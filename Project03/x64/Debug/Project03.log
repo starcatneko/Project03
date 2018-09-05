@@ -1,9 +1,6 @@
-﻿  Chip.cpp
-  GameMain.cpp
-  ImageMng.cpp
-  Main.cpp
-i:\users\star_cat\document\github\project03\project03\main.cpp(1): fatal error C1083: include ファイルを開けません。'DxLib.h':No such file or directory
-  Map.cpp
-  result.cpp
+﻿  GameMain.cpp
   Run.cpp
+  Title.cpp
   コードを生成中...
+MSVCRTD.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmtd.lib' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
+  Project03.vcxproj -> I:\Users\star_cat\Document\GitHub\Project03\x64\Debug\Project03.exe
