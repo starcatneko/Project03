@@ -7,6 +7,6 @@ public:
 	~Run();
 private:
 	void SceneCCtr();
-	int GameMain::*CurrentScene;
+	int *(CurrentScene)();
 };
 

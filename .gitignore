@@ -1,0 +1,7 @@
+
+*.db
+.vs/Project03/v15/.suo
+*.opendb
+*.ipch
+*.obj
+*.tlog

@@ -6,7 +6,6 @@ GameMain::GameMain()
 {
 }
 
-
 GameMain::~GameMain()
 {
 }
