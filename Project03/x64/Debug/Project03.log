@@ -1,2 +1,11 @@
-﻿  GameTask.cpp
-c:\users\1601291\desktop\project03\project03\gametask.cpp(10): error C2659: '=': 関数が演算子の左辺にあります
+﻿  Chip.cpp
+  GameMain.cpp
+  GameTask.cpp
+i:\users\star_cat\document\github\project03\project03\gametask.cpp(10): error C2440: '=': 'void (__cdecl GameTask::* )(void)' から 'int (__cdecl *)(void)' に変換できません。
+  i:\users\star_cat\document\github\project03\project03\gametask.cpp(10): note: この変換が可能なコンテキストはありません。
+  ImageMng.cpp
+  Main.cpp
+  Map.cpp
+  result.cpp
+  Title.cpp
+  コードを生成中...
