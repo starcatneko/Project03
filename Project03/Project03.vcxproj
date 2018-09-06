@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{5C006847-12E4-4F2C-8293-90E559C9A650}</ProjectGuid>
     <RootNamespace>Project03</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -125,21 +125,21 @@
   <ItemGroup>
     <ClCompile Include="Chip.cpp" />
     <ClCompile Include="GameMain.cpp" />
+    <ClCompile Include="GameTask.cpp" />
     <ClCompile Include="ImageMng.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="result.cpp" />
-    <ClCompile Include="Run.cpp" />
     <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chip.h" />
     <ClInclude Include="GameMain.h" />
+    <ClInclude Include="GameTask.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="ImageMng.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="result.h" />
-    <ClInclude Include="Run.h" />
     <ClInclude Include="Title.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

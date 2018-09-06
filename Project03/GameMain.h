@@ -9,6 +9,7 @@ public:
 		Create();
 		return s_Instance;
 	};
+	void Init();
  
 private:
 	//マップとチップを持たせる

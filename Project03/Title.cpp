@@ -12,3 +12,8 @@ void Title::Update()
 {
 }
 
+void Title::Init()
+{
+
+}
+

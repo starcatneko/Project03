@@ -5,3 +5,12 @@
 *.ipch
 *.obj
 *.tlog
+.vs/Project03/v15/.suo
+.vs/Project03/v15/.suo
+.vs/Project03/v15/Browse.VC.db
+*.exe
+x64/Debug/Project03.ilk
+x64/Debug/Project03.pdb
+Project03/x64/Debug/Project03.log
+Project03/x64/Debug/vc141.idb
+Project03/x64/Debug/vc141.pdb

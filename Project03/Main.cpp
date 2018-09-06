@@ -9,14 +9,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 16);
 	ChangeWindowMode(true);
-	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == false)
-	{
+	
 		ClsDrawScreen();
 
 		Run::GetInstance()->SceneCtr();
 		ScreenFlip();
 
-	}
 
 	Run::GetInstance()->Destroy();
 	return 0;
