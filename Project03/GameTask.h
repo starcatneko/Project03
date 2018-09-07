@@ -1,5 +1,7 @@
 #pragma once
 
+class GameBoard;
+
 #include <list>
 #include <memory>
 #include <mutex>
@@ -17,18 +19,24 @@ public:
 		return s_Instance;
 	};
 	void Run();
-
-	void GetMouse();
+	// 返り値 0b0001:左ボタン,0b0010:右ボタン,0b0100:中ボタン
+	int GetMouse();
 
 private:
 	GameTask();
 	~GameTask();
 	void Init();
+	void Title();
+	void GameMain();
+
+	void CreateNewBoard();
 	static std::once_flag initFlag;
 	static GameTask *s_Instance;
 
-	int (*CurrentScene)();
+	GameBoard* Board;
+	void (GameTask::*CurrentScene)();
 
+	int mouseFlg;
 	int mouseOld;
 };
 

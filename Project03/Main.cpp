@@ -1,21 +1,19 @@
 #include "DxLib.h"
+#include "GameTask.h"
 
-#include "Run.h"
-
-#define SCREEN_SIZE_X 860
-#define SCREEN_SIZE_Y 640
+#define SCREEN_SIZE_X 800
+#define SCREEN_SIZE_Y 600
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	DxLib_Init();
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 16);
 	ChangeWindowMode(true);
 	
-		ClsDrawScreen();
 
-		Run::GetInstance()->SceneCtr();
-		ScreenFlip();
+	GameTask::GetInstance()->Run();
 
 
-	Run::GetInstance()->Destroy();
+	DxLib_End();
 	return 0;
 }

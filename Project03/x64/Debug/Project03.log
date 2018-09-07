@@ -1,11 +1,2 @@
-﻿  Chip.cpp
-  GameMain.cpp
-  GameTask.cpp
-i:\users\star_cat\document\github\project03\project03\gametask.cpp(10): error C2440: '=': 'void (__cdecl GameTask::* )(void)' から 'int (__cdecl *)(void)' に変換できません。
-  i:\users\star_cat\document\github\project03\project03\gametask.cpp(10): note: この変換が可能なコンテキストはありません。
-  ImageMng.cpp
-  Main.cpp
-  Map.cpp
-  result.cpp
-  Title.cpp
-  コードを生成中...
+﻿  ImageMng.cpp
+  Project03.vcxproj -> C:\Users\1601291\Desktop\0907\Project03-master\x64\Debug\Project03.exe
