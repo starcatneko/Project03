@@ -14,3 +14,12 @@ x64/Debug/Project03.pdb
 Project03/x64/Debug/Project03.log
 Project03/x64/Debug/vc141.idb
 Project03/x64/Debug/vc141.pdb
+*.idb
+*.pdb
+*.exe
+*.ilk
+*.pdb
+.vs/Project03/v15/.suo
+*.db
+*.txt
+*.log
