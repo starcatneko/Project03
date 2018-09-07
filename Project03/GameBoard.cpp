@@ -51,15 +51,17 @@ void GameBoard::SetBoardSize(VECTOR2 size)
 
 void GameBoard::DB_TouchBoad()
 {
+	/*
 	int *XBuf = nullptr,*YBuf = nullptr;
 	VECTOR2 MousePos;
 
 	if ((GetMouseInput() == MOUSE_INPUT_LEFT) == true)
 	{
 		GetMousePoint(XBuf,YBuf);
-		/*MousePos = { &XBuf, &YBuf };
-		XBuf /= 8;*/
+		MousePos = { XBuf, YBuf };
+		XBuf /= 8;
 	}
+	*/
 }
 
 void GameBoard::Update()
@@ -82,6 +84,12 @@ void GameBoard::DrawBoardGrid()
 
 		for (int x = 0; x < data.size(); x++)
 		{
+			/*
+			DrawLine(x*CHIPSIZE + x_Dis, y*CHIPSIZE + Y_Dis
+				, x*CHIPSIZE + CHIPSIZE + x_Dis,
+				y*CHIPSIZE + Y_Dis, 0xffffff);
+				*/
+			
 			DrawBox(x*CHIPSIZE+ x_Dis, y*CHIPSIZE+ Y_Dis
 				, x*CHIPSIZE+ CHIPSIZE+ x_Dis,
 				y*CHIPSIZE + CHIPSIZE+ Y_Dis, 0xffffff, false);
