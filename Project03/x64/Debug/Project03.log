@@ -1,4 +1,20 @@
 ﻿  GameBoard.cpp
-  ImageMng.cpp
-  コードを生成中...
-  Project03.vcxproj -> C:\Users\1601291\Documents\GitHub\Project03\x64\Debug\Project03.exe
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2143: 構文エラー: ')' が '=' の前にありません。
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2660: 'DxLib::DrawBox': 関数に 0 個の引数を指定できません。
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2143: 構文エラー: ')' が ';' の前にありません。
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2064: 0 引数を取り込む関数には評価されません。
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2059: 構文エラー: ';'
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2059: 構文エラー: ','
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(88): error C2059: 構文エラー: ','
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(88): error C2143: 構文エラー: ')' が ';' の前にありません。
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(89): error C2143: 構文エラー: ')' が ';' の前にありません。
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(89): error C2059: 構文エラー: ','
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(90): error C2059: 構文エラー: ')'
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(103): error C2059: 構文エラー: '='
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(103): error C2143: 構文エラー: ')' が ';' の前にありません。
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(103): error C2059: 構文エラー: ','
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(104): error C2059: 構文エラー: ','
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(104): error C2143: 構文エラー: ')' が ';' の前にありません。
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(105): error C2143: 構文エラー: ')' が ';' の前にありません。
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(105): error C2059: 構文エラー: ','
+i:\users\star_cat\document\github\project03\project03\gameboard.cpp(105): error C2059: 構文エラー: ')'
