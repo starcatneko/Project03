@@ -1,3 +1,0 @@
-﻿  Main.cpp
-MSVCRTD.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmtd.lib' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
-  Project03.vcxproj -> C:\Users\1601291\Desktop\授業\project03\project03\Debug\Project03.exe

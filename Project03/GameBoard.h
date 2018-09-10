@@ -2,6 +2,7 @@
 #include "Geometry.h"
 #include "VECTOR2.h"
 #include <vector>
+#include <list>
 
 /*
 	可変サイズの盤面
@@ -26,8 +27,11 @@ public:
 	GameBoard(VECTOR2 size);
 	~GameBoard();
 	void SetBoardSize(VECTOR2 size);
+	// 指定した位置に石を配置
+	void SetStone(VECTOR2 pos);
 	void DB_TouchBoad();
 	void Update();
+	void Draw();
 	//
 private:
 	//

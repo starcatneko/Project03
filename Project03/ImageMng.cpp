@@ -22,6 +22,7 @@ void ImageMng::LoadImg(std::string path, std::string name)
 {
 	 
 	image[name] = LoadGraph(path.c_str(),0);
+	printf("w");
 }
 
 void ImageMng::DrawImg(VECTOR2 pos, std::string name, int tranceflg)
@@ -30,6 +31,8 @@ void ImageMng::DrawImg(VECTOR2 pos, std::string name, int tranceflg)
 	if (&image[name] != nullptr)
 	{
 		DrawGraph(pos.x,pos.y,image[name],tranceflg);
+		printf("w");
+
 	}
 }
 

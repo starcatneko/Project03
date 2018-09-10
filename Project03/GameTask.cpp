@@ -43,7 +43,10 @@ void GameTask::GameMain()
 	Board->Update();
 	if ((GetMouse() & 0b0001) != 0 && (mouseOld & 0b0001) == 0)
 	{
-		CurrentScene = &GameTask::Title;
+
+		//マウスの座標を取得してSetSoneしたぁん
+		//Board->SetStone(
+		//CurrentScene = &GameTask::Title;
 	}
 
 
