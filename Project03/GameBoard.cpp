@@ -69,7 +69,7 @@ void GameBoard::SetStone(VECTOR2 pos)
 		setPosX /= CHIPSIZE;
 		setPosY /= CHIPSIZE;
 
-		piecelist.push_back();
+		//piecelist.push_back();
 
 		switch (data[setPosY][setPosX])
 		{

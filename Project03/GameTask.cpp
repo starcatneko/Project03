@@ -83,7 +83,9 @@ void GameTask::Run()
 	{
 		ScreenFlip();
 		ClsDrawScreen();
+
 		(this->*CurrentScene)();
+
 	}
 }
 
