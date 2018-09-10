@@ -12,6 +12,7 @@ public:
 	void Init();
  
 private:
+
 	//マップとチップを持たせる
 	static GameMain *s_Instance;
 	GameMain();

@@ -12,30 +12,25 @@ const int CHIPSIZE = 64;
 
 GameBoard::GameBoard()
 {
-	boardSize = { BoardSize,BoardSize };
-	BaseData.resize(BoardSize*BoardSize);
-	data.resize(BoardSize);
-	for (int x = 0; x < data.size(); x++)
-	{
-		data[x] = &BaseData[x * BoardSize];
-	}
-	//board.resize(8,8) ;
+
+	Resize({ BoardSize, BoardSize });
 }
 
 GameBoard::GameBoard(int size)
 {
-	boardSize = { size,size};
-
-	BaseData.resize(size*size);
-	data.resize(size);
-	for (int x = 0; x < size; x++)
-	{
-		data[x] = &BaseData[x * size];
-	}
+	Resize({ size,size });
 }
 GameBoard::GameBoard(VECTOR2 size)
 {
-	boardSize = size;
+	Resize(size);
+}
+GameBoard::~GameBoard()
+{
+
+}
+
+bool GameBoard::Resize(VECTOR2 size)
+{
 
 	BaseData.resize(size.x*size.y);
 	data.resize(size.x);
@@ -43,14 +38,23 @@ GameBoard::GameBoard(VECTOR2 size)
 	{
 		data[x] = &BaseData[x * size.y];
 	}
-}
-GameBoard::~GameBoard()
-{
+
+	boardSize = {size.x,size.y};
+	return true;
 }
 
-void GameBoard::SetBoardSize(VECTOR2 size)
+void GameBoard::ChangeStone(VECTOR2 pos)
 {
-	//board = std::vector<std::vector<PIECE_ST>>(size.x,size.y);
+	for (int y = -1; y <= 1; y++)
+	{
+
+		for (int x = -1; x <= 1; x++)
+		{
+
+		}
+
+	}
+
 }
 
 void GameBoard::SetStone(VECTOR2 pos)
@@ -58,19 +62,25 @@ void GameBoard::SetStone(VECTOR2 pos)
 	int setPosX = pos.x - X_DIS;
 	int setPosY = pos.y - Y_DIS;
 
-	if (setPosX >= 0 && setPosY >= 0)
+	if (setPosX >= 0 && setPosY >= 0
+		&& setPosX < (CHIPSIZE * boardSize.x)
+		&& setPosY < (CHIPSIZE * boardSize.y))
 	{
-		switch (data[y][x])
-		{
+		setPosX /= CHIPSIZE;
+		setPosY /= CHIPSIZE;
 
+		piecelist.push_back();
+
+		switch (data[setPosY][setPosX])
+		{
 		case PIECE_NON:
-			data[(setPosY / CHIPSIZE)][(setPosX / CHIPSIZE)] = PIECE_W;
+			data[setPosY][setPosX] = PIECE_W;
 			break;
 		case PIECE_W:
-			data[(setPosY / CHIPSIZE)][(setPosX / CHIPSIZE)] = PIECE_B;
+			data[setPosY][setPosX] = PIECE_B;
 			break;
 		case PIECE_B:
-			data[(setPosY / CHIPSIZE)][(setPosX / CHIPSIZE)] = PIECE_NON;
+			data[setPosY][setPosX] = PIECE_NON;
 			break;
 		default:
 			break;
@@ -100,12 +110,6 @@ void GameBoard::Update()
 
 void GameBoard::Draw()
 {
-	DrawBoardGrid();
-
-}
-
-void GameBoard::DrawBoardGrid()
-{
 
 	DrawBox(X_DIS,Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
 		boardSize.y*CHIPSIZE + Y_DIS,
@@ -114,7 +118,7 @@ void GameBoard::DrawBoardGrid()
 	for (int y = 0; y < data.size(); y++)
 	{
 
-		for (int x = 0; x < data.size(); x++)
+		for (int x = 0; x < BaseData.size()/ data.size(); x++)
 		{
 			/*
 			DrawLine(x*CHIPSIZE + X_DIS, y*CHIPSIZE + Y_DIS
@@ -129,12 +133,14 @@ void GameBoard::DrawBoardGrid()
 			switch (data[y][x])
 			{
 			case PIECE_W:
-				DrawCircle(x*CHIPSIZE + X_DIS, y*CHIPSIZE + Y_DIS,
-					CHIPSIZE, 0xffffff, true, 1);
+				DrawCircle(x*CHIPSIZE + X_DIS +(CHIPSIZE /2),
+					y*CHIPSIZE + Y_DIS + (CHIPSIZE / 2),
+					CHIPSIZE/2, 0xffffff, true, 1);
 				break;
 			case PIECE_B:
-				DrawCircle(x*CHIPSIZE + X_DIS, y*CHIPSIZE + Y_DIS,
-					CHIPSIZE, 0x000000, true, 1);
+				DrawCircle(x*CHIPSIZE + X_DIS + (CHIPSIZE / 2),
+					y*CHIPSIZE + Y_DIS + (CHIPSIZE / 2),
+					CHIPSIZE/2, 0x000000, true, 1);
 				break;
 			}
 		}

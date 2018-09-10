@@ -23,6 +23,7 @@ public:
 	void LoadImg(std::string path, std::string name);
 	void DrawImg(VECTOR2 pos,std::string name,int tranceflg);
 private:
+
 	ImageMng();
 	~ImageMng();
 	static std::once_flag initFlag;

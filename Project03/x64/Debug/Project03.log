@@ -1,20 +1,47 @@
-﻿  GameBoard.cpp
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2143: 構文エラー: ')' が '=' の前にありません。
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2660: 'DxLib::DrawBox': 関数に 0 個の引数を指定できません。
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2143: 構文エラー: ')' が ';' の前にありません。
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2064: 0 引数を取り込む関数には評価されません。
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2059: 構文エラー: ';'
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(87): error C2059: 構文エラー: ','
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(88): error C2059: 構文エラー: ','
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(88): error C2143: 構文エラー: ')' が ';' の前にありません。
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(89): error C2143: 構文エラー: ')' が ';' の前にありません。
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(89): error C2059: 構文エラー: ','
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(90): error C2059: 構文エラー: ')'
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(103): error C2059: 構文エラー: '='
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(103): error C2143: 構文エラー: ')' が ';' の前にありません。
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(103): error C2059: 構文エラー: ','
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(104): error C2059: 構文エラー: ','
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(104): error C2143: 構文エラー: ')' が ';' の前にありません。
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(105): error C2143: 構文エラー: ')' が ';' の前にありません。
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(105): error C2059: 構文エラー: ','
-i:\users\star_cat\document\github\project03\project03\gameboard.cpp(105): error C2059: 構文エラー: ')'
+﻿  GamePiece.cpp
+c:\users\1601291\documents\github\project03\project03\gamepiece.h(2): fatal error C1083: include ファイルを開けません。'':No such file or directory
+  GameTask.cpp
+  GameBoard.cpp
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(412): error C2079: 'std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer>::_Myval' が 未定義の class 'GamePiece' で使用しています。
+          with
+          [
+              _Ty=GamePiece,
+              _Alloc=std::allocator<GamePiece>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(655): note: コンパイル対象の クラス テンプレート インスタンス化 'std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer>' のリファレンスを確認してください
+          with
+          [
+              _Ty=GamePiece,
+              _Alloc=std::allocator<GamePiece>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(654): note: クラス テンプレート のメンバー関数 'void std::_List_alloc<std::_List_base_types<_Ty,_Alloc>>::_Freeheadnode(std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *)' のコンパイル中
+          with
+          [
+              _Ty=GamePiece,
+              _Alloc=std::allocator<GamePiece>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(571): note: コンパイル対象の関数 テンプレート インスタンス化 'void std::_List_alloc<std::_List_base_types<_Ty,_Alloc>>::_Freeheadnode(std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *)' のリファレンスを確認してください
+          with
+          [
+              _Ty=GamePiece,
+              _Alloc=std::allocator<GamePiece>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(739): note: コンパイル対象の クラス テンプレート インスタンス化 'std::_List_alloc<std::_List_base_types<_Ty,_Alloc>>' のリファレンスを確認してください
+          with
+          [
+              _Ty=GamePiece,
+              _Alloc=std::allocator<GamePiece>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(790): note: コンパイル対象の クラス テンプレート インスタンス化 'std::_List_buy<_Ty,_Alloc>' のリファレンスを確認してください
+          with
+          [
+              _Ty=GamePiece,
+              _Alloc=std::allocator<GamePiece>
+          ]
+  c:\users\1601291\documents\github\project03\project03\gameboard.h(50): note: コンパイル対象の クラス テンプレート インスタンス化 'std::list<GamePiece,std::allocator<_Ty>>' のリファレンスを確認してください
+          with
+          [
+              _Ty=GamePiece
+          ]
+  Piece.cpp
+  コードを生成中...

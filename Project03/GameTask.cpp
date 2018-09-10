@@ -39,13 +39,14 @@ void GameTask::Title()
 
 void GameTask::GameMain()
 {
+
 	DrawString(0, 0, "Main", 0xffffff, 0);
 	Board->Update();
 	if ((GetMouse() & 0b0001) != 0 && (mouseOld & 0b0001) == 0)
 	{
-
-		//マウスの座標を取得してSetSoneしたぁん
-		//Board->SetStone(
+		int mx, my;
+		GetMousePoint(&mx,&my);
+		Board->SetStone({ mx,my });
 		//CurrentScene = &GameTask::Title;
 	}
 

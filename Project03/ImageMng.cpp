@@ -36,6 +36,7 @@ void ImageMng::DrawImg(VECTOR2 pos, std::string name, int tranceflg)
 	}
 }
 
+
 ImageMng::ImageMng()
 {
 }
