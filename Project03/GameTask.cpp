@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "MouseCtr.h"
 #include "GameTask.h"
 #include "GameBoard.h"
 #include "ImageMng.h"
@@ -14,11 +15,13 @@ GameTask::GameTask()
 
 GameTask::~GameTask()
 {
+
 }
 
 void GameTask::Init()
 {
 	ImageMng::GetInstance()->LoadImg("image/title.jpg", "title");
+	Mouse = std::make_unique<MouseCtr>();
 
 	CurrentScene = &GameTask::Title;
 
@@ -29,7 +32,7 @@ void GameTask::Title()
 	ImageMng::GetInstance()->DrawImg({ 120,240 }, "title", 0);
 	DrawString(0, 0, "Title", 0xffffff, 0);
 
-	if ((GetMouse() & 0b0001) > 0 && (mouseOld & 0b0001) == 0)
+	if ((Mouse->GetButton() & 0b0001) > 0)
 	{
 		CreateNewBoard();
 		CurrentScene = &GameTask::GameMain;
@@ -42,25 +45,15 @@ void GameTask::GameMain()
 
 	DrawString(0, 0, "Main", 0xffffff, 0);
 	Board->Update();
-	if ((GetMouse() & 0b0001) != 0 && (mouseOld & 0b0001) == 0)
+	if ((Mouse->GetButton() & 0b0001) != 0)
 	{
-		int mx, my;
-		GetMousePoint(&mx,&my);
-		Board->SetStone({ mx,my });
-		//CurrentScene = &GameTask::Title;
+		Board->SetStone(Mouse->GetPos());
 	}
-
-
 }
 
 void GameTask::CreateNewBoard()
 {
-	if (Board != nullptr)
-	{
-		delete Board;
-		Board = nullptr;
-	}
-	Board = new GameBoard(8);
+	Board = std::make_unique<GameBoard>();
 }
 
 
@@ -89,24 +82,8 @@ void GameTask::Run()
 	}
 }
 
-int GameTask::GetMouse()
+
+void GameTask::UpDate(const MouseCtr & mouseCtr)
 {
-	mouseOld = mouseFlg;
 
-	int flg = 0;
-	if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0 )
-	{
-		flg += 0b0001;
-	}
-	if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)
-	{
-		flg += 0b0010;
-	}
-	if ((GetMouseInput() & MOUSE_INPUT_MIDDLE) != 0)
-	{
-		flg += 0b0100;
-	}
-	mouseFlg = flg;
-
-	return flg;
 }

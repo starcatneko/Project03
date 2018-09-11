@@ -3,8 +3,16 @@
 #include "VECTOR2.h"
 #include <vector>
 #include <list>
+#include <memory>
 
 class GamePiece;
+
+
+typedef std::shared_ptr<GamePiece> piece_ptr;
+typedef std::list<piece_ptr> piece_list;
+
+typedef std::weak_ptr<GamePiece> piece_ptr_w;
+
 /*
 	可変サイズの盤面
 
@@ -34,6 +42,7 @@ public:
 	void Draw();
 	//
 private:
+	auto AddObjList(piece_ptr&& objPtr);
 	//
 	// 盤面のサイズを設定する関数
 	bool Resize(VECTOR2 size);
@@ -44,10 +53,10 @@ private:
 	std::vector<std::vector<PIECE_ST>> board;
 
 	// 二次円配列用のポインタ
-	std::vector < PIECE_ST*> data;
-	std::vector < PIECE_ST> BaseData;
+	std::vector <piece_ptr_w*> data;
+	std::vector <piece_ptr_w> BaseData;
 
-	std::list<GamePiece> piecelist;
+	piece_list piecelist;
 	VECTOR2 size;
 };
 

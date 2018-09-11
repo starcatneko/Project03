@@ -26,12 +26,3 @@ GameMain::~GameMain()
 {
 
 }
-
-void GameMain::Update()
-{
-	if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)
-	{
-		//ŠÖ”ƒ|ƒCƒ“ƒ^Ø‚è‘Ö‚¦
-	}
-
-}

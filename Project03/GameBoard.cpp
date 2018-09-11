@@ -1,4 +1,5 @@
 #include "GameBoard.h"
+#include "GamePiece.h"
 #include "Dxlib.h"
 const int CHIPSIZE = 64;
 #define BoardSize int(8)
@@ -26,7 +27,7 @@ GameBoard::GameBoard(VECTOR2 size)
 }
 GameBoard::~GameBoard()
 {
-
+	printf("!");
 }
 
 bool GameBoard::Resize(VECTOR2 size)
@@ -38,7 +39,7 @@ bool GameBoard::Resize(VECTOR2 size)
 	{
 		data[x] = &BaseData[x * size.y];
 	}
-
+	
 	boardSize = {size.x,size.y};
 	return true;
 }
@@ -69,18 +70,27 @@ void GameBoard::SetStone(VECTOR2 pos)
 		setPosX /= CHIPSIZE;
 		setPosY /= CHIPSIZE;
 
-		//piecelist.push_back();
 
-		switch (data[setPosY][setPosX])
+		if (data[setPosY][setPosX].expired())
+		{
+			auto tmp = AddObjList(std::make_shared<GamePiece>(VECTOR{ setPosX,setPosY }, VECTOR{ X_DIS,Y_DIS }));
+			data[setPosX][setPosY] = (*tmp);
+		}
+
+		
+		switch (data[setPosY][setPosX].lock)
 		{
 		case PIECE_NON:
-			data[setPosY][setPosX] = PIECE_W;
+
+			data[setPosY][setPosX].lock()->SetState(PIECE_W);
 			break;
 		case PIECE_W:
-			data[setPosY][setPosX] = PIECE_B;
+
+			data[setPosY][setPosX].lock()->SetState(PIECE_B);
 			break;
 		case PIECE_B:
-			data[setPosY][setPosX] = PIECE_NON;
+			data[setPosY][setPosX].lock()->SetState(PIECE_W);
+
 			break;
 		default:
 			break;
@@ -90,17 +100,7 @@ void GameBoard::SetStone(VECTOR2 pos)
 
 void GameBoard::DB_TouchBoad()
 {
-	/*
-	int *XBuf = nullptr,*YBuf = nullptr;
-	VECTOR2 MousePos;
 
-	if ((GetMouseInput() == MOUSE_INPUT_LEFT) == true)
-	{
-		GetMousePoint(XBuf,YBuf);
-		MousePos = { XBuf, YBuf };
-		XBuf /= 8;
-	}
-	*/
 }
 
 void GameBoard::Update()
@@ -111,38 +111,35 @@ void GameBoard::Update()
 void GameBoard::Draw()
 {
 
-	DrawBox(X_DIS,Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
+	DrawBox(X_DIS, Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
 		boardSize.y*CHIPSIZE + Y_DIS,
 		0x008822, true);
 
 	for (int y = 0; y < data.size(); y++)
 	{
 
-		for (int x = 0; x < BaseData.size()/ data.size(); x++)
+		for (int x = 0; x < BaseData.size() / data.size(); x++)
 		{
-			/*
-			DrawLine(x*CHIPSIZE + X_DIS, y*CHIPSIZE + Y_DIS
+			DrawBox(x*CHIPSIZE + X_DIS, y*CHIPSIZE + Y_DIS
 				, x*CHIPSIZE + CHIPSIZE + X_DIS,
-				y*CHIPSIZE + Y_DIS, 0xffffff);
-				*/
-			
-			DrawBox(x*CHIPSIZE+ X_DIS, y*CHIPSIZE+ Y_DIS
-				, x*CHIPSIZE+ CHIPSIZE+ X_DIS,
-				y*CHIPSIZE + CHIPSIZE+ Y_DIS, 0xffffff, false);
-
-			switch (data[y][x])
-			{
-			case PIECE_W:
-				DrawCircle(x*CHIPSIZE + X_DIS +(CHIPSIZE /2),
-					y*CHIPSIZE + Y_DIS + (CHIPSIZE / 2),
-					CHIPSIZE/2, 0xffffff, true, 1);
-				break;
-			case PIECE_B:
-				DrawCircle(x*CHIPSIZE + X_DIS + (CHIPSIZE / 2),
-					y*CHIPSIZE + Y_DIS + (CHIPSIZE / 2),
-					CHIPSIZE/2, 0x000000, true, 1);
-				break;
-			}
+				y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xffffff, false);
 		}
 	}
+	
+	for (auto itr = piecelist.begin(); itr != piecelist.end(); ++itr)
+	{
+		//itr().lock->Draw();
+
+	}
+	
+}
+
+auto GameBoard::AddObjList(piece_ptr && objPtr)
+{
+	// 引数の 内容をリストに追加
+	piecelist.push_back(objPtr);
+	//itrに追加したpieceのアドレスを入れる
+	auto itr = piecelist.end();
+	return itr;
+
 }

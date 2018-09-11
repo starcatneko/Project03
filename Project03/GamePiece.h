@@ -1,28 +1,30 @@
 #pragma once
 #include "VECTOR2.h"
 
-enum PIECE_ST
-{
-	PIECE_NON,
-	PIECE_W,
-	PIECE_B,
-	PIECE_MAX
-};
+enum PIECE_ST;
 
 class GamePiece
 {
 public:
 	GamePiece();
+	GamePiece(VECTOR2 pos, VECTOR2 drawOffset, PIECE_ST st);
+	GamePiece(VECTOR2 pos, VECTOR2 drawOffset);
 	GamePiece(VECTOR2 pos , PIECE_ST st);
 	~GamePiece();
 	VECTOR2 GetPos();
-
-	/*
-	// 駒を裏返す 反転:true 反転しなかった:false
-	bool Change();*/
-
+	// stateをセットする
+	void SetState(PIECE_ST st);
+	// 現在のstateを返す
+	PIECE_ST GetState();
+	// 駒を裏返す
+	void Revarse();
+	void Draw();
 private:
+
 	VECTOR2 pos;
+	// 描画用のずらす値
+	VECTOR2 drawOffset;
 	PIECE_ST state;
+
 };
 

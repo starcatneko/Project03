@@ -17,8 +17,5 @@ private:
 	static GameMain *s_Instance;
 	GameMain();
 	~GameMain();
-
-	void Update();
-
 };
 

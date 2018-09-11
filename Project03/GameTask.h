@@ -1,10 +1,12 @@
 #pragma once
 
 class GameBoard;
+class MouseCtr;
 
 #include <list>
 #include <memory>
 #include <mutex>
+//#include <
 
 class GameTask
 {
@@ -20,7 +22,7 @@ public:
 	};
 	void Run();
 	// 返り値 0b0001:左ボタン,0b0010:右ボタン,0b0100:中ボタン
-	int GetMouse();
+	void UpDate(const MouseCtr& mouseCtr);
 
 private:
 	GameTask();
@@ -33,7 +35,10 @@ private:
 	static std::once_flag initFlag;
 	static GameTask *s_Instance;
 
-	GameBoard* Board;
+	// ユニークポインタ
+	std::unique_ptr<GameBoard> Board;
+	std::unique_ptr<MouseCtr> Mouse;
+
 	void (GameTask::*CurrentScene)();
 
 	int mouseFlg;
