@@ -36,13 +36,14 @@ public:
 	GameBoard(VECTOR2 size);
 	~GameBoard();
 	// 指定した位置に石を配置
-	void SetStone(VECTOR2 pos);
+	void SetPiece(VECTOR2 pos);
 	void DB_TouchBoad();
 	void Update();
 	void Draw();
 	//
 private:
-	auto AddObjList(piece_ptr&& objPtr);
+	piece_ptr AddObjList(piece_ptr&& objPtr);
+	//auto AddObjList(piece_ptr&& objPtr);
 	//
 	// 盤面のサイズを設定する関数
 	bool Resize(VECTOR2 size);

@@ -1,3 +1,27 @@
+"メモのメモ"
+タグの説明
+ ##		項目名
+ $$		復習
+
+##autoとitr
+<list>
+ |-(itr) -> データ
+ |-(itr) -> データ
+ |-(itr) -> データ
+
+auto k = piecelist.bigin();
+	auto はlistのitrになる
+	（型に対して auto)
+
+auto l:piecelist;
+	auto はデータになる
+	(list全体に対して auto)
+
+	list自体を扱いたい場合は
+	前者の書き方じゃないとダメ
+
+
+
 リストじゃあああああああ
 LRを参照
 

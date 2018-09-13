@@ -47,7 +47,7 @@ void GameTask::GameMain()
 	Board->Update();
 	if ((Mouse->GetButton() & 0b0001) != 0)
 	{
-		Board->SetStone(Mouse->GetPos());
+		Board->SetPiece(Mouse->GetPos());
 	}
 }
 

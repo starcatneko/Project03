@@ -33,7 +33,7 @@ private:
 
 	void CreateNewBoard();
 	static std::once_flag initFlag;
-	static GameTask *s_Instance;
+	static std::unique_ptr<GameTask> s_Instance;
 
 	// ユニークポインタ
 	std::unique_ptr<GameBoard> Board;

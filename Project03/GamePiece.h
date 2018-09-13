@@ -7,9 +7,9 @@ class GamePiece
 {
 public:
 	GamePiece();
-	GamePiece(VECTOR2 pos, VECTOR2 drawOffset, PIECE_ST st);
-	GamePiece(VECTOR2 pos, VECTOR2 drawOffset);
 	GamePiece(VECTOR2 pos , PIECE_ST st);
+	GamePiece(VECTOR2 pos, VECTOR2 drawOffset);
+	GamePiece(VECTOR2 pos, VECTOR2 drawOffset, PIECE_ST st);
 	~GamePiece();
 	VECTOR2 GetPos();
 	// state‚ðƒZƒbƒg‚·‚é

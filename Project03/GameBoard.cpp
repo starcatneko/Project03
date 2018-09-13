@@ -58,27 +58,34 @@ void GameBoard::ChangeStone(VECTOR2 pos)
 
 }
 
-void GameBoard::SetStone(VECTOR2 pos)
+void GameBoard::SetPiece(VECTOR2 pos)
 {
 	int setPosX = pos.x - X_DIS;
 	int setPosY = pos.y - Y_DIS;
 
+	// マウスでクリックした箇所が盤面の外の場合、この処理は行わない
 	if (setPosX >= 0 && setPosY >= 0
 		&& setPosX < (CHIPSIZE * boardSize.x)
 		&& setPosY < (CHIPSIZE * boardSize.y))
 	{
+		// setPosを
 		setPosX /= CHIPSIZE;
 		setPosY /= CHIPSIZE;
 
+		VECTOR2 vec1 = { setPosX,setPosY };
+		VECTOR2 vec2 = { X_DIS,Y_DIS };
 
+		// 駒が存在しない場合の処理
 		if (data[setPosY][setPosX].expired())
 		{
-			auto tmp = AddObjList(std::make_shared<GamePiece>(VECTOR{ setPosX,setPosY }, VECTOR{ X_DIS,Y_DIS }));
-			data[setPosX][setPosY] = (*tmp);
+			piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(vec1,vec2));
+			data[setPosY][setPosX] = (tmp);
+			data[setPosY][setPosX].lock()->SetState(PIECE_W);
+			return;
 		}
 
-		
-		switch (data[setPosY][setPosX].lock)
+		// 駒が存在している場合の処理（駒の反転）
+		switch (data[setPosY][setPosX].lock()->GetState())
 		{
 		case PIECE_NON:
 
@@ -125,21 +132,19 @@ void GameBoard::Draw()
 				y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xffffff, false);
 		}
 	}
-	
-	for (auto itr = piecelist.begin(); itr != piecelist.end(); ++itr)
+	for (auto itr : piecelist)
 	{
-		//itr().lock->Draw();
-
+		itr->Draw();
+		DrawFormatString(0, 48, 0xdddddd,"駒数%d",piecelist.size());
 	}
-	
 }
 
-auto GameBoard::AddObjList(piece_ptr && objPtr)
+piece_ptr GameBoard::AddObjList(piece_ptr && objPtr)
 {
 	// 引数の 内容をリストに追加
 	piecelist.push_back(objPtr);
 	//itrに追加したpieceのアドレスを入れる
 	auto itr = piecelist.end();
-	return itr;
-
+	itr--;
+	return *itr;
 }
