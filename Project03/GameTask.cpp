@@ -4,8 +4,7 @@
 #include "GameBoard.h"
 #include "ImageMng.h"
 
-GameTask *GameTask::s_Instance = nullptr;
-std::once_flag GameTask::initFlag;
+std::unique_ptr<GameTask, GameTask::GameTaskDeleter> GameTask::s_Instance(new GameTask());
 
 GameTask::GameTask()
 {
@@ -56,18 +55,6 @@ void GameTask::CreateNewBoard()
 	Board = std::make_unique<GameBoard>();
 }
 
-
-void GameTask::Create()
-{
-	s_Instance = new GameTask();
-}
-
-void GameTask::Destroy()
-{
-	if (s_Instance)
-		delete s_Instance;
-	s_Instance = nullptr;
-}
 
 void GameTask::Run()
 {

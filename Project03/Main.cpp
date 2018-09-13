@@ -11,7 +11,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ChangeWindowMode(true);
 	
 
-	GameTask::GetInstance()->Run();
+	GameTask::GetInstance().Run();
 
 
 	DxLib_End();
