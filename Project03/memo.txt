@@ -1,0 +1,27 @@
+リストじゃあああああああ
+LRを参照
+
+GameBoard
+クリックされた場所をもとに盤面に駒を置く
+駒が置かれたら駒のクラス(GamePiece)をインスタンス
+
+置かれた駒が特殊駒だった場合、さらに特殊駒のクラス(GamePiece)を
+同じ位置にインスタンスする。
+
+GamePiece
+GameBoardにGamePieceのリストを作成する
+インスタンスされたらGamePieceのリストにpushする
+
+**隣接する駒を検索する関数つくる
+
+
+GameBoard
+↓
+GamePiece
+↓
+Piece→個別Pieceクラス
+
+=========
+→ : 継承
+
+隣接する駒の検索および反転はGameBoardクラスで行うのがよい？

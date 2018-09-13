@@ -91,6 +91,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="めもめも.txt" />
+    <Text Include="memo.txt" />
   </ItemGroup>
 </Project>
