@@ -5,7 +5,6 @@ class MouseCtr;
 
 #include <list>
 #include <memory>
-//#include <
 
 class GameTask
 {
@@ -21,11 +20,12 @@ public:
 private:
 	struct GameTaskDeleter
 	{
-		void operator ()(GameTask* gameTask) const
+		void operator ()(GameTask* GameTask) const
 		{
-			delete gameTask;
+			delete GameTask;
 		}
 	};
+
 	static std::unique_ptr<GameTask, GameTaskDeleter> s_Instance;
 
 	GameTask();
