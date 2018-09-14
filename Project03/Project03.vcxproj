@@ -134,6 +134,7 @@
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="MouseCtr.cpp" />
     <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="VECTOR2.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="MouseCtr.h" />
     <ClInclude Include="Piece.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="VECTOR2.h" />

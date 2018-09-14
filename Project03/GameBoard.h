@@ -6,19 +6,17 @@
 #include <memory>
 
 class GamePiece;
+class Player;
 
 
 typedef std::shared_ptr<GamePiece> piece_ptr;
+typedef std::shared_ptr<Player> player_ptr;
+
 typedef std::list<piece_ptr> piece_list;
+typedef std::list<player_ptr> player_list;
 
 typedef std::weak_ptr<GamePiece> piece_ptr_w;
 
-/*
-	可変サイズの盤面
-
-	任意のマスをクリックしたらenumのステートが変化するようにする
-
-*/
 
 //　マスに置かれている石
 enum PIECE_ST
@@ -35,11 +33,17 @@ public:
 	GameBoard(int size);
 	GameBoard(VECTOR2 size);
 	~GameBoard();
+	bool Init();
 	// 指定した位置に石を配置
 	void SetPiece(VECTOR2 pos);
 	void DB_TouchBoad();
 	void Update();
 	void Draw();
+	void SarchReverse(VECTOR2 pos);
+	void AddPlayer();
+	// プレイターンのプレイヤーを更新
+	void CurrentPlayerChange();
+
 	//
 private:
 	piece_ptr AddObjList(piece_ptr&& objPtr);
@@ -53,11 +57,23 @@ private:
 	VECTOR2 boardSize;
 	std::vector<std::vector<PIECE_ST>> board;
 
+	std::list<Player> playerList;
+
 	// 二次円配列用のポインタ
 	std::vector <piece_ptr_w*> data;
 	std::vector <piece_ptr_w> BaseData;
+	
+	//
+	player_list playerlist;
+	// iterator 現在行動中のプレイヤー
+	player_list::iterator currentPlayer;
+
+	// 現在選択しているプレイヤーのアドレスを格納する
+	//player_ptr currentPlayer;
 
 	piece_list piecelist;
 	VECTOR2 size;
+
+	
 };
 

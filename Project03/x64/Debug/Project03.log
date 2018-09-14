@@ -1,21 +1,56 @@
-﻿  GameBoard.cpp
-c:\users\1601291\documents\github\project03\project03\gameboard.cpp(76): error C2397: 'int' から 'float' への変換には縮小変換が必要です
-c:\users\1601291\documents\github\project03\project03\gameboard.cpp(76): warning C4244: '初期化中': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\1601291\documents\github\project03\project03\gameboard.cpp(76): error C3779: 'GameBoard::AddObjList': 'auto' を返す関数を、定義より前に使用することはできません
-  c:\users\1601291\documents\github\project03\project03\gameboard.h(45): note: 'GameBoard::AddObjList' の宣言を確認してください
-c:\users\1601291\documents\github\project03\project03\gameboard.cpp(77): error C3536: 'tmp': 初期化前に使用することはできません
-c:\users\1601291\documents\github\project03\project03\gameboard.cpp(77): error C2100: 間接指定演算子 (*) の使い方が正しくありません。
-c:\users\1601291\documents\github\project03\project03\gameboard.cpp(81): error C3867: 'std::weak_ptr<GamePiece>::lock': 非標準の構文です。メンバーにポインタを作成するには '&' を使用してください
-c:\users\1601291\documents\github\project03\project03\gameboard.cpp(142): error C2678: 二項演算子 '-': 型 'std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>>' の左オペランドを扱う演算子が見つかりません (または変換できません) (新しい動作; ヘルプを参照)。
+﻿  GameTask.cpp
+  GameBoard.cpp
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(240): warning C4804: '<': 演算中の 'bool' 型の使用方法が安全ではありません
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(258): warning C4804: '<': 演算中の 'bool' 型の使用方法が安全ではありません
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(275): warning C4804: '<': 演算中の 'bool' 型の使用方法が安全ではありません
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(162): warning C4390: ';': 制御が空の文が見つかりました。意図した記述でしょうか?
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(176): warning C4390: ';': 制御が空の文が見つかりました。意図した記述でしょうか?
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(191): warning C4390: ';': 制御が空の文が見つかりました。意図した記述でしょうか?
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(207): warning C4390: ';': 制御が空の文が見つかりました。意図した記述でしょうか?
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(222): warning C4390: ';': 制御が空の文が見つかりました。意図した記述でしょうか?
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(239): warning C4390: ';': 制御が空の文が見つかりました。意図した記述でしょうか?
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(256): warning C4390: ';': 制御が空の文が見つかりました。意図した記述でしょうか?
+c:\users\1601291\documents\github\project03\project03\gameboard.cpp(273): warning C4390: ';': 制御が空の文が見つかりました。意図した記述でしょうか?
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(412): error C2079: 'std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer>::_Myval' が 未定義の class 'Player' で使用しています。
           with
           [
-              _Ty=piece_ptr
+              _Ty=Player,
+              _Alloc=std::allocator<Player>
           ]
-  c:\users\1601291\documents\github\project03\project03\vector2.h(40): note: 'VECTOR2 operator -(const VECTOR2,const VECTOR2)' の可能性があります
-  c:\users\1601291\documents\github\project03\project03\vector2.h(39): note: または 'VECTOR2 operator -(const VECTOR2,const int)'
-  c:\users\1601291\documents\github\project03\project03\gameboard.cpp(142): note: 引数リスト '(std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>>, int)' を一致させようとしているとき
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(655): note: コンパイル対象の クラス テンプレート インスタンス化 'std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer>' のリファレンスを確認してください
           with
           [
-              _Ty=piece_ptr
+              _Ty=Player,
+              _Alloc=std::allocator<Player>
           ]
-c:\users\1601291\documents\github\project03\project03\gameboard.cpp(143): error C3536: 'itr': 初期化前に使用することはできません
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(654): note: クラス テンプレート のメンバー関数 'void std::_List_alloc<std::_List_base_types<_Ty,_Alloc>>::_Freeheadnode(std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *)' のコンパイル中
+          with
+          [
+              _Ty=Player,
+              _Alloc=std::allocator<Player>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(571): note: コンパイル対象の関数 テンプレート インスタンス化 'void std::_List_alloc<std::_List_base_types<_Ty,_Alloc>>::_Freeheadnode(std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *)' のリファレンスを確認してください
+          with
+          [
+              _Ty=Player,
+              _Alloc=std::allocator<Player>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(739): note: コンパイル対象の クラス テンプレート インスタンス化 'std::_List_alloc<std::_List_base_types<_Ty,_Alloc>>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Player,
+              _Alloc=std::allocator<Player>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\list(790): note: コンパイル対象の クラス テンプレート インスタンス化 'std::_List_buy<_Ty,_Alloc>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Player,
+              _Alloc=std::allocator<Player>
+          ]
+  c:\users\1601291\documents\github\project03\project03\gameboard.h(60): note: コンパイル対象の クラス テンプレート インスタンス化 'std::list<Player,std::allocator<_Ty>>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Player
+          ]
+  Player.cpp
+  コードを生成中...

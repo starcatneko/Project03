@@ -13,23 +13,28 @@ const int CHIPSIZE = 64;
 
 GameBoard::GameBoard()
 {
-
 	Resize({ BoardSize, BoardSize });
+	Init();
 }
 
 GameBoard::GameBoard(int size)
 {
 	Resize({ size,size });
+	Init();
 }
 GameBoard::GameBoard(VECTOR2 size)
 {
 	Resize(size);
+	Init();
 }
 GameBoard::~GameBoard()
 {
 	printf("!");
 }
-
+bool GameBoard::Init()
+{
+	AddPlayer();
+}
 bool GameBoard::Resize(VECTOR2 size)
 {
 
@@ -75,24 +80,18 @@ void GameBoard::SetPiece(VECTOR2 pos)
 		VECTOR2 vec1 = { setPosX,setPosY };
 		VECTOR2 vec2 = { X_DIS,Y_DIS };
 
-		// 駒が存在しない場合の処理
 		if (data[setPosY][setPosX].expired())
 		{
-			piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(vec1,vec2));
+			piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
 			data[setPosY][setPosX] = (tmp);
 			data[setPosY][setPosX].lock()->SetState(PIECE_W);
-			return;
 		}
 
-		// 駒が存在している場合の処理（駒の反転）
+		
 		switch (data[setPosY][setPosX].lock()->GetState())
 		{
-		case PIECE_NON:
 
-			data[setPosY][setPosX].lock()->SetState(PIECE_W);
-			break;
 		case PIECE_W:
-
 			data[setPosY][setPosX].lock()->SetState(PIECE_B);
 			break;
 		case PIECE_B:
@@ -102,6 +101,9 @@ void GameBoard::SetPiece(VECTOR2 pos)
 		default:
 			break;
 		}
+
+		SarchReverse(vec1);
+		CurrentPlayerChange();
 	}
 }
 
@@ -112,6 +114,7 @@ void GameBoard::DB_TouchBoad()
 
 void GameBoard::Update()
 {
+
 	Draw();
 }
 
@@ -137,6 +140,170 @@ void GameBoard::Draw()
 		itr->Draw();
 		DrawFormatString(0, 48, 0xdddddd,"駒数%d",piecelist.size());
 	}
+}
+
+void GameBoard::SarchReverse(VECTOR2 pos)
+{
+	// 0001 上方向 
+	// 0010 右方向
+	// 0100 下方向
+	// 1000 左方向
+	int sarch_dir = 0b0000;
+	// チェックの基準になるピース
+	PIECE_ST check_piece = data[pos.y][pos.x].lock()->GetState();
+
+	if (pos.y < boardSize.y - 1 ) sarch_dir += 0001;
+	if (pos.x > 0) sarch_dir += 0b0010;
+	if (pos.y > 0) sarch_dir += 0b0100;
+	if (pos.x < boardSize.x-1) sarch_dir += 0b1000;
+
+
+
+	if( sarch_dir &0b0001);
+		for (int i = 0; i < size.y; i++)
+		{
+			if (data[size.y - i][size.x].lock()->GetState() != check_piece
+				&& data[size.y - i][size.x].lock() != nullptr)
+			{
+				data[size.y - i][size.x].lock()->Revarse();
+			}
+			else
+			{
+				return;
+			}
+		}
+		
+	if( sarch_dir &0b0011);
+		for (int i = 0; (i < (boardSize.x - size.x)|| (i < size.y)); i++)
+		{
+			if (data[size.y - i][size.x - i].lock()->GetState() != check_piece
+				&& data[size.y - i][size.x - i].lock() != nullptr)
+			{
+				data[size.y - i][size.x - i].lock()->Revarse();
+			}
+			else
+			{
+				return;
+			}
+
+		}
+		
+	if( sarch_dir &0b0010);
+		for (int i = 0; i < (boardSize.x - size.x); i++)
+		{
+			if (data[size.y][size.x + i].lock()->GetState() != check_piece
+				&& data[size.y][size.x + i].lock() != nullptr)
+			{
+				data[size.y][size.x + i].lock()->Revarse();
+			}
+			else
+			{
+				return;
+			}
+
+		}
+
+		
+	if( sarch_dir &0b0110);
+		for (int i = 0; (i < (boardSize.x - size.x) || i < (boardSize.y - size.y)); i++)
+		{
+			if (data[size.y + i][size.x + i].lock()->GetState() != check_piece
+				&& data[size.y + i][size.x + i].lock() != nullptr)
+			{
+				data[size.y + i][size.x + i].lock()->Revarse();
+			}
+			else
+			{
+				return;
+			}
+
+		}
+		
+	if( sarch_dir &0b0100);
+		for (int i = 0; i < (boardSize.y - size.y); i++)
+		{
+			if (data[size.y + i][size.x].lock()->GetState() != check_piece
+				&& data[size.y + i][size.x].lock() != nullptr)
+			{
+				data[size.y + i][size.x].lock()->Revarse();
+			}
+			else
+			{
+				return;
+			}
+
+		}
+
+		
+
+	if( sarch_dir &0b1100);
+		for (int i = 0; i < ((boardSize.y - size.y) || i < size.x); i++)
+		{
+			if (data[size.y + i][size.x - i].lock()->GetState() != check_piece
+				&& data[size.y + i][size.x - i].lock() != nullptr)
+			{
+				data[size.y + i][size.x - i].lock()->Revarse();
+			}
+			else
+			{
+				return;
+			}
+
+		}
+
+
+		
+	if( sarch_dir &0b1000);
+
+		for (int i = 0; i < i < size.x; i++)
+		{
+			if (data[size.y][size.x - i].lock()->GetState() != check_piece
+				&& data[size.y][size.x - i].lock() != nullptr)
+			{
+				data[size.y][size.x - i].lock()->Revarse();
+			}
+			else
+			{
+				return;
+			}
+
+
+		}
+		
+	if( sarch_dir &0b1001);
+
+		for (int i = 0; i < (i < size.y || i < size.x); i++)
+		{
+
+			if (data[size.y - i][size.x - i].lock()->GetState() != check_piece
+				&& data[size.y - i][size.x - i].lock() != nullptr)
+			{
+				data[size.y - i][size.x - i].lock()->Revarse();
+			}
+			else
+			{
+				return;
+			}
+		}
+		
+
+}
+
+void GameBoard::AddPlayer()
+{
+	//std::make_shared<Player>();
+	playerlist.push_back(std::make_shared<Player>());
+}
+
+void GameBoard::CurrentPlayerChange()
+{
+	if (currentPlayer == playerlist.end())
+	{
+		currentPlayer = playerlist.begin();
+	}
+	currentPlayer++;
+
+	// 現在の順番を表示する関数を呼んで
 }
 
 piece_ptr GameBoard::AddObjList(piece_ptr && objPtr)

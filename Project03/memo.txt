@@ -4,6 +4,39 @@
  $$		復習
  **		やることメモ
 
+ player1
+ player2
+
+ current pl1
+ setpiece
+ nextpl plList.next
+ current pl2 
+ setpiece
+ plList.end == current
+ ->plList.bigin
+
+
+
+ ** おせろ設計
+ |→・二人が順に駒を置く（置けないときはスキップ）←-----|
+ | ・相手の駒を１個以上　ひっくり返せるか？		(ひっくり返せない)
+ | ↓
+ | ・駒を置く
+ | ↓
+ |-・駒をひっくり返す処理
+
+ 二人がひっくり返せない場合、ゲーム終了
+ ↓
+ 結果
+
+ GameTask()
+	→	
+	GameBoard()
+		→
+		std::list<player>playerList()
+
+
+
  **宿題0913
  シングルトンをGameTaskの形に（デストラクタのPrivate化、Destroy、Create削除）
 
