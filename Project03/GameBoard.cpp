@@ -34,6 +34,7 @@ GameBoard::~GameBoard()
 bool GameBoard::Init()
 {
 	AddPlayer();
+	return true;
 }
 bool GameBoard::Resize(VECTOR2 size)
 {
@@ -158,8 +159,8 @@ void GameBoard::SarchReverse(VECTOR2 pos)
 	if (pos.x < boardSize.x-1) sarch_dir += 0b1000;
 
 
-
-	if( sarch_dir &0b0001);
+	if (sarch_dir & 0b0001)
+	{
 		for (int i = 0; i < size.y; i++)
 		{
 			if (data[size.y - i][size.x].lock()->GetState() != check_piece
@@ -172,9 +173,11 @@ void GameBoard::SarchReverse(VECTOR2 pos)
 				return;
 			}
 		}
+	}
 		
-	if( sarch_dir &0b0011);
-		for (int i = 0; (i < (boardSize.x - size.x)|| (i < size.y)); i++)
+	if (sarch_dir & 0b0011)
+	{
+		for (int i = 0; (i < (boardSize.x - size.x) || (i < size.y)); i++)
 		{
 			if (data[size.y - i][size.x - i].lock()->GetState() != check_piece
 				&& data[size.y - i][size.x - i].lock() != nullptr)
@@ -187,8 +190,9 @@ void GameBoard::SarchReverse(VECTOR2 pos)
 			}
 
 		}
+	}
 		
-	if( sarch_dir &0b0010);
+	if( sarch_dir &0b0010)
 		for (int i = 0; i < (boardSize.x - size.x); i++)
 		{
 			if (data[size.y][size.x + i].lock()->GetState() != check_piece
@@ -204,7 +208,8 @@ void GameBoard::SarchReverse(VECTOR2 pos)
 		}
 
 		
-	if( sarch_dir &0b0110);
+	if (sarch_dir & 0b0110)
+	{
 		for (int i = 0; (i < (boardSize.x - size.x) || i < (boardSize.y - size.y)); i++)
 		{
 			if (data[size.y + i][size.x + i].lock()->GetState() != check_piece
@@ -216,10 +221,11 @@ void GameBoard::SarchReverse(VECTOR2 pos)
 			{
 				return;
 			}
-
 		}
+	}
 		
-	if( sarch_dir &0b0100);
+	if (sarch_dir & 0b0100)
+	{
 		for (int i = 0; i < (boardSize.y - size.y); i++)
 		{
 			if (data[size.y + i][size.x].lock()->GetState() != check_piece
@@ -233,10 +239,11 @@ void GameBoard::SarchReverse(VECTOR2 pos)
 			}
 
 		}
-
+	}
 		
 
-	if( sarch_dir &0b1100);
+	if (sarch_dir & 0b1100)
+	{
 		for (int i = 0; i < ((boardSize.y - size.y) || i < size.x); i++)
 		{
 			if (data[size.y + i][size.x - i].lock()->GetState() != check_piece
@@ -250,11 +257,12 @@ void GameBoard::SarchReverse(VECTOR2 pos)
 			}
 
 		}
+	}
 
 
 		
-	if( sarch_dir &0b1000);
-
+	if (sarch_dir & 0b1000)
+	{
 		for (int i = 0; i < i < size.x; i++)
 		{
 			if (data[size.y][size.x - i].lock()->GetState() != check_piece
@@ -269,9 +277,9 @@ void GameBoard::SarchReverse(VECTOR2 pos)
 
 
 		}
-		
-	if( sarch_dir &0b1001);
-
+	}
+	if (sarch_dir & 0b1001)
+	{
 		for (int i = 0; i < (i < size.y || i < size.x); i++)
 		{
 
@@ -285,24 +293,24 @@ void GameBoard::SarchReverse(VECTOR2 pos)
 				return;
 			}
 		}
-		
+	}
 
 }
 
 void GameBoard::AddPlayer()
 {
 	//std::make_shared<Player>();
-	playerlist.push_back(std::make_shared<Player>());
+	//playerlist.push_back(std::make_shared<Player>());
 }
 
 void GameBoard::CurrentPlayerChange()
-{
+{/*
 	if (currentPlayer == playerlist.end())
 	{
 		currentPlayer = playerlist.begin();
 	}
 	currentPlayer++;
-
+	*/
 	// åªç›ÇÃèáî‘Çï\é¶Ç∑ÇÈä÷êîÇåƒÇÒÇ≈
 }
 

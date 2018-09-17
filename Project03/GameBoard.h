@@ -57,7 +57,7 @@ private:
 	VECTOR2 boardSize;
 	std::vector<std::vector<PIECE_ST>> board;
 
-	std::list<Player> playerList;
+	//std::list<Player> playerList;
 
 	// 二次円配列用のポインタ
 	std::vector <piece_ptr_w*> data;
@@ -67,7 +67,6 @@ private:
 	player_list playerlist;
 	// iterator 現在行動中のプレイヤー
 	player_list::iterator currentPlayer;
-
 	// 現在選択しているプレイヤーのアドレスを格納する
 	//player_ptr currentPlayer;
 
