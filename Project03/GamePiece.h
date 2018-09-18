@@ -1,6 +1,10 @@
 #pragma once
 #include "VECTOR2.h"
-
+#include <vector>
+#include <list>
+#include <memory>
+class GameBoard;
+class Player;
 enum PIECE_ST;
 
 class GamePiece
@@ -17,7 +21,8 @@ public:
 	// Œ»İ‚Ìstate‚ğ•Ô‚·
 	PIECE_ST GetState();
 	// ‹î‚ğ— •Ô‚·
-	void Revarse();
+	void Revarse(PIECE_ST st);
+	int ColorSet();
 	void Draw();
 private:
 

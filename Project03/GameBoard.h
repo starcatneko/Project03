@@ -24,6 +24,12 @@ enum PIECE_ST
 	PIECE_NON,
 	PIECE_W,
 	PIECE_B,
+	PIECE_RED,
+	PIECE_BLU,
+	PIECE_GRN,
+	PIECE_YLW,
+	PIECE_PPL,
+	PIECE_CYN,
 	PIECE_MAX
 };
 class GameBoard
@@ -40,10 +46,11 @@ public:
 	void Update();
 	void Draw();
 	void SarchReverse(VECTOR2 pos);
-	void AddPlayer();
+	void AddPlayer(int number);
 	// プレイターンのプレイヤーを更新
 	void CurrentPlayerChange();
 
+	player_ptr GetCurrentPlayer();
 	//
 private:
 	piece_ptr AddObjList(piece_ptr&& objPtr);
@@ -56,7 +63,7 @@ private:
 
 	VECTOR2 boardSize;
 	std::vector<std::vector<PIECE_ST>> board;
-
+	std::vector<int> vect;
 	//std::list<Player> playerList;
 
 	// 二次円配列用のポインタ

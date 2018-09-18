@@ -1,16 +1,9 @@
 #include "GamePiece.h"
+#include "GameBoard.h"
 #include "DxLib.h"
 
 #define PIECESIZE 25
 #define CHIPSIZE 64
-
-enum PIECE_ST
-{
-	PIECE_NON,
-	PIECE_W,
-	PIECE_B,
-	PIECE_MAX
-};
 
 
 GamePiece::GamePiece()
@@ -58,39 +51,53 @@ PIECE_ST GamePiece::GetState()
 	return state;
 }
 
-void GamePiece::Revarse()
+void GamePiece::Revarse(PIECE_ST st)
 {
-	if (state == PIECE_W)
-	{
-		state = PIECE_B;
-	}
+	state = st;
+}
 
-	if (state == PIECE_B)
+int GamePiece::ColorSet()
+{
+	int color;
+	switch (state)
 	{
-		state = PIECE_W;
+	case PIECE_B:
+		color = 0x000000;
+		break;
+	case PIECE_W:
+		color = 0xffffff;
+		break;
+	case PIECE_RED:
+		color = 0xDD0000;
+		break;
+	case PIECE_BLU:
+		color = 0x0000DD;
+		break;
+	case PIECE_GRN:
+		color = 0x00DD00;
+		break;
+	case PIECE_YLW:
+		color = 0xEEEE00;
+		break;
+	case PIECE_PPL:
+		color = 0xEE00EE;
+		break;
+	case PIECE_CYN:
+		color = 0x00EEEE;
+		break;
+	default:
+
+		break;
 	}
+	return color;
 }
 
 void GamePiece::Draw()
 {
-	if (state == PIECE_NON)
-	{
-		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
-			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			PIECESIZE, 0xAAAAAA, true, 1);
-	}
+	int pieceColor = ColorSet();
+	
 
-	if (state == PIECE_W)
-	{
-		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
-			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			PIECESIZE, 0xeeeeee, true, 1);
-	}
-	if (state == PIECE_B)
-	{
-		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
-			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			PIECESIZE, 0x111111, true, 1);
-	}
-
+	DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
+		pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
+		PIECESIZE, pieceColor, true, 1);
 }
