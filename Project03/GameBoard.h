@@ -3,6 +3,7 @@
 #include "VECTOR2.h"
 #include <vector>
 #include <list>
+#include <array>
 #include <memory>
 
 class GamePiece;
@@ -45,6 +46,9 @@ public:
 	void DB_TouchBoad();
 	void Update();
 	void Draw();
+	// flgがtrueの方向に石を置く
+	bool Reverse(std::array <int, 0b1111+1> flg);
+
 	void SarchReverse(VECTOR2 pos);
 	void AddPlayer(int number);
 	// プレイターンのプレイヤーを更新
@@ -80,6 +84,6 @@ private:
 	piece_list piecelist;
 	VECTOR2 size;
 
-	
+	std::array <int,0b1111 + 1> hitDir;
 };
 
