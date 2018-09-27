@@ -45,9 +45,10 @@ bool GameBoard::Init()
 		pl_cnt++;
 	}
 	SetPiece({ 4,4 }, PIECE_W);
-	SetPiece({ 4,5 }, PIECE_B);
+	SetPiece({ 5,5 }, PIECE_RED);
+	SetPiece({ 4,5 }, PIECE_BLU);
 	SetPiece({ 5,4 }, PIECE_B);
-	SetPiece({ 5,5 }, PIECE_W);
+
 
 	currentPlayer = playerlist.begin();
 	return true;
@@ -81,19 +82,11 @@ void GameBoard::ChangeStone(VECTOR2 pos)
 }
 void GameBoard::SetPiece(VECTOR2 pos , PIECE_ST st)
 {
-	int setPosX = pos.x - X_DIS;
-	int setPosY = pos.y - Y_DIS;
+	VECTOR2 vec = { X_DIS,Y_DIS };
 
-
-	setPosX /= CHIPSIZE;
-	setPosY /= CHIPSIZE;
-
-	VECTOR2 vec1 = { setPosX,setPosY };
-	VECTOR2 vec2 = { X_DIS,Y_DIS };
-
-	piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2,st));
-	data[vec1.y][vec1.x] = (tmp);
-	data[vec1.y][vec1.x].lock()->SetState((*currentPlayer)->GetType());
+	piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(pos, vec,st));
+	data[pos.y][pos.x] = (tmp);
+	data[pos.y][pos.x].lock()->SetState(st);
 
 }
 
@@ -115,29 +108,40 @@ void GameBoard::SetPiece(VECTOR2 pos)
 		VECTOR2 vec1 = { setPosX,setPosY };
 		VECTOR2 vec2 = { X_DIS,Y_DIS };
 
-		// ひっくり返せる駒が配置されている方向を求める関数
+		VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }, };
 
-		if (data[vec1.y][vec1.x].expired() && SarchReverse(vec1) == true)
+
+		if (data[vec1.y][vec1.x].expired())
 		{
-			piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
-			data[vec1.y][vec1.x] = (tmp);
-			data[vec1.y][vec1.x].lock()->SetState((*currentPlayer)->GetType());
+			for (auto itr : sarchTBL)
+			{
+
+				// 方向に向かってひっくり返す関数
+				if(SarchReverse(vec1, itr))
+				{
+					piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
+					data[vec1.y][vec1.x] = (tmp);
+					data[vec1.y][vec1.x].lock()->SetState((*currentPlayer)->GetType());
+
+					for(int i = 1;Reverse(vec1, itr*i) == true;i++)
+					{
+						VECTOR2 setvec = vec1 + itr * i;
+
+						piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
+						data[setvec.y][setvec.x] = (tmp);
+						data[setvec.y][setvec.x].lock()->SetState((*currentPlayer)->GetType());
+					}
+					CurrentPlayerChange();
+
+				}
+			}
+
+
 		}
 		else
 		{
 			return;
 		}
-
-		
-		if(data[vec1.y][vec1.x].lock()->GetState()
-			!= (*currentPlayer)->GetType())
-		{
-			data[vec1.y][vec1.x].lock()->SetState((*currentPlayer)->GetType());
-		}
-		hitDir.fill(false);
-		// 方向に向かって(int引数)分ひっくり返す関数
-		Reverse(hitDir);
-		CurrentPlayerChange();
 	}
 }
 
@@ -179,65 +183,61 @@ void GameBoard::Draw()
 	DrawFormatString(0, 96, 0xdddddd, "現在のプレイヤー\n%d", (*currentPlayer)->GetNo());
 
 }
-bool GameBoard::Reverse(std::array <int, 0b1111 + 1> flg)
+bool GameBoard::Reverse(VECTOR2 pos, VECTOR2 vec)
 {
 	// i方向
-	// 0001 上方向 
-	// 0010 右方向
-	// 0100 下方向
-	// 1000 左方向
-	VECTOR2 dir;
+	VECTOR2 sarchPos = pos + (vec);
 
-	for (int i = 0; i <= 0xf; i++)
+	if (data[sarchPos.y][sarchPos.x].lock()->GetState() != (*currentPlayer)->GetType())
+		return true;
+	else
+		return false;
+}
+
+bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec)
+{
+	PIECE_ST check_piece = (*currentPlayer)->GetType();
+	VECTOR2 sarchPos;
+
+	for (int i = 1; i < data.size(); i++)
 	{
-		// i方向にひっくり返せる石がある
-		if (flg[i] == true)
-		{
-			// 1桁ずつビットを確認
-			// 縦方向
-			if (i & 0b0101)
-			{
-				// 上方向
-				if ((i >> 0) & 0b0001)
-				{
-					dir.y = -1;
-				}
-				// 下方向
-				if ((i >> 2) & 0b0001)
-				{
-					dir.y = 1;
-				}
-			}
-			else
-			{
-				dir.y = 0;
-			}
-			// 縦方向
-			if (i & 0b1010)
-			{
-				// 上方向
-				if ((i >> 1) & 0b0001)
-				{
-					dir.x = 1;
-				}
-				// 下方向
-				if ((i >> 3) & 0b0001)
-				{
-					dir.x = -1;
-				}
-			}
-			else
-			{
-				dir.x = 0;
-			}
+		sarchPos = pos + (vec*i);
 
+		// サーチするマスが盤面の外にはみ出していないかのチェック
+		if (sarchPos.x < 0 || sarchPos.y < 0 ||
+			sarchPos.x >= data.size() || sarchPos.y >= BaseData.size()
+			)
+		{
+			return false;
+		}
+
+		// サーチ位置に駒が配置されているか
+		if (!data[sarchPos.y][sarchPos.x].expired())
+		{
+			// 駒が配置されていた場合、その駒がプレイヤーの駒と一致するか
+			if (data[sarchPos.y][sarchPos.x].lock()->GetState() == check_piece)
+			{
+				// 駒がサーチ基準と隣接していない場合true
+				if (i >= 2)
+					return true;
+				else
+					return false;
+			}
+			else
+			{
+				continue;
+			}
+		}
+		else
+		{
+			return false;
 		}
 	}
 
-	return true;
+	return false;
 }
 
-bool GameBoard::SarchReverse(VECTOR2 pos)
+bool GameBoard::SarchReverse_OLD(VECTOR2 pos)
 {
 	// 0001 上方向 
 	// 0010 右方向
@@ -383,7 +383,7 @@ bool GameBoard::SarchReverse(VECTOR2 pos)
 		
 	if (sarch_dir & 0b0100)
 	{
-		for (int i = 1;(boardSize.y - boardSize.y); i++)
+		for (int i = 1;i < (boardSize.y - boardSize.y); i++)
 		{
 			if (!data[pos.y - i][pos.x].expired())
 			{
@@ -414,7 +414,7 @@ bool GameBoard::SarchReverse(VECTOR2 pos)
 
 	if (sarch_dir & 0b1100)
 	{
-		for (int i = 1;((boardSize.y - boardSize.y) || i < boardSize.x); i++)
+		for (int i = 1;(i < boardSize.y || i < boardSize.x); i++)
 		{
 			if (!data[pos.y + i][pos.x - i].expired())
 			{

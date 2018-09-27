@@ -47,9 +47,13 @@ public:
 	void Update();
 	void Draw();
 	// flgがtrueの方向に石を置く
-	bool Reverse(std::array <int, 0b1111+1> flg);
+	bool Reverse(VECTOR2 pos, VECTOR2 vec);
 
-	bool SarchReverse(VECTOR2 pos);
+	// vec:正規化された方向ベクトル
+	bool SarchReverse(VECTOR2 pos, VECTOR2 vec);
+
+	bool SarchReverse_OLD(VECTOR2 pos);
+
 	void AddPlayer(int number);
 	// プレイターンのプレイヤーを更新
 	void CurrentPlayerChange();
