@@ -49,7 +49,7 @@ public:
 	// flgがtrueの方向に石を置く
 	bool Reverse(std::array <int, 0b1111+1> flg);
 
-	void SarchReverse(VECTOR2 pos);
+	bool SarchReverse(VECTOR2 pos);
 	void AddPlayer(int number);
 	// プレイターンのプレイヤーを更新
 	void CurrentPlayerChange();
@@ -64,6 +64,8 @@ private:
 	bool Resize(VECTOR2 size);
 	// 駒を置いた場所を軸に白黒を反転させる処理
 	void ChangeStone(VECTOR2 pos);
+
+	void SetPiece(VECTOR2 pos, PIECE_ST st);
 
 	VECTOR2 boardSize;
 	std::vector<std::vector<PIECE_ST>> board;
