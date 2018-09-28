@@ -1,5 +1,6 @@
 #include "GamePiece.h"
 #include "GameBoard.h"
+#include "GameTask.h"
 #include "DxLib.h"
 
 #define PIECESIZE 25
@@ -96,8 +97,18 @@ void GamePiece::Draw()
 {
 	int pieceColor = ColorSet();
 	
+	/*
+	if (GETWAIT() > 0)
+	{
+		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
+			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
+			PIECESIZE + (GETWAIT()*GETWAIT()) , pieceColor, true, 1);
 
-	DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
-		pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-		PIECESIZE, pieceColor, true, 1);
+	}
+	else*/
+	{
+		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
+			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
+			PIECESIZE, pieceColor, true, 1);
+	}
 }

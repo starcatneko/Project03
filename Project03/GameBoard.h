@@ -8,6 +8,7 @@
 
 class GamePiece;
 class Player;
+class MouseCtr;
 
 
 typedef std::shared_ptr<GamePiece> piece_ptr;
@@ -43,6 +44,8 @@ public:
 	bool Init();
 	// 指定した位置に石を配置
 	void SetPiece(VECTOR2 pos);
+	void SetPiece(VECTOR2 pos, PIECE_ST st);
+
 	void DB_TouchBoad();
 	void Update();
 	void Draw();
@@ -50,18 +53,26 @@ public:
 	bool Reverse(VECTOR2 pos, VECTOR2 vec);
 
 	// vec:正規化された方向ベクトル
-	bool SarchReverse(VECTOR2 pos, VECTOR2 vec);
-
-	bool SarchReverse_OLD(VECTOR2 pos);
+	bool SarchReverse(VECTOR2 pos, VECTOR2 vec, PIECE_ST st);
 
 	void AddPlayer(int number);
 	// プレイターンのプレイヤーを更新
 	void CurrentPlayerChange();
-
 	player_ptr GetCurrentPlayer();
+
+
+	// マウス座標→ボード座標返還
+	VECTOR2 Pos_MouseToBoard(VECTOR2 mousePos);
+	// ボード座標→マウス座標返還
+	VECTOR2 Pos_BoardToMouse(VECTOR2 BoardPos);
 	//
+
+	//------デバッグ用関数-----
+	void Debug_SetPiece(VECTOR2 pos);
+
 private:
 	piece_ptr AddObjList(piece_ptr&& objPtr);
+	void CurrentSetUpData();
 	//auto AddObjList(piece_ptr&& objPtr);
 	//
 	// 盤面のサイズを設定する関数
@@ -69,7 +80,7 @@ private:
 	// 駒を置いた場所を軸に白黒を反転させる処理
 	void ChangeStone(VECTOR2 pos);
 
-	void SetPiece(VECTOR2 pos, PIECE_ST st);
+
 
 	VECTOR2 boardSize;
 	std::vector<std::vector<PIECE_ST>> board;
@@ -79,6 +90,9 @@ private:
 	// 二次円配列用のポインタ
 	std::vector <piece_ptr_w*> data;
 	std::vector <piece_ptr_w> BaseData;
+
+	// 現在のプレイヤー表示用
+	std::unique_ptr <GamePiece> CurrentPlPiece;
 	
 	//
 	player_list playerlist;
@@ -91,5 +105,6 @@ private:
 	VECTOR2 size;
 
 	std::array <int,0b1111 + 1> hitDir;
+
 };
 

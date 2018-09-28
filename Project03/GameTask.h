@@ -6,6 +6,10 @@ class MouseCtr;
 #include <list>
 #include <memory>
 
+#define SETWAIT(int) (GameTask::GetInstance().SetWait(int))
+#define ADDWAIT(int) (GameTask::GetInstance().AddWait(int))
+#define GETWAIT() (GameTask::GetInstance().GetWait())
+
 class GameTask
 {
 public:
@@ -13,9 +17,12 @@ public:
 	{
 		return *s_Instance;
 	};
-	void Run();
 	// 返り値 0b0001:左ボタン,0b0010:右ボタン,0b0100:中ボタン
-	void UpDate(const MouseCtr& mouseCtr);
+
+	void Run();
+	void SetWait(int wait);
+	void AddWait(int wait);
+	int GetWait();
 
 private:
 	struct GameTaskDeleter
@@ -41,6 +48,11 @@ private:
 	std::unique_ptr<MouseCtr> Mouse;
 
 	void (GameTask::*CurrentScene)();
+	
+	// ウェイトフレーム数
+	int wait;
+
+
 
 	int mouseFlg;
 	int mouseOld;

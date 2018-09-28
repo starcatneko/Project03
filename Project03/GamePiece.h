@@ -30,6 +30,5 @@ private:
 	// •`‰æ—p‚Ì‚¸‚ç‚·’l
 	VECTOR2 drawOffset;
 	PIECE_ST state;
-
 };
 

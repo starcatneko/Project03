@@ -9,6 +9,7 @@ std::unique_ptr<GameTask, GameTask::GameTaskDeleter> GameTask::s_Instance(new Ga
 GameTask::GameTask()
 {
 	CurrentScene = &GameTask::Init;
+	wait = 0;
 }
 
 
@@ -45,10 +46,16 @@ void GameTask::GameMain()
 	DrawString(0, 0, "Main", 0xffffff, 0);
 	Board->Update();
 
-	
+
 	if ((Mouse->GetButton() & 0b0001) != 0)
 	{
 		Board->SetPiece(Mouse->GetPos());
+	}
+
+	if ((Mouse->GetButton() & 0b0010) != 0)
+	{
+		Board->Debug_SetPiece(Mouse->GetPos());
+
 	}
 }
 
@@ -64,12 +71,29 @@ void GameTask::Run()
 		ScreenFlip();
 		ClsDrawScreen();
 
-		(this->*CurrentScene)();
+
+		if (wait > 0)
+		{
+			wait--;
+		}
+		else
+		{
+			(this->*CurrentScene)();
+
+		}
 
 }
 
-
-void GameTask::UpDate(const MouseCtr & mouseCtr)
+void GameTask::SetWait(int wait)
 {
+	this->wait = wait;
+}
+void GameTask::AddWait(int wait)
+{
+	this->wait += wait;
+}
 
+int GameTask::GetWait()
+{
+	return wait;
 }
