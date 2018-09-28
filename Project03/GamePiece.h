@@ -30,5 +30,7 @@ private:
 	// 描画用のずらす値
 	VECTOR2 drawOffset;
 	PIECE_ST state;
+	// アニメーション制御フレーム用
+	int animF;
 };
 

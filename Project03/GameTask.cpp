@@ -44,6 +44,7 @@ void GameTask::GameMain()
 {
 
 	DrawString(0, 0, "Main", 0xffffff, 0);
+	
 	Board->Update();
 
 
@@ -70,18 +71,12 @@ void GameTask::Run()
 
 		ScreenFlip();
 		ClsDrawScreen();
-
+		(this->*CurrentScene)();
 
 		if (wait > 0)
 		{
 			wait--;
 		}
-		else
-		{
-			(this->*CurrentScene)();
-
-		}
-
 }
 
 void GameTask::SetWait(int wait)

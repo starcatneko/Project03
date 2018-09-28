@@ -103,7 +103,6 @@ void GameBoard::Debug_SetPiece(VECTOR2 pos)
 	piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(pos, vec, (*currentPlayer)->GetType()));
 	data[pos.y][pos.x] = (tmp);
 	data[pos.y][pos.x].lock()->SetState((*currentPlayer)->GetType());
-
 }
 
 void GameBoard::SetPiece(VECTOR2 pos , PIECE_ST st)
@@ -187,7 +186,7 @@ bool GameBoard::Reverse(VECTOR2 pos, VECTOR2 vec)
 	VECTOR2 sarchPos = pos + (vec);
 	if (data[sarchPos.y][sarchPos.x].lock()->GetState() != (*currentPlayer)->GetType())
 	{
-		ADDWAIT(4);
+		ADDWAIT(2);
 		return true;
 	}
 	else

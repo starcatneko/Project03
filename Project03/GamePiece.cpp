@@ -24,6 +24,8 @@ GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset)
 	this->pos = pos;
 	this->drawOffset = drawOffset;
 	this->state = PIECE_NON;
+	this->animF = GETWAIT()*GETWAIT()*4;
+
 }
 
 
@@ -97,15 +99,16 @@ void GamePiece::Draw()
 {
 	int pieceColor = ColorSet();
 	
-	/*
-	if (GETWAIT() > 0)
+	
+	if (animF > 0)
 	{
 		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			PIECESIZE + (GETWAIT()*GETWAIT()) , pieceColor, true, 1);
-
+			PIECESIZE + (animF) , pieceColor, true, 1);
+		
+			animF/=1.18;
 	}
-	else*/
+	else
 	{
 		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
