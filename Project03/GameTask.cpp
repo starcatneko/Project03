@@ -46,7 +46,7 @@ void GameTask::GameMain()
 	DrawString(0, 0, "Main", 0xffffff, 0);
 	
 	Board->Update();
-
+	Mouse->GetPos().x;
 
 	if ((Mouse->GetButton() & 0b0001) != 0)
 	{
@@ -58,6 +58,22 @@ void GameTask::GameMain()
 		Board->Debug_SetPiece(Mouse->GetPos());
 
 	}
+}
+
+void GameTask::GameEnd()
+{
+	CurrentScene = &GameTask::Result;
+
+}
+
+void GameTask::Result()
+{
+	Board->Update();
+	if ((Mouse->GetButton() & 0b0001) != 0)
+	{
+		CurrentScene = &GameTask::Title;
+	}
+
 }
 
 void GameTask::CreateNewBoard()

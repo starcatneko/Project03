@@ -70,6 +70,8 @@ public:
 	//------デバッグ用関数-----
 	void Debug_SetPiece(VECTOR2 pos);
 
+	bool gameEndFlg;
+
 private:
 	piece_ptr AddObjList(piece_ptr&& objPtr);
 	void CurrentSetUpData();
@@ -98,8 +100,10 @@ private:
 	player_list playerlist;
 	// iterator 現在行動中のプレイヤー
 	player_list::iterator currentPlayer;
-	// 現在選択しているプレイヤーのアドレスを格納する
+		// 現在選択しているプレイヤーのアドレスを格納する
 	//player_ptr currentPlayer;
+		//最後に駒を置いたプレイヤー
+	int lastset;		
 
 	piece_list piecelist;
 	VECTOR2 size;

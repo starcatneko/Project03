@@ -21,6 +21,8 @@ GameBoard::GameBoard()
 {
 	Resize({ BoardSize, BoardSize });
 	Init();
+	
+
 }
 
 GameBoard::GameBoard(int size)
@@ -39,6 +41,7 @@ GameBoard::~GameBoard()
 }
 bool GameBoard::Init()
 {
+	gameEndFlg = false;
 	int pl_cnt = 0;
 	while (pl_cnt < PL_MAX)
 	{
@@ -48,8 +51,8 @@ bool GameBoard::Init()
 	}
 
 	SetPiece({ 3,3 }, PIECE_W);
-	SetPiece({ 4,4 }, PIECE_W);
-	SetPiece({ 3,4 }, PIECE_B);
+	//SetPiece({ 4,4 }, PIECE_W);
+	//SetPiece({ 3,4 }, PIECE_B);
 	SetPiece({ 4,3 }, PIECE_B);
 
 	currentPlayer = playerlist.begin();
@@ -150,6 +153,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 						piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
 						data[setvec.y][setvec.x] = (tmp);
 						data[setvec.y][setvec.x].lock()->SetState((*currentPlayer)->GetType());
+						lastset = (*currentPlayer)->GetNo();
 						plChangeFlg = true;
 					}
 
@@ -246,7 +250,6 @@ void GameBoard::AddPlayer(int number)
 void GameBoard::CurrentPlayerChange()
 {
 	currentPlayer++;
-
 	if (currentPlayer == playerlist.end())
 	{
 		currentPlayer = playerlist.begin();
@@ -299,8 +302,10 @@ void GameBoard::Draw()
 
 	CurrentPlPiece->Draw();
 
-	CurrentSetUpData();
-
+	if (gameEndFlg != true)
+	{
+		CurrentSetUpData();
+	}
 
 	// 現在の番のプレイヤーを表示する
 
@@ -352,7 +357,17 @@ void GameBoard::CurrentSetUpData()
 		}
 	}
 	// 設置可能なタイルが無い場合
-	if(tilecnt == 0)
+	if (tilecnt == 0)
+	{
 		CurrentPlayerChange();
+		
+		// 設置できるプレイヤーが一人も居ない場合
+		if (lastset == (*currentPlayer)->GetNo())
+		{
+			GameTask::GetInstance().GameEnd();
+			gameEndFlg = true;
+			return;
+		}
+	}
 
 }

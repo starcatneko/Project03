@@ -24,6 +24,8 @@ public:
 	void AddWait(int wait);
 	int GetWait();
 
+
+	void GameEnd();
 private:
 	struct GameTaskDeleter
 	{
@@ -40,6 +42,7 @@ private:
 	void Init();
 	void Title();
 	void GameMain();
+	void Result();
 
 	void CreateNewBoard();
 
