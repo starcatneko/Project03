@@ -48,6 +48,8 @@ public:
 
 	void DB_TouchBoad();
 	void Update();
+	// ゲームセット時処理
+	void GameEnd();
 	void Draw();
 	// flgがtrueの方向に石を置く
 	bool Reverse(VECTOR2 pos, VECTOR2 vec);
@@ -100,10 +102,14 @@ private:
 	player_list playerlist;
 	// iterator 現在行動中のプレイヤー
 	player_list::iterator currentPlayer;
-		// 現在選択しているプレイヤーのアドレスを格納する
+	// 現在選択しているプレイヤーのアドレスを格納する
+	
 	//player_ptr currentPlayer;
-		//最後に駒を置いたプレイヤー
+		
+	// 最後に駒を置いたプレイヤー
 	int lastset;		
+	// 勝利したプレイヤー
+	int winplayer;
 
 	piece_list piecelist;
 	VECTOR2 size;

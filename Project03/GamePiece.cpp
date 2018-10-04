@@ -105,8 +105,9 @@ void GamePiece::Draw()
 		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
 			PIECESIZE + (animF) , pieceColor, true, 1);
-		
-			animF/=1.18;
+			
+		if(wait <= 0)
+			animF--;
 	}
 	else
 	{
@@ -114,4 +115,15 @@ void GamePiece::Draw()
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
 			PIECESIZE, pieceColor, true, 1);
 	}
+	wait--;
+}
+
+void GamePiece::SetWait(int i)
+{
+	this->wait = i;
+}
+void GamePiece::SetAnimF(int i)
+{
+	this->animF = i;
+	
 }

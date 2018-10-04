@@ -22,7 +22,6 @@ void GameTask::Init()
 {
 	ImageMng::GetInstance().LoadImg("image/title.jpg", "title");
 	Mouse = std::make_unique<MouseCtr>();
-
 	CurrentScene = &GameTask::Title;
 
 }
@@ -44,7 +43,7 @@ void GameTask::GameMain()
 {
 
 	DrawString(0, 0, "Main", 0xffffff, 0);
-	
+
 	Board->Update();
 	Mouse->GetPos().x;
 
@@ -69,6 +68,7 @@ void GameTask::GameEnd()
 void GameTask::Result()
 {
 	Board->Update();
+
 	if ((Mouse->GetButton() & 0b0001) != 0)
 	{
 		CurrentScene = &GameTask::Title;

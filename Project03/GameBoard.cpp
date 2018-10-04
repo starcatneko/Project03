@@ -10,9 +10,11 @@ const int CHIPSIZE = 64;
 
 #define SCREEN_SIZE_X 800
 #define SCREEN_SIZE_Y 600
+#define SCREEN_HALF_X SCREEN_SIZE_X/2
+#define SCREEN_HALF_Y SCREEN_SIZE_Y/2
+#define X_DIS (int)((SCREEN_SIZE_X / 2) - (boardSize.x / 2)*CHIPSIZE)
+#define Y_DIS (int)((SCREEN_SIZE_Y / 2) - (boardSize.y / 2)*CHIPSIZE)
 
-#define X_DIS ((SCREEN_SIZE_X / 2) - (boardSize.x / 2)*CHIPSIZE)
-#define Y_DIS ((SCREEN_SIZE_Y / 2) - (boardSize.y / 2)*CHIPSIZE)
 
 // プレイヤー人数
 #define PL_MAX 2
@@ -50,10 +52,14 @@ bool GameBoard::Init()
 		pl_cnt++;
 	}
 
-	SetPiece({ 3,3 }, PIECE_W);
-	//SetPiece({ 4,4 }, PIECE_W);
-	//SetPiece({ 3,4 }, PIECE_B);
-	SetPiece({ 4,3 }, PIECE_B);
+	SetPiece({ 0,3 }, PIECE_W);
+	SetPiece({ 0,0 }, PIECE_W);
+	SetPiece({ 0,2 }, PIECE_W);
+	SetPiece({ 0,1 }, PIECE_W);
+	SetPiece({ 1,3 }, PIECE_B);
+	SetPiece({ 1,0 }, PIECE_B);
+	SetPiece({ 1,2 }, PIECE_B);
+	SetPiece({ 1,1 }, PIECE_B);
 
 	currentPlayer = playerlist.begin();
 	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_B);
@@ -140,6 +146,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 			{
 
 				// 方向に向かってひっくり返す関数
+
 				if(SarchReverse(vec1, itr, (*currentPlayer)->GetType()))
 				{
 					piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
@@ -155,6 +162,8 @@ void GameBoard::SetPiece(VECTOR2 pos)
 						data[setvec.y][setvec.x].lock()->SetState((*currentPlayer)->GetType());
 						lastset = (*currentPlayer)->GetNo();
 						plChangeFlg = true;
+
+
 					}
 
 				}
@@ -180,8 +189,20 @@ void GameBoard::DB_TouchBoad()
 
 void GameBoard::Update()
 {
-
 	Draw();
+	if (gameEndFlg)
+	{
+		std::string str1;
+		str1 = "WINNER PLAYER";
+		SetFontSize(48);
+
+		//GetDrawStringWidth(str1.c_str(),strlen(str1.c_str()))
+		DrawFormatString(
+			SCREEN_HALF_X - GetDrawStringWidth(str1.c_str(), strlen(str1.c_str()))/2,
+			320, 0xFF4444, str1.c_str(), (*currentPlayer)->GetNo());
+
+		SetFontSize(10);
+	}
 }
 
 bool GameBoard::Reverse(VECTOR2 pos, VECTOR2 vec)
@@ -190,7 +211,6 @@ bool GameBoard::Reverse(VECTOR2 pos, VECTOR2 vec)
 	VECTOR2 sarchPos = pos + (vec);
 	if (data[sarchPos.y][sarchPos.x].lock()->GetState() != (*currentPlayer)->GetType())
 	{
-		ADDWAIT(2);
 		return true;
 	}
 	else
@@ -199,7 +219,6 @@ bool GameBoard::Reverse(VECTOR2 pos, VECTOR2 vec)
 
 bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec ,PIECE_ST st)
 {
-	PIECE_ST check_piece = st;
 	VECTOR2 sarchPos;
 
 	for (int i = 1; i < data.size(); i++)
@@ -218,7 +237,7 @@ bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec ,PIECE_ST st)
 		if (!data[sarchPos.y][sarchPos.x].expired())
 		{
 			// 駒が配置されていた場合、その駒がプレイヤーの駒と一致するか
-			if (data[sarchPos.y][sarchPos.x].lock()->GetState() == check_piece)
+			if (data[sarchPos.y][sarchPos.x].lock()->GetState() == st)
 			{
 				// 駒がサーチ基準と隣接していない場合true
 				if (i >= 2)
@@ -265,12 +284,26 @@ player_ptr GameBoard::GetCurrentPlayer()
 
 piece_ptr GameBoard::AddObjList(piece_ptr && objPtr)
 {
-	// 引数の 内容をリストに追加
+	// 引数の 内容をリストにf追加
 	piecelist.push_back(objPtr);
 	//itrに追加したpieceのアドレスを入れる
 	auto itr = piecelist.end();
+	
 	itr--;
+	ADDWAIT(4);
+	(*itr)->SetWait(GETWAIT());
+	(*itr)->SetAnimF(7);
 	return *itr;
+}
+
+void GameBoard::GameEnd()
+{
+	std::array<int,PL_MAX> pieceCnt;
+	pieceCnt.fill(0);
+	for(auto itr : piecelist)
+	{
+		pieceCnt[(itr->GetState())-1]++;
+	}
 }
 
 void GameBoard::Draw()
@@ -350,24 +383,23 @@ void GameBoard::CurrentSetUpData()
 					DrawBox(drawPos.x*CHIPSIZE + X_DIS, drawPos.y*CHIPSIZE + Y_DIS
 						, drawPos.x*CHIPSIZE + CHIPSIZE + X_DIS,
 						drawPos.y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xaadd00, true);
-
-
 				}
 			}
 		}
 	}
+
 	// 設置可能なタイルが無い場合
 	if (tilecnt == 0)
 	{
-		CurrentPlayerChange();
-		
 		// 設置できるプレイヤーが一人も居ない場合
 		if (lastset == (*currentPlayer)->GetNo())
 		{
 			GameTask::GetInstance().GameEnd();
+			this->GameEnd();
 			gameEndFlg = true;
 			return;
 		}
+		CurrentPlayerChange();
 	}
 
 }

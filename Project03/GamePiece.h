@@ -5,6 +5,7 @@
 #include <memory>
 class GameBoard;
 class Player;
+
 enum PIECE_ST;
 
 class GamePiece
@@ -24,6 +25,8 @@ public:
 	void Revarse(PIECE_ST st);
 	int ColorSet();
 	void Draw();
+	void SetWait(int i);
+	void SetAnimF(int i);
 private:
 
 	VECTOR2 pos;
@@ -32,5 +35,6 @@ private:
 	PIECE_ST state;
 	// アニメーション制御フレーム用
 	int animF;
+	int wait;
 };
 
