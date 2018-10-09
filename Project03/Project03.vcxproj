@@ -125,33 +125,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Chip.cpp" />
-    <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="GamePiece.cpp" />
     <ClCompile Include="GameTask.cpp" />
     <ClCompile Include="ImageMng.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="MouseCtr.cpp" />
-    <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="PieceBlack.cpp" />
+    <ClCompile Include="PieceState.cpp" />
+    <ClCompile Include="PieceWhite.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="result.cpp" />
-    <ClCompile Include="Title.cpp" />
     <ClCompile Include="VECTOR2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Chip.h" />
-    <ClInclude Include="GameMain.h" />
     <ClInclude Include="GamePiece.h" />
     <ClInclude Include="GameTask.h" />
-    <ClInclude Include="Geometry.h" />
     <ClInclude Include="ImageMng.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="MouseCtr.h" />
-    <ClInclude Include="Piece.h" />
+    <ClInclude Include="PieceBlack.h" />
+    <ClInclude Include="PieceState.h" />
+    <ClInclude Include="PieceWhite.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="result.h" />
-    <ClInclude Include="Title.h" />
     <ClInclude Include="VECTOR2.h" />
   </ItemGroup>
   <ItemGroup>

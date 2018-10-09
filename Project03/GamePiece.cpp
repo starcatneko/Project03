@@ -1,7 +1,12 @@
 #include "GamePiece.h"
 #include "GameBoard.h"
 #include "GameTask.h"
+#include "GameBoard.h"
 #include "DxLib.h"
+#include "PieceState.h"
+
+#include "PieceWhite.h"
+#include "PieceBlack.h"
 
 #define PIECESIZE 25
 #define CHIPSIZE 64
@@ -16,15 +21,15 @@ GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset ,PIECE_ST st)
 {
 	this->pos = pos;
 	this->drawOffset = drawOffset;
-	this->state = st;
+	SetState(st);
 }
 
 GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset)
 {
 	this->pos = pos;
 	this->drawOffset = drawOffset;
-	this->state = PIECE_NON;
 	this->animF = GETWAIT()*GETWAIT()*4;
+
 
 }
 
@@ -32,7 +37,7 @@ GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset)
 GamePiece::GamePiece(VECTOR2 pos,PIECE_ST st)
 {
 	this->pos = pos;
-	state = st;
+	SetState(st);
 }
 
 GamePiece::~GamePiece()
@@ -46,23 +51,29 @@ VECTOR2 GamePiece::GetPos()
 
 void GamePiece::SetState(PIECE_ST st)
 {
-	state = st;
+	if (st == PIECE_W)
+	{
+		//GamePiece::state = std::make_unique<PieceWhite>();
+		state = std::make_unique<PieceWhite>();
+	}
+	else
+	{
+		state = std::make_unique<PieceBlack>();
+	}
 }
 
 PIECE_ST GamePiece::GetState()
 {
-	return state;
+	if (state)
+	{
+		return (*state).GetState();
+	}
 }
-
-void GamePiece::Revarse(PIECE_ST st)
-{
-	state = st;
-}
-
+/*
 int GamePiece::ColorSet()
 {
 	int color;
-	switch (state)
+	switch (state->GetState())
 	{
 	case PIECE_B:
 		color = 0x000000;
@@ -94,17 +105,29 @@ int GamePiece::ColorSet()
 	}
 	return color;
 }
-
+*/
 void GamePiece::Draw()
 {
-	int pieceColor = ColorSet();
-	
-	
+	int color = GetRand(0xffffff);
+		
+	if (state)
+	{
+		color = (*state).GetDrawColor();
+	}
+#ifdef _DEBUG
+	else
+	{
+		std::string txt = ("text\n");
+		OutputDebugString(txt.c_str());
+	}
+
+#endif // DEBUG
+
 	if (animF > 0)
 	{
 		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			PIECESIZE + (animF) , pieceColor, true, 1);
+			PIECESIZE + (animF) , color, true, 1);
 			
 		if(wait <= 0)
 			animF--;
@@ -113,7 +136,7 @@ void GamePiece::Draw()
 	{
 		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			PIECESIZE, pieceColor, true, 1);
+			PIECESIZE, color, true, 1);
 	}
 	wait--;
 }

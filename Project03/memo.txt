@@ -3,6 +3,29 @@
  ##		項目名
  $$		復習
  **		やることメモ
+ 
+ ## OutputDebugString()
+	出力ウィンドウに任意のテキストを表示する
+	書式付き文字列は表示できない。
+
+ ## unique_ptrの真偽
+	unique_ptrが真の場合存在
+	偽の場合は存在していない
+	
+	if(unique_ptr)	// unique_ptrが存在する場合ifの中に入る
+	{
+	
+	}
+
+ ## デザインパターン state
+ Stateパターン
+  抽象化したクラス→継承
+  メンバは全部純粋仮想関数
+  例)クラス PieceState
+	 virtual int GetDrawColor() = 0;
+	 ↓
+	 継承クラス PieceBlack
+	 int GetDrawColor() {~~~~return ~~;}
 
  ** チェック方向のベクトル
  チェック方向を正規化したベクトル

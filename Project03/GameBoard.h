@@ -1,5 +1,4 @@
 #pragma once
-#include "Geometry.h"
 #include "VECTOR2.h"
 #include <vector>
 #include <list>
@@ -10,6 +9,8 @@ class GamePiece;
 class Player;
 class MouseCtr;
 
+enum PIECE_ST;
+
 
 typedef std::shared_ptr<GamePiece> piece_ptr;
 typedef std::shared_ptr<Player> player_ptr;
@@ -19,21 +20,6 @@ typedef std::list<player_ptr> player_list;
 
 typedef std::weak_ptr<GamePiece> piece_ptr_w;
 
-
-//　マスに置かれている石
-enum PIECE_ST
-{
-	PIECE_NON,
-	PIECE_W,
-	PIECE_B,
-	PIECE_RED,
-	PIECE_BLU,
-	PIECE_GRN,
-	PIECE_YLW,
-	PIECE_PPL,
-	PIECE_CYN,
-	PIECE_MAX
-};
 class GameBoard
 {
 public:

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Geometry.h"
 #include "VECTOR2.h"
 /*
 #include <vector>

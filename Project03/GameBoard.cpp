@@ -3,6 +3,7 @@
 #include "Dxlib.h"
 #include "Player.h"
 #include "GameTask.h"
+#include "PieceState.h"
 
 
 const int CHIPSIZE = 64;
@@ -52,14 +53,10 @@ bool GameBoard::Init()
 		pl_cnt++;
 	}
 
-	SetPiece({ 0,3 }, PIECE_W);
-	SetPiece({ 0,0 }, PIECE_W);
-	SetPiece({ 0,2 }, PIECE_W);
-	SetPiece({ 0,1 }, PIECE_W);
-	SetPiece({ 1,3 }, PIECE_B);
-	SetPiece({ 1,0 }, PIECE_B);
-	SetPiece({ 1,2 }, PIECE_B);
-	SetPiece({ 1,1 }, PIECE_B);
+	SetPiece({ 3,3 }, PIECE_W);
+	SetPiece({ 4,4 }, PIECE_W);
+	SetPiece({ 4,3 }, PIECE_B);
+	SetPiece({ 3,4 }, PIECE_B);
 
 	currentPlayer = playerlist.begin();
 	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_B);
@@ -139,7 +136,6 @@ void GameBoard::SetPiece(VECTOR2 pos)
 
 		VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }, };
 
-
 		if (data[vec1.y][vec1.x].expired())
 		{
 			for (auto itr : sarchTBL)
@@ -197,11 +193,12 @@ void GameBoard::Update()
 		SetFontSize(48);
 
 		//GetDrawStringWidth(str1.c_str(),strlen(str1.c_str()))
-		DrawFormatString(
+		
+		/*DrawFormatString(
 			SCREEN_HALF_X - GetDrawStringWidth(str1.c_str(), strlen(str1.c_str()))/2,
 			320, 0xFF4444, str1.c_str(), (*currentPlayer)->GetNo());
-
-		SetFontSize(10);
+			*/
+		SetFontSize(16);
 	}
 }
 

@@ -3,10 +3,10 @@
 #include <vector>
 #include <list>
 #include <memory>
+
+#include "PieceState.h";
 class GameBoard;
 class Player;
-
-enum PIECE_ST;
 
 class GamePiece
 {
@@ -28,11 +28,11 @@ public:
 	void SetWait(int i);
 	void SetAnimF(int i);
 private:
-
+	std::unique_ptr <PieceState> state;
+	// 盤面上の座標
 	VECTOR2 pos;
 	// 描画用のずらす値
 	VECTOR2 drawOffset;
-	PIECE_ST state;
 	// アニメーション制御フレーム用
 	int animF;
 	int wait;

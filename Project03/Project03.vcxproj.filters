@@ -13,86 +13,83 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\piece">
+      <UniqueIdentifier>{f1b694e5-d246-4f91-b6e2-17b422b7782f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\piece">
+      <UniqueIdentifier>{aa1a98c8-1db0-45ed-b874-c52817a14706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\core">
+      <UniqueIdentifier>{846f2109-9de2-438d-87a1-ea0569550144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\core">
+      <UniqueIdentifier>{a08ba0d6-3ac8-4bab-9fe6-6dac4b581bc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageMng.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Chip.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="result.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameTask.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="VECTOR2.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="GamePiece.cpp">
+      <Filter>ソース ファイル\piece</Filter>
     </ClCompile>
     <ClCompile Include="GameBoard.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\core</Filter>
     </ClCompile>
-    <ClCompile Include="Piece.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="GameTask.cpp">
+      <Filter>ソース ファイル\core</Filter>
     </ClCompile>
-    <ClCompile Include="GamePiece.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="ImageMng.cpp">
+      <Filter>ソース ファイル\core</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>ソース ファイル\core</Filter>
     </ClCompile>
     <ClCompile Include="MouseCtr.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\core</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\core</Filter>
+    </ClCompile>
+    <ClCompile Include="VECTOR2.cpp">
+      <Filter>ソース ファイル\core</Filter>
+    </ClCompile>
+    <ClCompile Include="PieceState.cpp">
+      <Filter>ソース ファイル\piece</Filter>
+    </ClCompile>
+    <ClCompile Include="PieceBlack.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="PieceWhite.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameMain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageMng.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Chip.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="result.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameTask.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="VECTOR2.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="GamePiece.h">
+      <Filter>ヘッダー ファイル\piece</Filter>
     </ClInclude>
     <ClInclude Include="GameBoard.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\core</Filter>
     </ClInclude>
-    <ClInclude Include="Piece.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="GameTask.h">
+      <Filter>ヘッダー ファイル\core</Filter>
     </ClInclude>
-    <ClInclude Include="GamePiece.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ImageMng.h">
+      <Filter>ヘッダー ファイル\core</Filter>
     </ClInclude>
     <ClInclude Include="MouseCtr.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\core</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\core</Filter>
+    </ClInclude>
+    <ClInclude Include="VECTOR2.h">
+      <Filter>ヘッダー ファイル\core</Filter>
+    </ClInclude>
+    <ClInclude Include="PieceState.h">
+      <Filter>ヘッダー ファイル\piece</Filter>
+    </ClInclude>
+    <ClInclude Include="PieceBlack.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="PieceWhite.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
