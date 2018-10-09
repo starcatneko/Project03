@@ -4,9 +4,12 @@
 #include <list>
 #include <memory>
 
-#include "PieceState.h";
+#include "PieceState.h"
+
 class GameBoard;
 class Player;
+
+typedef std::list<std::unique_ptr <PieceState>> state_list;
 
 class GamePiece
 {
@@ -22,13 +25,11 @@ public:
 	// Œ»İ‚Ìstate‚ğ•Ô‚·
 	PIECE_ST GetState();
 	// ‹î‚ğ— •Ô‚·
-	void Revarse(PIECE_ST st);
-	int ColorSet();
 	void Draw();
 	void SetWait(int i);
 	void SetAnimF(int i);
 private:
-	std::unique_ptr <PieceState> state;
+	state_list state;
 	// ”Õ–Êã‚ÌÀ•W
 	VECTOR2 pos;
 	// •`‰æ—p‚Ì‚¸‚ç‚·’l

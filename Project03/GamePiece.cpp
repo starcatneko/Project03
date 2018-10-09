@@ -54,20 +54,21 @@ void GamePiece::SetState(PIECE_ST st)
 	if (st == PIECE_W)
 	{
 		//GamePiece::state = std::make_unique<PieceWhite>();
-		state = std::make_unique<PieceWhite>();
+		state.push_front(std::make_unique<PieceWhite>());
 	}
 	else
 	{
-		state = std::make_unique<PieceBlack>();
+		state.push_front(std::make_unique<PieceBlack>());
 	}
 }
 
 PIECE_ST GamePiece::GetState()
 {
-	if (state)
+	if ((*state.begin()))
 	{
-		return (*state).GetState();
+		return (*state.begin())->GetState();
 	}
+	return PIECE_NON;
 }
 /*
 int GamePiece::ColorSet()
@@ -110,9 +111,9 @@ void GamePiece::Draw()
 {
 	int color = GetRand(0xffffff);
 		
-	if (state)
+	if ((*state.begin()))
 	{
-		color = (*state).GetDrawColor();
+		color = (*state.begin())->GetDrawColor();
 	}
 #ifdef _DEBUG
 	else

@@ -24,5 +24,12 @@ public:
 	virtual ~PieceState();
 	virtual PIECE_ST GetState() = 0;
 	virtual unsigned int GetDrawColor() = 0;
+	/*
+	virtual int GetHp() = 0;
+	virtual int SkillNumber() = 0;
+	*/
+	//virtual int Image() = 0;
+	
+protected:
 };
 

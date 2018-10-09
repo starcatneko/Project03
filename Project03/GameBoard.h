@@ -20,6 +20,8 @@ typedef std::list<player_ptr> player_list;
 
 typedef std::weak_ptr<GamePiece> piece_ptr_w;
 
+
+
 class GameBoard
 {
 public:
