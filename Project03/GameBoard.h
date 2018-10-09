@@ -30,6 +30,7 @@ public:
 	GameBoard(VECTOR2 size);
 	~GameBoard();
 	bool Init();
+	void TypeSeting();
 	// 指定した位置に石を配置
 	void SetPiece(VECTOR2 pos);
 	void SetPiece(VECTOR2 pos, PIECE_ST st);
@@ -104,5 +105,7 @@ private:
 
 	std::array <int,0b1111 + 1> hitDir;
 
+	// プレイヤーが設置するピースの種類
+	PIECE_ST setType;
 };
 

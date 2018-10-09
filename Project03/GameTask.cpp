@@ -4,6 +4,8 @@
 #include "GameBoard.h"
 #include "ImageMng.h"
 
+
+
 std::unique_ptr<GameTask, GameTask::GameTaskDeleter> GameTask::s_Instance(new GameTask());
 
 GameTask::GameTask()
@@ -28,6 +30,7 @@ void GameTask::Init()
 
 void GameTask::Title()
 {
+	//ImgCtr({ 120,240 }, "title");
 	ImageMng::GetInstance().DrawImg({ 120,240 }, "title", 0);
 	DrawString(0, 0, "Title", 0xffffff, 0);
 
