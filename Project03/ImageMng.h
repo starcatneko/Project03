@@ -5,7 +5,6 @@
 #include <memory>
 #include <string>
 #include <map>
-//#define ImgCtr(VECTOR2 pos,std::string path) (ImageMng::GetInstance().ImageCtr(pos,path))
 
 class ImageMng
 {
@@ -15,8 +14,7 @@ public:
 	{
 		return *s_Instance;
 	};
-	void ImageCtr(VECTOR2 pos,std::string path);
-	void LoadImg(std::string path);
+
 	void LoadImg(std::string path, std::string name);
 	void DrawImg(VECTOR2 pos,std::string name,int tranceflg);
 private:

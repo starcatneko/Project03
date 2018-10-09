@@ -44,7 +44,6 @@ GameBoard::~GameBoard()
 }
 bool GameBoard::Init()
 {
-	setType = PIECE_NON;
 	gameEndFlg = false;
 	int pl_cnt = 0;
 	while (pl_cnt < PL_MAX)
@@ -62,24 +61,6 @@ bool GameBoard::Init()
 	currentPlayer = playerlist.begin();
 	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_B);
 	return true;
-}
-
-void GameBoard::TypeSeting()
-{
-	if (CheckHitKey(KEY_INPUT_1))
-	{
-		setType = PIECE_KING;
-	}
-	if (CheckHitKey(KEY_INPUT_2))
-	{
-		setType = PIECE_NON;
-	}
-	if (CheckHitKey(KEY_INPUT_3))
-	{
-		setType = PIECE_NON;
-	}
-
-
 }
 
 VECTOR2 GameBoard::Pos_MouseToBoard(VECTOR2 mousePos)
@@ -168,11 +149,6 @@ void GameBoard::SetPiece(VECTOR2 pos)
 					data[vec1.y][vec1.x] = (tmp);
 					data[vec1.y][vec1.x].lock()->SetState((*currentPlayer)->GetType());
 
-					// キャラ駒を配置する場合（setTypeにキャラ駒のIDが格納されている場合)
-					if (setType > PIECE_CHAR)
-					{
-						data[vec1.y][vec1.x].lock()->SetState(setType);
-					}
 					for(int i = 1;Reverse(vec1, itr*i) == true;i++)
 					{
 						VECTOR2 setvec = vec1 + itr * i;
@@ -210,7 +186,6 @@ void GameBoard::DB_TouchBoad()
 void GameBoard::Update()
 {
 	Draw();
-	TypeSeting();
 	if (gameEndFlg)
 	{
 		std::string str1;

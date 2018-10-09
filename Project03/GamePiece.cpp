@@ -7,7 +7,6 @@
 
 #include "PieceWhite.h"
 #include "PieceBlack.h"
-#include "PieceKing.h"
 
 #define PIECESIZE 25
 #define CHIPSIZE 64
@@ -61,27 +60,13 @@ void GamePiece::SetState(PIECE_ST st)
 	{
 		state.push_front(std::make_unique<PieceBlack>());
 	}
-
-	// ƒLƒƒƒ‰‹î‚ð”z’u
-	if (st > PIECE_CHAR)
-	{
-		if (st = PIECE_KING)
-		{
-			state.push_back(std::make_unique<PieceKing>());
-
-		}
-	}
 }
 
 PIECE_ST GamePiece::GetState()
 {
-	if (state.empty())
+	if ((*state.begin()))
 	{
-
-		if ((*state.begin()))
-		{
-			return (**state.begin()).GetState();
-		}
+		return (*state.begin())->GetState();
 	}
 	return PIECE_NON;
 }
@@ -130,11 +115,6 @@ void GamePiece::Draw()
 	{
 		color = (*state.begin())->GetDrawColor();
 	}
-	/*
-	if ((*state.rbegin())->GetState())
-	{
-		color = (*state.begin())->GetDrawColor();
-	}*/
 #ifdef _DEBUG
 	else
 	{
