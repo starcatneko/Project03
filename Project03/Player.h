@@ -15,6 +15,7 @@ public:
 	Player();
 	~Player();
 	void Update();
+	void SetTray(int boardsize);
 	int GetNo();
 	PIECE_ST GetType();
 private:

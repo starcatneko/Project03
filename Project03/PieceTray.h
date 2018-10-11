@@ -16,7 +16,7 @@ public:
 	PieceTray(PIECE_ST st);
 	~PieceTray();
 
-	void SetTray();
+	void SetTray(int boardsize, int plcnt);
 	void DrawTray();
 private:
 	piece_list piecelist;

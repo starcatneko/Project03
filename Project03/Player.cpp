@@ -22,6 +22,11 @@ void Player::Update()
 	pieceTray->DrawTray();
 }
 
+void Player::SetTray(int boardsize)
+{
+	pieceTray->SetTray(boardsize, Player::playercnt);
+}
+
 int Player::GetNo()
 {
 	return playerNo;

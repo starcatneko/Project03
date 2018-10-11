@@ -52,6 +52,10 @@ bool GameBoard::Init()
 		AddPlayer();
 		pl_cnt++;
 	}
+	for (auto itr : playerlist)
+	{
+		(*itr).SetTray(BaseData.size());
+	}
 
 	SetPiece({ 3,3 }, PIECE_W);
 	SetPiece({ 4,4 }, PIECE_W);
