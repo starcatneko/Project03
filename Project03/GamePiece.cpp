@@ -70,43 +70,7 @@ PIECE_ST GamePiece::GetState()
 	}
 	return PIECE_NON;
 }
-/*
-int GamePiece::ColorSet()
-{
-	int color;
-	switch (state->GetState())
-	{
-	case PIECE_B:
-		color = 0x000000;
-		break;
-	case PIECE_W:
-		color = 0xffffff;
-		break;
-	case PIECE_RED:
-		color = 0xDD0000;
-		break;
-	case PIECE_BLU:
-		color = 0x0000DD;
-		break;
-	case PIECE_GRN:
-		color = 0x00DD00;
-		break;
-	case PIECE_YLW:
-		color = 0xEEEE00;
-		break;
-	case PIECE_PPL:
-		color = 0xEE00EE;
-		break;
-	case PIECE_CYN:
-		color = 0x00EEEE;
-		break;
-	default:
 
-		break;
-	}
-	return color;
-}
-*/
 void GamePiece::Draw()
 {
 	int color = GetRand(0xffffff);

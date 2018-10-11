@@ -9,6 +9,7 @@ PieceKing::PieceKing()
 
 PieceKing::~PieceKing()
 {
+
 }
 
 PIECE_ST PieceKing::GetState()

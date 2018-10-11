@@ -49,7 +49,7 @@ bool GameBoard::Init()
 	while (pl_cnt < PL_MAX)
 	{
 		// 関数にpl_cntを加算させる処理を組み込んだら短縮可能
-		AddPlayer(pl_cnt);
+		AddPlayer();
 		pl_cnt++;
 	}
 
@@ -173,6 +173,9 @@ void GameBoard::SetPiece(VECTOR2 pos)
 		{
 			// 誰かが置ける状態の場合
 			CurrentPlayerChange();
+			// -----現在のプレイヤー表示
+			CurrentPlPiece->SetState((*currentPlayer)->GetType());
+
 		}
 
 	}
@@ -186,6 +189,7 @@ void GameBoard::DB_TouchBoad()
 void GameBoard::Update()
 {
 	Draw();
+	(*currentPlayer)->Update();
 	if (gameEndFlg)
 	{
 		std::string str1;
@@ -256,10 +260,10 @@ bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec ,PIECE_ST st)
 	return false;
 }
 
-void GameBoard::AddPlayer(int number)
+void GameBoard::AddPlayer()
 {
 	//std::make_shared<Player>();
-	playerlist.push_back(std::make_shared<Player>(number));
+	playerlist.push_back(std::make_shared<Player>());
 
 }
 
@@ -323,8 +327,6 @@ void GameBoard::Draw()
 
 	VECTOR2 CurrntPlPos = CurrentPlPiece->GetPos();
 
-	// -----現在のプレイヤー表示
-	CurrentPlPiece->SetState((*currentPlayer)->GetType());
 	
 	DrawBox(CurrntPlPos.x*CHIPSIZE + X_DIS, CurrntPlPos.y*CHIPSIZE + Y_DIS
 		, CurrntPlPos.x*CHIPSIZE + CHIPSIZE + X_DIS,

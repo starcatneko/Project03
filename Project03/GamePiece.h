@@ -4,12 +4,20 @@
 #include <list>
 #include <memory>
 
-#include "PieceState.h"
+class PieceState;
 
 class GameBoard;
 class Player;
+class GamePiece;
+enum PIECE_ST;
+
+
+typedef std::shared_ptr<GamePiece> piece_ptr;
+
+typedef std::list<piece_ptr> piece_list;
 
 typedef std::list<std::unique_ptr <PieceState>> state_list;
+
 
 class GamePiece
 {

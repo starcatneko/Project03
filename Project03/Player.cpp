@@ -1,16 +1,15 @@
 #include "Player.h"
 #include "GameBoard.h"
+#include "PieceTray.h"
 
-
+int Player::playercnt = 0;
 Player::Player()
 {
+	this->playerNo = playercnt++;
+	this->piecetype = PIECE_ST(this->playerNo + 1);
+	this->pieceTray = std::make_unique<PieceTray>(this->piecetype);
 }
 
-Player::Player(int number)
-{
-	playerNo = number;
-	piecetype = PIECE_ST(number+1);
-}
 
 
 Player::~Player()
@@ -18,19 +17,9 @@ Player::~Player()
 
 }
 
-void Player::Init()
-{
-}
-
 void Player::Update()
 {
-	
-}
-
-void Player::SetPiece()
-{
-
-
+	pieceTray->DrawTray();
 }
 
 int Player::GetNo()

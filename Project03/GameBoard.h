@@ -5,17 +5,17 @@
 #include <array>
 #include <memory>
 
-class GamePiece;
+
+#include "GamePiece.h"
+//class GamePiece;
 class Player;
 class MouseCtr;
 
 enum PIECE_ST;
 
 
-typedef std::shared_ptr<GamePiece> piece_ptr;
 typedef std::shared_ptr<Player> player_ptr;
 
-typedef std::list<piece_ptr> piece_list;
 typedef std::list<player_ptr> player_list;
 
 typedef std::weak_ptr<GamePiece> piece_ptr_w;
@@ -45,7 +45,7 @@ public:
 	// vec:正規化された方向ベクトル
 	bool SarchReverse(VECTOR2 pos, VECTOR2 vec, PIECE_ST st);
 
-	void AddPlayer(int number);
+	void AddPlayer();
 	// プレイターンのプレイヤーを更新
 	void CurrentPlayerChange();
 	player_ptr GetCurrentPlayer();

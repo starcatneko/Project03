@@ -1,10 +1,11 @@
 #include "PieceWhite.h"
-
+#include "DxLib.h"
 
 
 PieceWhite::PieceWhite()
 {
-	
+	OutputDebugString("White\n");
+
 }
 
 

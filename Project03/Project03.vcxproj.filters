@@ -61,6 +61,9 @@
       <Filter>ソース ファイル\piece</Filter>
     </ClCompile>
     <ClCompile Include="PieceKing.cpp">
+      <Filter>ソース ファイル\piece</Filter>
+    </ClCompile>
+    <ClCompile Include="PieceTray.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -96,6 +99,9 @@
       <Filter>ヘッダー ファイル\piece</Filter>
     </ClInclude>
     <ClInclude Include="PieceKing.h">
+      <Filter>ヘッダー ファイル\piece</Filter>
+    </ClInclude>
+    <ClInclude Include="PieceTray.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
