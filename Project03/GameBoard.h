@@ -62,6 +62,7 @@ public:
 
 	bool gameEndFlg;
 
+	VECTOR2 GetBoardSize();
 private:
 	piece_ptr AddObjList(piece_ptr&& objPtr);
 	void CurrentSetUpData();
@@ -69,10 +70,6 @@ private:
 	//
 	// 盤面のサイズを設定する関数
 	bool Resize(VECTOR2 size);
-	// 駒を置いた場所を軸に白黒を反転させる処理
-	void ChangeStone(VECTOR2 pos);
-
-
 
 	VECTOR2 boardSize;
 	std::vector<std::vector<PIECE_ST>> board;
@@ -101,8 +98,6 @@ private:
 
 	piece_list piecelist;
 	VECTOR2 size;
-
-	std::array <int,0b1111 + 1> hitDir;
 
 };
 

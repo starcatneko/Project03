@@ -4,6 +4,16 @@
  $$		復習
  **		やることメモ
  
+ PieceTrayの描画
+ 1.PieceTrayの土台を描画
+ 2.土台を基準にピースを描画
+ （PieceTrayのピースのDrauOffsetを土台の基準点にする）
+ 
+void PieceTray::SelectTrayPiece(VECTOR2 pos)
+{
+
+}
+
  ** 10/09 ~ 10/12
 	1.キャラ駒の配置
 

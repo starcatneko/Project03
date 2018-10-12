@@ -14,12 +14,12 @@ Player::Player()
 
 Player::~Player()
 {
-
+	Player::playercnt = 0;
 }
 
 void Player::Update()
 {
-	pieceTray->DrawTray();
+	pieceTray->DrawTray({ (playerNo != 1 ? 11 * 64 : 0), 0});
 }
 
 void Player::SetTray(int boardsize)
@@ -32,8 +32,18 @@ int Player::GetNo()
 	return playerNo;
 }
 
+void Player::SelectTray(VECTOR2 pos)
+{
+	pieceTray->SelectTrayPiece(pos);
+}
+
 
 PIECE_ST Player::GetType()
 {
 	return piecetype;
+}
+
+void Player::DeleteTrayPiece()
+{
+	pieceTray->TrayUpdate();
 }

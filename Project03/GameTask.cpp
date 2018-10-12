@@ -71,6 +71,7 @@ void GameTask::Result()
 
 	if ((Mouse->GetButton() & 0b0001) != 0)
 	{
+		
 		CurrentScene = &GameTask::Title;
 	}
 

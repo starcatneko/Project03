@@ -27,7 +27,11 @@ public:
 	GamePiece(VECTOR2 pos, VECTOR2 drawOffset);
 	GamePiece(VECTOR2 pos, VECTOR2 drawOffset, PIECE_ST st);
 	~GamePiece();
+
 	VECTOR2 GetPos();
+	bool SetPos(VECTOR2 pos);
+	VECTOR2 GetDrawOffset();
+	bool SetDrawOffset(VECTOR2 pos);
 	// stateÇÉZÉbÉgÇ∑ÇÈ
 	void SetState(PIECE_ST st);
 	// åªç›ÇÃstateÇï‘Ç∑

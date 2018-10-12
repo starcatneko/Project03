@@ -49,8 +49,32 @@ VECTOR2 GamePiece::GetPos()
 	return pos;
 }
 
+bool GamePiece::SetPos(VECTOR2 pos)
+{
+	this->pos = pos;
+	return true;
+}
+
+VECTOR2 GamePiece::GetDrawOffset()
+{
+	return drawOffset;
+}
+
+bool GamePiece::SetDrawOffset(VECTOR2 pos)
+{
+	this->drawOffset = pos;
+	return true;
+}
+
 void GamePiece::SetState(PIECE_ST st)
 {
+	// Šù‚Éƒs[ƒX‚Éstate‚ª“ü‚Á‚Ä‚¢‚éê‡
+	if (GamePiece::state.size())
+	{
+		// GamePiece::state.erase(GamePiece::state.begin);
+		GamePiece::state.pop_front();
+	}
+
 	if (st == PIECE_W)
 	{
 		//GamePiece::state = std::make_unique<PieceWhite>();
@@ -74,7 +98,7 @@ PIECE_ST GamePiece::GetState()
 void GamePiece::Draw()
 {
 	int color = GetRand(0xffffff);
-		
+
 	if ((*state.begin()))
 	{
 		color = (*state.begin())->GetDrawColor();

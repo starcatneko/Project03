@@ -6,8 +6,9 @@
 #include <memory>
 
 #include "GamePiece.h"
+#include "PieceState.h"
 
-enum PIECE_ST;
+//enum PIECE_ST;
 
 class PieceTray
 {
@@ -15,10 +16,18 @@ public:
 	PieceTray();
 	PieceTray(PIECE_ST st);
 	~PieceTray();
-
 	void SetTray(int boardsize, int plcnt);
-	void DrawTray();
+	void SelectTrayPiece(VECTOR2 pos);
+	void DrawTray(VECTOR2 DrawOffset);
+	void TrayUpdate();
 private:
+
+	bool AddPiece();
+	// 現在選択しているトレイ上のピースの位置
+	int selectPiece;	
+
+	// 表示用オフセット
+	VECTOR2 pos;
 	piece_list piecelist;
 	PIECE_ST color;
 };

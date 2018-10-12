@@ -17,7 +17,9 @@ public:
 	void Update();
 	void SetTray(int boardsize);
 	int GetNo();
+	void SelectTray(VECTOR2 pos);
 	PIECE_ST GetType();
+	void DeleteTrayPiece();
 private:
 	int playerNo;
 	static int playercnt;

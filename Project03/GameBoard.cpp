@@ -44,6 +44,7 @@ GameBoard::~GameBoard()
 }
 bool GameBoard::Init()
 {
+	//playerlist.remove(;
 	gameEndFlg = false;
 	int pl_cnt = 0;
 	while (pl_cnt < PL_MAX)
@@ -92,19 +93,6 @@ bool GameBoard::Resize(VECTOR2 size)
 	return true;
 }
 
-void GameBoard::ChangeStone(VECTOR2 pos)
-{
-	for (int y = -1; y <= 1; y++)
-	{
-
-		for (int x = -1; x <= 1; x++)
-		{
-
-		}
-
-	}
-
-}
 
 void GameBoard::Debug_SetPiece(VECTOR2 pos)
 {
@@ -127,6 +115,7 @@ void GameBoard::SetPiece(VECTOR2 pos , PIECE_ST st)
 
 void GameBoard::SetPiece(VECTOR2 pos)
 {
+	(*currentPlayer)->SelectTray(pos);
 	VECTOR2 vec1 = Pos_MouseToBoard(pos);
 
 	bool plChangeFlg = false;
@@ -161,6 +150,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 						data[setvec.y][setvec.x] = (tmp);
 						data[setvec.y][setvec.x].lock()->SetState((*currentPlayer)->GetType());
 						lastset = (*currentPlayer)->GetNo();
+						
 						plChangeFlg = true;
 
 
@@ -175,6 +165,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 		}
 		if (plChangeFlg)
 		{
+			(*currentPlayer)->DeleteTrayPiece();
 			// 誰かが置ける状態の場合
 			CurrentPlayerChange();
 			// -----現在のプレイヤー表示
@@ -193,7 +184,11 @@ void GameBoard::DB_TouchBoad()
 void GameBoard::Update()
 {
 	Draw();
-	(*currentPlayer)->Update();
+	for (auto itr : playerlist)
+	{
+		(*itr).Update();
+	}
+
 	if (gameEndFlg)
 	{
 		std::string str1;
@@ -287,6 +282,12 @@ player_ptr GameBoard::GetCurrentPlayer()
 	return (*currentPlayer);
 }
 
+VECTOR2 GameBoard::GetBoardSize()
+{
+	return { (int)BaseData.size()/ (int)data.size(), (int)data.size() };
+}
+
+
 piece_ptr GameBoard::AddObjList(piece_ptr && objPtr)
 {
 	// 引数の 内容をリストにf追加
@@ -317,6 +318,8 @@ void GameBoard::Draw()
 	DrawBox(X_DIS, Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
 		boardSize.y*CHIPSIZE + Y_DIS,
 		0x008822, true);
+
+
 
 	for (int y = 0; y < data.size(); y++)
 	{
