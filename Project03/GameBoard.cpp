@@ -44,7 +44,7 @@ GameBoard::~GameBoard()
 }
 bool GameBoard::Init()
 {
-	//playerlist.remove(;
+	//GameTask::GetInstance().playerlist.remove(;
 	gameEndFlg = false;
 	int pl_cnt = 0;
 	while (pl_cnt < PL_MAX)
@@ -53,9 +53,9 @@ bool GameBoard::Init()
 		AddPlayer();
 		pl_cnt++;
 	}
-	for (auto itr : playerlist)
+	for (auto itr : GameTask::GetInstance().playerlist)
 	{
-		(*itr).SetTray(BaseData.size());
+		(*itr).SetTray();
 	}
 
 	SetPiece({ 3,3 }, PIECE_W);
@@ -63,7 +63,6 @@ bool GameBoard::Init()
 	SetPiece({ 4,3 }, PIECE_B);
 	SetPiece({ 3,4 }, PIECE_B);
 
-	currentPlayer = playerlist.begin();
 	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_B);
 	return true;
 }
@@ -98,9 +97,9 @@ void GameBoard::Debug_SetPiece(VECTOR2 pos)
 {
 	VECTOR2 vec = { Pos_MouseToBoard(pos)};
 
-	piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(pos, vec, (*currentPlayer)->GetType()));
+	piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(pos, vec, (*GameTask::GetInstance().currentPlayer)->GetType()));
 	data[pos.y][pos.x] = (tmp);
-	data[pos.y][pos.x].lock()->SetState((*currentPlayer)->GetType());
+	data[pos.y][pos.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
 }
 
 void GameBoard::SetPiece(VECTOR2 pos , PIECE_ST st)
@@ -115,7 +114,7 @@ void GameBoard::SetPiece(VECTOR2 pos , PIECE_ST st)
 
 void GameBoard::SetPiece(VECTOR2 pos)
 {
-	(*currentPlayer)->SelectTray(pos);
+	(*GameTask::GetInstance().currentPlayer)->SelectTray(pos);
 	VECTOR2 vec1 = Pos_MouseToBoard(pos);
 
 	bool plChangeFlg = false;
@@ -136,11 +135,11 @@ void GameBoard::SetPiece(VECTOR2 pos)
 
 				// 方向に向かってひっくり返す関数
 
-				if(SarchReverse(vec1, itr, (*currentPlayer)->GetType()))
+				if(SarchReverse(vec1, itr, (*GameTask::GetInstance().currentPlayer)->GetType()))
 				{
 					piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
 					data[vec1.y][vec1.x] = (tmp);
-					data[vec1.y][vec1.x].lock()->SetState((*currentPlayer)->GetType());
+					data[vec1.y][vec1.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
 
 					for(int i = 1;Reverse(vec1, itr*i) == true;i++)
 					{
@@ -148,8 +147,8 @@ void GameBoard::SetPiece(VECTOR2 pos)
 
 						piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
 						data[setvec.y][setvec.x] = (tmp);
-						data[setvec.y][setvec.x].lock()->SetState((*currentPlayer)->GetType());
-						lastset = (*currentPlayer)->GetNo();
+						data[setvec.y][setvec.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
+						lastset = (*GameTask::GetInstance().currentPlayer)->GetNo();
 						
 						plChangeFlg = true;
 
@@ -165,11 +164,11 @@ void GameBoard::SetPiece(VECTOR2 pos)
 		}
 		if (plChangeFlg)
 		{
-			(*currentPlayer)->DeleteTrayPiece();
+			(*GameTask::GetInstance().currentPlayer)->DeleteTrayPiece();
 			// 誰かが置ける状態の場合
 			CurrentPlayerChange();
 			// -----現在のプレイヤー表示
-			CurrentPlPiece->SetState((*currentPlayer)->GetType());
+			CurrentPlPiece->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
 
 		}
 
@@ -184,7 +183,7 @@ void GameBoard::DB_TouchBoad()
 void GameBoard::Update()
 {
 	Draw();
-	for (auto itr : playerlist)
+	for (auto itr : GameTask::GetInstance().playerlist)
 	{
 		(*itr).Update();
 	}
@@ -199,7 +198,7 @@ void GameBoard::Update()
 		
 		/*DrawFormatString(
 			SCREEN_HALF_X - GetDrawStringWidth(str1.c_str(), strlen(str1.c_str()))/2,
-			320, 0xFF4444, str1.c_str(), (*currentPlayer)->GetNo());
+			320, 0xFF4444, str1.c_str(), (*GameTask::GetInstance().currentPlayer)->GetNo());
 			*/
 		SetFontSize(16);
 	}
@@ -209,7 +208,7 @@ bool GameBoard::Reverse(VECTOR2 pos, VECTOR2 vec)
 {
 	// i方向
 	VECTOR2 sarchPos = pos + (vec);
-	if (data[sarchPos.y][sarchPos.x].lock()->GetState() != (*currentPlayer)->GetType())
+	if (data[sarchPos.y][sarchPos.x].lock()->GetState() != (*GameTask::GetInstance().currentPlayer)->GetType())
 	{
 		return true;
 	}
@@ -262,16 +261,16 @@ bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec ,PIECE_ST st)
 void GameBoard::AddPlayer()
 {
 	//std::make_shared<Player>();
-	playerlist.push_back(std::make_shared<Player>());
+	GameTask::GetInstance().playerlist.push_back(std::make_shared<Player>());
 
 }
 
 void GameBoard::CurrentPlayerChange()
 {
-	currentPlayer++;
-	if (currentPlayer == playerlist.end())
+	(*GameTask::GetInstance().currentPlayer++);
+	if ((*GameTask::GetInstance().currentPlayer) == GameTask::GetInstance().playerlist.end())
 	{
-		currentPlayer = playerlist.begin();
+		(*GameTask::GetInstance().currentPlayer) = GameTask::GetInstance().playerlist.begin();
 	}
 	
 	// 現在の順番を表示する関数を呼んで
@@ -279,7 +278,7 @@ void GameBoard::CurrentPlayerChange()
 
 player_ptr GameBoard::GetCurrentPlayer()
 {
-	return (*currentPlayer);
+	return (*GameTask::GetInstance().currentPlayer);
 }
 
 VECTOR2 GameBoard::GetBoardSize()
@@ -354,8 +353,8 @@ void GameBoard::Draw()
 		DrawFormatString(0, 48, 0xdddddd, "駒数%d", piecelist.size());
 	}
 
-	DrawFormatString(0, 64, 0xdddddd, "プレイヤー数%d", playerlist.size());
-	DrawFormatString(0, 96, 0xdddddd, "現在のプレイヤー\n%d", (*currentPlayer)->GetNo());
+	DrawFormatString(0, 64, 0xdddddd, "プレイヤー数%d", GameTask::GetInstance().playerlist.size());
+	DrawFormatString(0, 96, 0xdddddd, "現在のプレイヤー\n%d", (*GameTask::GetInstance().currentPlayer)->GetNo());
 
 }
 
@@ -382,7 +381,7 @@ void GameBoard::CurrentSetUpData()
 					break;
 				}
 
-				if (SarchReverse(drawPos, vec_itr2, (*currentPlayer)->GetType())
+				if (SarchReverse(drawPos, vec_itr2, (*GameTask::GetInstance().currentPlayer)->GetType())
 					&& data[drawPos.y][drawPos.x].expired())
 				{
 					tilecnt++;
@@ -398,7 +397,7 @@ void GameBoard::CurrentSetUpData()
 	if (tilecnt == 0)
 	{
 		// 設置できるプレイヤーが一人も居ない場合
-		if (lastset == (*currentPlayer)->GetNo())
+		if (lastset == (*GameTask::GetInstance().currentPlayer)->GetNo())
 		{
 			GameTask::GetInstance().GameEnd();
 			this->GameEnd();

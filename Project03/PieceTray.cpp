@@ -1,4 +1,5 @@
 #include "PieceTray.h"
+#include "GameTask.h"
 #include "Dxlib.h"
 
 const int CHIPSIZE = 64;
@@ -10,8 +11,16 @@ PieceTray::PieceTray()
 PieceTray::PieceTray(PIECE_ST st)
 {
 	// PieceTray::color = st;
+	int piecemax = (lpGameTask.GetBoardSize().x*lpGameTask.GetBoardSize().y)/2;
 	this->color = st;
 	this->selectPiece = 0;
+
+	for (int j = 0; j < piecemax; j++)
+	{
+		//piecelist.pop_front
+		AddPiece();
+	}
+
 }
 
 PieceTray::~PieceTray()
@@ -23,10 +32,6 @@ void PieceTray::SetTray(int boardsize,int plcnt)
 {
 
 	this->pos = { (color == PIECE_B ? 0 : 11) * CHIPSIZE,128 };
-	for (int i = -2; i < boardsize / plcnt; i++)
-	{
-		AddPiece();
-	}
 }
 
 void PieceTray::SelectTrayPiece(VECTOR2 pos)

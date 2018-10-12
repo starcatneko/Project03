@@ -4,7 +4,15 @@ class GameBoard;
 class MouseCtr;
 
 #include <list>
+#include <vector>
+#include <array>
 #include <memory>
+
+typedef std::shared_ptr<Player> player_ptr;
+typedef std::list<player_ptr> player_list;
+
+
+#define lpGameTask GameTask::GetInstance()
 
 #define SETWAIT(int) (GameTask::GetInstance().SetWait(int))
 #define ADDWAIT(int) (GameTask::GetInstance().AddWait(int))
@@ -26,7 +34,17 @@ public:
 
 
 	void GameEnd();
+
+	VECTOR2 GetBoardSize();	
+
+	// iterator 現在行動中のプレイヤー
+	player_list playerlist;
+
+	player_list::iterator currentPlayer;
+	// 現在選択しているプレイヤーのアドレスを格納する
+
 private:
+
 	struct GameTaskDeleter
 	{
 		void operator ()(GameTask* GameTask) const
@@ -54,7 +72,6 @@ private:
 	
 	// ウェイトフレーム数
 	int wait;
-
 
 
 	int mouseFlg;

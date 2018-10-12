@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "GameBoard.h"
 #include "PieceTray.h"
+#include "GameTask.h"
 
 int Player::playercnt = 0;
 Player::Player()
@@ -22,9 +23,9 @@ void Player::Update()
 	pieceTray->DrawTray({ (playerNo != 1 ? 11 * 64 : 0), 0});
 }
 
-void Player::SetTray(int boardsize)
+void Player::SetTray()
 {
-	pieceTray->SetTray(boardsize, Player::playercnt);
+	pieceTray->SetTray(GameTask::GetInstance().GetBoardSize(), Player::playercnt);
 }
 
 int Player::GetNo()

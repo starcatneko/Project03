@@ -13,10 +13,9 @@ class MouseCtr;
 
 enum PIECE_ST;
 
-
 typedef std::shared_ptr<Player> player_ptr;
-
 typedef std::list<player_ptr> player_list;
+
 
 typedef std::weak_ptr<GamePiece> piece_ptr_w;
 
@@ -84,10 +83,6 @@ private:
 	std::unique_ptr <GamePiece> CurrentPlPiece;
 	
 	//
-	player_list playerlist;
-	// iterator 現在行動中のプレイヤー
-	player_list::iterator currentPlayer;
-	// 現在選択しているプレイヤーのアドレスを格納する
 	
 	//player_ptr currentPlayer;
 		

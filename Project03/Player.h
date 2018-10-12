@@ -15,7 +15,7 @@ public:
 	Player();
 	~Player();
 	void Update();
-	void SetTray(int boardsize);
+	void SetTray();
 	int GetNo();
 	void SelectTray(VECTOR2 pos);
 	PIECE_ST GetType();

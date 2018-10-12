@@ -23,6 +23,8 @@ void GameTask::Init()
 	ImageMng::GetInstance().LoadImg("image/title.jpg", "title");
 	Mouse = std::make_unique<MouseCtr>();
 	CurrentScene = &GameTask::Title;
+	currentPlayer = GameTask::GetInstance().playerlist.begin();
+
 
 }
 
@@ -47,6 +49,8 @@ void GameTask::GameMain()
 	Board->Update();
 	Mouse->GetPos().x;
 
+	
+
 	if ((Mouse->GetButton() & 0b0001) != 0)
 	{
 		Board->SetPiece(Mouse->GetPos());
@@ -63,6 +67,11 @@ void GameTask::GameEnd()
 {
 	CurrentScene = &GameTask::Result;
 
+}
+
+VECTOR2 GameTask::GetBoardSize()
+{
+	return Board->GetBoardSize();
 }
 
 void GameTask::Result()
