@@ -9,7 +9,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetWindowText("‚¨‚¹‚ë");
 	SetGraphMode(SCREEN_SIZE_X, SCREEN_SIZE_Y, 16);
 	ChangeWindowMode(true);
-	if (DxLib_Init() == -1);
+	if (DxLib_Init() == -1)
+	{
+		return 0;
+	}
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == false)

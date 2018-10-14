@@ -4,12 +4,11 @@
 #include <list>
 #include <array>
 #include <memory>
-
-
 #include "GamePiece.h"
-//class GamePiece;
-class Player;
+
+class GamePiece;
 class MouseCtr;
+class Player;
 
 enum PIECE_ST;
 
@@ -95,4 +94,5 @@ private:
 	VECTOR2 size;
 
 };
+
 

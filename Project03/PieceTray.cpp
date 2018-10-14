@@ -2,6 +2,8 @@
 #include "GameTask.h"
 #include "Dxlib.h"
 
+#define lpGameTask GameTask::GetInstance()
+
 const int CHIPSIZE = 64;
 
 PieceTray::PieceTray()
@@ -15,13 +17,32 @@ PieceTray::PieceTray(PIECE_ST st)
 	this->color = st;
 	this->selectPiece = 0;
 
+
+	// Šù‚Éƒs[ƒX‚Éstate‚ª“ü‚Á‚Ä‚¢‚éê‡
+	if (PieceTray::piecelist.size())
+	{
+		for (int j = 0; j < piecelist.size(); j++)
+		{
+			piecelist.push_back(std::make_shared<GamePiece>
+				(VECTOR2{ 0,0 }, this->pos, this->color));
+		}
+	}
+
 	for (int j = 0; j < piecemax; j++)
 	{
-		//piecelist.pop_front
 		AddPiece();
 	}
 
 }
+
+
+bool PieceTray::AddPiece()
+{
+	piecelist.push_back(std::make_shared<GamePiece>
+		(VECTOR2{ 0,0 }, this->pos, this->color));
+	return true;
+}
+
 
 PieceTray::~PieceTray()
 {
@@ -87,11 +108,4 @@ void PieceTray::TrayUpdate()
 		}
 	}
 
-}
-
-bool PieceTray::AddPiece()
-{
-	piecelist.push_back(std::make_shared<GamePiece>
-		(VECTOR2{ 0,0 }, this->pos, this->color));
-	return true;
 }

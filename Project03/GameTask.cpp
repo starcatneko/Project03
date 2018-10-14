@@ -4,6 +4,10 @@
 #include "GameBoard.h"
 #include "ImageMng.h"
 
+// プレイヤー人数
+#define PL_MAX 2
+
+
 std::unique_ptr<GameTask, GameTask::GameTaskDeleter> GameTask::s_Instance(new GameTask());
 
 GameTask::GameTask()
@@ -32,10 +36,19 @@ void GameTask::Title()
 {
 	ImageMng::GetInstance().DrawImg({ 120,240 }, "title", 0);
 	DrawString(0, 0, "Title", 0xffffff, 0);
+	int pl_cnt = 0;
 
 	if ((Mouse->GetButton() & 0b0001) > 0)
 	{
 		CreateNewBoard();
+
+		while (pl_cnt < PL_MAX)
+		{
+			// 関数にpl_cntを加算させる処理を組み込んだら短縮可能
+			AddPlayer();
+			pl_cnt++;
+		}
+
 		CurrentScene = &GameTask::GameMain;
 	}
 
@@ -71,7 +84,7 @@ void GameTask::GameEnd()
 
 VECTOR2 GameTask::GetBoardSize()
 {
-	return Board->GetBoardSize();
+	return this->Board->GetBoardSize();
 }
 
 void GameTask::Result()
@@ -89,6 +102,15 @@ void GameTask::Result()
 void GameTask::CreateNewBoard()
 {
 	Board = std::make_unique<GameBoard>();
+
+}
+
+
+void GameTask::AddPlayer()
+{
+	//std::make_shared<Player>();
+	playerlist.push_back(std::make_shared<Player>());
+
 }
 
 

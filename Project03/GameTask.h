@@ -8,6 +8,11 @@ class MouseCtr;
 #include <array>
 #include <memory>
 
+#include "VECTOR2.h"
+
+class Player;
+
+
 typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
 
@@ -17,7 +22,6 @@ typedef std::list<player_ptr> player_list;
 #define SETWAIT(int) (GameTask::GetInstance().SetWait(int))
 #define ADDWAIT(int) (GameTask::GetInstance().AddWait(int))
 #define GETWAIT() (GameTask::GetInstance().GetWait())
-
 class GameTask
 {
 public:
@@ -35,13 +39,14 @@ public:
 
 	void GameEnd();
 
-	VECTOR2 GetBoardSize();	
 
 	// iterator 現在行動中のプレイヤー
 	player_list playerlist;
 
 	player_list::iterator currentPlayer;
 	// 現在選択しているプレイヤーのアドレスを格納する
+
+	VECTOR2 GetBoardSize();
 
 private:
 
@@ -63,6 +68,8 @@ private:
 	void Result();
 
 	void CreateNewBoard();
+
+	void AddPlayer();
 
 	// ユニークポインタ
 	std::unique_ptr<GameBoard> Board;

@@ -5,6 +5,8 @@
 #include "GameTask.h"
 #include "PieceState.h"
 
+#define PL_MAX 2
+
 
 const int CHIPSIZE = 64;
 #define BoardSize int(8)
@@ -17,8 +19,6 @@ const int CHIPSIZE = 64;
 #define Y_DIS (int)((SCREEN_SIZE_Y / 2) - (boardSize.y / 2)*CHIPSIZE)
 
 
-// プレイヤー人数
-#define PL_MAX 2
 
 GameBoard::GameBoard()
 {
@@ -46,16 +46,9 @@ bool GameBoard::Init()
 {
 	//GameTask::GetInstance().playerlist.remove(;
 	gameEndFlg = false;
-	int pl_cnt = 0;
-	while (pl_cnt < PL_MAX)
-	{
-		// 関数にpl_cntを加算させる処理を組み込んだら短縮可能
-		AddPlayer();
-		pl_cnt++;
-	}
 	for (auto itr : GameTask::GetInstance().playerlist)
 	{
-		(*itr).SetTray();
+		//(*itr).SetTray();
 	}
 
 	SetPiece({ 3,3 }, PIECE_W);
@@ -258,19 +251,14 @@ bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec ,PIECE_ST st)
 	return false;
 }
 
-void GameBoard::AddPlayer()
-{
-	//std::make_shared<Player>();
-	GameTask::GetInstance().playerlist.push_back(std::make_shared<Player>());
-
-}
 
 void GameBoard::CurrentPlayerChange()
 {
 	(*GameTask::GetInstance().currentPlayer++);
-	if ((*GameTask::GetInstance().currentPlayer) == GameTask::GetInstance().playerlist.end())
+
+	if ((*GameTask::GetInstance().currentPlayer) == GameTask::GetInstance().playerlist.back())
 	{
-		(*GameTask::GetInstance().currentPlayer) = GameTask::GetInstance().playerlist.begin();
+		(*GameTask::GetInstance().currentPlayer) = (*GameTask::GetInstance().playerlist.begin());
 	}
 	
 	// 現在の順番を表示する関数を呼んで

@@ -3,6 +3,9 @@
 #include "PieceTray.h"
 #include "GameTask.h"
 
+#define lpGameTask GameTask::GetInstance()
+
+
 int Player::playercnt = 0;
 Player::Player()
 {
@@ -25,7 +28,7 @@ void Player::Update()
 
 void Player::SetTray()
 {
-	pieceTray->SetTray(GameTask::GetInstance().GetBoardSize(), Player::playercnt);
+	pieceTray->SetTray({ lpGameTask.GetBoardSize().x*lpGameTask.GetBoardSize().y }, Player::playercnt);
 }
 
 int Player::GetNo()
