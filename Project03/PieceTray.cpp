@@ -64,7 +64,7 @@ void PieceTray::DrawTray(VECTOR2 DrawOffset)
 		pos.y + CHIPSIZE * 5,
 		0x008800, true);
 	// DrawBox (pos.x,pos.y,pos.x +70,pos.y +300
-
+	DrawFormatString(pos.x*64,420,0xeeeeee,"No%d \n ",pos.x);
 	DrawBox(pos.x * CHIPSIZE,
 		pos.y + (CHIPSIZE* selectPiece),
 		pos.x * CHIPSIZE + CHIPSIZE,
@@ -83,7 +83,7 @@ void PieceTray::DrawTray(VECTOR2 DrawOffset)
 void PieceTray::TrayUpdate()
 {
 	int i = 0;
-
+	/*
 	for (auto itr = piecelist.begin();itr != piecelist.end();itr++)
 	{
 		if (selectPiece == i)
@@ -97,5 +97,5 @@ void PieceTray::TrayUpdate()
 			break;
 		}
 	}
-
+	*/
 }

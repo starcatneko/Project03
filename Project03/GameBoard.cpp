@@ -48,7 +48,7 @@ bool GameBoard::Init()
 	gameEndFlg = false;
 	for (auto itr : GameTask::GetInstance().playerlist)
 	{
-		//(*itr).SetTray();
+		(*itr).SetTray();
 	}
 
 	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_B);
@@ -251,11 +251,6 @@ bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec ,PIECE_ST st)
 	return false;
 }
 
-
-player_ptr GameBoard::GetCurrentPlayer()
-{
-	return (*GameTask::GetInstance().currentPlayer);
-}
 
 VECTOR2 GameBoard::GetBoardSize()
 {

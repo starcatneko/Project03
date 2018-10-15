@@ -118,6 +118,7 @@ void GameTask::AddPlayer()
 	playerlist.push_back(std::make_shared<Player>());
 
 }
+
 void GameTask::CurrentPlayerChange()
 {
 	auto itrrrr = lpGameTask.currentPlayer;
