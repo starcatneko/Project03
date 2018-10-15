@@ -152,11 +152,16 @@ void GameBoard::SetPiece(VECTOR2 pos)
 		}
 		if (plChangeFlg)
 		{
-			(*GameTask::GetInstance().currentPlayer)->DeleteTrayPiece();
+			/*
+			if (lpGameTask.currentPlayer.size())
+			{
+				(*lpGameTask.currentPlayer)->DeleteTrayPiece();
+			}*/
 			// 誰かが置ける状態の場合
 			lpGameTask.CurrentPlayerChange();
+
 			// -----現在のプレイヤー表示
-			CurrentPlPiece->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
+			CurrentPlPiece->SetState((*lpGameTask.currentPlayer)->GetType());
 
 		}
 

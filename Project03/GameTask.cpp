@@ -120,12 +120,16 @@ void GameTask::AddPlayer()
 }
 void GameTask::CurrentPlayerChange()
 {
-	(*lpGameTask.currentPlayer++);
+	auto itrrrr = lpGameTask.currentPlayer;
 
-	if (currentPlayer == playerlist.end())
+	if ((*lpGameTask.currentPlayer) == playerlist.back())
 	{
 		(*lpGameTask.currentPlayer) = (*lpGameTask.playerlist.begin());
+		itrrrr = lpGameTask.currentPlayer;
+		return;
 	}
+	(*lpGameTask.currentPlayer++);
+
 
 	// Œ»İ‚Ì‡”Ô‚ğ•\¦‚·‚éŠÖ”‚ğŒÄ‚ñ‚Å
 }
