@@ -1,8 +1,8 @@
+#include "Dxlib.h"
+#include "GameTask.h"
 #include "GameBoard.h"
 #include "GamePiece.h"
-#include "Dxlib.h"
 #include "Player.h"
-#include "GameTask.h"
 #include "PieceState.h"
 
 #define PL_MAX 2
@@ -50,11 +50,6 @@ bool GameBoard::Init()
 	{
 		//(*itr).SetTray();
 	}
-
-	SetPiece({ 3,3 }, PIECE_W);
-	SetPiece({ 4,4 }, PIECE_W);
-	SetPiece({ 4,3 }, PIECE_B);
-	SetPiece({ 3,4 }, PIECE_B);
 
 	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_B);
 	return true;
@@ -159,7 +154,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 		{
 			(*GameTask::GetInstance().currentPlayer)->DeleteTrayPiece();
 			// 誰かが置ける状態の場合
-			CurrentPlayerChange();
+			lpGameTask.CurrentPlayerChange();
 			// -----現在のプレイヤー表示
 			CurrentPlPiece->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
 
@@ -251,18 +246,6 @@ bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec ,PIECE_ST st)
 	return false;
 }
 
-
-void GameBoard::CurrentPlayerChange()
-{
-	(*GameTask::GetInstance().currentPlayer++);
-
-	if ((*GameTask::GetInstance().currentPlayer) == GameTask::GetInstance().playerlist.back())
-	{
-		(*GameTask::GetInstance().currentPlayer) = (*GameTask::GetInstance().playerlist.begin());
-	}
-	
-	// 現在の順番を表示する関数を呼んで
-}
 
 player_ptr GameBoard::GetCurrentPlayer()
 {
@@ -368,8 +351,9 @@ void GameBoard::CurrentSetUpData()
 				{
 					break;
 				}
+				SarchReverse(drawPos, vec_itr2, (*lpGameTask.currentPlayer)->GetType());
 
-				if (SarchReverse(drawPos, vec_itr2, (*GameTask::GetInstance().currentPlayer)->GetType())
+				if (SarchReverse(drawPos, vec_itr2, (*lpGameTask.currentPlayer)->GetType())
 					&& data[drawPos.y][drawPos.x].expired())
 				{
 					tilecnt++;
@@ -392,7 +376,7 @@ void GameBoard::CurrentSetUpData()
 			gameEndFlg = true;
 			return;
 		}
-		CurrentPlayerChange();
+		lpGameTask.CurrentPlayerChange();
 	}
 
 }

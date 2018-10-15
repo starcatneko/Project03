@@ -5,10 +5,9 @@
 #include <vector>
 #include <list>
 #include <memory>
+#include "PieceState.h"
 
-enum PIECE_ST;
 class PieceTray;
-
 class Player
 {
 public:
@@ -17,6 +16,7 @@ public:
 	void Update();
 	void SetTray();
 	int GetNo();
+	bool Draw();
 	void SelectTray(VECTOR2 pos);
 	PIECE_ST GetType();
 	void DeleteTrayPiece();

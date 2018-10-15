@@ -5,10 +5,13 @@
 #include <array>
 #include <memory>
 #include "GamePiece.h"
+#include "Player.h"
 
 class GamePiece;
 class MouseCtr;
-class Player;
+
+
+//class Player;
 
 enum PIECE_ST;
 
@@ -43,7 +46,7 @@ public:
 	// vec:正規化された方向ベクトル
 	bool SarchReverse(VECTOR2 pos, VECTOR2 vec, PIECE_ST st);
 
-	void AddPlayer();
+	//void AddPlayer();
 	// プレイターンのプレイヤーを更新
 	void CurrentPlayerChange();
 	player_ptr GetCurrentPlayer();

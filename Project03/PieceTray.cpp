@@ -2,7 +2,6 @@
 #include "GameTask.h"
 #include "Dxlib.h"
 
-#define lpGameTask GameTask::GetInstance()
 
 const int CHIPSIZE = 64;
 
@@ -18,18 +17,9 @@ PieceTray::PieceTray(PIECE_ST st)
 	this->selectPiece = 0;
 
 
-	// ä˘Ç…ÉsÅ[ÉXÇ…stateÇ™ì¸Ç¡ÇƒÇ¢ÇÈèÍçá
-	if (PieceTray::piecelist.size())
-	{
-		for (int j = 0; j < piecelist.size(); j++)
-		{
-			piecelist.push_back(std::make_shared<GamePiece>
-				(VECTOR2{ 0,0 }, this->pos, this->color));
-		}
-	}
-
 	for (int j = 0; j < piecemax; j++)
 	{
+		pos = VECTOR2{ 0,j } +VECTOR2{(this->color == PIECE_B?0:11),0};
 		AddPiece();
 	}
 
@@ -39,7 +29,7 @@ PieceTray::PieceTray(PIECE_ST st)
 bool PieceTray::AddPiece()
 {
 	piecelist.push_back(std::make_shared<GamePiece>
-		(VECTOR2{ 0,0 }, this->pos, this->color));
+		(this->pos, VECTOR2{0,0}, this->color));
 	return true;
 }
 
@@ -69,9 +59,10 @@ void PieceTray::SelectTrayPiece(VECTOR2 pos)
 void PieceTray::DrawTray(VECTOR2 DrawOffset)
 {
 	int i = 0;		
-	DrawBox(pos.x,pos.y,
-		pos.x + CHIPSIZE,pos.y + CHIPSIZE * 5,
+	DrawBox(pos.x,pos.y ,
+		pos.x  + CHIPSIZE,pos.y + CHIPSIZE * 5,
 		0x008800, true);
+	// DrawBox (pos.x,pos.y,pos.x +70,pos.y +300
 
 	DrawBox(pos.x,
 		pos.y + (CHIPSIZE* selectPiece),
@@ -82,10 +73,8 @@ void PieceTray::DrawTray(VECTOR2 DrawOffset)
 
 	for (auto itr : piecelist)
 	{
-		(*itr).SetPos({ 0, i });
 		(*itr).Draw();
-		i++;
-		if (!(i < 5))
+		if (!(++i < 5))
 			break;
 	}
 }

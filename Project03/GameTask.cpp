@@ -27,7 +27,7 @@ void GameTask::Init()
 	ImageMng::GetInstance().LoadImg("image/title.jpg", "title");
 	Mouse = std::make_unique<MouseCtr>();
 	CurrentScene = &GameTask::Title;
-	currentPlayer = GameTask::GetInstance().playerlist.begin();
+	//currentPlayer = lpGameTask.playerlist.begin();
 
 
 }
@@ -36,19 +36,10 @@ void GameTask::Title()
 {
 	ImageMng::GetInstance().DrawImg({ 120,240 }, "title", 0);
 	DrawString(0, 0, "Title", 0xffffff, 0);
-	int pl_cnt = 0;
 
 	if ((Mouse->GetButton() & 0b0001) > 0)
 	{
 		CreateNewBoard();
-
-		while (pl_cnt < PL_MAX)
-		{
-			// ŠÖ”‚Épl_cnt‚ğ‰ÁZ‚³‚¹‚éˆ—‚ğ‘g‚İ‚ñ‚¾‚ç’Zk‰Â”\
-			AddPlayer();
-			pl_cnt++;
-		}
-
 		CurrentScene = &GameTask::GameMain;
 	}
 
@@ -102,6 +93,21 @@ void GameTask::Result()
 void GameTask::CreateNewBoard()
 {
 	Board = std::make_unique<GameBoard>();
+	int pl_cnt = 0;
+	while (pl_cnt < PL_MAX)
+	{
+		// ŠÖ”‚Épl_cnt‚ğ‰ÁZ‚³‚¹‚éˆ—‚ğ‘g‚İ‚ñ‚¾‚ç’Zk‰Â”\
+		AddPlayer();
+		pl_cnt++;
+	}
+	Board->SetPiece({ 3,3 }, PIECE_W);
+	Board->SetPiece({ 4,4 }, PIECE_W);
+	Board->SetPiece({ 4,3 }, PIECE_B);
+	Board->SetPiece({ 3,4 }, PIECE_B);
+
+	currentPlayer = playerlist.begin();
+
+
 
 }
 
@@ -112,6 +118,19 @@ void GameTask::AddPlayer()
 	playerlist.push_back(std::make_shared<Player>());
 
 }
+void GameTask::CurrentPlayerChange()
+{
+	(*lpGameTask.currentPlayer++);
+
+	if (currentPlayer == playerlist.end())
+	{
+		(*lpGameTask.currentPlayer) = (*lpGameTask.playerlist.begin());
+	}
+
+	// Œ»İ‚Ì‡”Ô‚ğ•\¦‚·‚éŠÖ”‚ğŒÄ‚ñ‚Å
+}
+
+
 
 
 void GameTask::Run()

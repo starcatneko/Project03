@@ -6,6 +6,7 @@
 #define lpGameTask GameTask::GetInstance()
 
 
+
 int Player::playercnt = 0;
 Player::Player()
 {
@@ -34,6 +35,19 @@ void Player::SetTray()
 int Player::GetNo()
 {
 	return playerNo;
+}
+
+
+
+bool Player::Draw()
+{
+	if (pieceTray)
+	{
+		//pieceTray->DrawTray();
+		return true;
+	}
+
+	return false;
 }
 
 void Player::SelectTray(VECTOR2 pos)

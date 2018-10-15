@@ -10,6 +10,7 @@ class MouseCtr;
 
 #include "VECTOR2.h"
 
+class GamePiece;
 class Player;
 
 
@@ -47,6 +48,7 @@ public:
 	// 現在選択しているプレイヤーのアドレスを格納する
 
 	VECTOR2 GetBoardSize();
+	void CurrentPlayerChange();
 
 private:
 
@@ -70,6 +72,7 @@ private:
 	void CreateNewBoard();
 
 	void AddPlayer();
+
 
 	// ユニークポインタ
 	std::unique_ptr<GameBoard> Board;
