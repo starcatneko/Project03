@@ -13,12 +13,16 @@ class MouseCtr;
 class GamePiece;
 class Player;
 
+class GameState;
 
 typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
 
 
 #define lpGameTask GameTask::GetInstance()
+
+// プレイヤー人数
+#define PL_MAX 2
 
 #define SETWAIT(int) (GameTask::GetInstance().SetWait(int))
 #define ADDWAIT(int) (GameTask::GetInstance().AddWait(int))
@@ -40,6 +44,8 @@ public:
 
 	void GameEnd();
 
+	std::shared_ptr<GameBoard> SetBoard();
+
 
 	// iterator 現在行動中のプレイヤー
 	player_list playerlist;
@@ -47,8 +53,6 @@ public:
 	player_list::iterator currentPlayer;
 	// 現在選択しているプレイヤーのアドレスを格納する
 
-	VECTOR2 GetBoardSize();
-	void CurrentPlayerChange();
 
 private:
 
@@ -66,19 +70,21 @@ private:
 	~GameTask();
 	void Init();
 	void Title();
-	void GameMain();
-	void Result();
 	//const MouseCtr * MouseCtr;
 	void CreateNewBoard();
 
 	void AddPlayer();
 
+	//bool SetState(std::unique_ptr <GameState> st);
+	std::unique_ptr <GameState> state;
 
 	// ユニークポインタ
-	std::unique_ptr<GameBoard> Board;
+	std::shared_ptr<GameBoard> Board;
 	std::unique_ptr<MouseCtr> Mouse;
 
+
 	void (GameTask::*CurrentScene)();
+	void (GameState::*Scene)();
 	
 	// ウェイトフレーム数
 	int wait;

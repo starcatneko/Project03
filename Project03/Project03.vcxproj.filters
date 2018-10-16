@@ -25,6 +25,12 @@
     <Filter Include="ソース ファイル\core">
       <UniqueIdentifier>{a08ba0d6-3ac8-4bab-9fe6-6dac4b581bc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\mode">
+      <UniqueIdentifier>{07358e6f-6201-4dfb-9736-7be6885eb1b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\mode">
+      <UniqueIdentifier>{666516dd-90bf-460c-b1e3-5c5e4b89f184}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GamePiece.cpp">
@@ -66,6 +72,18 @@
     <ClCompile Include="PieceTray.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>ソース ファイル\mode</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMain.cpp">
+      <Filter>ソース ファイル\mode</Filter>
+    </ClCompile>
+    <ClCompile Include="GameResult.cpp">
+      <Filter>ソース ファイル\mode</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTitle.cpp">
+      <Filter>ソース ファイル\mode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamePiece.h">
@@ -103,6 +121,18 @@
     </ClInclude>
     <ClInclude Include="PieceTray.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>ヘッダー ファイル\mode</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMain.h">
+      <Filter>ヘッダー ファイル\mode</Filter>
+    </ClInclude>
+    <ClInclude Include="GameResult.h">
+      <Filter>ヘッダー ファイル\mode</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTitle.h">
+      <Filter>ヘッダー ファイル\mode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

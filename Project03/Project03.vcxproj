@@ -125,8 +125,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="GamePiece.cpp" />
+    <ClCompile Include="GameResult.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTask.cpp" />
+    <ClCompile Include="GameTitle.cpp" />
     <ClCompile Include="ImageMng.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameBoard.cpp" />
@@ -140,8 +144,12 @@
     <ClCompile Include="VECTOR2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameMain.h" />
     <ClInclude Include="GamePiece.h" />
+    <ClInclude Include="GameResult.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="GameTask.h" />
+    <ClInclude Include="GameTitle.h" />
     <ClInclude Include="ImageMng.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="MouseCtr.h" />

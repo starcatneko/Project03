@@ -4,8 +4,11 @@
 #include "GameBoard.h"
 #include "ImageMng.h"
 
-// プレイヤー人数
-#define PL_MAX 2
+// ゲームモードState三銃士を連れてきたよ！
+
+#include "GameTitle.h"
+#include "GameMain.h"
+#include "GameResult.h"
 
 
 std::unique_ptr<GameTask, GameTask::GameTaskDeleter> GameTask::s_Instance(new GameTask());
@@ -30,60 +33,17 @@ void GameTask::Init()
 	//currentPlayer = lpGameTask.playerlist.begin();
 }
 
-void GameTask::Title()
-{
-	ImageMng::GetInstance().DrawImg({ 120,240 }, "title", 0);
-	DrawString(0, 0, "Title", 0xffffff, 0);
-
-	if ((Mouse->GetButton() & 0b0001) > 0)
-	{
-		CreateNewBoard();
-		CurrentScene = &GameTask::GameMain;
-	}
-}
-
-void GameTask::GameMain()
-{
-
-	DrawString(0, 0, "Main", 0xffffff, 0);
-	Board->Update();
-	//Mouse->GetPos().x;
-	
-	(*currentPlayer)->TurnAct();
-
-	// ifTurnActがtrueの場合、プレイヤーチェンジ処理を行う
-
-	if ((Mouse->GetButton() & 0b0001) != 0)
-	{
-	Board->SetPiece(Mouse->GetPos());
-	}
-	if ((Mouse->GetButton() & 0b0010) != 0)
-	{
-		Board->Debug_SetPiece(Mouse->GetPos());
-	}
-}
-
 void GameTask::GameEnd()
 {
-	CurrentScene = &GameTask::Result;
+	state = std::make_unique<GameResult>();
 
 }
 
-VECTOR2 GameTask::GetBoardSize()
+std::shared_ptr<GameBoard> GameTask::SetBoard()
 {
-	return this->Board->GetBoardSize();
+	return this->Board;
 }
 
-void GameTask::Result()
-{
-	Board->Update();
-
-	if ((Mouse->GetButton() & 0b0001) != 0)
-	{
-		CurrentScene = &GameTask::Title;
-	}
-
-}
 
 void GameTask::CreateNewBoard()
 {
@@ -112,42 +72,20 @@ void GameTask::CreateNewBoard()
 }
 
 
-void GameTask::AddPlayer()
-{
-	//std::make_shared<Player>();
-	playerlist.push_back(std::make_shared<Player>());
-
-}
-
-void GameTask::CurrentPlayerChange()
-{
-	(*currentPlayer)->SetTunrFlg(false);
-	if ((*lpGameTask.currentPlayer) == playerlist.back())
-	{
-		currentPlayer = playerlist.begin();
-		(*currentPlayer)->SetTunrFlg(true);
-		return;
-	}
-
-	(*lpGameTask.currentPlayer++);
-	(*currentPlayer)->SetTunrFlg(true);
-	
-	// 現在の順番を表示する関数を呼んで
-}
-
-
 
 
 void GameTask::Run()
 {
 	ScreenFlip();
 	ClsDrawScreen();
+	state->Update();
 	(this->*CurrentScene)();
-
 	if (wait > 0)
 	{
 		wait--;
 	}
+
+	state->Draw();
 }
 
 void GameTask::SetWait(int wait)
