@@ -44,6 +44,10 @@ public:
 
 	void GameEnd();
 
+	auto SetState(GameState && ptr);
+
+	auto SetState(std::unique_ptr<GameState>()a);
+
 	std::shared_ptr<GameBoard> SetBoard();
 
 
@@ -52,6 +56,8 @@ public:
 
 	player_list::iterator currentPlayer;
 	// 現在選択しているプレイヤーのアドレスを格納する
+
+	std::unique_ptr <GameState> state;
 
 
 private:
@@ -76,7 +82,6 @@ private:
 	void AddPlayer();
 
 	//bool SetState(std::unique_ptr <GameState> st);
-	std::unique_ptr <GameState> state;
 
 	// ユニークポインタ
 	std::shared_ptr<GameBoard> Board;

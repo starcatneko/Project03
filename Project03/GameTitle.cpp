@@ -1,15 +1,19 @@
 #include "GameTitle.h"
 #include "GameTask.h"
 #include "GamePiece.h"
+#include "GameBoard.h"
 
 
 #include "GameMain.h"
+#include "Player.h"
 
 #include "DxLib.h"
 
 
 GameTitle::GameTitle()
 {
+	Board = lpGameTask.SetBoard();
+
 }
 
 
@@ -34,7 +38,7 @@ void GameTitle::Update(const MouseCtr & MouseCtr)
 
 void GameTitle::CreateNewBoard()
 {
-	Board = std::make_unique<GameBoard>();
+	Board.lock() = std::make_unique<GameBoard>();
 	int pl_cnt = 0;
 	while (pl_cnt < PL_MAX)
 	{
@@ -43,10 +47,10 @@ void GameTitle::CreateNewBoard()
 		pl_cnt++;
 	}
 
-	Board->SetPiece({ 3,3 }, PIECE_W);
-	Board->SetPiece({ 4,4 }, PIECE_W);
-	Board->SetPiece({ 4,3 }, PIECE_B);
-	Board->SetPiece({ 3,4 }, PIECE_B);
+	Board.lock()->SetPiece({ 3,3 }, PIECE_W);
+	Board.lock()->SetPiece({ 4,4 }, PIECE_W);
+	Board.lock()->SetPiece({ 4,3 }, PIECE_B);
+	Board.lock()->SetPiece({ 3,4 }, PIECE_B);
 	/*
 	Board->SetPiece({ 1,0 }, PIECE_B);
 	Board->SetPiece({ 2,0 }, PIECE_B);
@@ -56,6 +60,9 @@ void GameTitle::CreateNewBoard()
 	*/
 	lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
 	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+
+	lpGameTask.state.reset;
+	lpGameTask.state = std::make_unique<GameMain>();
 }
 
 

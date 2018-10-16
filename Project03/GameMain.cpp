@@ -1,5 +1,6 @@
 #include "GameMain.h"
 #include "GameTask.h"
+#include "GameBoard.h"
 #include "Dxlib.h"
 
 
@@ -59,5 +60,5 @@ void GameMain::CurrentPlayerChange()
 
 VECTOR2 GameMain::GetBoardSize()
 {
-	return *lpGameTask.)GetBoardSize();
+	return (*lpGameTask.).GetBoardSize();
 }

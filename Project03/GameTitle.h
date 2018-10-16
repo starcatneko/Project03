@@ -17,5 +17,8 @@ public:
 	void CreateNewBoard();
 	void AddPlayer();
 	void Draw();
+private:
+	std::weak_ptr<GameBoard> Board;
+
 };
 
