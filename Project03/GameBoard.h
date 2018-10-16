@@ -46,11 +46,6 @@ public:
 	// vec:正規化された方向ベクトル
 	bool SarchReverse(VECTOR2 pos, VECTOR2 vec, PIECE_ST st);
 
-	//void AddPlayer();
-	// プレイターンのプレイヤーを更新
-	void CurrentPlayerChange();
-	player_ptr GetCurrentPlayer();
-
 
 	// マウス座標→ボード座標返還
 	VECTOR2 Pos_MouseToBoard(VECTOR2 mousePos);

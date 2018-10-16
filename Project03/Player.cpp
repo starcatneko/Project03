@@ -8,6 +8,7 @@
 
 
 int Player::playercnt = 0;
+
 Player::Player()
 {
 	this->playerNo = playercnt++;
@@ -19,7 +20,7 @@ Player::Player()
 
 Player::~Player()
 {
-	Player::playercnt = 0;
+
 }
 
 void Player::Update()
@@ -65,3 +66,39 @@ void Player::DeleteTrayPiece()
 {
 	pieceTray->TrayUpdate();
 }
+
+void Player::TurnAct()
+{
+	//pieceTray->SetTurnFlg(true);
+	// TurnActのピースが設置のif内
+	// ピースを設置したらプレイヤーが切り替わるから
+	/*
+	if ((Mouse->GetButton() & 0b0001) != 0)
+	{
+		Board->SetPiece(Mouse->GetPos());
+	}*/
+	//ピースの数をチェック
+	//マウス取得{
+	//設置可能なら設置
+	//	{
+	//
+	//	}
+	//}
+}
+
+bool Player::SetTunrFlg(bool flg)
+{
+	 return pieceTray->SetTurnFlg(flg);
+
+}
+
+
+/*Playerのpublicに
+メンバ関数void型のSetTurnFlg
+を作る
+
+PlayerのSetTurnFlg内の処理が
+pieceTray->SetTurnFlg(引数);
+
+
+*/

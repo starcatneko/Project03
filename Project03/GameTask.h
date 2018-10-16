@@ -68,7 +68,7 @@ private:
 	void Title();
 	void GameMain();
 	void Result();
-
+	//const MouseCtr * MouseCtr;
 	void CreateNewBoard();
 
 	void AddPlayer();

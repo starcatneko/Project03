@@ -28,8 +28,6 @@ void GameTask::Init()
 	Mouse = std::make_unique<MouseCtr>();
 	CurrentScene = &GameTask::Title;
 	//currentPlayer = lpGameTask.playerlist.begin();
-
-
 }
 
 void GameTask::Title()
@@ -42,28 +40,26 @@ void GameTask::Title()
 		CreateNewBoard();
 		CurrentScene = &GameTask::GameMain;
 	}
-
 }
 
 void GameTask::GameMain()
 {
 
 	DrawString(0, 0, "Main", 0xffffff, 0);
-
 	Board->Update();
-	Mouse->GetPos().x;
-
+	//Mouse->GetPos().x;
 	
+	(*currentPlayer)->TurnAct();
+
+	// ifTurnActがtrueの場合、プレイヤーチェンジ処理を行う
 
 	if ((Mouse->GetButton() & 0b0001) != 0)
 	{
-		Board->SetPiece(Mouse->GetPos());
+	Board->SetPiece(Mouse->GetPos());
 	}
-
 	if ((Mouse->GetButton() & 0b0010) != 0)
 	{
 		Board->Debug_SetPiece(Mouse->GetPos());
-
 	}
 }
 
@@ -84,7 +80,6 @@ void GameTask::Result()
 
 	if ((Mouse->GetButton() & 0b0001) != 0)
 	{
-		
 		CurrentScene = &GameTask::Title;
 	}
 
@@ -100,15 +95,20 @@ void GameTask::CreateNewBoard()
 		AddPlayer();
 		pl_cnt++;
 	}
+	
 	Board->SetPiece({ 3,3 }, PIECE_W);
 	Board->SetPiece({ 4,4 }, PIECE_W);
 	Board->SetPiece({ 4,3 }, PIECE_B);
-	Board->SetPiece({ 3,4 }, PIECE_B);
-
+	Board->SetPiece({ 3,4 }, PIECE_B);	
+	/*
+	Board->SetPiece({ 1,0 }, PIECE_B);
+	Board->SetPiece({ 2,0 }, PIECE_B);
+	Board->SetPiece({ 3,0 }, PIECE_B);
+	Board->SetPiece({ 4,0 }, PIECE_W);
+	Board->SetPiece({ 4,1 }, PIECE_W);
+	*/
 	currentPlayer = playerlist.begin();
-
-
-
+	(*currentPlayer)->SetTunrFlg(true);
 }
 
 
@@ -121,17 +121,17 @@ void GameTask::AddPlayer()
 
 void GameTask::CurrentPlayerChange()
 {
-	auto itrrrr = lpGameTask.currentPlayer;
-
+	(*currentPlayer)->SetTunrFlg(false);
 	if ((*lpGameTask.currentPlayer) == playerlist.back())
 	{
-		(*lpGameTask.currentPlayer) = (*lpGameTask.playerlist.begin());
-		itrrrr = lpGameTask.currentPlayer;
+		currentPlayer = playerlist.begin();
+		(*currentPlayer)->SetTunrFlg(true);
 		return;
 	}
+
 	(*lpGameTask.currentPlayer++);
-
-
+	(*currentPlayer)->SetTunrFlg(true);
+	
 	// 現在の順番を表示する関数を呼んで
 }
 
@@ -140,15 +140,14 @@ void GameTask::CurrentPlayerChange()
 
 void GameTask::Run()
 {
+	ScreenFlip();
+	ClsDrawScreen();
+	(this->*CurrentScene)();
 
-		ScreenFlip();
-		ClsDrawScreen();
-		(this->*CurrentScene)();
-
-		if (wait > 0)
-		{
-			wait--;
-		}
+	if (wait > 0)
+	{
+		wait--;
+	}
 }
 
 void GameTask::SetWait(int wait)

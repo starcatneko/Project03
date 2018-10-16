@@ -20,6 +20,10 @@ public:
 	void SelectTray(VECTOR2 pos);
 	PIECE_ST GetType();
 	void DeleteTrayPiece();
+
+	// プレイヤーのターン処理
+	void TurnAct();
+	bool SetTunrFlg(bool flg);
 private:
 	int playerNo;
 	static int playercnt;

@@ -1,8 +1,8 @@
 #pragma once
 // Stateデザイン
 // 実体化はさせない
-
 //　マスに置かれている石
+
 enum PIECE_ST
 {
 	PIECE_NON,
@@ -17,19 +17,13 @@ enum PIECE_ST
 	PIECE_MAX
 };
 
-
 class PieceState
 {
 public:
 	virtual ~PieceState();
 	virtual PIECE_ST GetState() = 0;
 	virtual unsigned int GetDrawColor() = 0;
-	/*
-	virtual int GetHp() = 0;
-	virtual int SkillNumber() = 0;
-	*/
-	//virtual int Image() = 0;
-	
+
 protected:
 };
 

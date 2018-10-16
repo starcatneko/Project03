@@ -304,13 +304,13 @@ void GameBoard::Draw()
 
 	VECTOR2 CurrntPlPos = CurrentPlPiece->GetPos();
 
-	
+	/*
 	DrawBox(CurrntPlPos.x*CHIPSIZE + X_DIS, CurrntPlPos.y*CHIPSIZE + Y_DIS
 		, CurrntPlPos.x*CHIPSIZE + CHIPSIZE + X_DIS,
 		CurrntPlPos.y*CHIPSIZE + CHIPSIZE + Y_DIS, 0x006600, true);
 
 	CurrentPlPiece->Draw();
-
+	*/
 	if (gameEndFlg != true)
 	{
 		CurrentSetUpData();

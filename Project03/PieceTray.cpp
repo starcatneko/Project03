@@ -2,7 +2,7 @@
 #include "GameTask.h"
 #include "Dxlib.h"
 
-
+const int CURRENTBOXSIZE = 5;
 const int CHIPSIZE = 64;
 
 PieceTray::PieceTray()
@@ -57,12 +57,24 @@ void PieceTray::SelectTrayPiece(VECTOR2 pos)
 
 void PieceTray::DrawTray(VECTOR2 DrawOffset)
 {
-	int i = 0;		
+	int i = 0;	
+
+
+	if (turnFlag == true)
+	{
+		DrawBox(pos.x - 5,
+			pos.y - 5,
+			pos.x * CHIPSIZE + CHIPSIZE + 5,
+			pos.y + CHIPSIZE * 5 + 5,
+			0xEEEEEE, true);
+	}
+
 	DrawBox(pos.x * CHIPSIZE,
-		pos.y ,
+		pos.y,
 		pos.x * CHIPSIZE + CHIPSIZE,
 		pos.y + CHIPSIZE * 5,
 		0x008800, true);
+
 	// DrawBox (pos.x,pos.y,pos.x +70,pos.y +300
 	DrawFormatString(pos.x*64,420,0xeeeeee,"No%d \n ",pos.x);
 	DrawBox(pos.x * CHIPSIZE,
@@ -83,7 +95,7 @@ void PieceTray::DrawTray(VECTOR2 DrawOffset)
 void PieceTray::TrayUpdate()
 {
 	int i = 0;
-	/*
+	
 	for (auto itr = piecelist.begin();itr != piecelist.end();itr++)
 	{
 		if (selectPiece == i)
@@ -97,5 +109,10 @@ void PieceTray::TrayUpdate()
 			break;
 		}
 	}
-	*/
+}
+
+bool PieceTray::SetTurnFlg(bool flg)
+{
+		turnFlag = flg;
+		return flg;
 }

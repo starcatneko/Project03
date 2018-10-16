@@ -20,8 +20,10 @@ public:
 	void SelectTrayPiece(VECTOR2 pos);
 	void DrawTray(VECTOR2 DrawOffset);
 	void TrayUpdate();
+	bool SetTurnFlg(bool flg);
 private:
 
+	bool turnFlag;
 	bool AddPiece();
 	// 現在選択しているトレイ上のピースの位置
 	int selectPiece;	
