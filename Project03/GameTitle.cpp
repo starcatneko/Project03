@@ -2,9 +2,9 @@
 #include "GameTask.h"
 #include "GamePiece.h"
 #include "GameBoard.h"
-
-
 #include "GameMain.h"
+#include "MouseCtr.h"
+#include "ImageMng.h"
 #include "Player.h"
 
 #include "DxLib.h"
@@ -12,7 +12,6 @@
 
 GameTitle::GameTitle()
 {
-	Board = lpGameTask.SetBoard();
 
 }
 
@@ -25,12 +24,12 @@ void GameTitle::Update()
 {
 
 }*/
-void GameTitle::Update(const MouseCtr & MouseCtr)
+void GameTitle::Update()
 {
 	ImageMng::GetInstance().DrawImg({ 120,240 }, "title", 0);
 	DrawString(0, 0, "Title", 0xffffff, 0);
 
-	if ((MouseCtr->GetButton() & 0b0001) > 0)
+	if ((lpGameTask.Mouse->GetButton() & 0b0001) > 0)
 	{
 		CreateNewBoard();
 	}
@@ -38,7 +37,7 @@ void GameTitle::Update(const MouseCtr & MouseCtr)
 
 void GameTitle::CreateNewBoard()
 {
-	Board.lock() = std::make_unique<GameBoard>();
+	;
 	int pl_cnt = 0;
 	while (pl_cnt < PL_MAX)
 	{
@@ -47,10 +46,10 @@ void GameTitle::CreateNewBoard()
 		pl_cnt++;
 	}
 
-	Board.lock()->SetPiece({ 3,3 }, PIECE_W);
-	Board.lock()->SetPiece({ 4,4 }, PIECE_W);
-	Board.lock()->SetPiece({ 4,3 }, PIECE_B);
-	Board.lock()->SetPiece({ 3,4 }, PIECE_B);
+	lpGameTask.Board->SetPiece({ 3,3 }, PIECE_W);
+	lpGameTask.Board->SetPiece({ 4,4 }, PIECE_W);
+	lpGameTask.Board->SetPiece({ 4,3 }, PIECE_B);
+	lpGameTask.Board->SetPiece({ 3,4 }, PIECE_B);
 	/*
 	Board->SetPiece({ 1,0 }, PIECE_B);
 	Board->SetPiece({ 2,0 }, PIECE_B);
@@ -61,7 +60,7 @@ void GameTitle::CreateNewBoard()
 	lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
 	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 
-	lpGameTask.state.reset;
+	lpGameTask.state.reset();
 	lpGameTask.state = std::make_unique<GameMain>();
 }
 

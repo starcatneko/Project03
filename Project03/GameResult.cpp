@@ -8,7 +8,7 @@
 
 GameResult::GameResult()
 {
-	Board = lpGameTask.SetBoard();
+	
 }
 
 
@@ -16,17 +16,12 @@ GameResult::~GameResult()
 {
 }
 
-void GameResult::Update()
-{
-}
-
-
 
 void GameResult::Update()
 {
-	Board.lock()->Update();
+	lpGameTask.Board->Update();
 
-	if ((Mouse->GetButton() & 0b0001) != 0)
+	if ((lpGameTask.Mouse->GetButton() & 0b0001) != 0)
 	{
 		lpGameTask.state = std::make_unique<GameTitle>();
 

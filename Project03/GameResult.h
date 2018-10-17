@@ -11,7 +11,6 @@ public:
 	void Draw();
 
 private:
-	std::weak_ptr<GameBoard> Board;
 
 };
 

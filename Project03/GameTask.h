@@ -41,13 +41,10 @@ public:
 	void AddWait(int wait);
 	int GetWait();
 
+	VECTOR2 GetBoardSize();
+
 
 	void GameEnd();
-
-	auto SetState(GameState && ptr);
-
-	auto SetState(std::unique_ptr<GameState>()a);
-
 	std::shared_ptr<GameBoard> SetBoard();
 
 
@@ -58,6 +55,10 @@ public:
 	// 現在選択しているプレイヤーのアドレスを格納する
 
 	std::unique_ptr <GameState> state;
+	std::unique_ptr<MouseCtr> Mouse; 
+	std::unique_ptr<GameBoard> Board;
+
+
 
 
 private:
@@ -84,8 +85,7 @@ private:
 	//bool SetState(std::unique_ptr <GameState> st);
 
 	// ユニークポインタ
-	std::shared_ptr<GameBoard> Board;
-	std::unique_ptr<MouseCtr> Mouse;
+	//std::shared_ptr<GameBoard> Board;
 
 
 	void (GameTask::*CurrentScene)();

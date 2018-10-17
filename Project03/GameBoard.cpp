@@ -158,7 +158,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 				(*lpGameTask.currentPlayer)->DeleteTrayPiece();
 			}*/
 			// 誰かが置ける状態の場合
-			lpGameTask.CurrentPlayerChange();
+			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 
 			// -----現在のプレイヤー表示
 			CurrentPlPiece->SetState((*lpGameTask.currentPlayer)->GetType());
@@ -376,7 +376,7 @@ void GameBoard::CurrentSetUpData()
 			gameEndFlg = true;
 			return;
 		}
-		lpGameTask.CurrentPlayerChange();
+		(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 	}
 
 }

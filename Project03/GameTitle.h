@@ -13,12 +13,11 @@ public:
 	~GameTitle();
 
 	//void Update();
-	void Update(const MouseCtr & mouse);
+	void Update();
 	void CreateNewBoard();
 	void AddPlayer();
 	void Draw();
 private:
-	std::weak_ptr<GameBoard> Board;
 
 };
 
