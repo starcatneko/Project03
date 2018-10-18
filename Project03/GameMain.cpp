@@ -19,7 +19,7 @@ void GameMain::Draw()
 {
 }
 
-void GameMain::Update() 
+state_ptr GameMain::Update(state_ptr pt)
 {
 
 	DrawString(0, 0, "Main", 0xffffff, 0);
@@ -37,6 +37,7 @@ void GameMain::Update()
 	{
 		lpGameTask.Board->Debug_SetPiece(lpGameTask.Mouse->GetPos());
 	}
+
 }
 
 

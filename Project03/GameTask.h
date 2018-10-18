@@ -12,8 +12,9 @@ class MouseCtr;
 
 class GamePiece;
 class Player;
-
 class GameState;
+
+
 
 typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
@@ -47,7 +48,6 @@ public:
 
 
 	void GameEnd();
-	std::shared_ptr<GameBoard> SetBoard();
 
 
 	// iterator 現在行動中のプレイヤー
@@ -56,9 +56,9 @@ public:
 	player_list::iterator currentPlayer;
 	// 現在選択しているプレイヤーのアドレスを格納する
 
-	std::unique_ptr <GameState> state;
+	state_ptr state;
 	std::unique_ptr<MouseCtr> Mouse; 
-	std::unique_ptr<GameBoard> Board;
+	Board_ptr Board;
 
 
 
@@ -84,7 +84,7 @@ private:
 
 	void AddPlayer();
 
-	//bool SetState(std::unique_ptr <GameState> st);
+	//bool SetState(state_ptr st);
 
 	// ユニークポインタ
 	//std::shared_ptr<GameBoard> Board;

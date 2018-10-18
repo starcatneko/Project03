@@ -5,6 +5,27 @@
  **		やることメモ
  !!		授業との差異
  
+
+!! GameBoard
+GameTitle 存在せず
+GameMain 一週目で作成
+GameResult 終了時（Titleに戻るときにリセット)
+
+Sharedで作成
+GameResultの引数付きコンストラクタで
+GameMainが持っているGameBoardのSharedポインタを
+渡す
+Resultを抜けた時にポインタのカウントが切れて
+自動的にGameBoardが消える（リセットできる）
+
+
+ $$ stateパターン
+ Update()の返り値に型のアドレスを渡す
+ 同じstateを繰り返したい場合、自分が入っているポインターを返す
+ (*thisを返すのはダメ！！！)
+
+
+
  $$ 関数ポインタの代入
  	ポインタ名 = &クラス名::関数名;
 	例)

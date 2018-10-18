@@ -23,7 +23,7 @@ void GameTitle::Update()
 {
 
 }*/
-void GameTitle::Update()
+state_ptr GameTitle::Update(state_ptr pt)
 {
 	ImageMng::GetInstance().LoadImg("image/title.jpg", "title");
 
@@ -34,6 +34,8 @@ void GameTitle::Update()
 	{
 		CreateNewBoard();
 	}
+
+	return std::make_unique<GameMain>();
 }
 
 void GameTitle::CreateNewBoard()

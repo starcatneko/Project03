@@ -8,7 +8,12 @@
 
 GameResult::GameResult()
 {
-	
+
+}
+
+GameResult::GameResult(Board_ptr pt)
+{
+	Board = pt;
 }
 
 
@@ -17,7 +22,7 @@ GameResult::~GameResult()
 }
 
 
-void GameResult::Update()
+state_ptr  GameResult::Update(state_ptr  pt)
 {
 	lpGameTask.Board->Update();
 
@@ -26,7 +31,7 @@ void GameResult::Update()
 		lpGameTask.state = std::make_unique<GameTitle>();
 
 	}
-
+	return pt;
 }
 
 void GameResult::Draw()

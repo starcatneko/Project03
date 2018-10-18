@@ -13,7 +13,8 @@ public:
 	~GameTitle();
 
 	//void Update();
-	void Update();
+	//state_ptr Update();
+	state_ptr Update(state_ptr pt);
 	void CreateNewBoard();
 	void AddPlayer();
 	void Draw();

@@ -5,7 +5,7 @@
 #include "ImageMng.h"
 
 // ƒQ[ƒ€ƒ‚[ƒhStateOem‚ğ˜A‚ê‚Ä‚«‚½‚æI
-
+#include "GameState.h"
 #include "GameTitle.h"
 #include "GameMain.h"
 #include "GameResult.h"
@@ -44,30 +44,6 @@ void GameTask::GameEnd()
 
 void GameTask::CreateNewBoard()
 {
-	/*
-	Board = std::make_unique<GameBoard>();
-	int pl_cnt = 0;
-	while (pl_cnt < PL_MAX)
-	{
-		// ŠÖ”‚Épl_cnt‚ğ‰ÁZ‚³‚¹‚éˆ—‚ğ‘g‚İ‚ñ‚¾‚ç’Zk‰Â”\
-		AddPlayer();
-		pl_cnt++;
-	}
-	
-	Board->SetPiece({ 3,3 }, PIECE_W);
-	Board->SetPiece({ 4,4 }, PIECE_W);
-	Board->SetPiece({ 4,3 }, PIECE_B);
-	Board->SetPiece({ 3,4 }, PIECE_B);	
-	
-	Board->SetPiece({ 1,0 }, PIECE_B);
-	Board->SetPiece({ 2,0 }, PIECE_B);
-	Board->SetPiece({ 3,0 }, PIECE_B);
-	Board->SetPiece({ 4,0 }, PIECE_W);
-	Board->SetPiece({ 4,1 }, PIECE_W);
-	
-	currentPlayer = playerlist.begin();
-	(*currentPlayer)->SetTunrFlg(true);
-	*/
 }
 
 
@@ -77,8 +53,7 @@ void GameTask::Run()
 {
 	ScreenFlip();
 	ClsDrawScreen();
-	state->Update();
-	//(this->*CurrentScene)();
+	state = state->Update(std::move(state));
 	if (wait > 0)
 	{
 		wait--;

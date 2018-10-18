@@ -21,7 +21,7 @@ typedef std::list<player_ptr> player_list;
 
 typedef std::weak_ptr<GamePiece> piece_ptr_w;
 
-
+typedef std::shared_ptr<GameBoard> Board_ptr;
 
 class GameBoard
 {

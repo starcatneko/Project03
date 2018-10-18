@@ -14,7 +14,7 @@ public:
 	GameMain();
 	~GameMain();
 
-	void Update();
+	state_ptr Update(state_ptr pt);
 	void Draw();
 	void CurrentPlayerChange();
 private:
