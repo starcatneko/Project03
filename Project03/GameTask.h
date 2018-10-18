@@ -12,7 +12,8 @@ class MouseCtr;
 
 class GamePiece;
 class Player;
-class GameState;
+
+#include "GameState.h"
 
 
 

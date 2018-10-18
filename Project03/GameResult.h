@@ -3,7 +3,7 @@
 
 class Board;
 
-class GameResult :
+class GameResult:
 	public GameState
 {
 public:

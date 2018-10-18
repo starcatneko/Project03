@@ -1,10 +1,9 @@
-#include "GameResult.h"
 #include "GameTask.h"
 #include "GameBoard.h"
 #include "GameTitle.h"
-
 #include "MouseCtr.h"
 #include "DxLib.h"
+#include "GameResult.h"
 
 GameResult::GameResult()
 {
@@ -22,7 +21,7 @@ GameResult::~GameResult()
 }
 
 
-state_ptr  GameResult::Update(state_ptr  pt)
+state_ptr GameResult::Update(state_ptr pt)
 {
 	lpGameTask.Board->Update();
 

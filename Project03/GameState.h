@@ -1,10 +1,7 @@
 #pragma once
 class MouseCtl;
 
-class GameState;
-
-typedef std::unique_ptr<GameState> state_ptr;
-
+#define state_ptr std::unique_ptr<GameState>
 
 class GameState
 {
