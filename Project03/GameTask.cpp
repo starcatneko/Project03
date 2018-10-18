@@ -16,10 +16,8 @@ std::unique_ptr<GameTask, GameTask::GameTaskDeleter> GameTask::s_Instance(new Ga
 GameTask::GameTask()
 {
 	CurrentScene = &GameTask::Init;
-	ImageMng::GetInstance().LoadImg("image/title.jpg", "title");
 	Mouse = std::make_unique<MouseCtr>();
 	state.reset();
-
 	state = std::make_unique<GameTitle>();
 	wait = 0;
 }
@@ -106,4 +104,20 @@ int GameTask::GetWait()
 VECTOR2 GameTask::GetBoardSize()
 {
 	return Board->GetBoardSize();
+}
+
+void GameTask::CurrentPlayerChange()
+{
+	(*lpGameTask.currentPlayer)->SetTunrFlg(false);
+	if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
+	{
+		lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
+		(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+		return;
+	}
+
+	(*lpGameTask.currentPlayer++);
+	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+
+	// Œ»İ‚Ì‡”Ô‚ğ•\¦‚·‚éŠÖ”‚ğŒÄ‚ñ‚Å
 }

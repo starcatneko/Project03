@@ -2,6 +2,7 @@
 #include "GameTask.h"
 #include "GameBoard.h"
 #include "GamePiece.h"
+#include "GameMain.h"
 #include "Player.h"
 #include "PieceState.h"
 
@@ -158,7 +159,8 @@ void GameBoard::SetPiece(VECTOR2 pos)
 				(*lpGameTask.currentPlayer)->DeleteTrayPiece();
 			}*/
 			// 誰かが置ける状態の場合
-			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+			lpGameTask.CurrentPlayerChange();
+			//(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 
 			// -----現在のプレイヤー表示
 			CurrentPlPiece->SetState((*lpGameTask.currentPlayer)->GetType());
@@ -271,7 +273,6 @@ piece_ptr GameBoard::AddObjList(piece_ptr && objPtr)
 	(*itr)->SetAnimF(7);
 	return *itr;
 }
-
 void GameBoard::GameEnd()
 {
 	std::array<int,PL_MAX> pieceCnt;
@@ -376,7 +377,8 @@ void GameBoard::CurrentSetUpData()
 			gameEndFlg = true;
 			return;
 		}
-		(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+		lpGameTask.CurrentPlayerChange();
+		//(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 	}
 
 }

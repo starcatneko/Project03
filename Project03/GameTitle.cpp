@@ -12,7 +12,6 @@
 
 GameTitle::GameTitle()
 {
-
 }
 
 
@@ -26,6 +25,8 @@ void GameTitle::Update()
 }*/
 void GameTitle::Update()
 {
+	ImageMng::GetInstance().LoadImg("image/title.jpg", "title");
+
 	ImageMng::GetInstance().DrawImg({ 120,240 }, "title", 0);
 	DrawString(0, 0, "Title", 0xffffff, 0);
 
@@ -37,7 +38,8 @@ void GameTitle::Update()
 
 void GameTitle::CreateNewBoard()
 {
-	;
+	lpGameTask.Board = std::make_unique<GameBoard>();
+
 	int pl_cnt = 0;
 	while (pl_cnt < PL_MAX)
 	{

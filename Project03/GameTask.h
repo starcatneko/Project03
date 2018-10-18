@@ -43,6 +43,8 @@ public:
 
 	VECTOR2 GetBoardSize();
 
+	void CurrentPlayerChange();
+
 
 	void GameEnd();
 	std::shared_ptr<GameBoard> SetBoard();

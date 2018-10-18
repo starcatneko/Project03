@@ -62,7 +62,7 @@ void PieceTray::DrawTray(VECTOR2 DrawOffset)
 
 	if (turnFlag == true)
 	{
-		DrawBox(pos.x - 5,
+		DrawBox(pos.x* CHIPSIZE - 5,
 			pos.y - 5,
 			pos.x * CHIPSIZE + CHIPSIZE + 5,
 			pos.y + CHIPSIZE * 5 + 5,
