@@ -9,6 +9,17 @@ GameMain::GameMain()
 {
 	CreateNewBoard();
 
+	int pl_cnt = 0;
+	while (pl_cnt < PL_MAX)
+	{
+		// ŠÖ”‚Épl_cnt‚ğ‰ÁZ‚³‚¹‚éˆ—‚ğ‘g‚İ‚ñ‚¾‚ç’Zk‰Â”\
+		AddPlayer();
+		pl_cnt++;
+	}
+	lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
+	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+
+
 }
 
 
@@ -36,8 +47,6 @@ void GameMain::CreateNewBoard()
 	Board->SetPiece({ 4,0 }, PIECE_W);
 	Board->SetPiece({ 4,1 }, PIECE_W);
 	*/
-	lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
-	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 }
 
 
@@ -80,4 +89,13 @@ void GameMain::CurrentPlayerChange()
 	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 
 	// Œ»İ‚Ì‡”Ô‚ğ•\¦‚·‚éŠÖ”‚ğŒÄ‚ñ‚Å
+}
+
+
+
+void GameMain::AddPlayer()
+{
+	//std::make_shared<Player>();
+	lpGameTask.playerlist.push_back(std::make_shared<Player>());
+
 }

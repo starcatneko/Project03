@@ -19,10 +19,10 @@ public:
 	~GameMain();
 
 	state_ptr Update(state_ptr pt);
-	void Draw();
+	void Draw();	
 	void CurrentPlayerChange();
 private:
-
+	void AddPlayer();
 	void CreateNewBoard();
 	Board_ptr MainBoard;
 };

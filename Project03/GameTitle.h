@@ -15,7 +15,6 @@ public:
 	//void Update();
 	//state_ptr Update();
 	state_ptr Update(state_ptr pt);
-	void AddPlayer();
 	void Draw();
 private:
 

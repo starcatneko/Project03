@@ -33,14 +33,6 @@ state_ptr GameTitle::Update(state_ptr pt)
 	if ((lpGameTask.Mouse->GetButton() & 0b0001) > 0)
 	{
 
-		int pl_cnt = 0;
-		while (pl_cnt < PL_MAX)
-		{
-			// ŠÖ”‚Épl_cnt‚ð‰ÁŽZ‚³‚¹‚éˆ—‚ð‘g‚Ýž‚ñ‚¾‚ç’Zk‰Â”\
-			AddPlayer();
-			pl_cnt++;
-		}
-
 		return std::make_unique<GameMain>();
 	}
 
@@ -49,14 +41,6 @@ state_ptr GameTitle::Update(state_ptr pt)
 }
 
 
-
-
-void GameTitle::AddPlayer()
-{
-	//std::make_shared<Player>();
-	lpGameTask.playerlist.push_back(std::make_shared<Player>());
-
-}
 
 void GameTitle::Draw()
 {
