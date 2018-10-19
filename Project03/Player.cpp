@@ -14,13 +14,14 @@ Player::Player()
 	this->playerNo = playercnt++;
 	this->piecetype = PIECE_ST(this->playerNo + 1);
 	this->pieceTray = std::make_unique<PieceTray>(this->piecetype);
+	//this->SetTray();
 }
 
 
 
 Player::~Player()
 {
-
+	playercnt--;
 }
 
 void Player::Update()
@@ -30,7 +31,7 @@ void Player::Update()
 
 void Player::SetTray()
 {
-	pieceTray->SetTray({ lpGameTask.GetBoardSize().x*lpGameTask.GetBoardSize().y }, Player::playercnt);
+	this->pieceTray = std::make_unique<PieceTray>(this->piecetype);
 }
 
 int Player::GetNo()
@@ -69,7 +70,7 @@ void Player::DeleteTrayPiece()
 
 void Player::TurnAct()
 {
-	//pieceTray->SetTurnFlg(true);
+	pieceTray->SetTurnFlg(true);
 	// TurnActのピースが設置のif内
 	// ピースを設置したらプレイヤーが切り替わるから
 	/*

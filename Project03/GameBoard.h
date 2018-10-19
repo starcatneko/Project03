@@ -22,6 +22,15 @@ typedef std::list<player_ptr> player_list;
 typedef std::weak_ptr<GamePiece> piece_ptr_w;
 typedef std::shared_ptr<GameBoard> Board_ptr;
 
+#define BoardSize int(8)
+
+#define SCREEN_SIZE_X 800
+#define SCREEN_SIZE_Y 600
+#define SCREEN_HALF_X SCREEN_SIZE_X/2
+#define SCREEN_HALF_Y SCREEN_SIZE_Y/2
+#define X_DIS (int)((SCREEN_SIZE_X / 2) - (boardSize.x / 2)*CHIPSIZE)
+#define Y_DIS (int)((SCREEN_SIZE_Y / 2) - (boardSize.y / 2)*CHIPSIZE)
+
 
 class GameBoard
 {
@@ -39,6 +48,12 @@ public:
 	void Update();
 	// ゲームセット時処理
 	void GameEnd();
+
+	// 盤面の描画用
+	void DrawBoard();
+	// 基本的に駒の描画
+	void DrawPiece();
+	// 纏めて描画
 	void Draw();
 	// flgがtrueの方向に石を置く
 	bool Reverse(VECTOR2 pos, VECTOR2 vec);
@@ -59,9 +74,14 @@ public:
 	bool gameEndFlg;
 
 	VECTOR2 GetBoardSize();
+
+	// Result表示用にピースを配置する
+	void PieceResultSet();
+
 private:
 	piece_ptr AddObjList(piece_ptr&& objPtr);
 	void CurrentSetUpData();
+
 	//auto AddObjList(piece_ptr&& objPtr);
 	//
 	// 盤面のサイズを設定する関数

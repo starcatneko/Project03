@@ -5,6 +5,21 @@
  **		やることメモ
  !!		授業との差異
  
+ ##class と struct の違い
+ デフォルト（明記されていない場合）のメンバの属性が
+ classの場合 private
+ structの場合 public
+ になる
+
+
+ PlayerのコンストラクタでPieceTrayを作る
+PieceTrayのコンストラクタでPieceの最大数を取得する為にBoardからサイズを取得したい
+Boardのサイズが決まる前（そもそもBoardが生まれる前）なのでエラー
+そもそもそもそも、BoardをGameMainで作った場合に、
+PlayerからGameMainが持っている
+BoardのGetszieをする方法が無い
+
+
 
 !! GameBoard
 GameTitle 存在せず

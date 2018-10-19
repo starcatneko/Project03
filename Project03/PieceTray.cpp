@@ -15,7 +15,7 @@ PieceTray::PieceTray(PIECE_ST st)
 	int piecemax = (lpGameTask.GetBoardSize().x*lpGameTask.GetBoardSize().y)/2;
 	this->color = st;
 	this->selectPiece = 0;
-
+	this->turnFlag = false;
 	for (int j = 0; j < piecemax; j++)
 	{
 		pos = VECTOR2{ 0,j } +VECTOR2{ (this->color == PIECE_B ? 0 : 11),0};
@@ -46,8 +46,8 @@ void PieceTray::SetTray(int boardsize,int plcnt)
 
 void PieceTray::SelectTrayPiece(VECTOR2 pos)
 {
-	if (pos.x > this->pos.x &&
-		pos.x < this->pos.x + CHIPSIZE &&
+	if (pos.x > this->pos.x * CHIPSIZE&&
+		pos.x < this->pos.x* CHIPSIZE + CHIPSIZE &&
 		pos.y > this->pos.y &&
 		pos.y < this->pos.y + CHIPSIZE * 5)
 	{

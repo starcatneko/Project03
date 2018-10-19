@@ -36,8 +36,6 @@ void GameTask::Init()
 
 void GameTask::GameEnd()
 {
-	state.reset();
-	state = std::make_unique<GameResult>();
 
 }
 
@@ -78,6 +76,7 @@ int GameTask::GetWait()
 
 VECTOR2 GameTask::GetBoardSize()
 {
+	
 	return Board->GetBoardSize();
 }
 

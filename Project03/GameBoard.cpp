@@ -10,14 +10,6 @@
 
 
 const int CHIPSIZE = 64;
-#define BoardSize int(8)
-
-#define SCREEN_SIZE_X 800
-#define SCREEN_SIZE_Y 600
-#define SCREEN_HALF_X SCREEN_SIZE_X/2
-#define SCREEN_HALF_Y SCREEN_SIZE_Y/2
-#define X_DIS (int)((SCREEN_SIZE_X / 2) - (boardSize.x / 2)*CHIPSIZE)
-#define Y_DIS (int)((SCREEN_SIZE_Y / 2) - (boardSize.y / 2)*CHIPSIZE)
 
 
 
@@ -134,6 +126,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 					{
 						VECTOR2 setvec = vec1 + itr * i;
 
+						delete &data[setvec.y][setvec.x].lock();
 						piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
 						data[setvec.y][setvec.x] = (tmp);
 						data[setvec.y][setvec.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
@@ -177,12 +170,6 @@ void GameBoard::DB_TouchBoad()
 
 void GameBoard::Update()
 {
-	Draw();
-	for (auto itr : GameTask::GetInstance().playerlist)
-	{
-		(*itr).Update();
-	}
-
 	if (gameEndFlg)
 	{
 		std::string str1;
@@ -282,15 +269,11 @@ void GameBoard::GameEnd()
 		pieceCnt[(itr->GetState())-1]++;
 	}
 }
-
-void GameBoard::Draw()
+void GameBoard::DrawBoard()
 {
-
 	DrawBox(X_DIS, Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
 		boardSize.y*CHIPSIZE + Y_DIS,
 		0x008822, true);
-
-
 
 	for (int y = 0; y < data.size(); y++)
 	{
@@ -302,6 +285,23 @@ void GameBoard::Draw()
 				y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xffffff, false);
 		}
 	}
+
+
+
+}
+void GameBoard::DrawPiece()
+{
+
+	for (auto itr : piecelist)
+	{
+		itr->Draw();
+	}
+
+}
+
+void GameBoard::Draw()
+{
+	DrawBoard();
 
 	VECTOR2 CurrntPlPos = CurrentPlPiece->GetPos();
 
@@ -319,11 +319,7 @@ void GameBoard::Draw()
 
 	// 現在の番のプレイヤーを表示する
 
-	for (auto itr : piecelist)
-	{
-		itr->Draw();
-		DrawFormatString(0, 48, 0xdddddd, "駒数%d", piecelist.size());
-	}
+	DrawPiece();
 
 	DrawFormatString(0, 64, 0xdddddd, "プレイヤー数%d", GameTask::GetInstance().playerlist.size());
 	DrawFormatString(0, 96, 0xdddddd, "現在のプレイヤー\n%d", (*GameTask::GetInstance().currentPlayer)->GetNo());
@@ -379,6 +375,36 @@ void GameBoard::CurrentSetUpData()
 		}
 		lpGameTask.CurrentPlayerChange();
 		//(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+	}
+
+}
+
+
+void GameBoard::PieceResultSet()
+{
+	std::array<int,2> cnt = { 0,0 };
+	for (auto itr : piecelist)
+	{
+		cnt[int(itr->GetState()-1)]++;
+	}
+	piecelist.erase(piecelist.begin(), piecelist.end());
+
+	VECTOR2 set = {0,0};
+	for (auto itr : cnt)
+	{
+		for (int i = 0; i <= cnt.size(); i++)
+		{
+			if (itr == i)
+			{
+				AddObjList(std::make_shared<GamePiece>(set, VECTOR2{ X_DIS,Y_DIS }, PIECE_ST(itr)));
+			}
+			set.x++;
+			if (set.x >= boardSize.x)
+			{
+				set.x = 0;
+				set.y++;
+			}
+		}
 	}
 
 }

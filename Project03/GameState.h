@@ -4,10 +4,8 @@ class MouseCtl;
 
 #define state_ptr std::unique_ptr<GameState>
 
-class GameState
+struct GameState
 {
-public:
-
 	virtual ~GameState() = 0;
 	//Const‚ÅMouse‚ð—¬‚·
 	//Board
