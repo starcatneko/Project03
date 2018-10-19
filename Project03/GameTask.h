@@ -60,10 +60,6 @@ public:
 	state_ptr state;
 	std::unique_ptr<MouseCtr> Mouse; 
 	Board_ptr Board;
-
-
-
-
 private:
 
 	struct GameTaskDeleter

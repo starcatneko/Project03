@@ -382,6 +382,10 @@ void GameBoard::CurrentSetUpData()
 
 void GameBoard::PieceResultSet()
 {
+	piecelist.erase(
+		piecelist.begin(),
+		piecelist.end());
+	/*
 	std::array<int,2> cnt = { 0,0 };
 	for (auto itr : piecelist)
 	{
@@ -406,5 +410,5 @@ void GameBoard::PieceResultSet()
 			}
 		}
 	}
-
+	*/
 }

@@ -1,7 +1,5 @@
 #include "GameTitle.h"
 #include "GameTask.h"
-#include "GamePiece.h"
-#include "GameBoard.h"
 #include "GameMain.h"
 #include "MouseCtr.h"
 #include "ImageMng.h"
@@ -32,7 +30,6 @@ state_ptr GameTitle::Update(state_ptr pt)
 
 	if ((lpGameTask.Mouse->GetButton() & 0b0001) > 0)
 	{
-
 		return std::make_unique<GameMain>();
 	}
 

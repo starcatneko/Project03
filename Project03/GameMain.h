@@ -21,7 +21,6 @@ public:
 	state_ptr Update(state_ptr pt);
 	void Draw();	
 	void CurrentPlayerChange();
-	VECTOR2 GetBoardSize();
 private:
 	void AddPlayer();
 	void CreateNewBoard();

@@ -31,6 +31,8 @@ state_ptr GameResult::Update(state_ptr pt)
 	{
 		// ƒŠƒXƒg‚ðÁ‹Ž
 		lpGameTask.playerlist.erase(lpGameTask.playerlist.begin(), lpGameTask.playerlist.end());
+		
+		lpGameTask.Board->PieceResultSet();
 		return std::make_unique<GameTitle>();
 	}
 	return pt;
