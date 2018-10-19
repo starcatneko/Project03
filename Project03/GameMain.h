@@ -1,11 +1,15 @@
 #pragma once
 #include "GameState.h"
 #include <memory>
+#include <vector>
+#include <list>
 
 class GameBoard;
 class MouseCtr;
 class GamePiece;
-class Player;
+#include "Player.h"
+typedef std::shared_ptr<GameBoard> Board_ptr;
+
 
 class GameMain :
 	public GameState
@@ -19,5 +23,7 @@ public:
 	void CurrentPlayerChange();
 private:
 
+	void CreateNewBoard();
+	Board_ptr MainBoard;
 };
 

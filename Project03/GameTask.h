@@ -1,6 +1,5 @@
 #pragma once
 
-class GameBoard;
 class MouseCtr;
 
 #include <list>
@@ -15,6 +14,7 @@ class Player;
 
 #include "GameState.h"
 
+#include "GameBoard.h"
 
 
 typedef std::shared_ptr<Player> player_ptr;

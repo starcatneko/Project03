@@ -1,5 +1,6 @@
 #pragma once
 class MouseCtl;
+#include <memory>
 
 #define state_ptr std::unique_ptr<GameState>
 
@@ -11,7 +12,7 @@ public:
 	//Const‚ÅMouse‚ð—¬‚·
 	//Board
 	//Player(?)
-	virtual state_ptr Update() = 0;
+	virtual state_ptr Update(state_ptr pt) = 0;
 	virtual void Draw() = 0;
 };
 
