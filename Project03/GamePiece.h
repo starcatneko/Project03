@@ -13,11 +13,13 @@ class GamePiece;
 //enum PIECE_ST;
 
 
-typedef std::shared_ptr<GamePiece> piece_ptr;
+typedef std::shared_ptr<GamePiece> piece_shared;
 
-typedef std::list<piece_ptr> piece_list;
+typedef std::list<piece_shared> piece_list;
 
-typedef std::list<std::unique_ptr <PieceState>> state_list;
+using piece_unique = std::unique_ptr <PieceState>;
+
+using state_list = std::list<piece_unique>;
 
 
 class GamePiece

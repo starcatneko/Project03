@@ -78,7 +78,7 @@ void GameBoard::Debug_SetPiece(VECTOR2 pos)
 {
 	VECTOR2 vec = { Pos_MouseToBoard(pos)};
 
-	piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(pos, vec, (*GameTask::GetInstance().currentPlayer)->GetType()));
+	piece_shared tmp = AddObjList(std::make_shared<GamePiece>(pos, vec, (*GameTask::GetInstance().currentPlayer)->GetType()));
 	data[pos.y][pos.x] = (tmp);
 	data[pos.y][pos.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
 }
@@ -87,7 +87,7 @@ void GameBoard::SetPiece(VECTOR2 pos , PIECE_ST st)
 {
 	VECTOR2 vec = { X_DIS,Y_DIS };
 
-	piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(pos, vec,st));
+	piece_shared tmp = AddObjList(std::make_shared<GamePiece>(pos, vec,st));
 	data[pos.y][pos.x] = (tmp);
 	data[pos.y][pos.x].lock()->SetState(st);
 
@@ -118,7 +118,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 
 				if(SarchReverse(vec1, itr, (*GameTask::GetInstance().currentPlayer)->GetType()))
 				{
-					piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
+					piece_shared tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
 					data[vec1.y][vec1.x] = (tmp);
 					data[vec1.y][vec1.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
 
@@ -126,8 +126,8 @@ void GameBoard::SetPiece(VECTOR2 pos)
 					{
 						VECTOR2 setvec = vec1 + itr * i;
 
-						delete &data[setvec.y][setvec.x].lock();
-						piece_ptr tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
+						//delete &data[setvec.y][setvec.x].lock();
+						piece_shared tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
 						data[setvec.y][setvec.x] = (tmp);
 						data[setvec.y][setvec.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
 						lastset = (*GameTask::GetInstance().currentPlayer)->GetNo();
@@ -247,7 +247,7 @@ VECTOR2 GameBoard::GetBoardSize()
 }
 
 
-piece_ptr GameBoard::AddObjList(piece_ptr && objPtr)
+piece_shared GameBoard::AddObjList(piece_shared && objPtr)
 {
 	// à¯êîÇÃ ì‡óeÇÉäÉXÉgÇ…fí«â¡
 	piecelist.push_back(objPtr);

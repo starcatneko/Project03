@@ -42,4 +42,5 @@ void GameResult::Draw()
 {
 	Board->DrawBoard();
 	Board->DrawPiece();
+	//DrawFormatString(220,0,0xffffff,"%d:%d",
 }

@@ -4,7 +4,40 @@
  $$		復習
  **		やることメモ
  !!		授業との差異
- 
+
+ **
+ 今まで
+  Player
+  >PieceTray
+   >PieceAAA
+   >PieceBBB
+   >PieceCCC
+
+ 今回
+ Player
+ >PeceTray
+ 　>GamePiece　
+	>PieceState
+	 > AAA(能力～)
+	 > BBB(能力～)
+	 > …etc
+
+	 能力のリスト
+			能力A 能力B 能力C...etc
+	piece1	|	1|	 0|	  1|		//所持しているスキル...1
+	piece2	|	1|	 1|	  0|
+	piece3	|	0|	 1|	  1|
+	   /リストはExcelで作る
+
+	 下記の形式で扱えるように
+	 unsigned int chordStateList = {
+	 {1,0,1,0}	//AAA
+	 {1,1,0,0}	//BBB
+	 }
+
+	 動かす側は「Stateを動かすだけ」
+
+
  ##class と struct の違い
  デフォルト（明記されていない場合）のメンバの属性が
  classの場合 private

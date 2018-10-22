@@ -19,7 +19,7 @@ typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
 
 
-typedef std::weak_ptr<GamePiece> piece_ptr_w;
+typedef std::weak_ptr<GamePiece> piece_shared_w;
 typedef std::shared_ptr<GameBoard> Board_ptr;
 
 #define BoardSize int(8)
@@ -79,10 +79,10 @@ public:
 	void PieceResultSet();
 
 private:
-	piece_ptr AddObjList(piece_ptr&& objPtr);
+	piece_shared AddObjList(piece_shared&& objPtr);
 	void CurrentSetUpData();
 
-	//auto AddObjList(piece_ptr&& objPtr);
+	//auto AddObjList(piece_shared&& objPtr);
 	//
 	// 盤面のサイズを設定する関数
 	bool Resize(VECTOR2 size);
@@ -93,8 +93,8 @@ private:
 	//std::list<Player> playerList;
 
 	// 二次円配列用のポインタ
-	std::vector <piece_ptr_w*> data;
-	std::vector <piece_ptr_w> BaseData;
+	std::vector <piece_shared_w*> data;
+	std::vector <piece_shared_w> BaseData;
 
 	// 現在のプレイヤー表示用
 	std::unique_ptr <GamePiece> CurrentPlPiece;

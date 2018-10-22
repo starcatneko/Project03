@@ -8,6 +8,7 @@
 #define X_DIS (int)((SCREEN_SIZE_X / 2) - (MainBoard->GetBoardSize().x / 2)*CHIPSIZE)
 #define Y_DIS (int)((SCREEN_SIZE_Y / 2) - (MainBoard->GetBoardSize().y / 2)*CHIPSIZE)
 
+#define TESTMODE 0
 
 GameMain::GameMain()
 {
@@ -41,18 +42,24 @@ void GameMain::Draw()
 void GameMain::CreateNewBoard()
 {
 	MainBoard = std::make_unique<GameBoard>();
-	/*
-	MainBoard->SetPiece({ 3,3 }, PIECE_W);
-	MainBoard->SetPiece({ 4,4 }, PIECE_W);
-	MainBoard->SetPiece({ 4,3 }, PIECE_B);
-	MainBoard->SetPiece({ 3,4 }, PIECE_B);
-	*/
-	MainBoard->SetPiece({ 1,0 }, PIECE_B);
-	MainBoard->SetPiece({ 2,0 }, PIECE_B);
-	MainBoard->SetPiece({ 3,0 }, PIECE_B);
-	MainBoard->SetPiece({ 4,0 }, PIECE_W);
-	MainBoard->SetPiece({ 4,1 }, PIECE_W);
 	
+	if (TESTMODE == 0)
+	{
+		MainBoard->SetPiece({ 3,3 }, PIECE_W);
+		MainBoard->SetPiece({ 4,4 }, PIECE_W);
+		MainBoard->SetPiece({ 4,3 }, PIECE_B);
+		MainBoard->SetPiece({ 3,4 }, PIECE_B);
+	}
+	else
+	{
+		
+		MainBoard->SetPiece({ 1,0 }, PIECE_B);
+		MainBoard->SetPiece({ 2,0 }, PIECE_B);
+		MainBoard->SetPiece({ 3,0 }, PIECE_B);
+		MainBoard->SetPiece({ 4,0 }, PIECE_W);
+		MainBoard->SetPiece({ 4,1 }, PIECE_W);
+		
+	}
 }
 
 
