@@ -10,10 +10,17 @@ void Exceldb_charSt::SetDB()
 
 //std::vector<std::vector<unsigned int>> chordStateList
 	chordStateList = {
-		{	1	,	0	,	0	,	1	,	0	};
-		{	0	,	1	,	1	,	0	,	0	};
-		{	1	,	0	,	0	,	0	,	1	};
-		{	0	,	1	,	0	,	0	,	0	};
-		{	0	,	0	,	1	,	0	,	0	}
-	}
+		{	1	,	0	,	0	,	1	,	0	},
+		{	0	,	1	,	1	,	0	,	0	},
+		{	1	,	0	,	0	,	0	,	1	},
+		{	0	,	1	,	0	,	0	,	0	},
+		{	0	,	0	,	1	,	0	,	0	},
+	};
+	unitName = {
+		"King",
+		"Queen",
+		"Knight",
+		"Bishop",
+		"Rook"
+	};
 }
