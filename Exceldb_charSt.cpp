@@ -1,18 +1,27 @@
-     îzíuå„Ç…ãÓÇà⁄ìÆÇ≈Ç´ÇÈ     ,     â°çLîÕàÕÇé©ãÓÇ…     ,     ècçLîÕàÕÇé©ãÓÇ…     ,     2âÒçsìÆ     ,     è„èëÇ´Ç≥ÇÍÇ»Ç¢     ,          ,
-     Worp     ,     WTurn     ,     LTurn     ,     Quick     ,     Barrier     ,          ,
-     King     ,     1     ,     0     ,     0     ,     1     ,     0     ,          ,
-     Queen     ,     0     ,     1     ,     1     ,     0     ,     0     ,          ,
-     Knight     ,     1     ,     0     ,     0     ,     0     ,     1     ,          ,
-     Bishop     ,     0     ,     1     ,     0     ,     0     ,     0     ,          ,
-     Rook     ,     0     ,     0     ,     1     ,     0     ,     0     ,          ,
-          ,
-          ,
-          ,
-          ,
-          ,
-          ,
-          ,
-          ,
-          ,
-          ,
-          ,
+#include "Project03\Exceldb_charSt.h"
+Exceldb_charSt::Exceldb_charSt()
+{
+}
+Exceldb_charSt::~Exceldb_charSt()
+ {
+}
+void Exceldb_charSt::SetDB()
+{ 
+
+	chordStateList = {
+		{	1	,	0	,	0	,	1	,	0	,	0	},
+		{	0	,	1	,	1	,	0	,	0	,	0	},
+		{	1	,	0	,	0	,	0	,	1	,	0	},
+		{	0	,	1	,	0	,	0	,	0	,	0	},
+		{	0	,	0	,	1	,	0	,	0	,	0	},
+		{	1	,	0	,	0	,	1	,	1	,	1	},
+	};
+	unitName = {
+		"King",
+		"Queen",
+		"Knight",
+		"Bishop",
+		"Rook",
+		"YOSHIDA_SAORI"
+	};
+}

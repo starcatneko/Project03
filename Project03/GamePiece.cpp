@@ -7,6 +7,7 @@
 
 #include "PieceWhite.h"
 #include "PieceBlack.h"
+#include "Exceldb_charSt.h"
 
 #define PIECESIZE 25
 #define CHIPSIZE 64
@@ -43,6 +44,7 @@ GamePiece::GamePiece(VECTOR2 pos,PIECE_ST st)
 GamePiece::~GamePiece()
 {
 }
+
 
 VECTOR2 GamePiece::GetPos()
 {
