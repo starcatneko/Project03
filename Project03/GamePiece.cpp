@@ -7,7 +7,6 @@
 
 #include "PieceWhite.h"
 #include "PieceBlack.h"
-#include "Exceldb_charSt.h"
 
 #define PIECESIZE 25
 #define CHIPSIZE 64

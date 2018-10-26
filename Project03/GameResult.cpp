@@ -40,7 +40,6 @@ state_ptr GameResult::Update(state_ptr pt)
 
 void GameResult::Draw()
 {
-	Board->DrawBoard();
-	Board->DrawPiece();
+	Board->Draw();
 	//DrawFormatString(220,0,0xffffff,"%d:%d",
 }

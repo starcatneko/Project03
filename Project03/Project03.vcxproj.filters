@@ -84,7 +84,7 @@
     <ClCompile Include="GameTitle.cpp">
       <Filter>ソース ファイル\mode</Filter>
     </ClCompile>
-    <ClCompile Include="..\Exceldb_charSt.cpp">
+    <ClCompile Include="DataTbl.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,7 +137,7 @@
     <ClInclude Include="PieceTray.h">
       <Filter>ヘッダー ファイル\piece</Filter>
     </ClInclude>
-    <ClInclude Include="Exceldb_charSt.h">
+    <ClInclude Include="dataTbl.h">
       <Filter>ヘッダー ファイル\piece</Filter>
     </ClInclude>
   </ItemGroup>

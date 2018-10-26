@@ -54,6 +54,7 @@ public:
 	// iterator 現在行動中のプレイヤー
 	player_list playerlist;
 
+
 	player_list::iterator currentPlayer;
 	// 現在選択しているプレイヤーのアドレスを格納する
 
@@ -75,17 +76,7 @@ private:
 	GameTask();
 	~GameTask();
 	void Init();
-	void Title();
-	//const MouseCtr * MouseCtr;
 	void CreateNewBoard();
-
-	void AddPlayer();
-
-	//bool SetState(state_ptr st);
-
-	// ユニークポインタ
-	//std::shared_ptr<GameBoard> Board;
-
 
 	void (GameTask::*CurrentScene)();
 	void (GameState::*Scene)();

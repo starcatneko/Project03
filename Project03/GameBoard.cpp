@@ -109,11 +109,11 @@ void GameBoard::SetPiece(VECTOR2 pos)
 
 		VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }, };
 
+
 		if (data[vec1.y][vec1.x].expired())
 		{
 			for (auto itr : sarchTBL)
 			{
-
 				// •ûŒü‚ÉŒü‚©‚Á‚Ä‚Ð‚Á‚­‚è•Ô‚·ŠÖ”
 
 				if(SarchReverse(vec1, itr, (*GameTask::GetInstance().currentPlayer)->GetType()))
@@ -269,26 +269,7 @@ void GameBoard::GameEnd()
 		pieceCnt[(itr->GetState())-1]++;
 	}
 }
-void GameBoard::DrawBoard()
-{
-	DrawBox(X_DIS, Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
-		boardSize.y*CHIPSIZE + Y_DIS,
-		0x008822, true);
 
-	for (int y = 0; y < data.size(); y++)
-	{
-
-		for (int x = 0; x < BaseData.size() / data.size(); x++)
-		{
-			DrawBox(x*CHIPSIZE + X_DIS, y*CHIPSIZE + Y_DIS
-				, x*CHIPSIZE + CHIPSIZE + X_DIS,
-				y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xffffff, false);
-		}
-	}
-
-
-
-}
 void GameBoard::DrawPiece()
 {
 
@@ -301,6 +282,23 @@ void GameBoard::DrawPiece()
 
 void GameBoard::Draw()
 {
+	auto DrawBoard = [&]() {
+		DrawBox(X_DIS, Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
+			boardSize.y*CHIPSIZE + Y_DIS,
+			0x008822, true);
+
+		for (int y = 0; y < data.size(); y++)
+		{
+
+			for (int x = 0; x < BaseData.size() / data.size(); x++)
+			{
+				DrawBox(x*CHIPSIZE + X_DIS, y*CHIPSIZE + Y_DIS
+					, x*CHIPSIZE + CHIPSIZE + X_DIS,
+					y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xffffff, false);
+			}
+		}
+	};
+
 	DrawBoard();
 
 	VECTOR2 CurrntPlPos = CurrentPlPiece->GetPos();

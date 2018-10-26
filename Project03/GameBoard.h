@@ -49,8 +49,6 @@ public:
 	// ゲームセット時処理
 	void GameEnd();
 
-	// 盤面の描画用
-	void DrawBoard();
 	// 基本的に駒の描画
 	void DrawPiece();
 	// 纏めて描画

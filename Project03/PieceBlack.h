@@ -1,5 +1,6 @@
 #pragma once
 #include "PieceState.h"
+
 class PieceBlack :
 	public PieceState
 {

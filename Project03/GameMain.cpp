@@ -12,6 +12,27 @@
 
 GameMain::GameMain()
 {
+	auto CreateNewBoard = [&](){
+		MainBoard = std::make_unique<GameBoard>();
+
+		if (TESTMODE == 0)
+		{
+			MainBoard->SetPiece({ 3,3 }, PIECE_W);
+			MainBoard->SetPiece({ 4,4 }, PIECE_W);
+			MainBoard->SetPiece({ 4,3 }, PIECE_B);
+			MainBoard->SetPiece({ 3,4 }, PIECE_B);
+		}
+		else
+		{
+
+			MainBoard->SetPiece({ 1,0 }, PIECE_B);
+			MainBoard->SetPiece({ 2,0 }, PIECE_B);
+			MainBoard->SetPiece({ 3,0 }, PIECE_B);
+			MainBoard->SetPiece({ 4,0 }, PIECE_W);
+			MainBoard->SetPiece({ 4,1 }, PIECE_W);
+
+		}
+	};
 	CreateNewBoard();
 
 	lpGameTask.Board = MainBoard;
@@ -39,32 +60,22 @@ void GameMain::Draw()
 	MainBoard->Draw();
 }
 
-void GameMain::CreateNewBoard()
-{
-	MainBoard = std::make_unique<GameBoard>();
-	
-	if (TESTMODE == 0)
-	{
-		MainBoard->SetPiece({ 3,3 }, PIECE_W);
-		MainBoard->SetPiece({ 4,4 }, PIECE_W);
-		MainBoard->SetPiece({ 4,3 }, PIECE_B);
-		MainBoard->SetPiece({ 3,4 }, PIECE_B);
-	}
-	else
-	{
-		
-		MainBoard->SetPiece({ 1,0 }, PIECE_B);
-		MainBoard->SetPiece({ 2,0 }, PIECE_B);
-		MainBoard->SetPiece({ 3,0 }, PIECE_B);
-		MainBoard->SetPiece({ 4,0 }, PIECE_W);
-		MainBoard->SetPiece({ 4,1 }, PIECE_W);
-		
-	}
-}
-
-
 state_ptr GameMain::Update(state_ptr pt)
 {
+/*	
+	auto setNextPlayer = [&](){
+		(*lpGameTask.currentPlayer)->SetTunrFlg(false);
+		if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
+		{
+			lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
+			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+			return;
+		}
+
+		(*lpGameTask.currentPlayer++);
+		(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+	};
+*/
 
 	DrawString(0, 0, "Main", 0xffffff, 0);
 	MainBoard->Update();
@@ -96,17 +107,7 @@ state_ptr GameMain::Update(state_ptr pt)
 
 void GameMain::CurrentPlayerChange()
 {
-	(*lpGameTask.currentPlayer)->SetTunrFlg(false);
-	if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
-	{
-		lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
-		(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-		return;
-	}
-
-	(*lpGameTask.currentPlayer++);
-	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-
+	
 	// Œ»İ‚Ì‡”Ô‚ğ•\¦‚·‚éŠÖ”‚ğŒÄ‚ñ‚Å
 }
 void GameMain::AddPlayer()
