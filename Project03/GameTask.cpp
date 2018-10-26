@@ -33,20 +33,6 @@ void GameTask::Init()
 	//CurrentScene = &GameTask::Title;
 	//currentPlayer = lpGameTask.playerlist.begin();
 }
-
-void GameTask::GameEnd()
-{
-
-}
-
-
-void GameTask::CreateNewBoard()
-{
-}
-
-
-
-
 void GameTask::Run()
 {
 	ScreenFlip();
@@ -76,22 +62,6 @@ int GameTask::GetWait()
 
 VECTOR2 GameTask::GetBoardSize()
 {
-	
 	return Board->GetBoardSize();
 }
 
-void GameTask::CurrentPlayerChange()
-{
-	(*lpGameTask.currentPlayer)->SetTunrFlg(false);
-	if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
-	{
-		lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
-		(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-		return;
-	}
-
-	(*lpGameTask.currentPlayer++);
-	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-
-	// Œ»İ‚Ì‡”Ô‚ğ•\¦‚·‚éŠÖ”‚ğŒÄ‚ñ‚Å
-}

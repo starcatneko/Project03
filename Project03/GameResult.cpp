@@ -41,5 +41,11 @@ state_ptr GameResult::Update(state_ptr pt)
 void GameResult::Draw()
 {
 	Board->Draw();
+	
+	for (auto itr : lpGameTask.playerlist)
+	{
+		DrawFormatString(itr->GetNo() * 64, 440, 0xffff00, "%d", itr->GetScore());
+
+	}
 	//DrawFormatString(220,0,0xffffff,"%d:%d",
 }

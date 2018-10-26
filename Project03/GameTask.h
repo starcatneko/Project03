@@ -44,13 +44,6 @@ public:
 	int GetWait();
 
 	VECTOR2 GetBoardSize();
-
-	void CurrentPlayerChange();
-
-
-	void GameEnd();
-
-
 	// iterator 現在行動中のプレイヤー
 	player_list playerlist;
 
@@ -76,7 +69,6 @@ private:
 	GameTask();
 	~GameTask();
 	void Init();
-	void CreateNewBoard();
 
 	void (GameTask::*CurrentScene)();
 	void (GameState::*Scene)();

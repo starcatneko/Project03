@@ -54,6 +54,8 @@ public:
 	// 纏めて描画
 	void Draw();
 	// flgがtrueの方向に石を置く
+	// Result用描画 とりあえず
+	void ResultDraw(); 
 	bool Reverse(VECTOR2 pos, VECTOR2 vec);
 
 	// vec:正規化された方向ベクトル

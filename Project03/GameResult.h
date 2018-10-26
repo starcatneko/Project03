@@ -16,5 +16,6 @@ public:
 
 private:
 	Board_ptr Board;
+
 };
 

@@ -24,10 +24,14 @@ public:
 	// プレイヤーのターン処理
 	void TurnAct();
 	bool SetTunrFlg(bool flg);
+	//現在プレイヤーのターンか
+	bool GetTunrFlg();
+	int GetScore();
 private:
 	int playerNo;
 	static int playercnt;
 	std::unique_ptr <PieceTray> pieceTray;
 	PIECE_ST piecetype;
+	bool turnFlg;
 };
 

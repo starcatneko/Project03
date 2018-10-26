@@ -48,7 +48,7 @@ bool Player::Draw()
 		//pieceTray->DrawTray();
 		return true;
 	}
-
+	//DrawFormatString(playerNo * 64, 420, 0xeeeeee, "num%d", );
 	return false;
 }
 
@@ -70,7 +70,7 @@ void Player::DeleteTrayPiece()
 
 void Player::TurnAct()
 {
-	pieceTray->SetTurnFlg(true);
+	//pieceTray->SetTurnFlg(true);
 	// TurnActのピースが設置のif内
 	// ピースを設置したらプレイヤーが切り替わるから
 	/*
@@ -90,9 +90,18 @@ void Player::TurnAct()
 bool Player::SetTunrFlg(bool flg)
 {
 	 return pieceTray->SetTurnFlg(flg);
+}
+
+bool Player::GetTunrFlg()
+{
+	return pieceTray->GetTurnFlg();
 
 }
 
+int Player::GetScore()
+{
+	return pieceTray->GetScore();
+}
 
 /*Playerのpublicに
 メンバ関数void型のSetTurnFlg

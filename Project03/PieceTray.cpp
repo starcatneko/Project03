@@ -5,6 +5,9 @@
 const int CURRENTBOXSIZE = 5;
 const int CHIPSIZE = 64;
 
+#define piecemax (lpGameTask.GetBoardSize().x*lpGameTask.GetBoardSize().y) / 2
+
+
 PieceTray::PieceTray()
 {
 }
@@ -12,10 +15,11 @@ PieceTray::PieceTray()
 PieceTray::PieceTray(PIECE_ST st)
 {
 	// PieceTray::color = st;
-	int piecemax = (lpGameTask.GetBoardSize().x*lpGameTask.GetBoardSize().y)/2;
 	this->color = st;
 	this->selectPiece = 0;
 	this->turnFlag = false;
+	//int piecemax = (lpGameTask.GetBoardSize().x*lpGameTask.GetBoardSize().y) / 2;
+
 	for (int j = 0; j < piecemax; j++)
 	{
 		pos = VECTOR2{ 0,j } +VECTOR2{ (this->color == PIECE_B ? 0 : 11),0};
@@ -76,7 +80,6 @@ void PieceTray::DrawTray(VECTOR2 DrawOffset)
 		0x008800, true);
 
 	// DrawBox (pos.x,pos.y,pos.x +70,pos.y +300
-	DrawFormatString(pos.x*64,420,0xeeeeee,"No%d \n ",pos.x);
 	DrawBox(pos.x * CHIPSIZE,
 		pos.y + (CHIPSIZE* selectPiece),
 		pos.x * CHIPSIZE + CHIPSIZE,
@@ -86,6 +89,7 @@ void PieceTray::DrawTray(VECTOR2 DrawOffset)
 
 	for (auto itr : piecelist)
 	{
+		(*itr).SetPos({ pos.x,i });
 		(*itr).Draw();
 		if (!(++i < 5))
 			break;
@@ -114,5 +118,15 @@ void PieceTray::TrayUpdate()
 bool PieceTray::SetTurnFlg(bool flg)
 {
 		turnFlag = flg;
-		return flg;
+		return turnFlag;
+}
+
+bool PieceTray::GetTurnFlg()
+{
+	return turnFlag;
+}
+
+int PieceTray::GetScore()
+{
+	return piecemax - piecelist.size();
 }

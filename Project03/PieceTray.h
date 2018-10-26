@@ -21,6 +21,8 @@ public:
 	void DrawTray(VECTOR2 DrawOffset);
 	void TrayUpdate();
 	bool SetTurnFlg(bool flg);
+	bool GetTurnFlg();
+	int GetScore();
 private:
 
 	bool turnFlag;

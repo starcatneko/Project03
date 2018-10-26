@@ -8,7 +8,7 @@
 #define X_DIS (int)((SCREEN_SIZE_X / 2) - (MainBoard->GetBoardSize().x / 2)*CHIPSIZE)
 #define Y_DIS (int)((SCREEN_SIZE_Y / 2) - (MainBoard->GetBoardSize().y / 2)*CHIPSIZE)
 
-#define TESTMODE 0
+#define TESTMODE 1
 
 GameMain::GameMain()
 {
@@ -33,6 +33,7 @@ GameMain::GameMain()
 
 		}
 	};
+
 	CreateNewBoard();
 
 	lpGameTask.Board = MainBoard;
@@ -62,20 +63,21 @@ void GameMain::Draw()
 
 state_ptr GameMain::Update(state_ptr pt)
 {
-/*	
-	auto setNextPlayer = [&](){
-		(*lpGameTask.currentPlayer)->SetTunrFlg(false);
-		if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
-		{
-			lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
-			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-			return;
-		}
 
-		(*lpGameTask.currentPlayer++);
-		(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+	auto setNextPlayer = [&](){
+		//(*lpGameTask.currentPlayer)->SetTunrFlg(false);
+		if ((*lpGameTask.currentPlayer)->GetTunrFlg()== false)
+		{
+			if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
+			{
+				lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
+				(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+				return;
+			}
+			(*lpGameTask.currentPlayer++);
+			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+		}
 	};
-*/
 
 	DrawString(0, 0, "Main", 0xffffff, 0);
 	MainBoard->Update();
@@ -100,7 +102,7 @@ state_ptr GameMain::Update(state_ptr pt)
 		return std::make_unique<GameResult>(MainBoard);
 
 	}
-
+	setNextPlayer();
 	return pt;
 }
 

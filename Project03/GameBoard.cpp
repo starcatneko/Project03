@@ -10,9 +10,6 @@
 
 
 const int CHIPSIZE = 64;
-
-
-
 GameBoard::GameBoard()
 {
 	Resize({ BoardSize, BoardSize });
@@ -131,7 +128,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 						data[setvec.y][setvec.x] = (tmp);
 						data[setvec.y][setvec.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
 						lastset = (*GameTask::GetInstance().currentPlayer)->GetNo();
-						
+						(*lpGameTask.currentPlayer)->DeleteTrayPiece();
 						plChangeFlg = true;
 
 
@@ -152,8 +149,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 				(*lpGameTask.currentPlayer)->DeleteTrayPiece();
 			}*/
 			// 誰かが置ける状態の場合
-			lpGameTask.CurrentPlayerChange();
-			//(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+			(*lpGameTask.currentPlayer)->SetTunrFlg(false);
 
 			// -----現在のプレイヤー表示
 			CurrentPlPiece->SetState((*lpGameTask.currentPlayer)->GetType());
@@ -184,6 +180,11 @@ void GameBoard::Update()
 			*/
 		SetFontSize(16);
 	}
+}
+
+void GameBoard::ResultDraw()
+{
+	//for(auto itr: (*lpGameTask->playerList)
 }
 
 bool GameBoard::Reverse(VECTOR2 pos, VECTOR2 vec)
@@ -366,13 +367,11 @@ void GameBoard::CurrentSetUpData()
 		// 設置できるプレイヤーが一人も居ない場合
 		if (lastset == (*GameTask::GetInstance().currentPlayer)->GetNo())
 		{
-			GameTask::GetInstance().GameEnd();
 			this->GameEnd();
 			gameEndFlg = true;
 			return;
 		}
-		lpGameTask.CurrentPlayerChange();
-		//(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+		(*lpGameTask.currentPlayer)->SetTunrFlg(false);
 	}
 
 }
@@ -383,6 +382,12 @@ void GameBoard::PieceResultSet()
 	piecelist.erase(
 		piecelist.begin(),
 		piecelist.end());
+
+	int TotalPiece[this->piecelist.size()];
+	for (auto itr : piecelist)
+	{
+		if (*itr->)
+	}
 	/*
 	std::array<int,2> cnt = { 0,0 };
 	for (auto itr : piecelist)

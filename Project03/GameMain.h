@@ -23,7 +23,6 @@ public:
 	void CurrentPlayerChange();
 private:
 	void AddPlayer();
-	void CreateNewBoard();
 	Board_ptr MainBoard;
 };
 
