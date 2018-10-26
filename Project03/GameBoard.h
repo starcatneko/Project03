@@ -10,6 +10,7 @@
 class GamePiece;
 class MouseCtr;
 
+#define PL_MAX 2
 
 //class Player;
 
@@ -18,8 +19,6 @@ enum PIECE_ST;
 typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
 
-
-typedef std::weak_ptr<GamePiece> piece_shared_w;
 typedef std::shared_ptr<GameBoard> Board_ptr;
 
 #define BoardSize int(8)
@@ -99,8 +98,6 @@ private:
 	// 現在のプレイヤー表示用
 	std::unique_ptr <GamePiece> CurrentPlPiece;
 	
-	//
-	
 	//player_ptr currentPlayer;
 		
 	// 最後に駒を置いたプレイヤー
@@ -110,6 +107,8 @@ private:
 
 	piece_list piecelist;
 	VECTOR2 size;
+	std::array<int, PL_MAX> TotalPiece;
+
 
 };
 

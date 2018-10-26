@@ -41,6 +41,7 @@ state_ptr GameResult::Update(state_ptr pt)
 void GameResult::Draw()
 {
 	Board->Draw();
+	Board->ResultDraw();
 	
 	for (auto itr : lpGameTask.playerlist)
 	{

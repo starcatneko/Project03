@@ -13,6 +13,8 @@ class GamePiece;
 //enum PIECE_ST;
 
 
+typedef std::weak_ptr<GamePiece> piece_shared_w;
+
 typedef std::shared_ptr<GamePiece> piece_shared;
 
 typedef std::list<piece_shared> piece_list;

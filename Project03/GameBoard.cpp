@@ -6,7 +6,6 @@
 #include "Player.h"
 #include "PieceState.h"
 
-#define PL_MAX 2
 
 
 const int CHIPSIZE = 64;
@@ -124,6 +123,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 						VECTOR2 setvec = vec1 + itr * i;
 
 						//delete &data[setvec.y][setvec.x].lock();
+						
 						piece_shared tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
 						data[setvec.y][setvec.x] = (tmp);
 						data[setvec.y][setvec.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
@@ -184,6 +184,12 @@ void GameBoard::Update()
 
 void GameBoard::ResultDraw()
 {
+	int i = 0;
+	for (auto itr : TotalPiece)
+	{
+		DrawFormatString(i * 48, 0, 0xffff00, "%d", itr);
+		i++;
+	}
 	//for(auto itr: (*lpGameTask->playerList)
 }
 
@@ -379,39 +385,34 @@ void GameBoard::CurrentSetUpData()
 
 void GameBoard::PieceResultSet()
 {
+	auto listD = [&](auto i) {
+		i.erase(
+			i.begin(),
+			i.end());
+	};
+
+	TotalPiece.fill(0);
+	int i = 0;
+	for (auto itr : BaseData)
+	{
+		i++;
+		if (itr.expired())
+			continue;
+		TotalPiece[(int)(itr.lock()->GetState() - 1)]++;
+	}
+
+	listD(BaseData);
+	listD(piecelist);
+	/*
+	BaseData.erase(
+		BaseData.begin(),
+		BaseData.end());
 	piecelist.erase(
 		piecelist.begin(),
 		piecelist.end());
-
-	int TotalPiece[this->piecelist.size()];
-	for (auto itr : piecelist)
-	{
-		if (*itr->)
-	}
-	/*
-	std::array<int,2> cnt = { 0,0 };
-	for (auto itr : piecelist)
-	{
-		cnt[int(itr->GetState()-1)]++;
-	}
-	piecelist.erase(piecelist.begin(), piecelist.end());
-
-	VECTOR2 set = {0,0};
-	for (auto itr : cnt)
-	{
-		for (int i = 0; i <= cnt.size(); i++)
-		{
-			if (itr == i)
-			{
-				AddObjList(std::make_shared<GamePiece>(set, VECTOR2{ X_DIS,Y_DIS }, PIECE_ST(itr)));
-			}
-			set.x++;
-			if (set.x >= boardSize.x)
-			{
-				set.x = 0;
-				set.y++;
-			}
-		}
-	}
 	*/
+	for (auto itr : TotalPiece)
+	{
+		//BaseData.push_back(
+	}
 }
