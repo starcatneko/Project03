@@ -105,8 +105,10 @@ void GameBoard::SetPiece(VECTOR2 pos)
 
 		VECTOR2 vec2 = { X_DIS,Y_DIS };
 
-		VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }, };
-
+		VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }};
+		
+		// ƒNƒ‰ƒX‚É‘g‚İ‚ñ‚¾•û‚ª‚¢‚¢
+		int cnt_Reverse = 0;
 
 		if (data[vec1.y][vec1.x].expired())
 		{
@@ -139,6 +141,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 							data[setvec.y][setvec.x].lock()->SetReverse(i);
 							break;
 						case 1:
+							data[setvec.y][setvec.x].lock()->SetReverse(cnt_Reverse++);
 
 							break;
 						}

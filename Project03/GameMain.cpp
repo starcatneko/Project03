@@ -8,7 +8,7 @@
 #define X_DIS (int)((SCREEN_SIZE_X / 2) - (MainBoard->GetBoardSize().x / 2)*CHIPSIZE)
 #define Y_DIS (int)((SCREEN_SIZE_Y / 2) - (MainBoard->GetBoardSize().y / 2)*CHIPSIZE)
 
-#define TESTMODE 1
+#define TESTMODE 0
 
 GameMain::GameMain()
 {

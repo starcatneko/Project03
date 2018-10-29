@@ -10,7 +10,7 @@
 
 #define PIECESIZE 25
 #define CHIPSIZE 64
-#define REVERSE_F 16
+#define REVERSE_F 4
 
 
 GamePiece::GamePiece()
@@ -126,9 +126,10 @@ void GamePiece::Draw()
 	// ‹î”½“]‚Ì•`‰æ
 	if (rev_Num > 0)
 	{
-		if (rev_F > 0)
+		if (rev_F <= 0)
 		{
 			rev_Num--;
+			rev_F = REVERSE_F;
 		}
 		rev_F--;
 		return;
