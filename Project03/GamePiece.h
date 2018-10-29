@@ -41,6 +41,7 @@ public:
 	void SetState(PIECE_ST st);
 	// 現在のstateを返す
 	PIECE_ST GetState();
+	void SetReverse(int num);
 	// 駒を裏返す
 	void Draw();
 	void SetWait(int i);
@@ -54,5 +55,9 @@ private:
 	// アニメーション制御フレーム用
 	int animF;
 	int wait;
+
+	// 反転する順番
+	int rev_Num;
+	int rev_F;
 };
 
