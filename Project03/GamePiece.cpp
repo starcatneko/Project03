@@ -96,6 +96,21 @@ void GamePiece::SetOldState(PIECE_ST st)
 	{
 		old_state.push_front(std::make_unique<PieceBlack>());
 	}
+
+	if (st == PIECE_NON)
+	{
+		/*
+		if (state.front()->GetState() == PIECE_W)
+		{
+			old_state.push_front(std::make_unique<PieceBlack>());
+		}
+		else
+		{
+			old_state.push_front(std::make_unique<PieceWhite>());
+		}
+		*/
+
+	}
 }
 
 void GamePiece::SetState(PIECE_ST st)
@@ -206,7 +221,7 @@ void GamePiece::Draw()
 	{
 		wait--;
 		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
-			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
+			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2)-3,
 			PIECESIZE, color, true, 1);
 	}
 
