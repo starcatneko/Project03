@@ -53,9 +53,9 @@ public:
 	// ‹î‚ğ— •Ô‚·
 	void SetWait(int i);
 	void SetAnimF(int i);
+	void Draw();
 private:
 	void Init();
-	void Draw();
 
 	state_list state;
 	// ”Õ–Êã‚ÌÀ•W

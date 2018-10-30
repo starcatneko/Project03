@@ -134,14 +134,9 @@ void GamePiece::SetReverse(int num)
 bool GamePiece::Update()
 {
 	// ‹î”½“]Žž‚Ì•`‰æ
-	if (rev_F > 0)
-	{
-		rev_F--;
-		if (rev_F == 0) animF = ANIM_FRAME;
-		return true;
-	}
-	Draw();
 
+	Draw();
+	/*
 	if (clearTimer > 0)
 	{
 		clearTimer--;
@@ -149,7 +144,7 @@ bool GamePiece::Update()
 		{
 			//return false;
 		}
-	}
+	}*/
 	return true;
 }
 bool GamePiece::ReverseStandby()
@@ -160,6 +155,20 @@ bool GamePiece::ReverseStandby()
 
 void GamePiece::Draw()
 {
+	DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
+		pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
+		PIECESIZE,
+		(*old_state.begin())->GetDrawColor()
+		, true, 1);
+
+
+	if (rev_F > 0)
+	{
+		rev_F--;
+		//if (rev_F == 0) animF = ANIM_FRAME;
+		return;
+	}
+
 	int color = GetRand(0xffffff);
 
 	if ((*state.begin()))
@@ -178,22 +187,19 @@ void GamePiece::Draw()
 
 	if (animF > 0)
 	{
-		DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
+
+		DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2) - (animF),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			(PIECESIZE )- abs(animF- ANIM_FRAME), PIECESIZE,
+			(PIECESIZE)-(animF), PIECESIZE,
 			color, true, 1);
-		/*
+
+/*
 		DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			(PIECESIZE)-(ANIM_FRAME-animF),
-			PIECESIZE,
-			(*old_state.begin())->GetDrawColor() , true, 1);
-		*/
-		/*
-		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
-			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			PIECESIZE + (animF) , color, true, 1);
-			*/
+			(PIECESIZE)-(ANIM_FRAME - animF), PIECESIZE,
+			(*old_state.begin())->GetDrawColor()
+			, true, 1);
+*/
 			animF--;
 	}
 	else

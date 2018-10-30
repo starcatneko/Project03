@@ -132,7 +132,6 @@ void GameBoard::SetPiece(VECTOR2 pos)
 						data[setvec.y][setvec.x] = (tmp);
 						data[setvec.y][setvec.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
 						lastset = (*GameTask::GetInstance().currentPlayer)->GetNo();
-						(*lpGameTask.currentPlayer)->DeleteTrayPiece();
 						plChangeFlg = true;
 
 						switch (TEST_REVERSE)
@@ -157,6 +156,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 		}
 		if (plChangeFlg)
 		{
+			//(//*lpGameTask.currentPlayer)->DeleteTrayPiece()
 			/*
 			if (lpGameTask.currentPlayer.size())
 			{
@@ -272,12 +272,12 @@ piece_shared GameBoard::AddObjList(piece_shared && objPtr)
 {
 
 	piecelist.push_back(objPtr);
-	for (piece_list::iterator itr = piecelist.begin();
+	for (auto itr = piecelist.begin();
 		*itr != piecelist.back(); itr++)
 	{
 		if ((*itr)->GetPos() == objPtr->GetPos())
 		{
-			//objPtr->SetOldState((*itr)->GetState());
+			objPtr->SetOldState((*itr)->GetState());
 			piecelist.erase(itr);
 			break;
 		}
@@ -306,16 +306,22 @@ void GameBoard::DrawPiece()
 {
 	DrawFormatString(120, 0, 0xdddddd, "%d", piecelist.size());
 
+	for (auto itr : piecelist)
+	{
+		itr->Update();
+	}
+
+	/*
 	for (piece_list::iterator itr = piecelist.begin();
 		*itr != piecelist.back(); itr++)
 	{
-		(*itr)->Update();
+		(*itr)->Draw();
 		/*
 		if ((*itr)->Update() == false)
 		{
 			piecelist.erase(itr);
-		}*/
-	}
+		}
+	}*/
 
 }
 
