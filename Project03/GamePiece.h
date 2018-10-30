@@ -58,6 +58,7 @@ private:
 
 	// ”½“]‚·‚é‡”Ô
 	int rev_Num;
+	// ”½“]ŠÔƒtƒŒ[ƒ€—p
 	int rev_F;
 };
 

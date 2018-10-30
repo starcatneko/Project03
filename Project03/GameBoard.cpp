@@ -42,6 +42,7 @@ bool GameBoard::Init()
 		(*itr).SetTray();
 	}
 
+	timer = 0;
 	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_B);
 	return true;
 }
@@ -105,7 +106,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 
 		VECTOR2 vec2 = { X_DIS,Y_DIS };
 
-		VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }};
+		VECTOR2 sarchTBL[8] = {{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 },{ 0,-1 }};
 		
 		// クラスに組み込んだ方がいい
 		int cnt_Reverse = 0;
@@ -115,7 +116,6 @@ void GameBoard::SetPiece(VECTOR2 pos)
 			for (auto itr : sarchTBL)
 			{
 				// 方向に向かってひっくり返す関数
-
 				if(SarchReverse(vec1, itr, (*GameTask::GetInstance().currentPlayer)->GetType()))
 				{
 					piece_shared tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
@@ -270,6 +270,12 @@ VECTOR2 GameBoard::GetBoardSize()
 
 piece_shared GameBoard::AddObjList(piece_shared && objPtr)
 {
+	if (!data[objPtr->GetPos().y][objPtr->GetPos().x].expired())
+	{
+		data[objPtr->GetPos().y][objPtr->GetPos().x].lock().)
+
+	}
+		
 	// 引数の 内容をリストにf追加
 	piecelist.push_back(objPtr);
 	//itrに追加したpieceのアドレスを入れる
@@ -293,6 +299,7 @@ void GameBoard::GameEnd()
 
 void GameBoard::DrawPiece()
 {
+	DrawFormatString(120, 0, 0xdddddd, "%d", piecelist.size());
 
 	for (auto itr : piecelist)
 	{

@@ -12,7 +12,6 @@
 #define CHIPSIZE 64
 #define REVERSE_F 4
 
-
 GamePiece::GamePiece()
 {
 }
@@ -30,7 +29,7 @@ GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset)
 	this->drawOffset = drawOffset;
 	rev_Num = 0;
 	rev_F = 0;
-	this->animF = GETWAIT()*GETWAIT()*4;
+	this->animF = 0;
 
 
 }
@@ -102,8 +101,7 @@ PIECE_ST GamePiece::GetState()
 
 void GamePiece::SetReverse(int num)
 {
-	rev_Num = num;
-	rev_F = REVERSE_F;
+	rev_F = REVERSE_F * num;
 }
 
 void GamePiece::Draw()
@@ -124,33 +122,28 @@ void GamePiece::Draw()
 #endif // DEBUG
 
 	// ‹î”½“]Žž‚Ì•`‰æ
-	if (rev_Num > 0)
+	if (rev_F > 0)
 	{
-		if (rev_F <= 0)
-		{
-			rev_Num--;
-			rev_F = REVERSE_F;
-		}
 		rev_F--;
+		if (rev_F == 0) animF = 8;
 		return;
 	}
-
 	if (animF > 0)
 	{
 		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
 			PIECESIZE + (animF) , color, true, 1);
 			
-		if(wait <= 0)
 			animF--;
 	}
 	else
 	{
+		wait--;
 		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
 			PIECESIZE, color, true, 1);
 	}
-	wait--;
+
 }
 
 void GamePiece::SetWait(int i)
