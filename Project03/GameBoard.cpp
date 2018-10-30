@@ -270,14 +270,20 @@ VECTOR2 GameBoard::GetBoardSize()
 
 piece_shared GameBoard::AddObjList(piece_shared && objPtr)
 {
-	if (!data[objPtr->GetPos().y][objPtr->GetPos().x].expired())
-	{
-		data[objPtr->GetPos().y][objPtr->GetPos().x].lock().)
 
-	}
-		
-	// 引数の 内容をリストにf追加
 	piecelist.push_back(objPtr);
+	
+	for (piece_list::iterator itr = piecelist.begin();
+		*itr != piecelist.back(); itr++)
+	{
+		if ((*itr)->GetPos() == objPtr->GetPos())
+		{
+			piecelist.erase(itr);
+			break;
+		}
+	}
+
+	// 引数の 内容をリストにf追加
 	//itrに追加したpieceのアドレスを入れる
 	auto itr = piecelist.end();
 	
