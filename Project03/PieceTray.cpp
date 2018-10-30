@@ -90,7 +90,7 @@ void PieceTray::DrawTray(VECTOR2 DrawOffset)
 	for (auto itr : piecelist)
 	{
 		(*itr).SetPos({ pos.x,i });
-		(*itr).Draw();
+		(*itr).Update();
 		if (!(++i < 5))
 			break;
 	}

@@ -272,17 +272,16 @@ piece_shared GameBoard::AddObjList(piece_shared && objPtr)
 {
 
 	piecelist.push_back(objPtr);
-	
 	for (piece_list::iterator itr = piecelist.begin();
 		*itr != piecelist.back(); itr++)
 	{
 		if ((*itr)->GetPos() == objPtr->GetPos())
 		{
+			//objPtr->SetOldState((*itr)->GetState());
 			piecelist.erase(itr);
 			break;
 		}
 	}
-
 	// 引数の 内容をリストにf追加
 	//itrに追加したpieceのアドレスを入れる
 	auto itr = piecelist.end();
@@ -307,9 +306,15 @@ void GameBoard::DrawPiece()
 {
 	DrawFormatString(120, 0, 0xdddddd, "%d", piecelist.size());
 
-	for (auto itr : piecelist)
+	for (piece_list::iterator itr = piecelist.begin();
+		*itr != piecelist.back(); itr++)
 	{
-		itr->Draw();
+		(*itr)->Update();
+		/*
+		if ((*itr)->Update() == false)
+		{
+			piecelist.erase(itr);
+		}*/
 	}
 
 }

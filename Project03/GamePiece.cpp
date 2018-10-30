@@ -11,6 +11,7 @@
 #define PIECESIZE 25
 #define CHIPSIZE 64
 #define REVERSE_F 4
+#define ANIM_FRAME 10
 
 GamePiece::GamePiece()
 {
@@ -20,27 +21,27 @@ GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset ,PIECE_ST st)
 {
 	this->pos = pos;
 	this->drawOffset = drawOffset;
+	Init();
 	SetState(st);
+	SetOldState(PIECE_NON);
 }
 
 GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset)
 {
 	this->pos = pos;
 	this->drawOffset = drawOffset;
-	rev_Num = 0;
-	rev_F = 0;
-	this->animF = 0;
-
-
+	Init();
+	SetOldState(PIECE_NON);
 }
 
 
 GamePiece::GamePiece(VECTOR2 pos,PIECE_ST st)
 {
 	this->pos = pos;
-	rev_Num = 0;
-	rev_F = 0;
+	Init();
 	SetState(st);
+	SetOldState(PIECE_NON);
+	
 }
 
 GamePiece::~GamePiece()
@@ -48,6 +49,13 @@ GamePiece::~GamePiece()
 }
 
 
+void GamePiece::Init()
+{
+	rev_Num = 0;
+	rev_F = 0;
+	animF = 0;
+	clearTimer = 0;
+}
 VECTOR2 GamePiece::GetPos()
 {
 	return pos;
@@ -68,6 +76,26 @@ bool GamePiece::SetDrawOffset(VECTOR2 pos)
 {
 	this->drawOffset = pos;
 	return true;
+}
+
+void GamePiece::SetOldState(PIECE_ST st)
+{
+	// Šù‚Éƒs[ƒX‚Éstate‚ª“ü‚Á‚Ä‚¢‚éê‡
+	if (GamePiece::old_state.size())
+	{
+		// GamePiece::state.erase(GamePiece::state.begin);
+		GamePiece::old_state.pop_front();
+	}
+
+	if (st == PIECE_W)
+	{
+		//GamePiece::state = std::make_unique<PieceWhite>();
+		old_state.push_front(std::make_unique<PieceWhite>());
+	}
+	else
+	{
+		old_state.push_front(std::make_unique<PieceBlack>());
+	}
 }
 
 void GamePiece::SetState(PIECE_ST st)
@@ -103,6 +131,32 @@ void GamePiece::SetReverse(int num)
 {
 	rev_F = REVERSE_F * num;
 }
+bool GamePiece::Update()
+{
+	// ‹î”½“]‚Ì•`‰æ
+	if (rev_F > 0)
+	{
+		rev_F--;
+		if (rev_F == 0) animF = ANIM_FRAME;
+		return true;
+	}
+	Draw();
+
+	if (clearTimer > 0)
+	{
+		clearTimer--;
+		if (clearTimer == 0)
+		{
+			//return false;
+		}
+	}
+	return true;
+}
+bool GamePiece::ReverseStandby()
+{
+	clearTimer = ANIM_FRAME;
+	return true;
+}
 
 void GamePiece::Draw()
 {
@@ -121,19 +175,25 @@ void GamePiece::Draw()
 
 #endif // DEBUG
 
-	// ‹î”½“]‚Ì•`‰æ
-	if (rev_F > 0)
-	{
-		rev_F--;
-		if (rev_F == 0) animF = 8;
-		return;
-	}
+
 	if (animF > 0)
 	{
+		DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
+			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
+			(PIECESIZE )- abs(animF- ANIM_FRAME), PIECESIZE,
+			color, true, 1);
+		/*
+		DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
+			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
+			(PIECESIZE)-(ANIM_FRAME-animF),
+			PIECESIZE,
+			(*old_state.begin())->GetDrawColor() , true, 1);
+		*/
+		/*
 		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
 			PIECESIZE + (animF) , color, true, 1);
-			
+			*/
 			animF--;
 	}
 	else
