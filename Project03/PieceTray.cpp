@@ -86,11 +86,12 @@ void PieceTray::DrawTray(VECTOR2 DrawOffset)
 		pos.y + (CHIPSIZE*selectPiece)+ CHIPSIZE,
 		0x00FF00, true);
 
+	DrawFormatString(pos.x*2, pos.y + 128, 0xFFFF00, "%d", piecelist.size());
 
 	for (auto itr : piecelist)
 	{
 		(*itr).SetPos({ pos.x,i });
-		(*itr).Draw();
+		(*itr).Update();
 		if (!(++i < 5))
 			break;
 	}
@@ -100,12 +101,13 @@ void PieceTray::TrayUpdate()
 {
 	int i = 0;
 	
-	for (auto itr = piecelist.begin();itr != piecelist.end();itr++)
+	for (auto itr = piecelist.begin();
+		itr != piecelist.end();itr++)
 	{
 		if (selectPiece == i)
 		{
 			itr = piecelist.erase(itr);
-			break;
+			return;
 		}
 		i++;
 		if (i >= 5)
@@ -118,6 +120,7 @@ void PieceTray::TrayUpdate()
 bool PieceTray::SetTurnFlg(bool flg)
 {
 		turnFlag = flg;
+		if(!flg)TrayUpdate();
 		return turnFlag;
 }
 

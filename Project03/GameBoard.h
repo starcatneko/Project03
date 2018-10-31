@@ -109,6 +109,7 @@ private:
 	VECTOR2 size;
 	std::array<int, PL_MAX> TotalPiece;
 
+	int timer;
 
 };
 
