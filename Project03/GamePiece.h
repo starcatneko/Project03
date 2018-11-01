@@ -33,6 +33,9 @@ public:
 	GamePiece(VECTOR2 pos, VECTOR2 drawOffset, PIECE_ST st);
 	~GamePiece();
 
+	void SetOldState(PIECE_ST st, int cnt);
+
+
 	VECTOR2 GetPos();
 	bool SetPos(VECTOR2 pos);
 	VECTOR2 GetDrawOffset();
@@ -64,10 +67,11 @@ private:
 	VECTOR2 pos;
 	// 描画用のずらす値
 	VECTOR2 drawOffset;
+
+
 	// アニメーション制御フレーム用
 	int animF;
 	int wait;
-
 	// 反転する順番
 	int rev_Num;
 	// 反転時間フレーム用

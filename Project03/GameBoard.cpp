@@ -127,7 +127,6 @@ void GameBoard::SetPiece(VECTOR2 pos)
 						VECTOR2 setvec = vec1 + itr * i;
 
 						//delete &data[setvec.y][setvec.x].lock();
-
 						piece_shared tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
 						data[setvec.y][setvec.x] = (tmp);
 						data[setvec.y][setvec.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());

@@ -56,6 +56,13 @@ void GamePiece::Init()
 	animF = 0;
 	clearTimer = 0;
 }
+
+void GamePiece::SetOldState(PIECE_ST st,int cnt)
+{
+
+	return;
+}
+
 VECTOR2 GamePiece::GetPos()
 {
 	return pos;
@@ -109,7 +116,6 @@ void GamePiece::SetOldState(PIECE_ST st)
 			old_state.push_front(std::make_unique<PieceWhite>());
 		}
 		*/
-
 	}
 }
 
@@ -175,7 +181,7 @@ void GamePiece::Draw()
 		PIECESIZE,
 		(*old_state.begin())->GetDrawColor()
 		, true, 1);
-
+		
 
 	if (rev_F > 0)
 	{
@@ -221,7 +227,7 @@ void GamePiece::Draw()
 	{
 		wait--;
 		DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
-			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2)-3,
+			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
 			PIECESIZE, color, true, 1);
 	}
 
