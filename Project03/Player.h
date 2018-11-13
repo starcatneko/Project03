@@ -7,6 +7,8 @@
 #include <memory>
 #include "PieceState.h"
 
+enum MOUSE_STATE;
+
 class PieceTray;
 class Player
 {
@@ -31,6 +33,8 @@ private:
 	int playerNo;
 	static int playercnt;
 	std::unique_ptr <PieceTray> pieceTray;
+	
+	std::list<VECTOR2> setlist;
 	PIECE_ST piecetype;
 	bool turnFlg;
 };

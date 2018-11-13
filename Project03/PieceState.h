@@ -3,19 +3,7 @@
 // 実体化はさせない
 //　マスに置かれている石
 
-enum PIECE_ST
-{
-	PIECE_NON,
-	PIECE_B,
-	PIECE_W,
-	PIECE_RED,
-	PIECE_BLU,
-	PIECE_GRN,
-	PIECE_YLW,
-	PIECE_PPL,
-	PIECE_CYN,
-	PIECE_MAX
-};
+#include "PIECE_ST.h"
 
 class PieceState
 {

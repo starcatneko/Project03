@@ -9,9 +9,7 @@
 class GameBoard;
 class Player;
 class GamePiece;
-
 //enum PIECE_ST;
-
 
 typedef std::weak_ptr<GamePiece> piece_shared_w;
 
@@ -22,7 +20,6 @@ typedef std::list<piece_shared> piece_list;
 using piece_unique = std::unique_ptr <PieceState>;
 
 using state_list = std::list<piece_unique>;
-
 
 class GamePiece
 {

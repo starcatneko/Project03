@@ -15,6 +15,8 @@ public:
 	void Draw();
 
 private:
+
+	int pieceCount[int(PIECE_ST::PIECE_MAX)];
 	Board_ptr Board;
 
 };

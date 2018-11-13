@@ -42,8 +42,13 @@ bool GameBoard::Init()
 		(*itr).SetTray();
 	}
 
+	PIECE_ST ai = PIECE_ST::PIECE_B;
+	++ai;
+	++ai;
+	++ai;
+
 	timer = 0;
-	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_B);
+	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_ST::PIECE_B);
 	return true;
 }
 
@@ -297,7 +302,7 @@ void GameBoard::GameEnd()
 	pieceCnt.fill(0);
 	for(auto itr : piecelist)
 	{
-		pieceCnt[(itr->GetState())-1]++;
+		pieceCnt[int(itr->GetState())-1]++;
 	}
 }
 
@@ -371,6 +376,8 @@ void GameBoard::Draw()
 
 void GameBoard::CurrentSetUpData()
 {
+	setlist.clear();
+
 	VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }, };
 	
 	// 設置可能なタイルの数
@@ -396,6 +403,7 @@ void GameBoard::CurrentSetUpData()
 					&& data[drawPos.y][drawPos.x].expired())
 				{
 					tilecnt++;
+					setlist.push_back(drawPos);
 					DrawBox(drawPos.x*CHIPSIZE + X_DIS, drawPos.y*CHIPSIZE + Y_DIS
 						, drawPos.x*CHIPSIZE + CHIPSIZE + X_DIS,
 						drawPos.y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xaadd00, true);
@@ -416,18 +424,15 @@ void GameBoard::CurrentSetUpData()
 		}
 		(*lpGameTask.currentPlayer)->SetTunrFlg(false);
 	}
-
 }
-
 
 void GameBoard::PieceResultSet()
 {
-	auto listD = [&](auto i) {
+	/*auto listD = [&](auto i) {
 		i.erase(
 			i.begin(),
 			i.end());
-	};
-
+	};*/
 	TotalPiece.fill(0);
 	int i = 0;
 	for (auto itr : BaseData)
@@ -435,21 +440,31 @@ void GameBoard::PieceResultSet()
 		i++;
 		if (itr.expired())
 			continue;
-		TotalPiece[(int)(itr.lock()->GetState() - 1)]++;
+		TotalPiece[(int)(itr.lock()->GetState()) - 1]++;
 	}
 
-	listD(BaseData);
-	listD(piecelist);
-	/*
-	BaseData.erase(
-		BaseData.begin(),
-		BaseData.end());
-	piecelist.erase(
-		piecelist.begin(),
-		piecelist.end());
-	*/
+	//listD(BaseData);
+	//listD(piecelist);
+	BaseData.clear();
+	piecelist.clear();
 	for (auto itr : TotalPiece)
 	{
 		//BaseData.push_back(
 	}
+}
+
+int GameBoard::PieceCount(PIECE_ST color)
+{
+	int cnt = 0;
+	for (int y = 0; y < data.size(); y++)
+	{
+		for (int x = 0; x < BaseData.size() / data.size(); x++)
+		{
+			if (color == data[y][x].lock()->GetState())
+			{
+				cnt++;
+			}
+		}
+	}
+	return cnt;
 }

@@ -2,9 +2,7 @@
 #include "GameBoard.h"
 #include "PieceTray.h"
 #include "GameTask.h"
-
-#define lpGameTask GameTask::GetInstance()
-
+#include "MouseCtr.h"
 
 
 int Player::playercnt = 0;
@@ -70,14 +68,18 @@ void Player::DeleteTrayPiece()
 
 void Player::TurnAct()
 {
-	//pieceTray->SetTurnFlg(true);
+	pieceTray->SetTurnFlg(true);
+
 	// TurnActのピースが設置のif内
 	// ピースを設置したらプレイヤーが切り替わるから
-	/*
-	if ((Mouse->GetButton() & 0b0001) != 0)
+	
+	if ((lpGameTask.Mouse->GetButton() & 0b0001) != 0)
 	{
-		Board->SetPiece(Mouse->GetPos());
-	}*/
+		lpGameTask.Board->SetPiece(lpGameTask.Mouse->GetPos());
+	}
+	
+
+
 	//ピースの数をチェック
 	//マウス取得{
 	//設置可能なら設置

@@ -139,6 +139,7 @@
     <ClCompile Include="PieceBlack.cpp" />
     <ClCompile Include="PieceKing.cpp" />
     <ClCompile Include="PieceState.cpp" />
+    <ClCompile Include="PIECE_ST.cpp" />
     <ClCompile Include="PieceTray.cpp" />
     <ClCompile Include="PieceWhite.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="PieceBlack.h" />
     <ClInclude Include="PieceKing.h" />
     <ClInclude Include="PieceState.h" />
+    <ClInclude Include="PIECE_ST.h" />
     <ClInclude Include="PieceTray.h" />
     <ClInclude Include="PieceWhite.h" />
     <ClInclude Include="Player.h" />

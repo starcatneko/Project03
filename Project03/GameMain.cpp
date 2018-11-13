@@ -17,19 +17,19 @@ GameMain::GameMain()
 
 		if (TESTMODE == 0)
 		{
-			MainBoard->SetPiece({ 3,3 }, PIECE_W);
-			MainBoard->SetPiece({ 4,4 }, PIECE_W);
-			MainBoard->SetPiece({ 4,3 }, PIECE_B);
-			MainBoard->SetPiece({ 3,4 }, PIECE_B);
+			MainBoard->SetPiece({ 3,3 }, PIECE_ST::PIECE_W);
+			MainBoard->SetPiece({ 4,4 }, PIECE_ST::PIECE_W);
+			MainBoard->SetPiece({ 4,3 }, PIECE_ST::PIECE_B);
+			MainBoard->SetPiece({ 3,4 }, PIECE_ST::PIECE_B);
 		}
 		else
 		{
 
-			MainBoard->SetPiece({ 1,0 }, PIECE_B);
-			MainBoard->SetPiece({ 2,0 }, PIECE_B);
-			MainBoard->SetPiece({ 3,0 }, PIECE_B);
-			MainBoard->SetPiece({ 4,0 }, PIECE_W);
-			MainBoard->SetPiece({ 4,1 }, PIECE_W);
+			MainBoard->SetPiece({ 1,0 }, PIECE_ST::PIECE_B);
+			MainBoard->SetPiece({ 2,0 }, PIECE_ST::PIECE_B);
+			MainBoard->SetPiece({ 3,0 }, PIECE_ST::PIECE_B);
+			MainBoard->SetPiece({ 4,0 }, PIECE_ST::PIECE_W);
+			MainBoard->SetPiece({ 4,1 }, PIECE_ST::PIECE_W);
 
 		}
 	};
@@ -87,6 +87,8 @@ state_ptr GameMain::Update(state_ptr pt)
 		(*itr).Update();
 	}
 	// ifTurnActがtrueの場合、プレイヤーチェンジ処理を行う
+	
+	
 	if ((lpGameTask.Mouse->GetButton() & 0b0001) != 0)
 	{
 		MainBoard->SetPiece(lpGameTask.Mouse->GetPos());

@@ -14,6 +14,12 @@ GameResult::GameResult(Board_ptr pt)
 {
 	this->Board = pt;
 	Board->PieceResultSet();
+	for (auto itr : PIECE_ST())
+	{
+		pieceCount[int(itr)] = Board->PieceCount(itr);
+	}
+
+
 
 }
 
@@ -35,6 +41,9 @@ state_ptr GameResult::Update(state_ptr pt)
 		Board->PieceResultSet();
 		return std::make_unique<GameTitle>();
 	}
+
+	
+
 	return pt;
 }
 
@@ -43,9 +52,11 @@ void GameResult::Draw()
 	Board->Draw();
 	Board->ResultDraw();
 	
+	
+
 	for (auto itr : lpGameTask.playerlist)
 	{
-		DrawFormatString(itr->GetNo() * 64, 440, 0xffff00, "%d", itr->GetScore());
+		DrawFormatString(itr->GetNo() * 64, 440, 0xffff00, "%d", pieceCount[itr->GetNo()]);
 
 	}
 	//DrawFormatString(220,0,0xffffff,"%d:%d",

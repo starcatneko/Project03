@@ -3,7 +3,6 @@
 
 class GameMouse;
 
-enum PIECE_ST;
 
 class GameTitle :
 	public GameState

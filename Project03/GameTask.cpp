@@ -35,6 +35,8 @@ void GameTask::Init()
 }
 void GameTask::Run()
 {
+	Mouse->Update(OPRT_TYPE::OPRT_MAN);
+
 	ScreenFlip();
 	ClsDrawScreen();
 	state = state->Update(std::move(state));
@@ -42,7 +44,6 @@ void GameTask::Run()
 	{
 		wait--;
 	}
-
 	state->Draw();
 }
 

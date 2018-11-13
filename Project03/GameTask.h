@@ -6,17 +6,13 @@ class MouseCtr;
 #include <vector>
 #include <array>
 #include <memory>
-
 #include "VECTOR2.h"
-
-class GamePiece;
-class Player;
-
 #include "GameState.h"
-
 #include "GameBoard.h"
 
 
+class GamePiece;
+class Player;
 typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
 

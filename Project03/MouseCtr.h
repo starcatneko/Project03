@@ -7,6 +7,16 @@ enum MOUSE_STATE
 	ST_OLD,
 	ST_MAX
 };
+
+enum class OPRT_TYPE
+{
+	OPRT_MAN,		// ÉvÉåÉCÉÑÅ[ëÄçÏ
+	OPRT_CPU,		// CPUëÄçÏ
+	OPRT_MAX
+};
+
+
+
 //using MOUSE_INT std::array<int, ST_MAX>
 
 class MouseCtr
@@ -14,7 +24,7 @@ class MouseCtr
 public:
 	MouseCtr();
 	~MouseCtr();
-	void Update();
+	void Update(OPRT_TYPE);
 	int GetButton();
 	VECTOR2 GetPos();
 	int GetButton()	 const;

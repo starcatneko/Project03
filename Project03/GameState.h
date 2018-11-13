@@ -1,5 +1,5 @@
 #pragma once
-class MouseCtl;
+class MouseCtr;
 #include <memory>
 
 #define state_ptr std::unique_ptr<GameState>
