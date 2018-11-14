@@ -14,9 +14,9 @@ MouseCtr::~MouseCtr()
 {
 }
 
-void MouseCtr::Update(OPRT_TYPE oprt)
+void MouseCtr::Update()
 {
-	if (oprt == OPRT_TYPE::OPRT_MAN)
+	if (type == OPRT_TYPE::OPRT_MAN)
 	{
 		int flg = 0;
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)
@@ -33,10 +33,11 @@ void MouseCtr::Update(OPRT_TYPE oprt)
 		}
 		button[ST_NEW] = flg;
 	}
-	if (oprt == OPRT_TYPE::OPRT_CPU)
+	if (type == OPRT_TYPE::OPRT_CPU)
 	{
 		// 置ける場所リストを参照
 		// リスト内のそれぞれのケースで条件分岐
+
 
 
 
@@ -67,13 +68,27 @@ int MouseCtr::GetButton()
 
 VECTOR2 MouseCtr::GetPos()
 {
+	if (type == OPRT_TYPE::OPRT_MAN)
+	{
+
 	int mx, my;
 	GetMousePoint(&mx, &my);
 	pos = { mx,my };
 	return { pos };
+
+	}
+	if (type == OPRT_TYPE::OPRT_CPU)
+	{
+		return { pos };
+	}
 }
 
 int MouseCtr::GetDrag()
 {
 	return 0;
+}
+
+void MouseCtr::SetType(OPRT_TYPE type)
+{
+	MouseCtr::type = type;
 }
