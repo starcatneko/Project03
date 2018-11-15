@@ -19,7 +19,7 @@ typedef std::list<player_ptr> player_list;
 
 
 #define lpGameTask GameTask::GetInstance()
-#define lpMouse lpGameTask.Mouse[static_cast<int>(piecetype)]
+#define lpMouse lpGameTask.Mouse
 
 // プレイヤー人数
 #define PL_MAX 2

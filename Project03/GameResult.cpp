@@ -32,8 +32,8 @@ GameResult::~GameResult()
 state_ptr GameResult::Update(state_ptr pt)
 {
 	lpGameTask.Board->Update();
-/*
-	if ((lpGameTask.Mouse->GetButton() & 0b0001) != 0)
+
+	if ((lpMouse[0]->GetButton() & 0b0001) > 0)
 	{
 		// ƒŠƒXƒg‚ðÁ‹Ž
 		lpGameTask.playerlist.erase(lpGameTask.playerlist.begin(), lpGameTask.playerlist.end());
@@ -41,7 +41,6 @@ state_ptr GameResult::Update(state_ptr pt)
 		Board->PieceResultSet();
 		return std::make_unique<GameTitle>();
 	}
-	*/
 	
 
 	return pt;

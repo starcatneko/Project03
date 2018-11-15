@@ -77,7 +77,7 @@ public:
 	void PieceResultSet();
 	// 指定された色のピースの数を返す
 	int PieceCount(PIECE_ST olor);
-	VECTOR2 SetListSerch();
+	VECTOR2 SetListSerch(PIECE_ST type);
 private:
 	piece_shared AddObjList(piece_shared&& objPtr);
 	void CurrentSetUpData();
@@ -109,7 +109,7 @@ private:
 	int winplayer;
 
 	// 設置座標可能リスト
-	std::list<VECTOR2> setlist;
+	std::array<std::list<VECTOR2>,static_cast<int>(PIECE_ST::MAX)> setlist;
 
 	piece_list piecelist;
 	VECTOR2 size;

@@ -88,16 +88,7 @@ state_ptr GameMain::Update(state_ptr pt)
 	}
 	// ifTurnActがtrueの場合、プレイヤーチェンジ処理を行う
 	
-	/*
-	if ((lpMouse->GetButton() & 0b0001) != 0)
-	{
-		MainBoard->SetPiece(lpMouse->GetPos());
-	}
-	if ((lpMouse->GetButton() & 0b0010) != 0)
-	{
-		MainBoard->Debug_SetPiece(lpMouse->GetPos());
-	}
-	*/
+
 	if (MainBoard->gameEndFlg)
 	{
 		// GameRessultでMainBoardの情報を引き続き使うので引数で渡す

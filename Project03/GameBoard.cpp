@@ -376,8 +376,8 @@ void GameBoard::Draw()
 
 void GameBoard::CurrentSetUpData()
 {
-	setlist.clear();
-
+	
+	setlist[static_cast<int>((*lpGameTask.currentPlayer)->GetType())].clear();
 	VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }, };
 	
 	// 設置可能なタイルの数
@@ -403,7 +403,7 @@ void GameBoard::CurrentSetUpData()
 					&& data[drawPos.y][drawPos.x].expired())
 				{
 					tilecnt++;
-					setlist.push_back(drawPos);
+					setlist[static_cast<int>((*lpGameTask.currentPlayer)->GetType())].push_back(drawPos);
 					DrawBox(drawPos.x*CHIPSIZE + X_DIS, drawPos.y*CHIPSIZE + Y_DIS
 						, drawPos.x*CHIPSIZE + CHIPSIZE + X_DIS,
 						drawPos.y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xaadd00, true);
@@ -469,16 +469,21 @@ int GameBoard::PieceCount(PIECE_ST color)
 	return cnt;
 }
 
-VECTOR2 GameBoard::SetListSerch()
+VECTOR2 GameBoard::SetListSerch(PIECE_ST type)
 {
 	VECTOR2 tmpPos;
+	if (&setlist == nullptr)
+	{
+		return { -1,-1 };
+	}
+
 	int rnd = GetRand(setlist.size());
 	int cnt = 0;
-	for (auto itr : setlist)
+	for (auto itr : setlist[static_cast<int>(type)])
 	{
 		if (rnd == cnt)
 		{
-			tmpPos = itr*CHIPSIZE + CHIPSIZE/2;
+			tmpPos = (itr*64)+12 + VECTOR2( X_DIS, Y_DIS );
 			break;
 		}
 		cnt++;

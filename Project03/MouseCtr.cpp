@@ -38,12 +38,12 @@ void MouseCtr::Update()
 	{
 		// 置ける場所リストを参照
 		// リスト内のそれぞれのケースで条件分岐
-
+		/*
 		pos = lpGameTask.Board->SetListSerch();
 		button[ST_OLD] = 0b0000;
 
 		button[ST_NEW] = 0b0001;
-
+		*/
 		// １とれる数
 		// ２相手が置ける場所の数
 		// ３壁際・角
@@ -76,15 +76,19 @@ void MouseCtr::Update(OPRT_TYPE oprt)
 
 	if (oprt == OPRT_TYPE::CPU)
 	{
-		/*
+		
 		// 置ける場所リストを参照
 		// リスト内のそれぞれのケースで条件分岐
 
-		pos = lpGameTask.Board->SetListSerch();
+		if (!lpGameTask.Board)
+		{
+			return;
+		}
+		pos = lpGameTask.Board->SetListSerch(PIECE_ST::W);
 		button[ST_OLD] = 0b0000;
 
 		button[ST_NEW] = 0b0001;
-		*/
+		
 		// １とれる数
 		// ２相手が置ける場所の数
 		// ３壁際・角
