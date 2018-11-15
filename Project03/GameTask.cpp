@@ -50,7 +50,7 @@ void GameTask::Run()
 	{
 		// ˆø”‚Å‘€ìŽí•Ê‚ð“n‚·
 		// 
-		Mouse[unit]->Update(oprt_tbl[0]);
+		Mouse[unit]->Update(oprt_tbl[unit]);
 	}
 	ScreenFlip();
 	ClsDrawScreen();
