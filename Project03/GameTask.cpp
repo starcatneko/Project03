@@ -16,9 +16,20 @@ std::unique_ptr<GameTask, GameTask::GameTaskDeleter> GameTask::s_Instance(new Ga
 GameTask::GameTask()
 {
 	CurrentScene = &GameTask::Init;
-	Mouse = std::make_unique<MouseCtr>();
+
 	state.reset();
 	state = std::make_unique<GameTitle>();
+	Mouse.resize(static_cast<int>(PIECE_ST::MAX));
+	oprt_tbl.resize(static_cast<int>(PIECE_ST::MAX));
+	for (auto unit : PIECE_ST())
+	{
+		Mouse[unit] = std::make_shared<MouseCtr>();
+		oprt_tbl[unit] = OPRT_TYPE::CPU;
+	}
+	oprt_tbl[0] = OPRT_TYPE::MAN;
+	oprt_tbl[1] = OPRT_TYPE::MAN;
+	oprt_tbl[2] = OPRT_TYPE::MAN;
+
 	wait = 0;
 }
 
@@ -35,9 +46,12 @@ void GameTask::Init()
 }
 void GameTask::Run()
 {
-
-
-	Mouse->Update();
+	for (auto unit : PIECE_ST())
+	{
+		// ˆø”‚Å‘€ìŽí•Ê‚ð“n‚·
+		// 
+		Mouse[unit]->Update(oprt_tbl[0]);
+	}
 	ScreenFlip();
 	ClsDrawScreen();
 	state = state->Update(std::move(state));

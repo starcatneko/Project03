@@ -7,8 +7,6 @@
 #include <memory>
 #include "PieceState.h"
 
-enum MOUSE_STATE;
-
 class PieceTray;
 class Player
 {
@@ -28,13 +26,16 @@ public:
 	bool SetTunrFlg(bool flg);
 	//現在プレイヤーのターンか
 	bool GetTunrFlg();
-	int GetScore();
+	int GetScore();	
+	
 private:
 	int playerNo;
 	static int playercnt;
 	std::unique_ptr <PieceTray> pieceTray;
 	
+	// 置ける場所リスト
 	std::list<VECTOR2> setlist;
+
 	PIECE_ST piecetype;
 	bool turnFlg;
 };

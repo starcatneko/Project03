@@ -22,7 +22,7 @@ PieceTray::PieceTray(PIECE_ST st)
 
 	for (int j = 0; j < piecemax; j++)
 	{
-		pos = VECTOR2{ 0,j } +VECTOR2{ (this->color == PIECE_ST::PIECE_B ? 0 : 11),0};
+		pos = VECTOR2{ 0,j } +VECTOR2{ (this->color == PIECE_ST::B ? 0 : 11),0};
 		AddPiece();
 	}
 
@@ -39,13 +39,13 @@ bool PieceTray::AddPiece()
 
 PieceTray::~PieceTray()
 {
-	this->color = PIECE_ST::PIECE_NON;
+	this->color = PIECE_ST::NON;
 }
 
 void PieceTray::SetTray(int boardsize,int plcnt)
 {
 
-	this->pos = { (color == PIECE_ST::PIECE_B ? 0 : 11) * CHIPSIZE,128 };
+	this->pos = { (color == PIECE_ST::B ? 0 : 11) * CHIPSIZE,128 };
 }
 
 void PieceTray::SelectTrayPiece(VECTOR2 pos)

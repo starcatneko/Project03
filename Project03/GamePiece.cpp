@@ -25,7 +25,7 @@ GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset ,PIECE_ST st)
 	this->drawOffset = drawOffset;
 	Init();
 	SetState(st);
-	SetOldState(PIECE_ST::PIECE_NON);
+	SetOldState(PIECE_ST::NON);
 }
 
 GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset)
@@ -33,7 +33,7 @@ GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset)
 	this->pos = pos;
 	this->drawOffset = drawOffset;
 	Init();
-	SetOldState(PIECE_ST::PIECE_NON);
+	SetOldState(PIECE_ST::NON);
 }
 
 
@@ -42,7 +42,7 @@ GamePiece::GamePiece(VECTOR2 pos,PIECE_ST st)
 	this->pos = pos;
 	Init();
 	SetState(st);
-	SetOldState(PIECE_ST::PIECE_NON);
+	SetOldState(PIECE_ST::NON);
 	
 }
 
@@ -96,7 +96,7 @@ void GamePiece::SetOldState(PIECE_ST st)
 		GamePiece::old_state.pop_front();
 	}
 
-	if (st == PIECE_ST::PIECE_W)
+	if (st == PIECE_ST::W)
 	{
 		//GamePiece::state = std::make_unique<PieceWhite>();
 		old_state.push_front(std::make_unique<PieceWhite>());
@@ -106,7 +106,7 @@ void GamePiece::SetOldState(PIECE_ST st)
 		old_state.push_front(std::make_unique<PieceBlack>());
 	}
 
-	if (st == PIECE_ST::PIECE_NON)
+	if (st == PIECE_ST::NON)
 	{
 		/*
 		if (state.front()->GetState() == PIECE_W)
@@ -130,7 +130,7 @@ void GamePiece::SetState(PIECE_ST st)
 		GamePiece::state.pop_front();
 	}
 
-	if (st == PIECE_ST::PIECE_W)
+	if (st == PIECE_ST::W)
 	{
 		//GamePiece::state = std::make_unique<PieceWhite>();
 		state.push_front(std::make_unique<PieceWhite>());
@@ -147,7 +147,7 @@ PIECE_ST GamePiece::GetState()
 	{
 		return (*state.begin())->GetState();
 	}
-	return PIECE_ST::PIECE_NON;
+	return PIECE_ST::NON;
 }
 
 void GamePiece::SetReverse(int num)

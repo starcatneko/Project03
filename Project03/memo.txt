@@ -6,6 +6,13 @@
  !!		授業との差異
 
  !!		VBA 出力
+ 
+ 
+ ** PIECE_STのインクリメントがうまく動かない！！！
+ 
+
+ ##	static_cast
+ static_cast<型>(変数名);
 
  ** 操作をPlayerのTurnAct経由にする
 	AI操作できるようにする

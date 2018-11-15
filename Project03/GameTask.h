@@ -9,6 +9,7 @@ class MouseCtr;
 #include "VECTOR2.h"
 #include "GameState.h"
 #include "GameBoard.h"
+#include "MouseCtr.h"
 
 
 class GamePiece;
@@ -18,6 +19,7 @@ typedef std::list<player_ptr> player_list;
 
 
 #define lpGameTask GameTask::GetInstance()
+#define lpMouse lpGameTask.Mouse[static_cast<int>(piecetype)]
 
 // プレイヤー人数
 #define PL_MAX 2
@@ -48,7 +50,8 @@ public:
 	// 現在選択しているプレイヤーのアドレスを格納する
 
 	state_ptr state;
-	std::unique_ptr<MouseCtr> Mouse; 
+	std::vector<std::shared_ptr<MouseCtr>> Mouse;
+
 	Board_ptr Board;
 private:
 
@@ -72,9 +75,13 @@ private:
 	// ウェイトフレーム数
 	int wait;
 
-
 	int mouseFlg;
 	int mouseOld;
+	
+	
+	//std::array<OPRT_TYPE,static_cast<int>(OPRT_TYPE::MAX)> oprt_tbl;
+	// プレイヤー毎のOPRT_TYPE;
+	std::vector<OPRT_TYPE> oprt_tbl;
 };
 
 

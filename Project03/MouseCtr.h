@@ -1,4 +1,5 @@
 #pragma once
+
 #include "VECTOR2.h"
 #include <array>
 enum MOUSE_STATE
@@ -8,11 +9,14 @@ enum MOUSE_STATE
 	ST_MAX
 };
 
+
+// プレイヤーの種類毎に操作系統を判断できる
+// テーブルを作成する
 enum class OPRT_TYPE
 {
-	OPRT_MAN,		// プレイヤー操作
-	OPRT_CPU,		// CPU操作
-	OPRT_MAX
+	MAN,		// プレイヤー操作
+	CPU,		// CPU操作
+	MAX
 };
 
 
@@ -25,6 +29,8 @@ public:
 	MouseCtr();
 	~MouseCtr();
 	void Update();
+	void Update(OPRT_TYPE oprt);
+	void SetPos(VECTOR2 pos);
 	int GetButton();
 	VECTOR2 GetPos();
 	int GetButton()	 const;
@@ -39,7 +45,6 @@ private:
 	//std::array<int, ST_MAX> button;
 
 	OPRT_TYPE type;
-
 	std::array<int, ST_MAX> button;
 	VECTOR2 pos;
 };

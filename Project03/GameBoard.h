@@ -77,6 +77,7 @@ public:
 	void PieceResultSet();
 	// 指定された色のピースの数を返す
 	int PieceCount(PIECE_ST olor);
+	VECTOR2 SetListSerch();
 private:
 	piece_shared AddObjList(piece_shared&& objPtr);
 	void CurrentSetUpData();
@@ -98,7 +99,9 @@ private:
 	// 現在のプレイヤー表示用
 	std::unique_ptr <GamePiece> CurrentPlPiece;
 	
-	//player_ptr currentPlayer;
+	//player_ptr 
+	
+	;
 		
 	// 最後に駒を置いたプレイヤー
 	int lastset;		

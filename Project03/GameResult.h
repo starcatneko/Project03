@@ -16,7 +16,7 @@ public:
 
 private:
 
-	int pieceCount[int(PIECE_ST::PIECE_MAX)];
+	int pieceCount[int(PIECE_ST::MAX)];
 	Board_ptr Board;
 
 };

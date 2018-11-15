@@ -17,19 +17,19 @@ GameMain::GameMain()
 
 		if (TESTMODE == 0)
 		{
-			MainBoard->SetPiece({ 3,3 }, PIECE_ST::PIECE_W);
-			MainBoard->SetPiece({ 4,4 }, PIECE_ST::PIECE_W);
-			MainBoard->SetPiece({ 4,3 }, PIECE_ST::PIECE_B);
-			MainBoard->SetPiece({ 3,4 }, PIECE_ST::PIECE_B);
+			MainBoard->SetPiece({ 3,3 }, PIECE_ST::W);
+			MainBoard->SetPiece({ 4,4 }, PIECE_ST::W);
+			MainBoard->SetPiece({ 4,3 }, PIECE_ST::B);
+			MainBoard->SetPiece({ 3,4 }, PIECE_ST::B);
 		}
 		else
 		{
 
-			MainBoard->SetPiece({ 1,0 }, PIECE_ST::PIECE_B);
-			MainBoard->SetPiece({ 2,0 }, PIECE_ST::PIECE_B);
-			MainBoard->SetPiece({ 3,0 }, PIECE_ST::PIECE_B);
-			MainBoard->SetPiece({ 4,0 }, PIECE_ST::PIECE_W);
-			MainBoard->SetPiece({ 4,1 }, PIECE_ST::PIECE_W);
+			MainBoard->SetPiece({ 1,0 }, PIECE_ST::B);
+			MainBoard->SetPiece({ 2,0 }, PIECE_ST::B);
+			MainBoard->SetPiece({ 3,0 }, PIECE_ST::B);
+			MainBoard->SetPiece({ 4,0 }, PIECE_ST::W);
+			MainBoard->SetPiece({ 4,1 }, PIECE_ST::W);
 
 		}
 	};
@@ -88,16 +88,16 @@ state_ptr GameMain::Update(state_ptr pt)
 	}
 	// ifTurnActがtrueの場合、プレイヤーチェンジ処理を行う
 	
-	
-	if ((lpGameTask.Mouse->GetButton() & 0b0001) != 0)
+	/*
+	if ((lpMouse->GetButton() & 0b0001) != 0)
 	{
-		MainBoard->SetPiece(lpGameTask.Mouse->GetPos());
+		MainBoard->SetPiece(lpMouse->GetPos());
 	}
-	if ((lpGameTask.Mouse->GetButton() & 0b0010) != 0)
+	if ((lpMouse->GetButton() & 0b0010) != 0)
 	{
-		MainBoard->Debug_SetPiece(lpGameTask.Mouse->GetPos());
+		MainBoard->Debug_SetPiece(lpMouse->GetPos());
 	}
-
+	*/
 	if (MainBoard->gameEndFlg)
 	{
 		// GameRessultでMainBoardの情報を引き続き使うので引数で渡す

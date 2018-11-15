@@ -16,7 +16,7 @@ GameResult::GameResult(Board_ptr pt)
 	Board->PieceResultSet();
 	for (auto itr : PIECE_ST())
 	{
-		pieceCount[int(itr)] = Board->PieceCount(itr);
+		//pieceCount[int(itr)] = Board->PieceCount(itr);
 	}
 
 
@@ -32,7 +32,7 @@ GameResult::~GameResult()
 state_ptr GameResult::Update(state_ptr pt)
 {
 	lpGameTask.Board->Update();
-
+/*
 	if ((lpGameTask.Mouse->GetButton() & 0b0001) != 0)
 	{
 		// ƒŠƒXƒg‚ðÁ‹Ž
@@ -41,7 +41,7 @@ state_ptr GameResult::Update(state_ptr pt)
 		Board->PieceResultSet();
 		return std::make_unique<GameTitle>();
 	}
-
+	*/
 	
 
 	return pt;

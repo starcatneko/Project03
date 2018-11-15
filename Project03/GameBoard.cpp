@@ -42,13 +42,13 @@ bool GameBoard::Init()
 		(*itr).SetTray();
 	}
 
-	PIECE_ST ai = PIECE_ST::PIECE_B;
+	PIECE_ST ai = PIECE_ST::B;
 	++ai;
 	++ai;
 	++ai;
 
 	timer = 0;
-	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_ST::PIECE_B);
+	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_ST::B);
 	return true;
 }
 
@@ -467,4 +467,23 @@ int GameBoard::PieceCount(PIECE_ST color)
 		}
 	}
 	return cnt;
+}
+
+VECTOR2 GameBoard::SetListSerch()
+{
+	VECTOR2 tmpPos;
+	int rnd = GetRand(setlist.size());
+	int cnt = 0;
+	for (auto itr : setlist)
+	{
+		if (rnd == cnt)
+		{
+			tmpPos = itr*CHIPSIZE + CHIPSIZE/2;
+			break;
+		}
+		cnt++;
+	}
+
+
+	return tmpPos;
 }

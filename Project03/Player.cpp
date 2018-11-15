@@ -4,7 +4,6 @@
 #include "GameTask.h"
 #include "MouseCtr.h"
 
-
 int Player::playercnt = 0;
 
 Player::Player()
@@ -73,13 +72,23 @@ void Player::TurnAct()
 	// TurnActのピースが設置のif内
 	// ピースを設置したらプレイヤーが切り替わるから
 	
-	if (this->playerNo == 0)
+	if (piecetype == PIECE_ST::B)
 	{
-		lpGameTask.Mouse->SetType(OPRT_MAN);
-		if ((lpGameTask.Mouse->GetButton() & 0b0001) != 0)
+		
+		lpMouse->SetType(OPRT_TYPE::MAN);
+		if ((lpMouse->GetButton() & 0b0001) != 0)
 		{
-			lpGameTask.Board->SetPiece(lpGameTask.Mouse->GetPos());
+			lpGameTask.Board->SetPiece(lpMouse->GetPos());
 		}
+	}
+	else
+	{
+		lpMouse->SetType(OPRT_TYPE::CPU);
+		if ((lpMouse->GetButton() & 0b0001) != 0)
+		{
+			lpGameTask.Board->SetPiece(lpMouse->GetPos());
+		}
+
 	}
 
 

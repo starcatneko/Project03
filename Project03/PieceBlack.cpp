@@ -16,7 +16,7 @@ PieceBlack::~PieceBlack()
 
 PIECE_ST PieceBlack::GetState()
 {
-	return PIECE_ST::PIECE_B;
+	return PIECE_ST::B;
 
 }
 
