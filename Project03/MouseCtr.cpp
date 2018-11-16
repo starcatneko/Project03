@@ -144,7 +144,13 @@ int MouseCtr::GetDrag()
 	return 0;
 }
 
-void MouseCtr::SetType(OPRT_TYPE type)
+void MouseCtr::SetOprtType(OPRT_TYPE type)
 {
 	MouseCtr::type = type;
+}
+
+OPRT_TYPE MouseCtr::GetOprtType()
+{
+	//return ;
+	return OPRT_TYPE::CPU;
 }

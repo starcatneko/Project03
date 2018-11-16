@@ -9,3 +9,10 @@ Excel/~$PieceData.xlsm
 *.pdb
 .vs/Project03/v15/.suo
 *.pdb
+*.exe
+*.ilk
+*.log
+*.ilk
+*.pdb
+.vs/Project03/v15/.suo
+Project03/Log.txt

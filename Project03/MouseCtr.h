@@ -37,7 +37,8 @@ public:
 	VECTOR2 GetPos() const;
 	int GetDrag();
 
-	void SetType(OPRT_TYPE type);
+	void SetOprtType(OPRT_TYPE type);
+	OPRT_TYPE GetOprtType();
 
 
 private:
