@@ -4,3 +4,8 @@
 *.tlog
 *.idb
 Excel/~$PieceData.xlsm
+*.db
+*.opendb
+*.pdb
+.vs/Project03/v15/.suo
+*.pdb
