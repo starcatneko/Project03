@@ -12,27 +12,7 @@
 
 GameMain::GameMain()
 {
-	Init();
-}
-GameMain::~GameMain()
-{
-}
-
-void GameMain::Init()
-{
-
-	for (auto unit : PIECE_ST())
-	{
-		Mouse[unit] = std::make_shared<MouseCtr>();
-		oprt_tbl[unit] = OPRT_TYPE::CPU;
-		printf("w");
-
-	}
-	oprt_tbl[static_cast<int>(PIECE_ST::B)] = OPRT_TYPE::MAN;
-
-	printf("w");
-
-	auto CreateNewBoard = [&]() {
+	auto CreateNewBoard = [&](){
 		MainBoard = std::make_unique<GameBoard>();
 
 		if (TESTMODE == 0)
@@ -71,6 +51,11 @@ void GameMain::Init()
 }
 
 
+GameMain::~GameMain()
+{
+}
+
+
 void GameMain::Draw()
 {
 	MainBoard->Draw();
@@ -78,34 +63,25 @@ void GameMain::Draw()
 
 state_ptr GameMain::Update(state_ptr pt)
 {
-	auto nowPlayer = lpGameTask.currentPlayer;
-	// 現在のプレイヤーの色
-	auto playerID = static_cast<int>((*nowPlayer)->GetType());
-	
-	for (auto unit : PIECE_ST())
-	{
-		if ((*nowPlayer)->GetTunrFlg() == true)
-		{
-			Mouse[playerID]->Update(oprt_tbl[playerID]);
-		}
-	}
+
 	auto setNextPlayer = [&](){
-		if ((*nowPlayer)->GetTunrFlg()== false)
+		//(*lpGameTask.currentPlayer)->SetTunrFlg(false);
+		if ((*lpGameTask.currentPlayer)->GetTunrFlg()== false)
 		{
-			if ((*nowPlayer) == lpGameTask.playerlist.back())
+			if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
 			{
-				nowPlayer = lpGameTask.playerlist.begin();
-				(*nowPlayer)->SetTunrFlg(true);
+				lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
+				(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 				return;
 			}
-			(*nowPlayer++);
-			(*nowPlayer)->SetTunrFlg(true);
+			(*lpGameTask.currentPlayer++);
+			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 		}
 	};
 
 	DrawString(0, 0, "Main", 0xffffff, 0);
 	MainBoard->Update();
-	(*lpGameTask.currentPlayer)->TurnAct(Mouse[playerID]);
+	(*lpGameTask.currentPlayer)->TurnAct();
 	for (auto itr : GameTask::GetInstance().playerlist)
 	{
 		(*itr).Update();
@@ -135,4 +111,3 @@ void GameMain::AddPlayer()
 	lpGameTask.playerlist.push_back(std::make_shared<Player>());
 
 }
-

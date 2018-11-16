@@ -1,8 +1,5 @@
 #include "MouseCtr.h"
 #include "GameTask.h"
-#include "OPRT_Base.h"
-#include "OPRT_MAN.h"
-#include "OPRT_CPU.h"
 #include "DxLib.h"
 
 
@@ -10,12 +7,53 @@
 
 MouseCtr::MouseCtr()
 {
+	type = OPRT_TYPE::MAN;
 }
 
 
 MouseCtr::~MouseCtr()
 {
 }
+
+void MouseCtr::Update()
+{
+	if (type == OPRT_TYPE::MAN)
+	{
+		int flg = 0;
+		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)
+		{
+			flg += 0b0001;
+		}
+		if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)
+		{
+			flg += 0b0010;
+		}
+		if ((GetMouseInput() & MOUSE_INPUT_MIDDLE) != 0)
+		{
+			flg += 0b0100;
+		}
+		button[ST_NEW] = flg;
+	}
+	if (type == OPRT_TYPE::CPU)
+	{
+		// ’u‚¯‚éêŠƒŠƒXƒg‚ðŽQÆ
+		// ƒŠƒXƒg“à‚Ì‚»‚ê‚¼‚ê‚ÌƒP[ƒX‚ÅðŒ•ªŠò
+		/*
+		pos = lpGameTask.Board->SetListSerch();
+		button[ST_OLD] = 0b0000;
+
+		button[ST_NEW] = 0b0001;
+		*/
+		// ‚P‚Æ‚ê‚é”
+		// ‚Q‘ŠŽè‚ª’u‚¯‚éêŠ‚Ì”
+		// ‚R•ÇÛEŠp
+
+
+	}
+
+	//mouseCtr.GetBtn()[ST_NOW]
+}
+
 void MouseCtr::Update(OPRT_TYPE oprt)
 {
 	if (oprt == OPRT_TYPE::MAN)
@@ -50,7 +88,7 @@ void MouseCtr::Update(OPRT_TYPE oprt)
 		button[ST_OLD] = 0b0000;
 
 		button[ST_NEW] = 0b0001;
-
+		
 		// ‚P‚Æ‚ê‚é”
 		// ‚Q‘ŠŽè‚ª’u‚¯‚éêŠ‚Ì”
 		// ‚R•ÇÛEŠp
@@ -84,14 +122,8 @@ int MouseCtr::GetButton()
 	}
 }
 
-void MouseCtr::SetButton(MOUSE_STATE button,int flg)
-{
-	MouseCtr::button[button] = flg;
-}
-
 VECTOR2 MouseCtr::GetPos()
 {
-	/*
 	if (type == OPRT_TYPE::MAN)
 	{
 
@@ -105,31 +137,14 @@ VECTOR2 MouseCtr::GetPos()
 	{
 		return { pos };
 	}
-	*/
-	return { pos };
-}
-
-OPRT_TYPE MouseCtr::GetOprtType()
-{
-	return oprt_state->GetType();
-	//return oprt_state->;
-}
-
-void MouseCtr::SetOprtType(OPRT_TYPE type)
-{
-	switch (type)
-	{
-	case OPRT_TYPE::MAN:
-		oprt_state = std::make_unique<OPRT_MAN>();
-		break;
-	case OPRT_TYPE::CPU:
-		oprt_state = std::make_unique<OPRT_CPU>();
-		break;
-
-	}
 }
 
 int MouseCtr::GetDrag()
 {
 	return 0;
+}
+
+void MouseCtr::SetType(OPRT_TYPE type)
+{
+	MouseCtr::type = type;
 }

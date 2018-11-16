@@ -33,7 +33,7 @@ state_ptr GameResult::Update(state_ptr pt)
 {
 	lpGameTask.Board->Update();
 
-	if ((lpMouse->GetButton() & 0b0001) > 0)
+	if ((lpMouse[0]->GetButton() & 0b0001) > 0)
 	{
 		// ƒŠƒXƒg‚ğÁ‹
 		lpGameTask.playerlist.erase(lpGameTask.playerlist.begin(), lpGameTask.playerlist.end());

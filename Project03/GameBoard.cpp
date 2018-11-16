@@ -477,7 +477,7 @@ VECTOR2 GameBoard::SetListSerch(PIECE_ST type)
 		return { -1,-1 };
 	}
 
-	int rnd = GetRand(static_cast<int>(setlist.size()));
+	int rnd = GetRand(setlist.size());
 	int cnt = 0;
 	for (auto itr : setlist[static_cast<int>(type)])
 	{
