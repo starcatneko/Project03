@@ -31,6 +31,12 @@
     <Filter Include="ヘッダー ファイル\mode">
       <UniqueIdentifier>{666516dd-90bf-460c-b1e3-5c5e4b89f184}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\oprator_type">
+      <UniqueIdentifier>{9a999b3c-e52d-414d-93e4-709dc0e5de3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\oprator_type">
+      <UniqueIdentifier>{29bf6c44-8eb1-4e94-a0c3-ae2cf1a69259}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GamePiece.cpp">
@@ -90,6 +96,15 @@
     <ClCompile Include="PIECE_ST.cpp">
       <Filter>ソース ファイル\piece</Filter>
     </ClCompile>
+    <ClCompile Include="OPRT_Base.cpp">
+      <Filter>ソース ファイル\oprator_type</Filter>
+    </ClCompile>
+    <ClCompile Include="OPRT_CPU.cpp">
+      <Filter>ソース ファイル\oprator_type</Filter>
+    </ClCompile>
+    <ClCompile Include="OPRT_MAN.cpp">
+      <Filter>ソース ファイル\oprator_type</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamePiece.h">
@@ -145,6 +160,15 @@
     </ClInclude>
     <ClInclude Include="PIECE_ST.h">
       <Filter>ヘッダー ファイル\piece</Filter>
+    </ClInclude>
+    <ClInclude Include="OPRT_Base.h">
+      <Filter>ヘッダー ファイル\oprator_type</Filter>
+    </ClInclude>
+    <ClInclude Include="OPRT_CPU.h">
+      <Filter>ヘッダー ファイル\oprator_type</Filter>
+    </ClInclude>
+    <ClInclude Include="OPRT_MAN.h">
+      <Filter>ヘッダー ファイル\oprator_type</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

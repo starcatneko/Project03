@@ -136,6 +136,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="MouseCtr.cpp" />
+    <ClCompile Include="OPRT_Base.cpp" />
+    <ClCompile Include="OPRT_CPU.cpp" />
+    <ClCompile Include="OPRT_MAN.cpp" />
     <ClCompile Include="PieceBlack.cpp" />
     <ClCompile Include="PieceKing.cpp" />
     <ClCompile Include="PieceState.cpp" />
@@ -156,6 +159,9 @@
     <ClInclude Include="ImageMng.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="MouseCtr.h" />
+    <ClInclude Include="OPRT_Base.h" />
+    <ClInclude Include="OPRT_CPU.h" />
+    <ClInclude Include="OPRT_MAN.h" />
     <ClInclude Include="PieceBlack.h" />
     <ClInclude Include="PieceKing.h" />
     <ClInclude Include="PieceState.h" />

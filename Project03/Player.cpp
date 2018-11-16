@@ -65,34 +65,26 @@ void Player::DeleteTrayPiece()
 	pieceTray->TrayUpdate();
 }
 
-void Player::TurnAct()
+void Player::TurnAct(std::shared_ptr<MouseCtr> mouse)
 {
 	//pieceTray->SetTurnFlg(true);
-
+	
 	// TurnActのピースが設置のif内
 	// ピースを設置したらプレイヤーが切り替わるから
 	
-	if (piecetype == PIECE_ST::B)
+	auto mouseID = static_cast<int>(piecetype);
+
+	if (playerNo > PL_MAX)
 	{
-		
-		lpMouse[static_cast<int>(piecetype)]->SetType(OPRT_TYPE::MAN);
-		if ((lpMouse[static_cast<int>(piecetype)]->GetButton() & 0b0001) != 0)
+		return;
+	}
+	
+	if ((mouse.GetButton() & 0b0001) != 0)
+	{
 		{
-			lpGameTask.Board->SetPiece(lpMouse[static_cast<int>(piecetype)]->GetPos());
+			lpGameTask.Board->SetPiece(mouse.GetPos());
 		}
 	}
-	else
-	{
-		lpMouse[static_cast<int>(piecetype)]->SetType(OPRT_TYPE::CPU);
-		if ((lpMouse[static_cast<int>(piecetype)]->GetButton() & 0b0001) != 0)
-		{
-			lpGameTask.Board->SetPiece(lpMouse[static_cast<int>(piecetype)]->GetPos());
-		}
-
-	}
-
-
-
 	//ピースの数をチェック
 	//マウス取得{
 	//設置可能なら設置

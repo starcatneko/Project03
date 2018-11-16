@@ -19,7 +19,7 @@ typedef std::list<player_ptr> player_list;
 
 
 #define lpGameTask GameTask::GetInstance()
-#define lpMouse lpGameTask.Mouse
+#define lpMouse lpGameTask.SysMouse
 
 // プレイヤー人数
 #define PL_MAX 2
@@ -50,7 +50,9 @@ public:
 	// 現在選択しているプレイヤーのアドレスを格納する
 
 	state_ptr state;
-	std::vector<std::shared_ptr<MouseCtr>> Mouse;
+
+	// システム操作用
+	std::shared_ptr<MouseCtr> SysMouse;
 
 	Board_ptr Board;
 private:
@@ -81,7 +83,6 @@ private:
 	
 	//std::array<OPRT_TYPE,static_cast<int>(OPRT_TYPE::MAX)> oprt_tbl;
 	// プレイヤー毎のOPRT_TYPE;
-	std::vector<OPRT_TYPE> oprt_tbl;
 };
 
 

@@ -107,6 +107,8 @@ void PieceTray::TrayUpdate()
 		if (selectPiece == i)
 		{
 			itr = piecelist.erase(itr);
+			turnFlag = false;
+
 			return;
 		}
 		i++;

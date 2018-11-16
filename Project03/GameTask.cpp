@@ -19,15 +19,11 @@ GameTask::GameTask()
 
 	state.reset();
 	state = std::make_unique<GameTitle>();
-	Mouse.resize(static_cast<int>(PIECE_ST::MAX));
-	oprt_tbl.resize(static_cast<int>(PIECE_ST::MAX));
 	for (auto unit : PIECE_ST())
 	{
-		Mouse[unit] = std::make_shared<MouseCtr>();
-		oprt_tbl[unit] = OPRT_TYPE::CPU;
+		SysMouse = std::make_shared<MouseCtr>();
 	}
-	oprt_tbl[0] = OPRT_TYPE::MAN;
-	oprt_tbl[1] = OPRT_TYPE::MAN;
+	//oprt_tbl[1] = OPRT_TYPE::MAN;
 
 	wait = 0;
 }
@@ -49,7 +45,7 @@ void GameTask::Run()
 	{
 		// ˆø”‚Å‘€ìŽí•Ê‚ð“n‚·
 		// 
-		Mouse[unit]->Update(oprt_tbl[unit]);
+		SysMouse->Update(OPRT_TYPE::MAN);
 	}
 	ScreenFlip();
 	ClsDrawScreen();

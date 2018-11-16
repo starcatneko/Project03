@@ -1,19 +1,74 @@
 ﻿  GameMain.cpp
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(27): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+  c:\users\1601291\documents\github\project03-1\project03\gamemain.h(37): note: コンパイル対象の クラス テンプレート インスタンス化 'std::array<std::unique_ptr<OPRT_Base,std::default_delete<_Ty>> (void),2>' のリファレンスを確認してください
+          with
+          [
+              _Ty=OPRT_Base
+          ]
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(29): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(38): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(44): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(120): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(130): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(223): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(233): error C2092: '_Elems' 配列要素型を関数または抽象クラス型にすることはできません
 c:\users\1601291\documents\github\project03-1\project03\gamemain.cpp(8): warning C4005: 'X_DIS': マクロが再定義されました。
   c:\users\1601291\documents\github\project03-1\project03\gameboard.h(29): note: 'X_DIS' の以前の定義を確認してください
 c:\users\1601291\documents\github\project03-1\project03\gamemain.cpp(9): warning C4005: 'Y_DIS': マクロが再定義されました。
   c:\users\1601291\documents\github\project03-1\project03\gameboard.h(30): note: 'Y_DIS' の以前の定義を確認してください
   GamePiece.cpp
   GameResult.cpp
-  GameState.cpp
   GameTask.cpp
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(27): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+  c:\users\1601291\documents\github\project03-1\project03\gamemain.h(37): note: コンパイル対象の クラス テンプレート インスタンス化 'std::array<std::unique_ptr<OPRT_Base,std::default_delete<_Ty>> (void),2>' のリファレンスを確認してください
+          with
+          [
+              _Ty=OPRT_Base
+          ]
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(29): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(38): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(44): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(120): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(130): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(223): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(233): error C2092: '_Elems' 配列要素型を関数または抽象クラス型にすることはできません
   GameTitle.cpp
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(27): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+  c:\users\1601291\documents\github\project03-1\project03\gamemain.h(37): note: コンパイル対象の クラス テンプレート インスタンス化 'std::array<std::unique_ptr<OPRT_Base,std::default_delete<_Ty>> (void),2>' のリファレンスを確認してください
+          with
+          [
+              _Ty=OPRT_Base
+          ]
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(29): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(38): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(44): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(120): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(130): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(223): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(233): error C2092: '_Elems' 配列要素型を関数または抽象クラス型にすることはできません
   Main.cpp
-c:\users\1601291\documents\github\project03-1\project03\main.cpp(21): error C2275: 'MouseCtr': この型は演算子として使用できません
-  c:\users\1601291\documents\github\project03-1\project03\gameboard.h(11): note: 'MouseCtr' の宣言を確認してください
   GameBoard.cpp
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(27): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+  c:\users\1601291\documents\github\project03-1\project03\gamemain.h(37): note: コンパイル対象の クラス テンプレート インスタンス化 'std::array<std::unique_ptr<OPRT_Base,std::default_delete<_Ty>> (void),2>' のリファレンスを確認してください
+          with
+          [
+              _Ty=OPRT_Base
+          ]
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(29): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(38): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(44): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(120): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(130): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(223): warning C4180: 関数型へ適用された修飾子は無効なため、無視されます。
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.13.26128\include\array(233): error C2092: '_Elems' 配列要素型を関数または抽象クラス型にすることはできません
   MouseCtr.cpp
+  OPRT_CPU.cpp
+  OPRT_MAN.cpp
   PieceTray.cpp
-c:\users\1601291\documents\github\project03-1\project03\piecetray.cpp(134): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\1601291\documents\github\project03-1\project03\piecetray.cpp(136): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
   Player.cpp
+c:\users\1601291\documents\github\project03-1\project03\player.cpp(82): error C2039: 'GetButton': 'std::shared_ptr<MouseCtr>' のメンバーではありません。
+  c:\users\1601291\documents\github\project03-1\project03\player.h(27): note: 'std::shared_ptr<MouseCtr>' の宣言を確認してください
+c:\users\1601291\documents\github\project03-1\project03\player.cpp(85): error C2039: 'GetPos': 'std::shared_ptr<MouseCtr>' のメンバーではありません。
+  c:\users\1601291\documents\github\project03-1\project03\player.h(27): note: 'std::shared_ptr<MouseCtr>' の宣言を確認してください
   コードを生成中...

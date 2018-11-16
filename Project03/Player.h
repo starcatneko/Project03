@@ -8,6 +8,8 @@
 #include "PieceState.h"
 
 class PieceTray;
+class MouseCtr;
+
 class Player
 {
 public:
@@ -22,7 +24,7 @@ public:
 	void DeleteTrayPiece();
 
 	// プレイヤーのターン処理
-	void TurnAct();
+	void TurnAct(std::shared_ptr<MouseCtr> mouse);
 	bool SetTunrFlg(bool flg);
 	//現在プレイヤーのターンか
 	bool GetTunrFlg();

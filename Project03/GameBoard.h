@@ -30,6 +30,13 @@ typedef std::shared_ptr<GameBoard> Board_ptr;
 #define Y_DIS (int)((SCREEN_SIZE_Y / 2) - (boardSize.y / 2)*CHIPSIZE)
 
 
+// AI‚Ì”»’f—p À•W‚Æİ’u—Dæ“x‚ğŠi”[‚Å‚«‚é
+typedef struct
+{
+	VECTOR2 pos;
+	int socore;
+}SetScore;
+
 class GameBoard
 {
 public:
