@@ -107,6 +107,7 @@ void PieceTray::TrayUpdate()
 		if (selectPiece == i)
 		{
 			itr = piecelist.erase(itr);
+			turnFlag = false;
 			return;
 		}
 		i++;
@@ -131,5 +132,5 @@ bool PieceTray::GetTurnFlg()
 
 int PieceTray::GetScore()
 {
-	return piecemax - piecelist.size();
+	return piecemax - int(piecelist.size());
 }

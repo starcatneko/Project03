@@ -5,8 +5,8 @@
 #include "MouseCtr.h"
 #include "Dxlib.h"
 
-#define X_DIS (int)((SCREEN_SIZE_X / 2) - (MainBoard->GetBoardSize().x / 2)*CHIPSIZE)
-#define Y_DIS (int)((SCREEN_SIZE_Y / 2) - (MainBoard->GetBoardSize().y / 2)*CHIPSIZE)
+//		#define X_DIS (int)((SCREEN_SIZE_X / 2) - (MainBoard->GetBoardSize().x / 2)*CHIPSIZE)
+//		#define Y_DIS (int)((SCREEN_SIZE_Y / 2) - (MainBoard->GetBoardSize().y / 2)*CHIPSIZE)
 
 #define TESTMODE 0
 
@@ -78,6 +78,7 @@ state_ptr GameMain::Update(state_ptr pt)
 			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 		}
 	};
+
 
 	DrawString(0, 0, "Main", 0xffffff, 0);
 	MainBoard->Update();

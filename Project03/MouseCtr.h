@@ -33,6 +33,7 @@ public:
 	void SetPos(VECTOR2 pos);
 	int GetButton();
 	VECTOR2 GetPos();
+
 	int GetButton()	 const;
 	VECTOR2 GetPos() const;
 	int GetDrag();
@@ -45,7 +46,6 @@ private:
 	//int button[ST_MAX];
 	//std::array<int, ST_MAX> button;
 
-	OPRT_TYPE type;
 	std::array<int, ST_MAX> button;
 	VECTOR2 pos;
 };

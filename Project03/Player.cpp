@@ -69,13 +69,17 @@ void Player::TurnAct()
 {
 	//pieceTray->SetTurnFlg(true);
 
+	if (GetTunrFlg() == false)
+	{
+		return;
+	}
 	// TurnActのピースが設置のif内
 	// ピースを設置したらプレイヤーが切り替わるから
 	
 	if (piecetype == PIECE_ST::B)
 	{
 		
-		lpMouse[static_cast<int>(piecetype)]->SetType(OPRT_TYPE::MAN);
+		//lpMouse[static_cast<int>(piecetype)]->SetType(OPRT_TYPE::MAN);
 		if ((lpMouse[static_cast<int>(piecetype)]->GetButton() & 0b0001) != 0)
 		{
 			lpGameTask.Board->SetPiece(lpMouse[static_cast<int>(piecetype)]->GetPos());
@@ -83,7 +87,7 @@ void Player::TurnAct()
 	}
 	else
 	{
-		lpMouse[static_cast<int>(piecetype)]->SetType(OPRT_TYPE::CPU);
+		//lpMouse[static_cast<int>(piecetype)]->SetType(OPRT_TYPE::CPU);
 		if ((lpMouse[static_cast<int>(piecetype)]->GetButton() & 0b0001) != 0)
 		{
 			lpGameTask.Board->SetPiece(lpMouse[static_cast<int>(piecetype)]->GetPos());
