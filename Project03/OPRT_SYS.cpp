@@ -11,3 +11,7 @@ OPRT_SYS::OPRT_SYS()
 OPRT_SYS::~OPRT_SYS()
 {
 }
+
+void OPRT_SYS::Update()
+{
+}

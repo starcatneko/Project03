@@ -1,7 +1,7 @@
 #pragma once
 
 #include "VECTOR2.h"
-#include "OPRT_Base.h"
+#include "OPRT_State.h"
 #include <array>
 
 enum MOUSE_STATE

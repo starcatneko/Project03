@@ -164,9 +164,6 @@
     <ClInclude Include="PIECE_ST.h">
       <Filter>ヘッダー ファイル\piece</Filter>
     </ClInclude>
-    <ClInclude Include="OPRT_Base.h">
-      <Filter>ヘッダー ファイル\oprt</Filter>
-    </ClInclude>
     <ClInclude Include="OPRT_MAN.h">
       <Filter>ヘッダー ファイル\oprt</Filter>
     </ClInclude>
@@ -174,6 +171,9 @@
       <Filter>ヘッダー ファイル\oprt</Filter>
     </ClInclude>
     <ClInclude Include="OPRT_SYS.h">
+      <Filter>ヘッダー ファイル\oprt</Filter>
+    </ClInclude>
+    <ClInclude Include="OPRT_State.h">
       <Filter>ヘッダー ファイル\oprt</Filter>
     </ClInclude>
   </ItemGroup>

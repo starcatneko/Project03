@@ -160,7 +160,7 @@
     <ClInclude Include="ImageMng.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="MouseCtr.h" />
-    <ClInclude Include="OPRT_Base.h" />
+    <ClInclude Include="OPRT_State.h" />
     <ClInclude Include="OPRT_CPU.h" />
     <ClInclude Include="OPRT_MAN.h" />
     <ClInclude Include="OPRT_SYS.h" />

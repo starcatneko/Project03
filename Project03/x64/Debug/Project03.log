@@ -1,6 +1,16 @@
-﻿  GameBoard.cpp
-  GameMain.cpp
+﻿  GameMain.cpp
   GamePiece.cpp
   GameResult.cpp
   GameTask.cpp
   GameTitle.cpp
+  Main.cpp
+  GameBoard.cpp
+  MouseCtr.cpp
+  OPRT_Base.cpp
+  OPRT_CPU.cpp
+  OPRT_MAN.cpp
+  OPRT_SYS.cpp
+  PieceTray.cpp
+  Player.cpp
+  コードを生成中...
+  Project03.vcxproj -> C:\Users\1601291\Documents\GitHub\Project03-1\x64\Debug\Project03.exe

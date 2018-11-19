@@ -12,10 +12,10 @@ enum class OPRT_TYPE
 };
 
 
-class OPRT_Base
+class OPRT_State
 {
 public:
-	virtual ~OPRT_Base() = 0;
+	virtual ~OPRT_State() = 0;
 	virtual void Update() = 0;
 	virtual OPRT_TYPE GetOprtType() = 0;
 };

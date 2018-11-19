@@ -1,7 +1,7 @@
 #pragma once
-#include "OPRT_Base.h"
+#include "OPRT_State.h"
 class OPRT_CPU :
-	public OPRT_Base
+	public OPRT_State
 {
 public:
 	OPRT_CPU();
