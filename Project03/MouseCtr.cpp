@@ -2,11 +2,17 @@
 #include "GameTask.h"
 #include "DxLib.h"
 
+#include "OPRT_State.h"
+#include "OPRT_MAN.h"
+#include "OPRT_CPU.h"
+#include "OPRT_SYS.h"
+
 
 // const_castは絶対に使ってはいけない
 
 MouseCtr::MouseCtr()
 {
+	oprt = std::make_shared<OPRT_CPU>();
 }
 
 
@@ -17,6 +23,7 @@ MouseCtr::~MouseCtr()
 
 void MouseCtr::Update(OPRT_TYPE oprt)
 {
+
 	if (oprt == OPRT_TYPE::MAN)
 	{
 		int mx, my;
@@ -41,7 +48,7 @@ void MouseCtr::Update(OPRT_TYPE oprt)
 
 	if (oprt == OPRT_TYPE::CPU)
 	{
-		
+
 		// 置ける場所リストを参照
 		// リスト内のそれぞれのケースで条件分岐
 
@@ -99,10 +106,22 @@ int MouseCtr::GetDrag()
 
 void MouseCtr::SetOprtType(OPRT_TYPE type)
 {
+	switch (type)
+	{
+	case OPRT_TYPE::CPU:
+		oprt = std::make_shared<OPRT_CPU>();
+		break;
+	case OPRT_TYPE::MAN:
+		oprt = std::make_shared<OPRT_MAN>();
+		break;
+	case OPRT_TYPE::SYS:
+		oprt = std::make_shared<OPRT_SYS>();
+		break;
+	}
 }
-
 OPRT_TYPE MouseCtr::GetOprtType()
 {
-	//return ;
-	return OPRT_TYPE::CPU;
+	//return ;	
+	return oprt->GetOprtType();
+
 }

@@ -93,9 +93,6 @@
     <ClCompile Include="PIECE_ST.cpp">
       <Filter>ソース ファイル\piece</Filter>
     </ClCompile>
-    <ClCompile Include="OPRT_Base.cpp">
-      <Filter>ソース ファイル\oprt</Filter>
-    </ClCompile>
     <ClCompile Include="OPRT_CPU.cpp">
       <Filter>ソース ファイル\oprt</Filter>
     </ClCompile>
@@ -106,6 +103,9 @@
       <Filter>ソース ファイル\core</Filter>
     </ClCompile>
     <ClCompile Include="OPRT_SYS.cpp">
+      <Filter>ソース ファイル\oprt</Filter>
+    </ClCompile>
+    <ClCompile Include="OPRT_State.cpp">
       <Filter>ソース ファイル\oprt</Filter>
     </ClCompile>
   </ItemGroup>

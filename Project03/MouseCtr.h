@@ -1,8 +1,10 @@
 #pragma once
 
 #include "VECTOR2.h"
-#include "OPRT_State.h"
 #include <array>
+#include <memory>
+
+#include "OPRT_State.h"
 
 enum MOUSE_STATE
 {
@@ -32,8 +34,7 @@ public:
 
 
 private:
-	//int button[ST_MAX];
-	//std::array<int, ST_MAX> button;
+	std::shared_ptr<OPRT_State> oprt;
 
 	std::array<int, ST_MAX> button;
 	VECTOR2 pos;

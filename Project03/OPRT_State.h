@@ -1,6 +1,5 @@
 #pragma once
 
-
 // プレイヤーの種類毎に操作系統を判断できる
 // テーブルを作成する
 enum class OPRT_TYPE

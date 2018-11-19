@@ -6,7 +6,7 @@
   Main.cpp
   GameBoard.cpp
   MouseCtr.cpp
-  OPRT_Base.cpp
+  OPRT_State.cpp
   OPRT_CPU.cpp
   OPRT_MAN.cpp
   OPRT_SYS.cpp

@@ -9,6 +9,7 @@
 #include "GameTitle.h"
 #include "GameMain.h"
 #include "GameResult.h"
+#include "OPRT_State.h"
 
 
 std::unique_ptr<GameTask, GameTask::GameTaskDeleter> GameTask::s_Instance(new GameTask());
