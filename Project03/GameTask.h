@@ -83,6 +83,7 @@ private:
 	// プレイヤー毎のOPRT_TYPE;
 	// プレイヤー操作(OPRT_TYPE::MAN)は明示的に設定する
 	std::vector<OPRT_TYPE> oprt_tbl;
+	std::vector<OPRT_State> oprt_tbl_s;
 };
 
 

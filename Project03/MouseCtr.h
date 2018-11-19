@@ -19,7 +19,6 @@ class MouseCtr
 public:
 	MouseCtr();
 	~MouseCtr();
-	void Update();
 	void Update(OPRT_TYPE oprt);
 	void SetPos(VECTOR2 pos);
 	int GetButton();

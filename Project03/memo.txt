@@ -8,6 +8,11 @@
 
  !!		VBA 出力
 
+ mouse.Update{
+ mouse.oprt->Update()
+ mouse.oprt->
+}
+
  ~~	defineで()を使う意味
  ヘッダーを複数のソースファイルから読み込んだ際に
  再定義を回避することができる。
