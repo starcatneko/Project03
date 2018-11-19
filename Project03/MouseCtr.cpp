@@ -49,7 +49,7 @@ void MouseCtr::Update(OPRT_TYPE oprt)
 		{
 			return;
 		}
-		pos = lpGameTask.Board->SetListSerch(PIECE_ST::W);
+		pos = lpGameTask.Board->SetListSerch((*lpGameTask.currentPlayer)->GetType());
 		button[ST_OLD] = 0b0000;
 
 		button[ST_NEW] = 0b0001;

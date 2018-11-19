@@ -1,26 +1,15 @@
 #pragma once
 
 #include "VECTOR2.h"
+#include "OPRT_Base.h"
 #include <array>
+
 enum MOUSE_STATE
 {
 	ST_NEW,
 	ST_OLD,
 	ST_MAX
 };
-
-
-// プレイヤーの種類毎に操作系統を判断できる
-// テーブルを作成する
-enum class OPRT_TYPE
-{
-	MAN,		// プレイヤー操作
-	CPU,		// CPU操作
-	MAX
-};
-
-
-
 //using MOUSE_INT std::array<int, ST_MAX>
 
 class MouseCtr

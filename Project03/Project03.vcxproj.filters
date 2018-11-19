@@ -31,6 +31,12 @@
     <Filter Include="ヘッダー ファイル\mode">
       <UniqueIdentifier>{666516dd-90bf-460c-b1e3-5c5e4b89f184}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\oprt">
+      <UniqueIdentifier>{36734e9d-e7ba-4ea5-9ef3-94211abf17f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\oprt">
+      <UniqueIdentifier>{e0d0eac5-d8ae-45bd-bcf8-97965f1276f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GamePiece.cpp">
@@ -69,9 +75,6 @@
     <ClCompile Include="PieceKing.cpp">
       <Filter>ソース ファイル\piece</Filter>
     </ClCompile>
-    <ClCompile Include="PieceTray.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="GameState.cpp">
       <Filter>ソース ファイル\mode</Filter>
     </ClCompile>
@@ -89,6 +92,21 @@
     </ClCompile>
     <ClCompile Include="PIECE_ST.cpp">
       <Filter>ソース ファイル\piece</Filter>
+    </ClCompile>
+    <ClCompile Include="OPRT_Base.cpp">
+      <Filter>ソース ファイル\oprt</Filter>
+    </ClCompile>
+    <ClCompile Include="OPRT_CPU.cpp">
+      <Filter>ソース ファイル\oprt</Filter>
+    </ClCompile>
+    <ClCompile Include="OPRT_MAN.cpp">
+      <Filter>ソース ファイル\oprt</Filter>
+    </ClCompile>
+    <ClCompile Include="PieceTray.cpp">
+      <Filter>ソース ファイル\core</Filter>
+    </ClCompile>
+    <ClCompile Include="OPRT_SYS.cpp">
+      <Filter>ソース ファイル\oprt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +163,18 @@
     </ClInclude>
     <ClInclude Include="PIECE_ST.h">
       <Filter>ヘッダー ファイル\piece</Filter>
+    </ClInclude>
+    <ClInclude Include="OPRT_Base.h">
+      <Filter>ヘッダー ファイル\oprt</Filter>
+    </ClInclude>
+    <ClInclude Include="OPRT_MAN.h">
+      <Filter>ヘッダー ファイル\oprt</Filter>
+    </ClInclude>
+    <ClInclude Include="OPRT_CPU.h">
+      <Filter>ヘッダー ファイル\oprt</Filter>
+    </ClInclude>
+    <ClInclude Include="OPRT_SYS.h">
+      <Filter>ヘッダー ファイル\oprt</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

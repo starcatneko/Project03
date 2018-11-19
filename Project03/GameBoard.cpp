@@ -127,10 +127,13 @@ void GameBoard::SetPiece(VECTOR2 pos)
 					data[vec1.y][vec1.x] = (tmp);
 					data[vec1.y][vec1.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
 
+
+					int reverseTime = REVERSE_TIME;
+
 					for(int i = 1;Reverse(vec1, itr*i) == true;i++)
 					{
 						VECTOR2 setvec = vec1 + itr * i;
-
+						reverseTime += REVERSE_TIME;
 						//delete &data[setvec.y][setvec.x].lock();
 						piece_shared tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
 						data[setvec.y][setvec.x] = (tmp);
@@ -150,7 +153,7 @@ void GameBoard::SetPiece(VECTOR2 pos)
 						}
 
 					}
-
+					(*lpGameTask.currentPlayer)->SetTurnTimer(reverseTime);
 				}
 			}
 		}

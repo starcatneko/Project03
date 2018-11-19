@@ -46,8 +46,6 @@ GameMain::GameMain()
 	}
 	lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
 	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-
-
 }
 
 
@@ -64,9 +62,10 @@ void GameMain::Draw()
 state_ptr GameMain::Update(state_ptr pt)
 {
 
+
 	auto setNextPlayer = [&](){
 		//(*lpGameTask.currentPlayer)->SetTunrFlg(false);
-		if ((*lpGameTask.currentPlayer)->GetTunrFlg()== false)
+		if ((*lpGameTask.currentPlayer)->GetTunrFlg()== false && (*lpGameTask.currentPlayer)->GetTurnTimer() <= 0)
 		{
 			if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
 			{
@@ -88,7 +87,6 @@ state_ptr GameMain::Update(state_ptr pt)
 		(*itr).Update();
 	}
 	// ifTurnActがtrueの場合、プレイヤーチェンジ処理を行う
-	
 
 	if (MainBoard->gameEndFlg)
 	{

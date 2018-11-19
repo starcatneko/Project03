@@ -28,6 +28,8 @@ public:
 	bool GetTunrFlg();
 	int GetScore();	
 	
+	void SetTurnTimer(int time);
+	int GetTurnTimer();
 private:
 	int playerNo;
 	static int playercnt;
@@ -38,5 +40,8 @@ private:
 
 	PIECE_ST piecetype;
 	bool turnFlg;
+
+	// プレイヤーを切り替えるフラグタイマー
+	int ChangeTimer;
 };
 

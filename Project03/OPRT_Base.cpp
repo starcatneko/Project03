@@ -1,11 +1,5 @@
 #include "OPRT_Base.h"
-
-
-
-OPRT_Base::OPRT_Base()
-{
-}
-
+#include "GameTask.h"
 
 OPRT_Base::~OPRT_Base()
 {

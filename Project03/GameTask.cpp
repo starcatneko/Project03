@@ -27,7 +27,7 @@ GameTask::GameTask()
 		oprt_tbl[unit] = OPRT_TYPE::CPU;
 	}
 	oprt_tbl[0] = OPRT_TYPE::MAN;
-	oprt_tbl[1] = OPRT_TYPE::MAN;
+	//oprt_tbl[1] = OPRT_TYPE::MAN;
 
 	wait = 0;
 }

@@ -22,7 +22,7 @@ typedef std::list<player_ptr> player_list;
 #define lpMouse lpGameTask.Mouse
 
 // プレイヤー人数
-#define PL_MAX 2
+#define PL_MAX (2)
 
 #define SETWAIT(int) (GameTask::GetInstance().SetWait(int))
 #define ADDWAIT(int) (GameTask::GetInstance().AddWait(int))
@@ -81,6 +81,7 @@ private:
 	
 	//std::array<OPRT_TYPE,static_cast<int>(OPRT_TYPE::MAX)> oprt_tbl;
 	// プレイヤー毎のOPRT_TYPE;
+	// プレイヤー操作(OPRT_TYPE::MAN)は明示的に設定する
 	std::vector<OPRT_TYPE> oprt_tbl;
 };
 

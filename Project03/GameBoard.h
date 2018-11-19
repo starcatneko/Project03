@@ -10,7 +10,8 @@
 class GamePiece;
 class MouseCtr;
 
-#define PL_MAX 2
+#define PL_MAX (2)
+#define REVERSE_TIME (8)		// ‹î”½“]‚ÌƒtƒŒ[ƒ€”
 
 //class Player;
 
