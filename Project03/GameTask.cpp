@@ -16,13 +16,7 @@ std::unique_ptr<GameTask, GameTask::GameTaskDeleter> GameTask::s_Instance(new Ga
 
 GameTask::GameTask()
 {
-	CurrentScene = &GameTask::Init;
-
-	state.reset();
-	state = std::make_unique<GameTitle>();
-	Mouse = std::make_shared<MouseCtr>();
-
-	wait = 0;
+	Init();
 }
 
 
@@ -33,18 +27,16 @@ GameTask::~GameTask()
 
 void GameTask::Init()
 {
-	//CurrentScene = &GameTask::Title;
-	//currentPlayer = lpGameTask.playerlist.begin();
+	CurrentScene = &GameTask::Init;
+
+	state.reset();
+	state = std::make_unique<GameTitle>();
+	Mouse = std::make_shared<MouseCtr>();
+
+	wait = 0;
 }
 void GameTask::Run()
 {
-	for (auto unit : PIECE_ST())
-	{
-
-		// ˆø”‚Å‘€ìí•Ê‚ğ“n‚·
-		// 
-		//oprt_tbl[unit]->Update();
-	}
 	Mouse->Update();
 
 	ScreenFlip();
@@ -52,7 +44,7 @@ void GameTask::Run()
 	state = state->Update(std::move(state));
 	if (wait > 0)
 	{
-		wait--;
+		//wait--;
 	}
 	state->Draw();
 }

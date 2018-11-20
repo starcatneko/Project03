@@ -21,7 +21,6 @@ void OPRT_CPU::Update()
 	}
 	lpGameTask.Mouse->SetPos(lpGameTask.Board->SetlistSerch());
 	
-	lpGameTask.Mouse->SetClick(0b0001); lpGameTask.Mouse->SetButton(0b0001);
-
+	lpGameTask.Mouse->SetClick(0b0001); 
 
 }

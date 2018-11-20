@@ -21,6 +21,7 @@ class MouseCtr
 {
 public:
 	MouseCtr();
+	void Init();
 	~MouseCtr();
 	void Update();
 	void SetPos(VECTOR2 pos);
@@ -30,8 +31,6 @@ public:
 	void SetClick(int button);
 	VECTOR2 GetPos();
 
-	int GetButton()	 const;
-	VECTOR2 GetPos() const;
 	int GetDrag();
 	void SetOprtType(OPRT_TYPE type);
 	void SetOprtType(int piece_st);

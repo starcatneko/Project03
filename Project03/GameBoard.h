@@ -11,8 +11,8 @@ class GamePiece;
 class MouseCtr;
 
 #define PL_MAX (2)
-#define REVERSE_TIME (30)		// 駒反転のフレーム数
-#define TURN_CHANGE_WAIT (24)	// ターン更新時ウェイト
+#define REVERSE_TIME (4)		// 駒反転のフレーム数
+#define TURN_CHANGE_WAIT (16)	// ターン更新時ウェイト
 
 //class Player;
 
@@ -82,7 +82,7 @@ public:
 	// 指定された色のピースの数を返す
 	int PieceCount(PIECE_ST olor);
 	VECTOR2 SetlistSerch();	
-	void CurrentSetUpData();
+	void SetlistUpdata();
 
 private:
 	piece_shared AddObjList(piece_shared&& objPtr);

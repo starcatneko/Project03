@@ -10,7 +10,6 @@ enum class OPRT_TYPE
 	MAX
 };
 
-
 class OPRT_State
 {
 public:

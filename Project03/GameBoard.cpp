@@ -382,7 +382,7 @@ void SetlistClear()
 
 }
 
-void GameBoard::CurrentSetUpData()
+void GameBoard::SetlistUpdata()
 {
 	
 	setlist.clear();

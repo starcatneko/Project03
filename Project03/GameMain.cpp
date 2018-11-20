@@ -48,7 +48,7 @@ GameMain::GameMain()
 	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 	
 	lpMouse->SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
-	MainBoard->CurrentSetUpData();
+	MainBoard->SetlistUpdata();
 }
 
 
@@ -72,13 +72,13 @@ state_ptr GameMain::Update(state_ptr pt)
 			{
 				lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
 				(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-				MainBoard->CurrentSetUpData();
+				MainBoard->SetlistUpdata();
 				lpMouse->SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
 				return;
 			}
 			(*lpGameTask.currentPlayer++);
 			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-			MainBoard->CurrentSetUpData();
+			MainBoard->SetlistUpdata();
 			lpMouse->SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
 		}
 	};

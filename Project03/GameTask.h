@@ -17,8 +17,11 @@ class Player;
 typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
 
-
+//		
 #define lpGameTask GameTask::GetInstance()
+//		
+#define lpCurrentPlayer (*lpGameTask.currentPlayer)
+//		
 #define lpMouse lpGameTask.Mouse
 
 // プレイヤー人数
