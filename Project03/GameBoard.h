@@ -20,6 +20,8 @@ class MouseCtr;
 typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
 typedef std::shared_ptr<GameBoard> Board_ptr;
+typedef std::shared_ptr<std::list<VECTOR2>> VECTOR2_list;
+
 
 #define BoardSize int(8)
 
@@ -78,10 +80,11 @@ public:
 	void PieceResultSet();
 	// 指定された色のピースの数を返す
 	int PieceCount(PIECE_ST olor);
-	VECTOR2 SetListSerch(PIECE_ST type);
+	VECTOR2 SetlistSerch();	
+	void CurrentSetUpData();
+
 private:
 	piece_shared AddObjList(piece_shared&& objPtr);
-	void CurrentSetUpData();
 
 	//auto AddObjList(piece_shared&& objPtr);
 	//
@@ -110,13 +113,13 @@ private:
 	int winplayer;
 
 	// 設置座標可能リスト
-	std::array<std::list<VECTOR2>,static_cast<int>(PIECE_ST::MAX)> setlist;
-
+	//std::array<std::list<VECTOR2>,static_cast<int>(PIECE_ST::MAX)> itr;
+	std::list<VECTOR2> setlist;
 	piece_list piecelist;
 	VECTOR2 size;
 	std::array<int, PL_MAX> TotalPiece;
 
-
+	//std::array<VECTOR2_list, static_cast<int>(PIECE_ST::MAX)>itr;
 
 	int timer;
 

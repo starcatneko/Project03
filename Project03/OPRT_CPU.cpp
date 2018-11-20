@@ -15,4 +15,5 @@ OPRT_CPU::~OPRT_CPU()
 
 void OPRT_CPU::Update()
 {
+
 }

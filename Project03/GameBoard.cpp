@@ -49,6 +49,7 @@ bool GameBoard::Init()
 
 	timer = 0;
 	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_ST::B);
+	
 	return true;
 }
 
@@ -56,7 +57,7 @@ VECTOR2 GameBoard::Pos_MouseToBoard(VECTOR2 mousePos)
 {
 	int setPosX = mousePos.x - X_DIS;
 	int setPosY = mousePos.y - Y_DIS;
-	return{ setPosX /= CHIPSIZE, setPosY /= CHIPSIZE };
+	return{ setPosX / CHIPSIZE, setPosY / CHIPSIZE };
 }
 VECTOR2 GameBoard::Pos_BoardToMouse(VECTOR2 BoardPos)
 {
@@ -126,7 +127,6 @@ void GameBoard::SetPiece(VECTOR2 pos)
 					piece_shared tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
 					data[vec1.y][vec1.x] = (tmp);
 					data[vec1.y][vec1.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
-
 
 					int reverseTime = REVERSE_TIME;
 
@@ -334,6 +334,10 @@ void GameBoard::DrawPiece()
 
 void GameBoard::Draw()
 {
+	
+
+	//DrawBox(itr.x, itr.y, itr.x + 64, itr.y + 64, 0xDDDDDD, true);
+
 	auto DrawBoard = [&]() {
 		DrawBox(X_DIS, Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
 			boardSize.y*CHIPSIZE + Y_DIS,
@@ -362,11 +366,12 @@ void GameBoard::Draw()
 
 	CurrentPlPiece->Draw();
 	*/
+	/*
 	if (gameEndFlg != true)
 	{
 		CurrentSetUpData();
 	}
-
+	*/
 	// 現在の番のプレイヤーを表示する
 
 	DrawPiece();
@@ -376,11 +381,15 @@ void GameBoard::Draw()
 
 }
 
+void SetlistClear()
+{
+
+}
 
 void GameBoard::CurrentSetUpData()
 {
 	
-	setlist[static_cast<int>((*lpGameTask.currentPlayer)->GetType())].clear();
+	setlist.clear();
 	VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }, };
 	
 	// 設置可能なタイルの数
@@ -406,11 +415,12 @@ void GameBoard::CurrentSetUpData()
 					&& data[drawPos.y][drawPos.x].expired())
 				{
 					tilecnt++;
-					setlist[static_cast<int>((*lpGameTask.currentPlayer)->GetType())].push_back(drawPos);
+					setlist.push_back(drawPos);
+				/*
 					DrawBox(drawPos.x*CHIPSIZE + X_DIS, drawPos.y*CHIPSIZE + Y_DIS
 						, drawPos.x*CHIPSIZE + CHIPSIZE + X_DIS,
 						drawPos.y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xaadd00, true);
-				}
+				*/}
 			}
 		}
 	}
@@ -472,7 +482,7 @@ int GameBoard::PieceCount(PIECE_ST color)
 	return cnt;
 }
 
-VECTOR2 GameBoard::SetListSerch(PIECE_ST type)
+VECTOR2 GameBoard::SetlistSerch()
 {
 	VECTOR2 tmpPos;
 	if (&setlist == nullptr)
@@ -482,7 +492,7 @@ VECTOR2 GameBoard::SetListSerch(PIECE_ST type)
 
 	int rnd = GetRand(static_cast<int>(setlist.size()));
 	int cnt = 0;
-	for (auto itr : setlist[static_cast<int>(type)])
+	for (auto itr : setlist)
 	{
 		if (rnd == cnt)
 		{

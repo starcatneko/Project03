@@ -12,6 +12,7 @@ Player::Player()
 	Player::piecetype = PIECE_ST(this->playerNo + 1);
 	Player::pieceTray = std::make_unique<PieceTray>(this->piecetype);
 	Player::ChangeTimer = 0;
+
 	//this->SetTray();
 }
 
@@ -69,6 +70,7 @@ void Player::DeleteTrayPiece()
 void Player::TurnAct()
 {
 	//pieceTray->SetTurnFlg(true);
+	//lpGameTask.Board->CurrentSetUpData();
 
 	if (GetTunrFlg() == false)
 	{
@@ -81,6 +83,7 @@ void Player::TurnAct()
 	{
 		lpGameTask.Board->SetPiece(lpMouse[static_cast<int>(piecetype)]->GetPos());
 	}
+
 }
 
 bool Player::SetTunrFlg(bool flg)

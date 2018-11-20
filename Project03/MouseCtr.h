@@ -14,6 +14,8 @@ enum MOUSE_STATE
 };
 //using MOUSE_INT std::array<int, ST_MAX>
 
+typedef std::shared_ptr<OPRT_State> OPRT_ptr;
+
 class MouseCtr
 {
 public:
@@ -27,13 +29,10 @@ public:
 	int GetButton()	 const;
 	VECTOR2 GetPos() const;
 	int GetDrag();
-
 	void SetOprtType(OPRT_TYPE type);
 	OPRT_TYPE GetOprtType();
-
-
 private:
-	std::shared_ptr<OPRT_State> oprt;
+	OPRT_ptr oprt;
 
 	std::array<int, ST_MAX> button;
 	VECTOR2 pos;

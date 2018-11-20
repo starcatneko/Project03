@@ -23,6 +23,7 @@ MouseCtr::~MouseCtr()
 
 void MouseCtr::Update(OPRT_TYPE oprt)
 {
+	MouseCtr::oprt->Update();
 
 	if (oprt == OPRT_TYPE::MAN)
 	{
@@ -56,7 +57,7 @@ void MouseCtr::Update(OPRT_TYPE oprt)
 		{
 			return;
 		}
-		pos = lpGameTask.Board->SetListSerch((*lpGameTask.currentPlayer)->GetType());
+		pos = lpGameTask.Board->SetlistSerch();
 		button[ST_OLD] = 0b0000;
 
 		button[ST_NEW] = 0b0001;

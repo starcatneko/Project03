@@ -46,6 +46,7 @@ GameMain::GameMain()
 	}
 	lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
 	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+	MainBoard->CurrentSetUpData();
 }
 
 
@@ -71,10 +72,12 @@ state_ptr GameMain::Update(state_ptr pt)
 			{
 				lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
 				(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+				MainBoard->CurrentSetUpData();
 				return;
 			}
 			(*lpGameTask.currentPlayer++);
 			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+			MainBoard->CurrentSetUpData();
 		}
 	};
 

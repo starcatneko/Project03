@@ -36,7 +36,7 @@ private:
 	std::unique_ptr <PieceTray> pieceTray;
 	
 	// ’u‚¯‚éêŠƒŠƒXƒg
-	std::list<VECTOR2> setlist;
+	std::list<VECTOR2> itr;
 
 	PIECE_ST piecetype;
 	bool turnFlg;
