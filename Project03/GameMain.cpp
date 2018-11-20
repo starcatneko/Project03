@@ -46,6 +46,8 @@ GameMain::GameMain()
 	}
 	lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
 	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+	
+	lpMouse->SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
 	MainBoard->CurrentSetUpData();
 }
 
@@ -62,8 +64,6 @@ void GameMain::Draw()
 
 state_ptr GameMain::Update(state_ptr pt)
 {
-
-
 	auto setNextPlayer = [&](){
 		//(*lpGameTask.currentPlayer)->SetTunrFlg(false);
 		if ((*lpGameTask.currentPlayer)->GetTunrFlg()== false && (*lpGameTask.currentPlayer)->GetTurnTimer() <= 0)
@@ -73,11 +73,13 @@ state_ptr GameMain::Update(state_ptr pt)
 				lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
 				(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 				MainBoard->CurrentSetUpData();
+				lpMouse->SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
 				return;
 			}
 			(*lpGameTask.currentPlayer++);
 			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 			MainBoard->CurrentSetUpData();
+			lpMouse->SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
 		}
 	};
 
@@ -85,11 +87,11 @@ state_ptr GameMain::Update(state_ptr pt)
 	DrawString(0, 0, "Main", 0xffffff, 0);
 	MainBoard->Update();
 	(*lpGameTask.currentPlayer)->TurnAct();
+
 	for (auto itr : GameTask::GetInstance().playerlist)
 	{
 		(*itr).Update();
 	}
-	// ifTurnActがtrueの場合、プレイヤーチェンジ処理を行う
 
 	if (MainBoard->gameEndFlg)
 	{

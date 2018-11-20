@@ -19,7 +19,7 @@ GameResult::GameResult(Board_ptr pt)
 		//pieceCount[int(itr)] = Board->PieceCount(itr);
 	}
 
-
+	lpMouse->SetOprtType(OPRT_TYPE::MAN);
 
 }
 
@@ -33,7 +33,7 @@ state_ptr GameResult::Update(state_ptr pt)
 {
 	lpGameTask.Board->Update();
 
-	if ((lpMouse[0]->GetButton() & 0b0001) > 0)
+	if ((lpMouse->GetButton() & 0b0001) > 0)
 	{
 		// ƒŠƒXƒg‚ðÁ‹Ž
 		lpGameTask.playerlist.erase(lpGameTask.playerlist.begin(), lpGameTask.playerlist.end());
@@ -49,7 +49,7 @@ state_ptr GameResult::Update(state_ptr pt)
 void GameResult::Draw()
 {
 	Board->Draw();
-	Board->ResultDraw();
+	//Board->ResultDraw();
 	
 	
 

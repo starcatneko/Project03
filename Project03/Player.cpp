@@ -79,9 +79,9 @@ void Player::TurnAct()
 	}
 	// TurnActのピースが設置のif内
 	// ピースを設置したらプレイヤーが切り替わるから
-	if ((lpMouse[static_cast<int>(piecetype)]->GetButton() & 0b0001) != 0)
+	if ((lpMouse->GetButton() & 0b0001) != 0)
 	{
-		lpGameTask.Board->SetPiece(lpMouse[static_cast<int>(piecetype)]->GetPos());
+		lpGameTask.Board->SetPiece(lpMouse->GetPos());
 	}
 
 }
@@ -104,7 +104,7 @@ int Player::GetScore()
 
 void Player::SetTurnTimer(int time)
 {
-	ChangeTimer = time;
+	ChangeTimer = time + TURN_CHANGE_WAIT;
 }
 int Player::GetTurnTimer()
 {

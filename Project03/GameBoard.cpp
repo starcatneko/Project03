@@ -334,9 +334,7 @@ void GameBoard::DrawPiece()
 
 void GameBoard::Draw()
 {
-	
 
-	//DrawBox(itr.x, itr.y, itr.x + 64, itr.y + 64, 0xDDDDDD, true);
 
 	auto DrawBoard = [&]() {
 		DrawBox(X_DIS, Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
@@ -357,24 +355,22 @@ void GameBoard::Draw()
 
 	DrawBoard();
 
+
 	VECTOR2 CurrntPlPos = CurrentPlPiece->GetPos();
 
-	/*
-	DrawBox(CurrntPlPos.x*CHIPSIZE + X_DIS, CurrntPlPos.y*CHIPSIZE + Y_DIS
-		, CurrntPlPos.x*CHIPSIZE + CHIPSIZE + X_DIS,
-		CurrntPlPos.y*CHIPSIZE + CHIPSIZE + Y_DIS, 0x006600, true);
-
-	CurrentPlPiece->Draw();
-	*/
-	/*
-	if (gameEndFlg != true)
+	for (auto itr : setlist)
 	{
-		CurrentSetUpData();
+		VECTOR2 drawpos = itr * 64;
+		DrawBox(drawpos.x + X_DIS+1, drawpos.y + Y_DIS+1,
+			drawpos.x + 64 + X_DIS-1, drawpos.y + 64 + Y_DIS-1, 0x00dd00, true);
 	}
-	*/
-	// 現在の番のプレイヤーを表示する
+
 
 	DrawPiece();
+
+
+
+
 
 	DrawFormatString(0, 64, 0xdddddd, "プレイヤー数%d", GameTask::GetInstance().playerlist.size());
 	DrawFormatString(0, 96, 0xdddddd, "現在のプレイヤー\n%d", (*GameTask::GetInstance().currentPlayer)->GetNo());
@@ -458,8 +454,8 @@ void GameBoard::PieceResultSet()
 
 	//listD(BaseData);
 	//listD(piecelist);
-	BaseData.clear();
-	piecelist.clear();
+	//BaseData.clear();
+	//piecelist.clear();
 	for (auto itr : TotalPiece)
 	{
 		//BaseData.push_back(

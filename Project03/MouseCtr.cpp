@@ -13,6 +13,20 @@
 MouseCtr::MouseCtr()
 {
 	oprt = std::make_shared<OPRT_CPU>();
+	oprt_tbl.resize(static_cast<int>(PIECE_ST::MAX));
+
+	for (auto unit : PIECE_ST())
+	{
+		oprt_tbl[unit] = OPRT_TYPE::CPU;
+		//oprt_tbl_s[unit] = ;
+	}
+	oprt_tbl[static_cast<int>(PIECE_ST::NON)] = OPRT_TYPE::SYS;
+	oprt_tbl[static_cast<int>(PIECE_ST::B)] = OPRT_TYPE::MAN;
+	//oprt_tbl[static_cast<int>(PIECE_ST::W)] = OPRT_TYPE::MAN;
+	//oprt_tbl[1] = OPRT_TYPE::MAN;
+	SetOprtType(oprt_tbl[static_cast<int>(PIECE_ST::NON)]);
+
+
 }
 
 
@@ -21,10 +35,11 @@ MouseCtr::~MouseCtr()
 }
 
 
-void MouseCtr::Update(OPRT_TYPE oprt)
+void MouseCtr::Update()
 {
+	button[ST_OLD] = button[ST_NEW];
 	MouseCtr::oprt->Update();
-
+	/*
 	if (oprt == OPRT_TYPE::MAN)
 	{
 		int mx, my;
@@ -68,7 +83,7 @@ void MouseCtr::Update(OPRT_TYPE oprt)
 
 		return;
 	}
-
+	*/
 	//mouseCtr.GetBtn()[ST_NOW]
 }
 
@@ -95,6 +110,16 @@ int MouseCtr::GetButton()
 	}
 }
 
+void MouseCtr::SetButton(int button)
+{
+	MouseCtr::button[ST_NEW] = button;
+}
+void MouseCtr::SetClick(int button)
+{
+	MouseCtr::button[ST_OLD] = 0b0000;
+	MouseCtr::button[ST_NEW] = button;
+}
+
 VECTOR2 MouseCtr::GetPos()
 {
 	return { pos };
@@ -112,13 +137,15 @@ void MouseCtr::SetOprtType(OPRT_TYPE type)
 	case OPRT_TYPE::CPU:
 		oprt = std::make_shared<OPRT_CPU>();
 		break;
+	case OPRT_TYPE::SYS:
 	case OPRT_TYPE::MAN:
 		oprt = std::make_shared<OPRT_MAN>();
 		break;
-	case OPRT_TYPE::SYS:
-		oprt = std::make_shared<OPRT_SYS>();
-		break;
 	}
+}
+void MouseCtr::SetOprtType(int piece_st)
+{
+	SetOprtType(oprt_tbl[piece_st]);
 }
 OPRT_TYPE MouseCtr::GetOprtType()
 {

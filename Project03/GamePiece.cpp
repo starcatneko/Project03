@@ -152,7 +152,7 @@ PIECE_ST GamePiece::GetState()
 
 void GamePiece::SetReverse(int num)
 {
-	rev_F = REVERSE_F * num;
+	rev_F = REVERSE_TIME * num;
 }
 bool GamePiece::Update()
 {
@@ -172,7 +172,7 @@ bool GamePiece::Update()
 }
 bool GamePiece::ReverseStandby()
 {
-	clearTimer = ANIM_FRAME;
+	clearTimer = REVERSE_TIME;
 	return true;
 }
 

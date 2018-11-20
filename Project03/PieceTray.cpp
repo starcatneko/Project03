@@ -20,7 +20,7 @@ PieceTray::PieceTray(PIECE_ST st)
 	this->turnFlag = false;
 	//int piecemax = (lpGameTask.GetBoardSize().x*lpGameTask.GetBoardSize().y) / 2;
 
-	for (int j = 0; j < piecemax; j++)
+	for (int j = 0; j < piecemax-2; j++)
 	{
 		pos = VECTOR2{ 0,j } +VECTOR2{ (this->color == PIECE_ST::B ? 0 : 11),0};
 		AddPiece();

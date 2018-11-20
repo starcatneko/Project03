@@ -50,7 +50,7 @@ public:
 	// 現在選択しているプレイヤーのアドレスを格納する
 
 	state_ptr state;
-	std::vector<std::shared_ptr<MouseCtr>> Mouse;
+	std::shared_ptr<MouseCtr> Mouse;
 
 	Board_ptr Board;
 private:
@@ -82,7 +82,6 @@ private:
 	//std::array<OPRT_TYPE,static_cast<int>(OPRT_TYPE::MAX)> oprt_tbl;
 	// プレイヤー毎のOPRT_TYPE;
 	// プレイヤー操作(OPRT_TYPE::MAN)は明示的に設定する
-	std::vector<OPRT_TYPE> oprt_tbl;
 	//std::vector<OPRT_State> oprt_tbl_s;
 };
 

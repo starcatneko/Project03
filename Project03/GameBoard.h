@@ -11,7 +11,8 @@ class GamePiece;
 class MouseCtr;
 
 #define PL_MAX (2)
-#define REVERSE_TIME (8)		// 駒反転のフレーム数
+#define REVERSE_TIME (30)		// 駒反転のフレーム数
+#define TURN_CHANGE_WAIT (24)	// ターン更新時ウェイト
 
 //class Player;
 
