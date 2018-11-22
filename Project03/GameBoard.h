@@ -46,6 +46,9 @@ public:
 	void SetPiece(VECTOR2 pos);
 	void SetPiece(VECTOR2 pos, PIECE_ST st);
 
+	// data[pos.y][pos.x].expiredをする。範囲外参照を回避する。
+	bool CheckExpired(VECTOR2 pos);
+
 	void DB_TouchBoad();
 	void Update();
 	// ゲームセット時処理
@@ -53,12 +56,15 @@ public:
 
 	// 基本的に駒の描画
 	void DrawPiece();
+	void DrawBoard();
 	// 纏めて描画
 	void Draw();
-	// flgがtrueの方向に石を置く
 	// Result用描画 とりあえず
 	void ResultDraw(); 
 	bool Reverse(VECTOR2 pos, VECTOR2 vec);
+
+	// checkPosがBoardのサイズをはみ出していなければtrueを返す
+	bool CheckOverBoard(VECTOR2 checkPos);
 
 	// vec:正規化された方向ベクトル
 	bool SarchReverse(VECTOR2 pos, VECTOR2 vec, PIECE_ST st);

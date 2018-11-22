@@ -7,7 +7,7 @@
 #include "PieceState.h"
 
 // リバース描画のテスト用
-#define TEST_REVERSE 0
+#define TEST_REVERSE 1
 
 
 const int CHIPSIZE = 64;
@@ -41,11 +41,6 @@ bool GameBoard::Init()
 	{
 		(*itr).SetTray();
 	}
-
-	PIECE_ST ai = PIECE_ST::B;
-	++ai;
-	++ai;
-	++ai;
 
 	timer = 0;
 	CurrentPlPiece = std::make_unique<GamePiece>(VECTOR2{ 9,0 }, VECTOR2{ X_DIS,Y_DIS }, PIECE_ST::B);
@@ -98,86 +93,82 @@ void GameBoard::SetPiece(VECTOR2 pos , PIECE_ST st)
 
 }
 
+bool GameBoard::CheckExpired(VECTOR2 pos)
+{
+	if (CheckOverBoard(pos)) {
+		if (data[pos.y][pos.x].expired())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 void GameBoard::SetPiece(VECTOR2 pos)
 {
 	(*GameTask::GetInstance().currentPlayer)->SelectTray(pos);
+	
 	VECTOR2 vec1 = Pos_MouseToBoard(pos);
+	
+	// マウスでクリックした箇所が盤面の外の場合、処理を中断する
+	if (!CheckOverBoard(vec1) ||
+		!CheckExpired(vec1))
+	{
+		return;
+	}
 
 	bool plChangeFlg = false;
-	// マウスでクリックした箇所が盤面の外の場合、この処理は行わない
-	if (vec1.x >= 0 && vec1.y >= 0
-		&& vec1.x <  boardSize.x
-		&& vec1.y < boardSize.y)
-	{
-
-		VECTOR2 vec2 = { X_DIS,Y_DIS };
-
-		VECTOR2 sarchTBL[8] = {{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 },{ 0,-1 }};
-		
-		// クラスに組み込んだ方がいい
+	VECTOR2 vec2 = { X_DIS,Y_DIS };
+	VECTOR2 sarchTBL[8] = {{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 },{ 0,-1 }};
 		int cnt_Reverse = 0;
-
-		if (data[vec1.y][vec1.x].expired())
+	
+	for (auto itr : sarchTBL)
+	{
+		// 方向に向かってひっくり返す関数
+		if (!SarchReverse(vec1, itr, (*GameTask::GetInstance().currentPlayer)->GetType()))
 		{
-			for (auto itr : sarchTBL)
+			continue;
+		}
+
+		piece_shared tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
+		data[vec1.y][vec1.x] = (tmp);
+		data[vec1.y][vec1.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
+
+		int reverseTime = REVERSE_TIME;
+
+		for(int i = 1;Reverse(vec1, itr*i) == true;i++)
+		{
+			VECTOR2 setvec = vec1 + itr * i;
+			reverseTime += REVERSE_TIME;
+			//delete &data[setvec.y][setvec.x].lock();
+			piece_shared tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
+			data[setvec.y][setvec.x] = (tmp);
+			data[setvec.y][setvec.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
+			lastset = (*GameTask::GetInstance().currentPlayer)->GetNo();
+			plChangeFlg = true;
+
+			switch (TEST_REVERSE)
 			{
-				// 方向に向かってひっくり返す関数
-				if(SarchReverse(vec1, itr, (*GameTask::GetInstance().currentPlayer)->GetType()))
-				{
-					piece_shared tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
-					data[vec1.y][vec1.x] = (tmp);
-					data[vec1.y][vec1.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
+			case 0:
+				data[setvec.y][setvec.x].lock()->SetReverse(i);
+				break;
+			case 1:
+				data[setvec.y][setvec.x].lock()->SetReverse(cnt_Reverse++);
 
-					int reverseTime = REVERSE_TIME;
-
-					for(int i = 1;Reverse(vec1, itr*i) == true;i++)
-					{
-						VECTOR2 setvec = vec1 + itr * i;
-						reverseTime += REVERSE_TIME;
-						//delete &data[setvec.y][setvec.x].lock();
-						piece_shared tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
-						data[setvec.y][setvec.x] = (tmp);
-						data[setvec.y][setvec.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
-						lastset = (*GameTask::GetInstance().currentPlayer)->GetNo();
-						plChangeFlg = true;
-
-						switch (TEST_REVERSE)
-						{
-						case 0:
-							data[setvec.y][setvec.x].lock()->SetReverse(i);
-							break;
-						case 1:
-							data[setvec.y][setvec.x].lock()->SetReverse(cnt_Reverse++);
-
-							break;
-						}
-
-					}
-					(*lpGameTask.currentPlayer)->SetTurnTimer(reverseTime);
-				}
+				break;
 			}
 		}
-		else
-		{
-			return;
-		}
-		if (plChangeFlg)
-		{
-			//(//*lpGameTask.currentPlayer)->DeleteTrayPiece()
-			/*
-			if (lpGameTask.currentPlayer.size())
-			{
-				(*lpGameTask.currentPlayer)->DeleteTrayPiece();
-			}*/
-			// 誰かが置ける状態の場合
-			(*lpGameTask.currentPlayer)->SetTunrFlg(false);
-
-			// -----現在のプレイヤー表示
-			CurrentPlPiece->SetState((*lpGameTask.currentPlayer)->GetType());
-
-		}
-
+		(*lpGameTask.currentPlayer)->SetTurnTimer(reverseTime);
+		
 	}
+
+	if (plChangeFlg)
+	{
+		// 誰かが置ける状態の場合
+		(*lpGameTask.currentPlayer)->SetTunrFlg(false);
+	}
+
+	
 }
 
 void GameBoard::DB_TouchBoad()
@@ -194,12 +185,7 @@ void GameBoard::Update()
 		SetFontSize(48);
 
 		//GetDrawStringWidth(str1.c_str(),strlen(str1.c_str()))
-		
-		/*DrawFormatString(
-			SCREEN_HALF_X - GetDrawStringWidth(str1.c_str(), strlen(str1.c_str()))/2,
-			320, 0xFF4444, str1.c_str(), (*GameTask::GetInstance().currentPlayer)->GetNo());
-			*/
-		SetFontSize(16);
+		SetFontSize(DEFAULT_FONT_SIZE);
 	}
 }
 
@@ -222,9 +208,9 @@ bool GameBoard::Reverse(VECTOR2 pos, VECTOR2 vec)
 	{
 		return true;
 	}
-	else
-		return false;
+	return false;
 }
+
 
 bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec ,PIECE_ST st)
 {
@@ -233,36 +219,24 @@ bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec ,PIECE_ST st)
 	for (int i = 1; i < data.size(); i++)
 	{
 		sarchPos = pos + (vec*i);
-
 		// サーチするマスが盤面の外にはみ出していないかのチェック
-		if (sarchPos.x < 0 || sarchPos.y < 0 ||
-			sarchPos.x >= data.size() || sarchPos.y >= data.size()
-			)
+		if (!CheckOverBoard(sarchPos)
+			|| CheckExpired(sarchPos))
 		{
 			return false;
+		}
+		// 駒が配置されていた場合、その駒がプレイヤーの駒と一致するか
+		if (!(data[sarchPos.y][sarchPos.x].lock()->GetState() == st))
+		{
+			continue;
 		}
 
-		// サーチ位置に駒が配置されているか
-		if (!data[sarchPos.y][sarchPos.x].expired())
-		{
-			// 駒が配置されていた場合、その駒がプレイヤーの駒と一致するか
-			if (data[sarchPos.y][sarchPos.x].lock()->GetState() == st)
-			{
-				// 駒がサーチ基準と隣接していない場合true
-				if (i >= 2)
-					return true;
-				else
-					return false;
-			}
-			else
-			{
-				continue;
-			}
-		}
+		// 駒がサーチ基準と隣接していない場合true
+		if (i >= 2)
+			return true;
 		else
-		{
 			return false;
-		}
+		
 	}
 
 	return false;
@@ -277,7 +251,6 @@ VECTOR2 GameBoard::GetBoardSize()
 
 piece_shared GameBoard::AddObjList(piece_shared && objPtr)
 {
-
 	piecelist.push_back(objPtr);
 	for (auto itr = piecelist.begin();
 		*itr != piecelist.back(); itr++)
@@ -292,7 +265,6 @@ piece_shared GameBoard::AddObjList(piece_shared && objPtr)
 	// 引数の 内容をリストにf追加
 	//itrに追加したpieceのアドレスを入れる
 	auto itr = piecelist.end();
-	
 	itr--;
 	ADDWAIT(4);
 	(*itr)->SetWait(GETWAIT());
@@ -315,108 +287,77 @@ void GameBoard::DrawPiece()
 
 	for (auto itr : piecelist)
 	{
-		itr->Update();
+		itr->Draw();
 	}
 
-	/*
-	for (piece_list::iterator itr = piecelist.begin();
-		*itr != piecelist.back(); itr++)
-	{
-		(*itr)->Draw();
-		/*
-		if ((*itr)->Update() == false)
-		{
-			piecelist.erase(itr);
-		}
-	}*/
 
 }
+void GameBoard::DrawBoard()
+{
+	DrawBox(X_DIS, Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
+		boardSize.y*CHIPSIZE + Y_DIS,
+		0x008822, true);
 
+	for (int y = 0; y < data.size(); y++)
+	{
+
+		for (int x = 0; x < BaseData.size() / data.size(); x++)
+		{
+			DrawBox(x*CHIPSIZE + X_DIS, y*CHIPSIZE + Y_DIS
+				, x*CHIPSIZE + CHIPSIZE + X_DIS,
+				y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xffffff, false);
+		}
+	}
+}
 void GameBoard::Draw()
 {
 
-
-	auto DrawBoard = [&]() {
-		DrawBox(X_DIS, Y_DIS, boardSize.x*CHIPSIZE + X_DIS,
-			boardSize.y*CHIPSIZE + Y_DIS,
-			0x008822, true);
-
-		for (int y = 0; y < data.size(); y++)
-		{
-
-			for (int x = 0; x < BaseData.size() / data.size(); x++)
-			{
-				DrawBox(x*CHIPSIZE + X_DIS, y*CHIPSIZE + Y_DIS
-					, x*CHIPSIZE + CHIPSIZE + X_DIS,
-					y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xffffff, false);
-			}
-		}
-	};
-
 	DrawBoard();
-
-
 	VECTOR2 CurrntPlPos = CurrentPlPiece->GetPos();
-
 	for (auto itr : setlist)
 	{
 		VECTOR2 drawpos = itr * 64;
 		DrawBox(drawpos.x + X_DIS+1, drawpos.y + Y_DIS+1,
 			drawpos.x + 64 + X_DIS-1, drawpos.y + 64 + Y_DIS-1, 0x00dd00, true);
 	}
-
-
 	DrawPiece();
-
-
-
-
-
 	DrawFormatString(0, 64, 0xdddddd, "プレイヤー数%d", GameTask::GetInstance().playerlist.size());
 	DrawFormatString(0, 96, 0xdddddd, "現在のプレイヤー\n%d", (*GameTask::GetInstance().currentPlayer)->GetNo());
 
 }
-
 void SetlistClear()
 {
 
 }
-
 void GameBoard::SetlistUpdata()
 {
-	
 	setlist.clear();
 	VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }, };
 	
 	// 設置可能なタイルの数
 	int tilecnt = 0;
-	for (auto itr : piecelist)
+	// 既に置いてある駒
+	for (auto piece_itr : piecelist)
 	{
+		// 駒の周囲八方向
 		for (auto vec_itr : sarchTBL)
 		{
+			// 配置されている駒の周りのマス
+			VECTOR2 tempPos = piece_itr->GetPos() + vec_itr;
+			// 駒の周囲八方向のマスを中心に、八方向に向かって駒を配置できるか検索する
 			for (auto vec_itr2 : sarchTBL)
 			{
-				VECTOR2 drawPos = itr->GetPos() + vec_itr;
-				
-
-				if (drawPos.x < 0 || drawPos.y < 0 ||
-					drawPos.x >= data.size() || drawPos.y >= data.size()
-					)
+				if(!CheckOverBoard(tempPos))
 				{
 					break;
 				}
-				SarchReverse(drawPos, vec_itr2, (*lpGameTask.currentPlayer)->GetType());
-
-				if (SarchReverse(drawPos, vec_itr2, (*lpGameTask.currentPlayer)->GetType())
-					&& data[drawPos.y][drawPos.x].expired())
+				if (SarchReverse(tempPos, vec_itr2, (*lpGameTask.currentPlayer)->GetType())
+					&& data[tempPos.y][tempPos.x].expired()
+					)
 				{
 					tilecnt++;
-					setlist.push_back(drawPos);
-				/*
-					DrawBox(drawPos.x*CHIPSIZE + X_DIS, drawPos.y*CHIPSIZE + Y_DIS
-						, drawPos.x*CHIPSIZE + CHIPSIZE + X_DIS,
-						drawPos.y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xaadd00, true);
-				*/}
+					setlist.push_back(tempPos);
+				}
 			}
 		}
 	}
@@ -437,11 +378,6 @@ void GameBoard::SetlistUpdata()
 
 void GameBoard::PieceResultSet()
 {
-	/*auto listD = [&](auto i) {
-		i.erase(
-			i.begin(),
-			i.end());
-	};*/
 	TotalPiece.fill(0);
 	int i = 0;
 	for (auto itr : BaseData)
@@ -452,13 +388,8 @@ void GameBoard::PieceResultSet()
 		TotalPiece[(int)(itr.lock()->GetState()) - 1]++;
 	}
 
-	//listD(BaseData);
-	//listD(piecelist);
-	//BaseData.clear();
-	//piecelist.clear();
 	for (auto itr : TotalPiece)
 	{
-		//BaseData.push_back(
 	}
 }
 
@@ -500,4 +431,15 @@ VECTOR2 GameBoard::SetlistSerch()
 
 
 	return tmpPos;
+}
+
+bool GameBoard::CheckOverBoard(VECTOR2 checkPos)
+{
+	if (checkPos.x < 0 || checkPos.y < 0 ||
+		checkPos.x >= data.size() || checkPos.y >= BaseData.size()/ data.size()
+		)
+	{
+		return false;
+	}
+	return true;
 }

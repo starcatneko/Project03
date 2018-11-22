@@ -33,9 +33,10 @@ public:
 	void SetOldState(PIECE_ST st, int cnt);
 
 
-	VECTOR2 GetPos();
-	bool SetPos(VECTOR2 pos);
-	VECTOR2 GetDrawOffset();
+	VECTOR2 GetPos() { return pos;}
+	void SetPos(VECTOR2 pos){ this->pos = pos;}
+
+	VECTOR2 GetDrawOffset(){ return drawOffset;}
 	bool SetDrawOffset(VECTOR2 pos);
 	void SetOldState(PIECE_ST st);
 	// stateをセットする
@@ -45,14 +46,13 @@ public:
 	void SetReverse(int num);
 	// falseが返ったらピースを削除する
 	bool Update();
-
 	// タイマーが0になった時にpiece_listからこのピースを削除する
 	bool ReverseStandby();
 
 
 	// 駒を裏返す
-	void SetWait(int i);
-	void SetAnimF(int i);
+	void SetWait(int i) { this->wait = i;}
+	void SetAnimF(int i) { this->animF = i;}
 	void Draw();
 private:
 	void Init();

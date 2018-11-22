@@ -61,26 +61,8 @@ void GamePiece::Init()
 
 void GamePiece::SetOldState(PIECE_ST st,int cnt)
 {
-
 	return;
 }
-
-VECTOR2 GamePiece::GetPos()
-{
-	return pos;
-}
-
-bool GamePiece::SetPos(VECTOR2 pos)
-{
-	this->pos = pos;
-	return true;
-}
-
-VECTOR2 GamePiece::GetDrawOffset()
-{
-	return drawOffset;
-}
-
 bool GamePiece::SetDrawOffset(VECTOR2 pos)
 {
 	this->drawOffset = pos;
@@ -156,18 +138,6 @@ void GamePiece::SetReverse(int num)
 }
 bool GamePiece::Update()
 {
-	// ‹î”½“]Žž‚Ì•`‰æ
-
-	Draw();
-	/*
-	if (clearTimer > 0)
-	{
-		clearTimer--;
-		if (clearTimer == 0)
-		{
-			//return false;
-		}
-	}*/
 	return true;
 }
 bool GamePiece::ReverseStandby()
@@ -188,7 +158,6 @@ void GamePiece::Draw()
 	if (rev_F > 0)
 	{
 		rev_F--;
-		//if (rev_F == 0) animF = ANIM_FRAME;
 		return;
 	}
 
@@ -213,17 +182,9 @@ void GamePiece::Draw()
 
 		DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2) - (animF),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			(PIECESIZE)-(animF), PIECESIZE,
+			(PIECESIZE), PIECESIZE,
 			color, true, 1);
-
-/*
-		DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
-			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			(PIECESIZE)-(ANIM_FRAME - animF), PIECESIZE,
-			(*old_state.begin())->GetDrawColor()
-			, true, 1);
-*/
-			animF--;
+		animF--;
 	}
 	else
 	{
@@ -233,14 +194,4 @@ void GamePiece::Draw()
 			PIECESIZE, color, true, 1);
 	}
 
-}
-
-void GamePiece::SetWait(int i)
-{
-	this->wait = i;
-}
-void GamePiece::SetAnimF(int i)
-{
-	this->animF = i;
-	
 }
