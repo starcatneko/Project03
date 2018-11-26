@@ -1,12 +1,11 @@
-﻿  GameMain.cpp
+﻿  GameBoard.cpp
+  GameMain.cpp
   GamePiece.cpp
   GameResult.cpp
   GameTask.cpp
   GameTitle.cpp
   Main.cpp
-  GameBoard.cpp
   MouseCtr.cpp
-  OPRT_State.cpp
   OPRT_CPU.cpp
   OPRT_MAN.cpp
   OPRT_SYS.cpp

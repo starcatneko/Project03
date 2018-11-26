@@ -7,7 +7,7 @@
 #include "PieceState.h"
 
 // リバース描画のテスト用
-#define TEST_REVERSE 1
+#define TEST_REVERSE 0
 
 
 const int CHIPSIZE = 64;
@@ -187,6 +187,11 @@ void GameBoard::Update()
 		//GetDrawStringWidth(str1.c_str(),strlen(str1.c_str()))
 		SetFontSize(DEFAULT_FONT_SIZE);
 	}
+
+	if (60 == (*lpGameTask.currentPlayer)->GetTurnTimer())
+	{
+		setlist.clear();
+	}
 }
 
 void GameBoard::ResultDraw()
@@ -267,8 +272,7 @@ piece_shared GameBoard::AddObjList(piece_shared && objPtr)
 	auto itr = piecelist.end();
 	itr--;
 	ADDWAIT(4);
-	(*itr)->SetWait(GETWAIT());
-	(*itr)->SetAnimF(7);
+	(*itr)->SetAnimF(REVERSE_TIME);
 	return *itr;
 }
 void GameBoard::GameEnd()
@@ -331,7 +335,6 @@ void SetlistClear()
 }
 void GameBoard::SetlistUpdata()
 {
-	setlist.clear();
 	VECTOR2 sarchTBL[8] = { { 0,-1 },{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 }, };
 	
 	// 設置可能なタイルの数
