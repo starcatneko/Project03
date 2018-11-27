@@ -31,7 +31,7 @@ GameResult::~GameResult()
 
 state_ptr GameResult::Update(state_ptr pt)
 {
-	lpGameTask.Board->Update();
+	Board->Update();
 
 	if ((lpMouse.GetButton() & 0b0001) > 0)
 	{
