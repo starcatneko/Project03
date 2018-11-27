@@ -16,3 +16,4 @@ Excel/~$PieceData.xlsm
 *.pdb
 .vs/Project03/v15/.suo
 Project03/Log.txt
+*.enc

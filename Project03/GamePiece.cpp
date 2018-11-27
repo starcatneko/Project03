@@ -33,6 +33,7 @@ GamePiece::GamePiece(VECTOR2 pos, VECTOR2 drawOffset)
 	this->pos = pos;
 	this->drawOffset = drawOffset;
 	Init();
+	SetState(PIECE_ST::NON);
 	SetOldState(PIECE_ST::NON);
 }
 
@@ -90,16 +91,14 @@ void GamePiece::SetOldState(PIECE_ST st)
 
 	if (st == PIECE_ST::NON)
 	{
-		/*
-		if (state.front()->GetState() == PIECE_W)
-		{
-			old_state.push_front(std::make_unique<PieceBlack>());
-		}
-		else
+		if (state.front()->GetState() == PIECE_ST::W)
 		{
 			old_state.push_front(std::make_unique<PieceWhite>());
 		}
-		*/
+		else
+		{
+			old_state.push_front(std::make_unique<PieceBlack>());
+		}
 	}
 }
 
@@ -148,42 +147,48 @@ bool GamePiece::ReverseStandby()
 
 void GamePiece::Draw()
 {
-	DrawCircle(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
-		pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-		PIECESIZE,
-		(*old_state.begin())->GetDrawColor()
-		, true, 1);
-		
-
-	if (rev_F > 0)
-	{
-		rev_F--;
-		return;
-	}
-
+	int oldcolor = GetRand(0xffffff);
 	int color = GetRand(0xffffff);
-
+	int SetF = PIECESIZE - (PIECESIZE / abs(animF - REVERSE_TIME));//(PIECESIZE / abs(animF - REVERSE_TIME));
+	if ((*old_state.begin()))
+	{
+		oldcolor = (*old_state.begin())->GetDrawColor();
+		if ((*old_state.begin())->GetState() == PIECE_ST::NON)
+		{
+			oldcolor = 0xFFFFFF;
+		}
+	}
 	if ((*state.begin()))
 	{
 		color = (*state.begin())->GetDrawColor();
 	}
-#ifdef _DEBUG
-	else
-	{
-		std::string txt = ("text\n");
-		OutputDebugString(txt.c_str());
-	}
 
-#endif // DEBUG
+	if (rev_F != 0)
+	{
+
+		if (rev_F < PIECESIZE)
+		{
+			DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
+				pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
+				rev_F*2 - PIECESIZE , PIECESIZE, oldcolor, true, 1);
+		}
+		else
+		{
+			DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
+				pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
+				PIECESIZE, PIECESIZE, oldcolor, true, 1);
+		}
+
+		rev_F--;
+		return;
+	}
 
 
 	if (animF > 0)
 	{
-
-		DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2) - (animF),
+		DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 			pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-			(PIECESIZE), PIECESIZE,
-			color, true, 1);
+			SetF, PIECESIZE, color, true, 1);
 		animF--;
 	}
 	else

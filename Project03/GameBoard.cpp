@@ -188,7 +188,7 @@ void GameBoard::Update()
 		SetFontSize(DEFAULT_FONT_SIZE);
 	}
 
-	if (60 == (*lpGameTask.currentPlayer)->GetTurnTimer())
+	if (REVERSE_TIME == (*lpGameTask.currentPlayer)->GetTurnTimer())
 	{
 		setlist.clear();
 	}
@@ -272,7 +272,7 @@ piece_shared GameBoard::AddObjList(piece_shared && objPtr)
 	auto itr = piecelist.end();
 	itr--;
 	ADDWAIT(4);
-	(*itr)->SetAnimF(REVERSE_TIME);
+	(*itr)->SetAnimF(REVERSE_TIME-1);
 	return *itr;
 }
 void GameBoard::GameEnd()
