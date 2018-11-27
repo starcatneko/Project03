@@ -44,6 +44,7 @@ public:
 	void SetOprtType(OPRT_TYPE type);
 	void SetOprtType(int piece_st);
 	OPRT_TYPE GetOprtType();
+
 private:
 
 	struct MouseCtrDeleter

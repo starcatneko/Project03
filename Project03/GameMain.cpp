@@ -24,7 +24,6 @@ GameMain::GameMain()
 		}
 		else
 		{
-
 			MainBoard->SetPiece({ 1,0 }, PIECE_ST::B);
 			MainBoard->SetPiece({ 2,0 }, PIECE_ST::B);
 			MainBoard->SetPiece({ 3,0 }, PIECE_ST::B);
@@ -92,6 +91,24 @@ state_ptr GameMain::Update(state_ptr pt)
 	{
 		(*itr).Update();
 	}
+
+	VECTOR2 tmp = VECTOR2{ 0,180 };
+	VECTOR2 tmp2 = VECTOR2{ 64,24 };;
+
+	if (lpMouse.GetOprtType() != OPRT_TYPE::CPU)
+	{
+	}
+	DrawBox(tmp.x, tmp.y,
+		tmp.x + tmp2.x, tmp.y + tmp2.y,
+		0xDD00ee, true);
+	if ( lpMouse.GetPos().x > tmp.x
+		&&lpMouse.GetPos().y > tmp.y
+		&&lpMouse.GetPos().x <tmp.x + tmp2.x
+		&&lpMouse.GetPos().y <tmp.y + tmp2.y)
+	{
+		lpMouse.SetOprtType(OPRT_TYPE::MAN);
+	}
+
 
 	if (MainBoard->gameEndFlg)
 	{
