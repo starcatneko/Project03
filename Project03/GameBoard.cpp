@@ -188,7 +188,7 @@ void GameBoard::Update()
 		SetFontSize(DEFAULT_FONT_SIZE);
 	}
 
-	if (REVERSE_TIME == (*lpGameTask.currentPlayer)->GetTurnTimer())
+	if (TURN_CHANGE_WAIT == (*lpGameTask.currentPlayer)->GetTurnTimer())
 	{
 		setlist.clear();
 	}

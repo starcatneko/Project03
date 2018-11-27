@@ -79,9 +79,9 @@ void Player::TurnAct()
 	}
 	// TurnActのピースが設置のif内
 	// ピースを設置したらプレイヤーが切り替わるから
-	if ((lpMouse->GetButton() & 0b0001) != 0)
+	if ((lpMouse.GetButton() & 0b0001) != 0)
 	{
-		lpGameTask.Board->SetPiece(lpMouse->GetPos());
+		lpGameTask.Board->SetPiece(lpMouse.GetPos());
 	}
 
 }

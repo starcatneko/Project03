@@ -166,11 +166,11 @@ void GamePiece::Draw()
 	if (rev_F != 0)
 	{
 
-		if (rev_F < PIECESIZE)
+		if (rev_F < REVERSE_TIME)
 		{
 			DrawOval(pos.x*CHIPSIZE + drawOffset.x + (CHIPSIZE / 2),
 				pos.y*CHIPSIZE + drawOffset.y + (CHIPSIZE / 2),
-				rev_F*2 - PIECESIZE , PIECESIZE, oldcolor, true, 1);
+				rev_F*2 - REVERSE_TIME, PIECESIZE, oldcolor, true, 1);
 		}
 		else
 		{

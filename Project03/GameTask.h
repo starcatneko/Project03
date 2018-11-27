@@ -22,7 +22,6 @@ typedef std::list<player_ptr> player_list;
 //		
 #define lpCurrentPlayer (*lpGameTask.currentPlayer)
 //		
-#define lpMouse lpGameTask.Mouse
 
 // プレイヤー人数
 #define PL_MAX (2)

@@ -7,6 +7,8 @@
 #include "OPRT_CPU.h"
 #include "OPRT_SYS.h"
 
+std::unique_ptr<MouseCtr, MouseCtr::MouseCtrDeleter> MouseCtr::s_Instance(new MouseCtr());
+
 
 // const_castÇÕê‚ëŒÇ…égÇ¡ÇƒÇÕÇ¢ÇØÇ»Ç¢
 
@@ -28,6 +30,7 @@ void MouseCtr::Init()
 	//oprt_tbl[static_cast<int>(PIECE_ST::W)] = OPRT_TYPE::MAN;
 	//oprt_tbl[1] = OPRT_TYPE::MAN;
 	SetOprtType(oprt_tbl[static_cast<int>(PIECE_ST::NON)]);
+	waitTimer;
 }
 
 MouseCtr::~MouseCtr()
@@ -37,8 +40,13 @@ MouseCtr::~MouseCtr()
 
 void MouseCtr::Update()
 {
-	button[ST_OLD] = button[ST_NEW];
+	if (waitTimer > 0)
+	{
+		waitTimer--;
+		return;
+	}	
 	MouseCtr::oprt->Update();
+	button[ST_OLD] = button[ST_NEW];
 }
 
 
