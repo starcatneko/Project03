@@ -39,7 +39,6 @@ int Player::GetNo()
 }
 
 
-
 bool Player::Draw()
 {
 	if (pieceTray)
@@ -65,6 +64,11 @@ PIECE_ST Player::GetType()
 void Player::DeleteTrayPiece()
 {
 	pieceTray->TrayUpdate();
+}
+
+bool Player::CheckChangeTurn()
+{
+	return (ChangeTimer > 0);
 }
 
 void Player::TurnAct()

@@ -31,13 +31,12 @@ void GameTask::Init()
 
 	state.reset();
 	state = std::make_unique<GameTitle>();
-	Mouse = std::make_shared<MouseCtr>();
 
 	wait = 0;
 }
 void GameTask::Run()
 {
-	Mouse->Update();
+	lpMouse.Update();
 
 	ScreenFlip();
 	ClsDrawScreen();
@@ -47,6 +46,7 @@ void GameTask::Run()
 		//wait--;
 	}
 	state->Draw();
+
 }
 
 void GameTask::SetWait(int wait)
@@ -67,4 +67,3 @@ VECTOR2 GameTask::GetBoardSize()
 {
 	return Board->GetBoardSize();
 }
-

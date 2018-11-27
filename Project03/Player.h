@@ -21,6 +21,9 @@ public:
 	PIECE_ST GetType();
 	void DeleteTrayPiece();
 
+	// ターン切り替え中の場合trueを返す
+	bool CheckChangeTurn();
+
 	// プレイヤーのターン処理
 	void TurnAct();
 	bool SetTunrFlg(bool flg);

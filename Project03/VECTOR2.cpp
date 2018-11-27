@@ -17,11 +17,24 @@ bool VECTOR2::operator==(const VECTOR2 & vec) const
 			this->y == vec.y);
 }
 
+bool VECTOR2::operator==(const int & i) const
+{
+	return (this->x == i &&
+		this->y == i);
+}
+
 bool VECTOR2::operator!=(const VECTOR2 & vec) const
 {
 	return (this->x != vec.x ||
 		this->y != vec.y);	
 	//return !(this->x == vec.x &&	this->y == vec.y);
+
+}
+
+bool VECTOR2::operator!=(const int & i) const
+{
+	return (this->x != i ||
+		this->y != i);
 
 }
 

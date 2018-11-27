@@ -52,7 +52,7 @@ public:
 	// 現在選択しているプレイヤーのアドレスを格納する
 
 	state_ptr state;
-	std::shared_ptr<MouseCtr> Mouse;
+	//std::shared_ptr<MouseCtr> Mouse;
 
 	Board_ptr Board;
 private:

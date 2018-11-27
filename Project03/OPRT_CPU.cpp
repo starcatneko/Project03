@@ -19,8 +19,13 @@ void OPRT_CPU::Update()
 	{
 		return;
 	}
-	lpGameTask.Mouse->SetPos(lpGameTask.Board->SetlistSerch());
-	
-	lpGameTask.Mouse->SetClick(0b0001); 
+	if (!(*lpGameTask.currentPlayer)->CheckChangeTurn())
+	{
+		lpMouse.SetPos(lpGameTask.Board->SetlistSerch());
+		lpMouse.SetOprtType(0);
+	}
 
+
+	lpMouse.SetClick(0b0001); 
+	
 }

@@ -10,8 +10,10 @@ public:
 
 	//”äŠr‰‰Zq
 	bool operator == (const VECTOR2& vec) const;
+	bool operator == (const int& i) const;
 	bool operator != (const VECTOR2& vec) const;
-	
+	bool operator != (const int& i) const;
+
 	//’P€‰‰Zq
 	VECTOR2& operator += (const VECTOR2& vec);
 	VECTOR2& operator -= (const VECTOR2& vec);

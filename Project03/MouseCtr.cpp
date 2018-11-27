@@ -40,13 +40,48 @@ MouseCtr::~MouseCtr()
 
 void MouseCtr::Update()
 {
+	button[ST_OLD] = button[ST_NEW];
+	/*
 	if (waitTimer > 0)
 	{
 		waitTimer--;
 		return;
-	}	
+	}	*/
 	MouseCtr::oprt->Update();
-	button[ST_OLD] = button[ST_NEW];
+	//DrawFormatString(lpMouse.GetPos().x, lpMouse.GetPos().y, 0xFFFF00, "‚ ‚ ‚ ‚ ");
+	
+	if (GetButton() != 0)
+	{
+		DrawCircle(lpMouse.GetPos().x, lpMouse.GetPos().y,
+			12,0xffff00, true, 3);
+	}
+	
+	VECTOR2 mp = { 0,420 };
+	if (oprt_tbl[static_cast<int>(PIECE_ST::B)] == OPRT_TYPE::MAN)
+	{
+		DrawString(mp.x, mp.y, "MAN", 0xffffff, true);
+		DrawString(mp.x, mp.y, "CPU", 0xffffff, true);
+		if (pos.x > mp.x && pos.x < mp.x + 64 &&
+			pos.y>mp.y && pos.y < mp.y + 64 &&
+			GetButton() != 0)
+		{
+			oprt_tbl[static_cast<int>(PIECE_ST::B)] = OPRT_TYPE::CPU;
+		}
+
+
+	}
+	if (oprt_tbl[static_cast<int>(PIECE_ST::B)] == OPRT_TYPE::CPU)
+	{
+		DrawString(mp.x, mp.y, "CPU", 0xffffff, true);
+		
+		if (pos.x > mp.x && pos.x < mp.x + 64 &&
+			pos.y>mp.y && pos.y < mp.y + 64 &&
+			GetButton() != 0)
+		{
+			oprt_tbl[static_cast<int>(PIECE_ST::B)] = OPRT_TYPE::MAN;
+		}
+
+	}
 }
 
 
@@ -58,11 +93,9 @@ void MouseCtr::SetPos(VECTOR2 pos)
 
 int MouseCtr::GetButton()
 {
-
-
 	if (button[ST_OLD] != button[ST_NEW])
 	{
-		button[ST_OLD] = button[ST_NEW];
+		//button[ST_OLD] = button[ST_NEW];
 		return button[ST_NEW];
 	}
 	else

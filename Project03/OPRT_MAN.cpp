@@ -18,7 +18,7 @@ void OPRT_MAN::Update()
 {
 	int mx, my;
 	GetMousePoint(&mx, &my);
-	lpGameTask.Mouse->SetPos({ mx,my });
+	lpMouse.SetPos({ mx,my });
 
 	int flg = 0;
 	if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)
@@ -33,5 +33,8 @@ void OPRT_MAN::Update()
 	{
 		flg += 0b0100;
 	}
-	lpGameTask.Mouse->SetButton(flg);
+
+
+
+	lpMouse.SetButton(flg);
 }

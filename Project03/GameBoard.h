@@ -87,6 +87,7 @@ public:
 	void PieceResultSet();
 	// 指定された色のピースの数を返す
 	int PieceCount(PIECE_ST olor);
+	// setlist(置けるマスのリスト)からランダムで座標を抽出する
 	VECTOR2 SetlistSerch();	
 	void SetlistUpdata();
 
@@ -119,14 +120,14 @@ private:
 	// 勝利したプレイヤー
 	int winplayer;
 
-	// 設置座標可能リスト
-	//std::array<std::list<VECTOR2>,static_cast<int>(PIECE_ST::MAX)> itr;
+	// 設置可能座標リスト
 	std::list<VECTOR2> setlist;
 	piece_list piecelist;
 	VECTOR2 size;
 	std::array<int, PL_MAX> TotalPiece;
 
 	//std::array<VECTOR2_list, static_cast<int>(PIECE_ST::MAX)>itr;
+	//std::array<std::list<VECTOR2>,static_cast<int>(PIECE_ST::MAX)> itr;
 
 	int timer;
 

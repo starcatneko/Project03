@@ -426,7 +426,7 @@ VECTOR2 GameBoard::SetlistSerch()
 	{
 		if (rnd == cnt)
 		{
-			tmpPos = (itr*64)+12 + VECTOR2( X_DIS, Y_DIS );
+			tmpPos = (itr*CHIPSIZE)+(CHIPSIZE/2 )+ VECTOR2( X_DIS, Y_DIS );
 			break;
 		}
 		cnt++;
