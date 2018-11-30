@@ -124,3 +124,9 @@ pieceTray->SetTurnFlg(ˆø”);
 
 
 */
+
+
+void Player::ChangePlSet()
+{
+
+}

@@ -54,8 +54,6 @@ GameMain::GameMain()
 GameMain::~GameMain()
 {
 }
-
-
 void GameMain::Draw()
 {
 	MainBoard->Draw();
@@ -92,10 +90,8 @@ state_ptr GameMain::Update(state_ptr pt)
 		(*itr).Update();
 	}
 
-	VECTOR2 tmp = VECTOR2{ 0,180 };
-	VECTOR2 tmp2 = VECTOR2{ 64,24 };;
-	645664
-	/*
+	VECTOR2 tmp = VECTOR2{ 0,380 };
+	VECTOR2 tmp2 = VECTOR2{ 64,24 };
 	if (lpMouse.GetOprtType() != OPRT_TYPE::CPU)
 	{
 		DrawBox(tmp.x, tmp.y,
@@ -111,8 +107,6 @@ state_ptr GameMain::Update(state_ptr pt)
 		}
 
 	}
-	*/
-
 	if (MainBoard->gameEndFlg)
 	{
 		// GameRessult‚ÅMainBoard‚Ìî•ñ‚ğˆø‚«‘±‚«g‚¤‚Ì‚Åˆø”‚Å“n‚·

@@ -30,6 +30,7 @@ public:
 	//現在プレイヤーのターンか
 	bool GetTunrFlg();
 	int GetScore();	
+	void ChangePlSet();
 	
 	void SetTurnTimer(int time);
 	int GetTurnTimer();
@@ -46,5 +47,7 @@ private:
 
 	// プレイヤーを切り替えるフラグタイマー
 	int ChangeTimer;
+
+
 };
 
