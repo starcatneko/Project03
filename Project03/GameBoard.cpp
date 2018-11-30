@@ -162,9 +162,9 @@ bool GameBoard::SetPiece(VECTOR2 pos)
 		
 	}
 
+	// 誰かが置ける状態の場合
 	if (plChangeFlg)
 	{
-		// 誰かが置ける状態の場合
 		lpCurrentPlayer->SetTunrFlg(false);
 	}
 
@@ -230,18 +230,18 @@ bool GameBoard::SarchReverse(VECTOR2 pos, VECTOR2 vec ,PIECE_ST st)
 		{
 			return false;
 		}
-		// 駒が配置されていた場合、その駒がプレイヤーの駒と一致するか
+		// 駒が配置されていた場合、その駒がプレイヤーの駒じゃない場合
 		if (!(data[sarchPos.y][sarchPos.x].lock()->GetState() == st))
 		{
 			continue;
 		}
-
+		// サーチした駒がプレイヤーの駒だった場合
 		// 駒がサーチ基準と隣接していない場合true
 		if (i >= 2)
 			return true;
 		else
 			return false;
-		
+
 	}
 
 	return false;
@@ -342,13 +342,14 @@ void GameBoard::SetlistUpdata()
 		{
 			// 配置されている駒の周りのマス
 			VECTOR2 tempPos = piece_itr->GetPos() + vec_itr;
+
+			if (!CheckOverBoard(tempPos))
+			{
+				continue;
+			}
 			// 駒の周囲八方向のマスを中心に、八方向に向かって駒を配置できるか検索する
 			for (auto vec_itr2 : sarchTBL)
 			{
-				if(!CheckOverBoard(tempPos))
-				{
-					break;
-				}
 				if (SarchReverse(tempPos, vec_itr2, (*lpGameTask.currentPlayer)->GetType())
 					&& data[tempPos.y][tempPos.x].expired()
 					)

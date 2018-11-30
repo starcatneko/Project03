@@ -89,6 +89,8 @@ public:
 	int PieceCount(PIECE_ST color);
 	// setlist(置けるマスのリスト)からランダムで座標を抽出する
 	VECTOR2 SetlistSerch();	
+
+	// 
 	void SetlistUpdata();
 
 private:
