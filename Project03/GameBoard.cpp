@@ -78,9 +78,9 @@ void GameBoard::Debug_SetPiece(VECTOR2 pos)
 {
 	VECTOR2 vec = { Pos_MouseToBoard(pos)};
 
-	piece_shared tmp = AddObjList(std::make_shared<GamePiece>(pos, vec, (*GameTask::GetInstance().currentPlayer)->GetType()));
+	piece_shared tmp = AddObjList(std::make_shared<GamePiece>(pos, vec, lpCurrentPlayer->GetType()));
 	data[pos.y][pos.x] = (tmp);
-	data[pos.y][pos.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
+	data[pos.y][pos.x].lock()->SetState(lpCurrentPlayer->GetType());
 }
 
 void GameBoard::SetPiece(VECTOR2 pos , PIECE_ST st)
@@ -104,20 +104,22 @@ bool GameBoard::CheckExpired(VECTOR2 pos)
 	return false;
 }
 
-void GameBoard::SetPiece(VECTOR2 pos)
+bool GameBoard::SetPiece(VECTOR2 pos)
 {
-	(*GameTask::GetInstance().currentPlayer)->SelectTray(pos);
-	
+	// 返り値用変数
+	bool rtn = false;
+	lpCurrentPlayer->SelectTray(pos);
 	VECTOR2 vec1 = Pos_MouseToBoard(pos);
 	
 	// マウスでクリックした箇所が盤面の外の場合、処理を中断する
 	if (!CheckOverBoard(vec1) ||
-		!CheckExpired(vec1))
+		!CheckExpired(vec1)	)
 	{
-		return;
+		return false;
 	}
 
 	bool plChangeFlg = false;
+	rtn = true;
 	VECTOR2 vec2 = { X_DIS,Y_DIS };
 	VECTOR2 sarchTBL[8] = {{ 1,-1 },{ 1,0 },{ 1,1 },{ 0,1 },{ -1,1 },{ -1,0 },{ -1,-1 },{ 0,-1 }};
 		int cnt_Reverse = 0;
@@ -125,26 +127,25 @@ void GameBoard::SetPiece(VECTOR2 pos)
 	for (auto itr : sarchTBL)
 	{
 		// 方向に向かってひっくり返す関数
-		if (!SarchReverse(vec1, itr, (*GameTask::GetInstance().currentPlayer)->GetType()))
+		if (!SarchReverse(vec1, itr, lpCurrentPlayer->GetType()))
 		{
 			continue;
 		}
 
 		piece_shared tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
 		data[vec1.y][vec1.x] = (tmp);
-		data[vec1.y][vec1.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
+		data[vec1.y][vec1.x].lock()->SetState(lpCurrentPlayer->GetType());
 
 		int reverseTime = REVERSE_TIME;
-
 		for(int i = 1;Reverse(vec1, itr*i) == true;i++)
 		{
 			VECTOR2 setvec = vec1 + itr * i;
 			reverseTime += REVERSE_TIME;
-			//delete &data[setvec.y][setvec.x].lock();
+
 			piece_shared tmp = AddObjList(std::make_shared<GamePiece>(setvec, vec2));
 			data[setvec.y][setvec.x] = (tmp);
-			data[setvec.y][setvec.x].lock()->SetState((*GameTask::GetInstance().currentPlayer)->GetType());
-			lastset = (*GameTask::GetInstance().currentPlayer)->GetNo();
+			data[setvec.y][setvec.x].lock()->SetState(lpCurrentPlayer->GetType());
+			lastset = lpCurrentPlayer->GetNo();
 			plChangeFlg = true;
 
 			switch (TEST_REVERSE)
@@ -154,21 +155,20 @@ void GameBoard::SetPiece(VECTOR2 pos)
 				break;
 			case 1:
 				data[setvec.y][setvec.x].lock()->SetReverse(cnt_Reverse++);
-
 				break;
 			}
 		}
-		(*lpGameTask.currentPlayer)->SetTurnTimer(reverseTime);
+		lpCurrentPlayer->SetTurnTimer(reverseTime);
 		
 	}
 
 	if (plChangeFlg)
 	{
 		// 誰かが置ける状態の場合
-		(*lpGameTask.currentPlayer)->SetTunrFlg(false);
+		lpCurrentPlayer->SetTunrFlg(false);
 	}
 
-	
+	return rtn;
 }
 
 void GameBoard::DB_TouchBoad()
@@ -188,7 +188,7 @@ void GameBoard::Update()
 		SetFontSize(DEFAULT_FONT_SIZE);
 	}
 
-	if (TURN_CHANGE_WAIT == (*lpGameTask.currentPlayer)->GetTurnTimer())
+	if (TURN_CHANGE_WAIT == lpCurrentPlayer->GetTurnTimer())
 	{
 		setlist.clear();
 	}
@@ -209,7 +209,7 @@ bool GameBoard::Reverse(VECTOR2 pos, VECTOR2 vec)
 {
 	// i方向
 	VECTOR2 sarchPos = pos + (vec);
-	if (data[sarchPos.y][sarchPos.x].lock()->GetState() != (*GameTask::GetInstance().currentPlayer)->GetType())
+	if (data[sarchPos.y][sarchPos.x].lock()->GetState() != lpCurrentPlayer->GetType())
 	{
 		return true;
 	}
@@ -271,7 +271,6 @@ piece_shared GameBoard::AddObjList(piece_shared && objPtr)
 	//itrに追加したpieceのアドレスを入れる
 	auto itr = piecelist.end();
 	itr--;
-	ADDWAIT(4);
 	(*itr)->SetAnimF(REVERSE_TIME-1);
 	return *itr;
 }
@@ -326,11 +325,7 @@ void GameBoard::Draw()
 	}
 	DrawPiece();
 	DrawFormatString(0, 64, 0xdddddd, "プレイヤー数%d", GameTask::GetInstance().playerlist.size());
-	DrawFormatString(0, 96, 0xdddddd, "現在のプレイヤー\n%d", (*GameTask::GetInstance().currentPlayer)->GetNo());
-
-}
-void SetlistClear()
-{
+	DrawFormatString(0, 96, 0xdddddd, "現在のプレイヤー\n%d", lpCurrentPlayer->GetNo());
 
 }
 void GameBoard::SetlistUpdata()
@@ -369,7 +364,7 @@ void GameBoard::SetlistUpdata()
 	if (tilecnt == 0)
 	{
 		// 設置できるプレイヤーが一人も居ない場合
-		if (lastset == (*GameTask::GetInstance().currentPlayer)->GetNo())
+		if (lastset == lpCurrentPlayer->GetNo())
 		{
 			this->GameEnd();
 			gameEndFlg = true;

@@ -19,16 +19,13 @@ typedef std::list<player_ptr> player_list;
 
 //		
 #define lpGameTask GameTask::GetInstance()
-//		
+// 現在のプレイヤー		
 #define lpCurrentPlayer (*lpGameTask.currentPlayer)
 //		
 
 // プレイヤー人数
 #define PL_MAX (2)
 
-#define SETWAIT(int) (GameTask::GetInstance().SetWait(int))
-#define ADDWAIT(int) (GameTask::GetInstance().AddWait(int))
-#define GETWAIT() (GameTask::GetInstance().GetWait())
 class GameTask
 {
 public:
@@ -39,15 +36,10 @@ public:
 	// 返り値 0b0001:左ボタン,0b0010:右ボタン,0b0100:中ボタン
 
 	void Run();
-	void SetWait(int wait);
-	void AddWait(int wait);
-	int GetWait();
 
 	VECTOR2 GetBoardSize();
 	// iterator 現在行動中のプレイヤー
 	player_list playerlist;
-
-
 	player_list::iterator currentPlayer;
 	// 現在選択しているプレイヤーのアドレスを格納する
 
@@ -74,8 +66,6 @@ private:
 	void (GameTask::*CurrentScene)();
 	void (GameState::*Scene)();
 	
-	// ウェイトフレーム数
-	int wait;
 
 	int mouseFlg;
 	int mouseOld;

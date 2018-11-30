@@ -38,18 +38,6 @@ int Player::GetNo()
 	return playerNo;
 }
 
-
-bool Player::Draw()
-{
-	if (pieceTray)
-	{
-		//pieceTray->DrawTray();
-		return true;
-	}
-	//DrawFormatString(playerNo * 64, 420, 0xeeeeee, "num%d", );
-	return false;
-}
-
 void Player::SelectTray(VECTOR2 pos)
 {
 	pieceTray->SelectTrayPiece(pos);
@@ -75,7 +63,6 @@ void Player::TurnAct()
 {
 	//pieceTray->SetTurnFlg(true);
 	//lpGameTask.Board->CurrentSetUpData();
-
 	if (GetTunrFlg() == false)
 	{
 		ChangeTimer--;
@@ -118,12 +105,8 @@ int Player::GetTurnTimer()
 /*Player‚Ìpublic‚É
 ƒƒ“ƒoŠÖ”voidŒ^‚ÌSetTurnFlg
 ‚ğì‚é
-
 Player‚ÌSetTurnFlg“à‚Ìˆ—‚ª
-pieceTray->SetTurnFlg(ˆø”);
-
-
-*/
+pieceTray->SetTurnFlg(ˆø”);*/
 
 
 void Player::ChangePlSet()

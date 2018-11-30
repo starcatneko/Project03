@@ -50,9 +50,6 @@ void GameResult::Draw()
 {
 	Board->Draw();
 	//Board->ResultDraw();
-	
-	
-
 	for (auto itr : lpGameTask.playerlist)
 	{
 		DrawFormatString(itr->GetNo() * 64, 440, 0xffff00, "%d", pieceCount[itr->GetNo()]);

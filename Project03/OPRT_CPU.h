@@ -8,5 +8,7 @@ public:
 	~OPRT_CPU();
 	void Update();
 	OPRT_TYPE GetOprtType() { return OPRT_TYPE::CPU; }
+	// ‘€ì‚ÌŠ´Šo
+	int wait;
 };
 

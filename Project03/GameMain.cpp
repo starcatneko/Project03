@@ -61,24 +61,6 @@ void GameMain::Draw()
 
 state_ptr GameMain::Update(state_ptr pt)
 {
-	auto setNextPlayer = [&](){
-		//(*lpGameTask.currentPlayer)->SetTunrFlg(false);
-		if ((*lpGameTask.currentPlayer)->GetTunrFlg()== false && (*lpGameTask.currentPlayer)->GetTurnTimer() <= 0)
-		{
-			if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
-			{
-				lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
-				(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-				MainBoard->SetlistUpdata();
-				lpMouse.SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
-				return;
-			}
-			(*lpGameTask.currentPlayer++);
-			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-			MainBoard->SetlistUpdata();
-			lpMouse.SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
-		}
-	};
 
 
 	DrawString(0, 0, "Main", 0xffffff, 0);
@@ -103,7 +85,7 @@ state_ptr GameMain::Update(state_ptr pt)
 			&&lpMouse.GetPos().x <tmp.x + tmp2.x
 			&&lpMouse.GetPos().y <tmp.y + tmp2.y)
 		{
-			lpMouse.SetOprtType(OPRT_TYPE::MAN);
+			//lpMouse.SetOprtType(OPRT_TYPE::MAN);
 		}
 
 	}
@@ -129,3 +111,22 @@ void GameMain::AddPlayer()
 	lpGameTask.playerlist.push_back(std::make_shared<Player>());
 
 }
+
+void GameMain::setNextPlayer() {
+	//(*lpGameTask.currentPlayer)->SetTunrFlg(false);
+	if ((*lpGameTask.currentPlayer)->GetTunrFlg() == false && (*lpGameTask.currentPlayer)->GetTurnTimer() <= 0)
+	{
+		if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
+		{
+			lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
+			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+			MainBoard->SetlistUpdata();
+			lpMouse.SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
+			return;
+		}
+		(*lpGameTask.currentPlayer++);
+		(*lpGameTask.currentPlayer)->SetTunrFlg(true);
+		MainBoard->SetlistUpdata();
+		lpMouse.SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
+	}
+};

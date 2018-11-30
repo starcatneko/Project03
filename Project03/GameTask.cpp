@@ -32,7 +32,6 @@ void GameTask::Init()
 	state.reset();
 	state = std::make_unique<GameTitle>();
 
-	wait = 0;
 }
 void GameTask::Run()
 {
@@ -41,26 +40,8 @@ void GameTask::Run()
 	ScreenFlip();
 	ClsDrawScreen();
 	state = state->Update(std::move(state));
-	if (wait > 0)
-	{
-		//wait--;
-	}
 	state->Draw();
 
-}
-
-void GameTask::SetWait(int wait)
-{
-	this->wait = wait;
-}
-void GameTask::AddWait(int wait)
-{
-	this->wait += wait;
-}
-
-int GameTask::GetWait()
-{
-	return wait;
 }
 
 VECTOR2 GameTask::GetBoardSize()

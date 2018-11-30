@@ -43,7 +43,7 @@ public:
 	~GameBoard();
 	bool Init();
 	// 指定した位置に石を配置
-	void SetPiece(VECTOR2 pos);
+	bool SetPiece(VECTOR2 pos);
 	void SetPiece(VECTOR2 pos, PIECE_ST st);
 
 	// data[pos.y][pos.x].expiredをする。範囲外参照を回避する。
@@ -86,7 +86,7 @@ public:
 	// Result表示用にピースを配置する
 	void PieceResultSet();
 	// 指定された色のピースの数を返す
-	int PieceCount(PIECE_ST olor);
+	int PieceCount(PIECE_ST color);
 	// setlist(置けるマスのリスト)からランダムで座標を抽出する
 	VECTOR2 SetlistSerch();	
 	void SetlistUpdata();
