@@ -10,6 +10,7 @@
 #define lpMouse MouseCtr::GetInstance()
 //		
 //		
+enum class PIECE_ST;
 
 enum MOUSE_STATE
 {
@@ -28,22 +29,22 @@ public:
 	{
 		return *s_Instance;
 	};
-
 	MouseCtr();
-	void Init();
 	~MouseCtr();
+	void Init();
 	void Update();
-	void SetPos(VECTOR2 pos);
+	void SetPos(VECTOR2 pos)	{ MouseCtr::pos = pos;}
+	VECTOR2 GetPos()	{ return { pos };}
+
 	int GetButton();
-	void SetButton(int button);
+	void SetButton(int button)	{ MouseCtr::button[ST_NEW] = button;}
 	// ボタン単押し処理用
 	void SetClick(int button);
-	VECTOR2 GetPos();
-
-	int GetDrag();
 	void SetOprtType(OPRT_TYPE type);
-	void SetOprtType(int piece_st);
+	void SetOprtType(int piece_st)	{ SetOprtType(oprt_tbl[piece_st]);}
 	OPRT_TYPE GetOprtType();
+
+	void ChangeOprtTbl(PIECE_ST color);
 
 private:
 

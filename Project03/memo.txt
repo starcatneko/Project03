@@ -8,6 +8,12 @@
 
  !!		VBA 出力
 
+ GameTaskの怪しいヤツ
+ ・Board
+ ・Playerlistとイテレータ
+ ・マウスの操作系
+
+
  ** やること
  ・-人対人
  ・-mouseCtlクラスのstateパターン

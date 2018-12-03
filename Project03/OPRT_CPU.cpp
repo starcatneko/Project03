@@ -1,12 +1,12 @@
 #include "OPRT_CPU.h"
 #include "GameTask.h"
 
-
+#define COM_WAIT_TIME 30
 
 
 OPRT_CPU::OPRT_CPU()
 {
-	wait = 30;
+	wait = COM_WAIT_TIME;
 }
 
 
@@ -29,7 +29,7 @@ void OPRT_CPU::Update()
 	if (!lpCurrentPlayer->CheckChangeTurn())
 	{
 		lpMouse.SetPos(lpGameTask.Board->SetlistSerch());
+		lpMouse.SetClick(0b0001);
+		lpMouse.SetOprtType(OPRT_TYPE::MAN);
 	}
-	lpMouse.SetClick(0b0001); 
-	
 }

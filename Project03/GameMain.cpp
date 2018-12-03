@@ -59,74 +59,87 @@ void GameMain::Draw()
 	MainBoard->Draw();
 }
 
+
 state_ptr GameMain::Update(state_ptr pt)
 {
-
-
 	DrawString(0, 0, "Main", 0xffffff, 0);
 	MainBoard->Update();
 	(*lpGameTask.currentPlayer)->TurnAct();
-
+	// player全体のUpdateを回す
 	for (auto itr : GameTask::GetInstance().playerlist)
 	{
 		(*itr).Update();
 	}
 
-	VECTOR2 tmp = VECTOR2{ 0,380 };
+	//Button()
+	/*VECTOR2 tmp = VECTOR2{ 0,380 };
 	VECTOR2 tmp2 = VECTOR2{ 64,24 };
-	if (lpMouse.GetOprtType() != OPRT_TYPE::CPU)
+	*/
+	if (Button({ 0,380 }, { 64,24 }, "CHANGE", 0xdddddd))
 	{
-		DrawBox(tmp.x, tmp.y,
-			tmp.x + tmp2.x, tmp.y + tmp2.y,
-			0xDD00ee, true);
-		if (lpMouse.GetButton() != 0 
-			&&lpMouse.GetPos().x > tmp.x
-			&&lpMouse.GetPos().y > tmp.y
-			&&lpMouse.GetPos().x <tmp.x + tmp2.x
-			&&lpMouse.GetPos().y <tmp.y + tmp2.y)
-		{
-			//lpMouse.SetOprtType(OPRT_TYPE::MAN);
-		}
-
+		lpMouse.ChangeOprtTbl(PIECE_ST::B);
 	}
+	if (Button({ 0,380+64 }, { 64,24 }, "CHANGE", 0x444444))
+	{
+		lpMouse.ChangeOprtTbl(PIECE_ST::W);
+	}
+
 	if (MainBoard->gameEndFlg)
 	{
 		// GameRessultでMainBoardの情報を引き続き使うので引数で渡す
 		return std::make_unique<GameResult>(MainBoard);
-
 	}
 	setNextPlayer();
 	return pt;
 }
 
-
-void GameMain::CurrentPlayerChange()
-{
-	
-	// 現在の順番を表示する関数を呼んで
-}
-void GameMain::AddPlayer()
-{
-	//std::make_shared<Player>();
-	lpGameTask.playerlist.push_back(std::make_shared<Player>());
-
-}
-
 void GameMain::setNextPlayer() {
-	//(*lpGameTask.currentPlayer)->SetTunrFlg(false);
+	// プレイヤーがターン終了 & ターン変更ウェイト終了
 	if ((*lpGameTask.currentPlayer)->GetTunrFlg() == false && (*lpGameTask.currentPlayer)->GetTurnTimer() <= 0)
 	{
 		if ((*lpGameTask.currentPlayer) == lpGameTask.playerlist.back())
 		{
 			lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
-			(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-			MainBoard->SetlistUpdata();
-			lpMouse.SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
-			return;
 		}
-		(*lpGameTask.currentPlayer++);
+		else
+		{
+			(*lpGameTask.currentPlayer++);
+		}
 		(*lpGameTask.currentPlayer)->SetTunrFlg(true);
 		MainBoard->SetlistUpdata();
 		lpMouse.SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
 	}
 };
+
+void GameMain::AddPlayer()
+{
+	lpGameTask.playerlist.push_back(std::make_shared<Player>());
+}
+
+
+bool GameMain::Button(VECTOR2 pos,VECTOR2 size,std::string text,int color)
+{
+	DrawBox(pos.x, pos.y,
+		pos.x + size.x, pos.y + size.y,
+		color, true);
+
+	if ((color & 0xff0000) > 0x880000 &&
+		(color & 0x00ff00) > 0x008800 &&
+		(color & 0x0000ff) > 0x000088)
+	{
+		DrawString(pos.x, pos.y, text.c_str(), 0x000000);
+	}
+	else
+	{
+		DrawString(pos.x, pos.y, text.c_str(), 0xffffff);
+	}
+	if (lpMouse.GetButton() != 0
+		&& lpMouse.GetPos().x > pos.x
+		&&lpMouse.GetPos().y > pos.y
+		&&lpMouse.GetPos().x <pos.x + size.x
+		&&lpMouse.GetPos().y <pos.y + size.y)
+	{
+		return true;
+	}
+	return false;
+}

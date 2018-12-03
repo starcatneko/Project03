@@ -12,7 +12,7 @@ class MouseCtr;
 
 #define PL_MAX (2)
 #define REVERSE_TIME (6)		// 駒反転のフレーム数
-#define TURN_CHANGE_WAIT (32)	// ターン更新時ウェイト
+#define TURN_CHANGE_WAIT (30)	// ターン更新時ウェイト
 
 //class Player;
 
@@ -88,6 +88,7 @@ public:
 	// 指定された色のピースの数を返す
 	int PieceCount(PIECE_ST color);
 	// setlist(置けるマスのリスト)からランダムで座標を抽出する
+	// 検索に失敗した場合 {-1,-1}を返す
 	VECTOR2 SetlistSerch();	
 
 	// 

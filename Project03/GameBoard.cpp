@@ -343,6 +343,16 @@ void GameBoard::SetlistUpdata()
 			// 配置されている駒の周りのマス
 			VECTOR2 tempPos = piece_itr->GetPos() + vec_itr;
 
+			//既にsetlistに入っている要素を除外する
+			for (auto checkitr : setlist)
+			{
+				if (checkitr == tempPos)
+				{
+					tempPos = { -1,-1 };
+					break;
+				}
+			}
+
 			if (!CheckOverBoard(tempPos))
 			{
 				continue;
@@ -410,13 +420,9 @@ int GameBoard::PieceCount(PIECE_ST color)
 
 VECTOR2 GameBoard::SetlistSerch()
 {
-	VECTOR2 tmpPos;
-	if (&setlist == nullptr)
-	{
-		return { -1,-1 };
-	}
+	VECTOR2 tmpPos = { -1,-1 };
 
-	int rnd = GetRand(static_cast<int>(setlist.size()));
+	int rnd = GetRand(static_cast<int>(setlist.size())-1);
 	int cnt = 0;
 	for (auto itr : setlist)
 	{
@@ -427,8 +433,6 @@ VECTOR2 GameBoard::SetlistSerch()
 		}
 		cnt++;
 	}
-
-
 	return tmpPos;
 }
 

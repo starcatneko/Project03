@@ -6,6 +6,7 @@
 #include "OPRT_MAN.h"
 #include "OPRT_CPU.h"
 #include "OPRT_SYS.h"
+#include "PIECE_ST.h"
 
 std::unique_ptr<MouseCtr, MouseCtr::MouseCtrDeleter> MouseCtr::s_Instance(new MouseCtr());
 
@@ -23,12 +24,10 @@ void MouseCtr::Init()
 	for (auto unit : PIECE_ST())
 	{
 		oprt_tbl[unit] = OPRT_TYPE::CPU;
-		//oprt_tbl_s[unit] = ;
 	}
 	oprt_tbl[static_cast<int>(PIECE_ST::NON)] = OPRT_TYPE::SYS;
 	//oprt_tbl[static_cast<int>(PIECE_ST::B)] = OPRT_TYPE::MAN;
 	//oprt_tbl[static_cast<int>(PIECE_ST::W)] = OPRT_TYPE::MAN;
-	//oprt_tbl[1] = OPRT_TYPE::MAN;
 	SetOprtType(oprt_tbl[static_cast<int>(PIECE_ST::NON)]);
 	waitTimer;
 }
@@ -46,7 +45,8 @@ void MouseCtr::Update()
 	{
 		waitTimer--;
 		return;
-	}	*/
+	}	
+	*/
 	MouseCtr::oprt->Update();
 	//DrawFormatString(lpMouse.GetPos().x, lpMouse.GetPos().y, 0xFFFF00, "‚ ‚ ‚ ‚ ");
 	
@@ -58,11 +58,6 @@ void MouseCtr::Update()
 	
 	VECTOR2 mp = { 0,420 };
 
-}
-
-void MouseCtr::SetPos(VECTOR2 pos)
-{
-	MouseCtr::pos = pos;
 }
 
 int MouseCtr::GetButton()
@@ -79,26 +74,11 @@ int MouseCtr::GetButton()
 	}
 }
 
-void MouseCtr::SetButton(int button)
-{
-	MouseCtr::button[ST_NEW] = button;
-}
 void MouseCtr::SetClick(int button)
 {
 	MouseCtr::button[ST_OLD] = 0b0000;
 	MouseCtr::button[ST_NEW] = button;
 }
-
-VECTOR2 MouseCtr::GetPos()
-{
-	return { pos };
-}
-
-int MouseCtr::GetDrag()
-{
-	return 0;
-}
-
 void MouseCtr::SetOprtType(OPRT_TYPE type)
 {
 	switch (type)
@@ -112,13 +92,25 @@ void MouseCtr::SetOprtType(OPRT_TYPE type)
 		break;
 	}
 }
-void MouseCtr::SetOprtType(int piece_st)
-{
-	SetOprtType(oprt_tbl[piece_st]);
-}
 OPRT_TYPE MouseCtr::GetOprtType()
 {
-	//return ;	
 	return oprt->GetOprtType();
+}
 
+void MouseCtr::ChangeOprtTbl(PIECE_ST color)
+{
+	int num = static_cast<int>(color);
+
+	switch (oprt_tbl[num])
+	{
+	case OPRT_TYPE::CPU:
+		oprt_tbl[num] = OPRT_TYPE::MAN;
+		break;
+	case OPRT_TYPE::MAN:
+		oprt_tbl[num] = OPRT_TYPE::CPU;
+		break;
+	default:
+		break;
+	}		
+	SetOprtType(oprt_tbl[num]);
 }

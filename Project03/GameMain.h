@@ -20,9 +20,9 @@ public:
 
 	state_ptr Update(state_ptr pt);
 	void Draw();	
-	void CurrentPlayerChange();
 private:
 	void AddPlayer();
+	bool Button(VECTOR2 pos, VECTOR2 size, std::string text,int color);
 	Board_ptr MainBoard;
 	// AIがプログラム上で盤面のシミュレートをする際に使うBoard
 	// 盤面をMainBoardからコピーし、実際における場所に駒の置いた際に
