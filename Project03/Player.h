@@ -46,6 +46,8 @@ private:
 
 	// プレイヤーを切り替えるフラグタイマー
 	int ChangeTimer;
+	// ターン開始時のウェイト
+	int turnStartTimer;
 
 
 };

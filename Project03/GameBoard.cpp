@@ -418,11 +418,14 @@ int GameBoard::PieceCount(PIECE_ST color)
 	return cnt;
 }
 
+
+
 VECTOR2 GameBoard::SetlistSerch()
 {
 	VECTOR2 tmpPos = { -1,-1 };
 
 	int rnd = GetRand(static_cast<int>(setlist.size())-1);
+	
 	int cnt = 0;
 	for (auto itr : setlist)
 	{

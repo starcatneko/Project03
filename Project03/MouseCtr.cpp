@@ -10,9 +10,6 @@
 
 std::unique_ptr<MouseCtr, MouseCtr::MouseCtrDeleter> MouseCtr::s_Instance(new MouseCtr());
 
-
-// const_cast‚Íâ‘Î‚Ég‚Á‚Ä‚Í‚¢‚¯‚È‚¢
-
 MouseCtr::MouseCtr()
 {
 	Init();

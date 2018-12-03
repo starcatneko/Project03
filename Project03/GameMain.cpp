@@ -45,7 +45,6 @@ GameMain::GameMain()
 	}
 	lpGameTask.currentPlayer = lpGameTask.playerlist.begin();
 	(*lpGameTask.currentPlayer)->SetTunrFlg(true);
-	
 	lpMouse.SetOprtType(static_cast<int>((*lpGameTask.currentPlayer)->GetType()));
 	MainBoard->SetlistUpdata();
 }

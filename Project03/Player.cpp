@@ -12,6 +12,7 @@ Player::Player()
 	Player::piecetype = PIECE_ST(this->playerNo + 1);
 	Player::pieceTray = std::make_unique<PieceTray>(this->piecetype);
 	Player::ChangeTimer = 0;
+	Player::turnStartTimer = 0;
 
 	//this->SetTray();
 }
@@ -67,6 +68,15 @@ void Player::TurnAct()
 	{
 		ChangeTimer--;
 		return;
+	}	
+	if (turnStartTimer > 0)
+	{
+		turnStartTimer--;
+		if (turnStartTimer == 0)
+		{
+			lpMouse.SetOprtType(static_cast<int>(lpCurrentPlayer->GetType()));
+		}
+		return;
 	}
 	// TurnActのピースが設置のif内
 	// ピースを設置したらプレイヤーが切り替わるから
@@ -79,6 +89,10 @@ void Player::TurnAct()
 
 bool Player::SetTunrFlg(bool flg)
 {
+	if (flg == true)
+	{
+		turnStartTimer = 30;
+	}
 	 return pieceTray->SetTurnFlg(flg);
 }
 
