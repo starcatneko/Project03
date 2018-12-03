@@ -71,10 +71,6 @@ state_ptr GameMain::Update(state_ptr pt)
 		(*itr).Update();
 	}
 
-	//Button()
-	/*VECTOR2 tmp = VECTOR2{ 0,380 };
-	VECTOR2 tmp2 = VECTOR2{ 64,24 };
-	*/
 	if (Button({ 0,380 }, { 64,24 }, "CHANGE", 0xdddddd))
 	{
 		lpMouse.ChangeOprtTbl(PIECE_ST::B);
