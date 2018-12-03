@@ -1,5 +1,6 @@
 #pragma once
 #include "OPRT_State.h"
+#include <chrono>
 class OPRT_CPU :
 	public OPRT_State
 {
@@ -10,5 +11,6 @@ public:
 	OPRT_TYPE GetOprtType() { return OPRT_TYPE::CPU; }
 	// ëÄçÏÇÃä¥äo
 	int wait;
+private:
 };
 

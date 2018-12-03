@@ -16,6 +16,6 @@ public:
 	state_ptr Update(state_ptr pt);
 	void Draw();
 private:
-
+	void Init();
 };
 

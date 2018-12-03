@@ -32,4 +32,5 @@ void OPRT_CPU::Update()
 		lpMouse.SetClick(0b0001);
 		lpMouse.SetOprtType(OPRT_TYPE::MAN);
 	}
+
 }
