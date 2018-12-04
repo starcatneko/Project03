@@ -26,7 +26,6 @@ void MouseCtr::Init()
 	//oprt_tbl[static_cast<int>(PIECE_ST::B)] = OPRT_TYPE::MAN;
 	//oprt_tbl[static_cast<int>(PIECE_ST::W)] = OPRT_TYPE::MAN;
 	SetOprtType(oprt_tbl[static_cast<int>(PIECE_ST::NON)]);
-	waitTimer;
 }
 
 MouseCtr::~MouseCtr()
@@ -37,13 +36,6 @@ MouseCtr::~MouseCtr()
 void MouseCtr::Update()
 {
 	button[ST_OLD] = button[ST_NEW];
-	/*
-	if (waitTimer > 0)
-	{
-		waitTimer--;
-		return;
-	}	
-	*/
 	MouseCtr::oprt->Update();
 	//DrawFormatString(lpMouse.GetPos().x, lpMouse.GetPos().y, 0xFFFF00, "‚ ‚ ‚ ‚ ");
 	
@@ -92,6 +84,11 @@ void MouseCtr::SetOprtType(OPRT_TYPE type)
 OPRT_TYPE MouseCtr::GetOprtType()
 {
 	return oprt->GetOprtType();
+}
+
+OPRT_TYPE MouseCtr::GetOprtTbl(PIECE_ST color)
+{
+	return oprt_tbl[static_cast<int>(color)];
 }
 
 void MouseCtr::ChangeOprtTbl(PIECE_ST color)

@@ -72,12 +72,14 @@ state_ptr GameMain::Update(state_ptr pt)
 
 	std::string p1OprtType,p2OprtType;
 
+	p1OprtType = (lpMouse.GetOprtTbl(PIECE_ST::B) == OPRT_TYPE::CPU ? "CPU" : "MAN");
+	p2OprtType = (lpMouse.GetOprtTbl(PIECE_ST::W) == OPRT_TYPE::CPU ? "CPU" : "MAN");
 
-	if (Button({ 0+20,380 }, { 64,32 },"%s", 0xdddddd))
+	if (Button({ 0+20,380 }, { 64,32 },p1OprtType.c_str(), 0x445555))
 	{
 		lpMouse.ChangeOprtTbl(PIECE_ST::B);
 	}
-	if (Button({ PLAYER2_TRAY_OFFSET+20,380 }, { 64,24 }, "CHANGE", 0x444444))
+	if (Button({ PLAYER2_TRAY_OFFSET+20,380 }, { 64,32 }, p2OprtType.c_str(), 0xeeeeee))
 	{
 		lpMouse.ChangeOprtTbl(PIECE_ST::W);
 	}
@@ -121,16 +123,24 @@ bool GameMain::Button(VECTOR2 pos,VECTOR2 size,std::string text,int color)
 		pos.x + size.x, pos.y + size.y,
 		color, true);
 
+	SetFontSize(size.y);
+	int textOffset = (text.c_str(), text.size());
+	
+
 	if ((color & 0xff0000) > 0x880000 &&
 		(color & 0x00ff00) > 0x008800 &&
 		(color & 0x0000ff) > 0x000088)
 	{
-		DrawString(pos.x, pos.y, text.c_str(), 0x000000);
+		DrawString(pos.x + textOffset, pos.y, text.c_str(), 0x000000);
 	}
 	else
 	{
-		DrawString(pos.x, pos.y, text.c_str(), 0xffffff);
+		DrawString(pos.x + textOffset, pos.y, text.c_str(), 0xffffff);
 	}
+
+	SetFontSize(DEFAULT_FONT_SIZE);
+
+
 	if (lpMouse.GetButton() != 0
 		&& lpMouse.GetPos().x > pos.x
 		&&lpMouse.GetPos().y > pos.y

@@ -135,7 +135,7 @@ bool GameBoard::SetPiece(VECTOR2 pos)
 		piece_shared tmp = AddObjList(std::make_shared<GamePiece>(vec1, vec2));
 		data[vec1.y][vec1.x] = (tmp);
 		data[vec1.y][vec1.x].lock()->SetState(lpCurrentPlayer->GetType());
-
+		lastsetPos = vec1;
 		int reverseTime = REVERSE_TIME;
 		for(int i = 1;Reverse(vec1, itr*i) == true;i++)
 		{
@@ -158,7 +158,7 @@ bool GameBoard::SetPiece(VECTOR2 pos)
 				break;
 			}
 		}
-		lpCurrentPlayer->SetTurnTimer(reverseTime);
+		lpCurrentPlayer->SetTurnTimer(reverseTime+ TURN_CHANGE_WAIT/2);
 		
 	}
 
@@ -200,6 +200,8 @@ void GameBoard::ResultDraw()
 	for (auto itr : TotalPiece)
 	{
 		DrawFormatString(i * 48, 0, 0xffff00, "%d", itr);
+		
+		
 		i++;
 	}
 	//for(auto itr: (*lpGameTask->playerList)
@@ -286,7 +288,7 @@ void GameBoard::GameEnd()
 
 void GameBoard::DrawPiece()
 {
-	DrawFormatString(120, 0, 0xdddddd, "%d", piecelist.size());
+	//DrawFormatString(120, 0, 0xdddddd, "%d", piecelist.size());
 
 	for (auto itr : piecelist)
 	{
@@ -311,21 +313,30 @@ void GameBoard::DrawBoard()
 				y*CHIPSIZE + CHIPSIZE + Y_DIS, 0xffffff, false);
 		}
 	}
+
 }
 void GameBoard::Draw()
 {
-
 	DrawBoard();
 	VECTOR2 CurrntPlPos = CurrentPlPiece->GetPos();
 	for (auto itr : setlist)
 	{
 		VECTOR2 drawpos = itr * 64;
 		DrawBox(drawpos.x + X_DIS+1, drawpos.y + Y_DIS+1,
-			drawpos.x + 64 + X_DIS-1, drawpos.y + 64 + Y_DIS-1, 0x00dd00, true);
+			drawpos.x + 64 + X_DIS-1, drawpos.y + 64 + Y_DIS-1,
+			0x00dd00, true);
+	}
+	if (lpCurrentPlayer->GetTunrFlg() == false)
+	{
+		DrawBox(lastsetPos.x * 64 + X_DIS + 1, lastsetPos.y * 64 + Y_DIS + 1,
+			lastsetPos.x * 64 + 64 + X_DIS - 1, lastsetPos.y * 64 + 64 + Y_DIS - 1,
+			0xff88dd, true);
 	}
 	DrawPiece();
+	/*
 	DrawFormatString(0, 64, 0xdddddd, "プレイヤー数%d", GameTask::GetInstance().playerlist.size());
 	DrawFormatString(0, 96, 0xdddddd, "現在のプレイヤー\n%d", lpCurrentPlayer->GetNo());
+	*/
 
 }
 void GameBoard::SetlistUpdata()
@@ -419,6 +430,13 @@ int GameBoard::PieceCount(PIECE_ST color)
 }
 
 
+void GameBoard::ResultInit()
+{
+	for (auto itr : piecelist)
+	{
+		TotalPiece[static_cast<int>(itr->GetState())-1]+= 1;
+	}
+}
 
 VECTOR2 GameBoard::SetlistSerch()
 {
@@ -431,6 +449,7 @@ VECTOR2 GameBoard::SetlistSerch()
 	{
 		if (rnd == cnt)
 		{
+
 			tmpPos = (itr*CHIPSIZE)+(CHIPSIZE/2 )+ VECTOR2( X_DIS, Y_DIS );
 			break;
 		}

@@ -34,7 +34,6 @@ public:
 	{
 		return *s_Instance;
 	};
-	// 返り値 0b0001:左ボタン,0b0010:右ボタン,0b0100:中ボタン
 
 	void Run();
 
@@ -45,11 +44,8 @@ public:
 	// 現在選択しているプレイヤーのアドレスを格納する
 
 	state_ptr state;
-	//std::shared_ptr<MouseCtr> Mouse;
-
 	Board_ptr Board;
 private:
-
 	struct GameTaskDeleter
 	{
 		void operator ()(GameTask* GameTask) const
@@ -66,13 +62,10 @@ private:
 
 	void (GameTask::*CurrentScene)();
 	void (GameState::*Scene)();
-	
 
 	int mouseFlg;
 	int mouseOld;
-	
-	std::array<MouseCtr, static_cast<int>(PIECE_ST::MAX)>Mouse;
-	
+		
 	//std::array<OPRT_TYPE,static_cast<int>(OPRT_TYPE::MAX)> oprt_tbl;
 	// プレイヤー毎のOPRT_TYPE;
 	// プレイヤー操作(OPRT_TYPE::MAN)は明示的に設定する

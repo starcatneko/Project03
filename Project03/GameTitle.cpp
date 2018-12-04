@@ -24,7 +24,7 @@ void GameTitle::Init()
 
 state_ptr GameTitle::Update(state_ptr pt)
 {
-	//ImageMng::GetInstance().LoadImg("image/title.jpg", "title");
+	ImageMng::GetInstance().LoadImg("image/title.jpg", "title");
 	DrawString(0, 0, "Title", 0xffffff, 0);	
 
 	ImageMng::GetInstance().DrawImg({ 120,240 }, "title", 0);

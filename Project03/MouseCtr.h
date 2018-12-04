@@ -43,6 +43,8 @@ public:
 	void SetOprtType(OPRT_TYPE type);
 	void SetOprtType(int piece_st)	{ SetOprtType(oprt_tbl[piece_st]);}
 	OPRT_TYPE GetOprtType();
+	// ˆø”color‚É‘Î‰‚µ‚½oprt_tbl‚Ì’l‚ğ•Ô‚·
+	OPRT_TYPE GetOprtTbl(PIECE_ST color);
 
 	void ChangeOprtTbl(PIECE_ST color);
 
@@ -61,7 +63,6 @@ private:
 	std::vector<OPRT_TYPE> oprt_tbl;
 	std::array<int, ST_MAX> button;
 	// waitTime‚ª0‚É‚È‚é‚Ü‚Å‘€ì‚Å‚«‚È‚¢
-	int waitTimer;
 	VECTOR2 pos;
 };
 

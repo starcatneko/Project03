@@ -85,11 +85,11 @@ void PieceTray::DrawTray(VECTOR2 DrawOffset)
 		pos.x * CHIPSIZE + CHIPSIZE + Offset.x,
 		pos.y + (CHIPSIZE*selectPiece)+ CHIPSIZE + Offset.y,
 		0x00FF00, true);
-
+	/*
 	DrawFormatString(pos.x*2 + Offset.x,
 		pos.y + 128 + Offset.y,
 		0xFFFF00, "%d", piecelist.size());
-
+		*/
 	for (auto itr : piecelist)
 	{
 		(*itr).SetPos({ pos.x,i });

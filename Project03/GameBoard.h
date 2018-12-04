@@ -11,8 +11,8 @@ class GamePiece;
 class MouseCtr;
 
 #define PL_MAX (2)
-#define REVERSE_TIME (6)		// 駒反転のフレーム数
-#define TURN_CHANGE_WAIT (30)	// ターン更新時ウェイト
+#define REVERSE_TIME (8)		// 駒反転のフレーム数
+#define TURN_CHANGE_WAIT (24)	// ターン更新時ウェイト
 
 //class Player;
 
@@ -57,6 +57,7 @@ public:
 	// 基本的に駒の描画
 	void DrawPiece();
 	void DrawBoard();
+
 	// 纏めて描画
 	void Draw();
 	// Result用描画 とりあえず
@@ -87,11 +88,14 @@ public:
 	void PieceResultSet();
 	// 指定された色のピースの数を返す
 	int PieceCount(PIECE_ST color);
+	// リザルト開始時に呼び出す
+	void ResultInit();
 	// setlist(置けるマスのリスト)からランダムで座標を抽出する
 	// 検索に失敗した場合 {-1,-1}を返す
 	VECTOR2 SetlistSerch();	
 
-	// 
+	// 置ける場所リストを更新する
+	// ターンにつき一回の呼び出し
 	void SetlistUpdata();
 
 private:
@@ -119,7 +123,9 @@ private:
 	;
 		
 	// 最後に駒を置いたプレイヤー
-	int lastset;		
+	int lastset;
+	// 最後に駒が置かれた位置
+	VECTOR2 lastsetPos;
 	// 勝利したプレイヤー
 	int winplayer;
 

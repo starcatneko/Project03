@@ -6,8 +6,13 @@ std::unique_ptr<ImageMng, ImageMng::ImageMngDeleter> ImageMng::s_Instance(new Im
 
 void ImageMng::LoadImg(std::string path, std::string name)
 {
-	 
-	image[name] = LoadGraph(path.c_str(),0);
+	auto itr = image.find(name);
+	if (itr != image.end())
+	{
+		return;
+	}
+	image[name] = LoadGraph(path.c_str(), 0);
+
 	printf("w");
 }
 

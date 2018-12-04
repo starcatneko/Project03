@@ -16,12 +16,7 @@ OPRT_CPU::~OPRT_CPU()
 
 void OPRT_CPU::Update()
 {
-	/*
-	if (wait > 0)
-	{
-		wait--;
-		return;
-	}*/
+
 	if (!lpGameTask.Board)
 	{
 		return;
