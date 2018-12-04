@@ -70,11 +70,14 @@ state_ptr GameMain::Update(state_ptr pt)
 		(*itr).Update();
 	}
 
-	if (Button({ 0,380 }, { 64,24 }, "CHANGE", 0xdddddd))
+	std::string p1OprtType,p2OprtType;
+
+
+	if (Button({ 0+20,380 }, { 64,32 },"%s", 0xdddddd))
 	{
 		lpMouse.ChangeOprtTbl(PIECE_ST::B);
 	}
-	if (Button({ 0,380+64 }, { 64,24 }, "CHANGE", 0x444444))
+	if (Button({ PLAYER2_TRAY_OFFSET+20,380 }, { 64,24 }, "CHANGE", 0x444444))
 	{
 		lpMouse.ChangeOprtTbl(PIECE_ST::W);
 	}

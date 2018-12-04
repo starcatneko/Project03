@@ -17,6 +17,7 @@ class Player;
 typedef std::shared_ptr<Player> player_ptr;
 typedef std::list<player_ptr> player_list;
 
+
 //		
 #define lpGameTask GameTask::GetInstance()
 // 現在のプレイヤー		
@@ -70,6 +71,7 @@ private:
 	int mouseFlg;
 	int mouseOld;
 	
+	std::array<MouseCtr, static_cast<int>(PIECE_ST::MAX)>Mouse;
 	
 	//std::array<OPRT_TYPE,static_cast<int>(OPRT_TYPE::MAX)> oprt_tbl;
 	// プレイヤー毎のOPRT_TYPE;

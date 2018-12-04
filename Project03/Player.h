@@ -7,6 +7,8 @@
 #include <memory>
 #include "PieceState.h"
 
+#define PLAYER2_TRAY_OFFSET 11*64
+
 class PieceTray;
 class Player
 {

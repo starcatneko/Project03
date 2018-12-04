@@ -8,6 +8,9 @@
 
  !!		VBA 出力
 
+
+ ・Gitをつかう
+
  GameTaskの怪しいヤツ
  ・Board
  ・Playerlistとイテレータ
